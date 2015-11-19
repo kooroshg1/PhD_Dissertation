@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+\newcommand{\enquote}[1]{``#1''}
+
+\bibitem{han2013improving}
+Han, Z.-H., G{\"o}rtz, S., and Zimmermann, R., \enquote{Improving
+  variable-fidelity surrogate modeling via gradient-enhanced kriging and a
+  generalized hybrid bridge function,} {\em Aerospace Science and
+  Technology\/}, Vol.~25, No.~1, 2013, pp.~177--189.
+
+\bibitem{pettit2004uncertainty}
+Pettit, C.~L., \enquote{Uncertainty quantification in aeroelasticity: recent
+  results and research challenges,} {\em Journal of Aircraft\/}, Vol.~41,
+  No.~5, 2004, pp.~1217--1229.
+
+\bibitem{martins2003complex}
+Martins, J.~R., Sturdza, P., and Alonso, J.~J., \enquote{The complex-step
+  derivative approximation,} {\em ACM Transactions on Mathematical Software
+  (TOMS)\/}, Vol.~29, No.~3, 2003, pp.~245--262.
+
+\end{thebibliography}

@@ -8,4 +8,24 @@ Due to the large amount of computations involved in the FSI simulation, the grad
 The motivation for the research proposed in this document is in two areas. First, we want to have sensitivity analysis capabilities that can treat the solvers as black-box. This means that we can solve both the governing equations and sensitivity response using the same code. Second, a robust analysis technique for the coupled FSI system based on IB method is formulated. The current approach of IB is not suited for the sensitivity analysis due to the discontinuities in its formulation. This will be explained in more details in the following Chapters.
 
 % ======================================================================================
-\section{Sensitivity Analysis Literature}
+\section{Sensitivity Analysis Overview}
+Sensitivity analysis consists of computing the derivatives of solution of the governing equations, i.e. displacement, velocity, or pressure, with respect to one of several independent design variables, i.e. shape of boundaries or size of elements. There various applications for sensitivity information such as improving the accuracy of surrogate models as in gradient enhanced Kriging \cite{han2013improving} or uncertainty quantification \cite{pettit2004uncertainty}. However, our main motivation is the use of this information in gradient-based optimization. The calculation of gradients is often the most expensive step in the optimization cycle therefore, using efficient methods for accurate calculation of sensitivities are vital to the optimization process. As shown in Figure \ref{fig:C1_sensitivityTaxonomy}, methods for sensitivity calculation can be put into three methods: i) numerical, ii) analytical, and iii) automatic differentiation.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=7.00cm]{Chapter_1/figure/sensitivity_taxonomy.png}
+	\caption{Sensitivity calculation techniques.}
+	\label{fig:C1_sensitivityTaxonomy}
+\end{figure}
+
+The Finite Difference (FD) method is probably the easiest method to implement for calculating the sensitivity of a variable. However, the computational cost associated with finite difference for large systems can become very large. For a system with $n$ number of design variables, the analysis needs to be done $n+1$ time to calculate the design sensitivities. Furthermore, to ensure the accuracy, convergence study needs to be done for selecting the appropriate step size for finite difference. The inaccuracy of finite differencing could result in convergence difficulties and inaccurate optimum results. On the other hand, Complex Step (CS) method avoids the loss of precision in finite differences approximation of sensitivities by employing complex arithmetic \cite{martins2003complex}. The complex step derivative is calculated as shown in Equation \eqref{eq:C1_compelxStepFormula}.
+
+\begin{equation}\label{eq:C1_compelxStepFormula}
+	\mathcal{F}^\prime\left(u; b\right) = \frac{\text{Im}\left[ \mathcal{F}\left(u; b + ih\right) \right]}{h}
+\end{equation}
+
+This means that we perturb the design variable by an imaginary value of $ih$ and then look at
+the imaginary portion of the resulting response. Using the complex step method, we can choose a
+small step size for $h$ without loosing accuracy. However, many commercial packages such as ANSYS or Nastran cannot handle complex arithmetic which makes the implementation of complex step method infeasible. Moreover, the high cost of finite difference is still associated with the complex method as well.
+
+Automatic differentiation (AD) is 
