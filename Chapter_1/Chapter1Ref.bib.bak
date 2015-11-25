@@ -29,3 +29,40 @@
   year={2003},
   publisher={ACM}
 }
+
+@book{naumann2012art,
+  title={The art of differentiating computer programs: an introduction to algorithmic differentiation},
+  author={Naumann, Uwe},
+  volume={24},
+  year={2012},
+  publisher={Siam}
+}
+
+@book{choi2006structural,
+  title={Structural sensitivity analysis and optimization 1: linear systems},
+  author={Choi, Kyung K and Kim, Nam-Ho},
+  year={2006},
+  publisher={Springer Science \& Business Media}
+}
+
+@article{arora1979methods,
+  title={Methods of design sensitivity analysis in structural optimization},
+  author={Arora, Jasbir S and Haug, Edward J},
+  journal={AIAA journal},
+  volume={17},
+  number={9},
+  pages={970--974},
+  year={1979}
+}
+
+@article{reuther1999constrained,
+  title={Constrained multipoint aerodynamic shape optimization using an adjoint formulation and parallel computers, part 2},
+  author={Reuther, James J and Jameson, Antony and Alonso, Juan J and Rimllnger, Mark J and Saunders, David},
+  journal={Journal of aircraft},
+  volume={36},
+  number={1},
+  pages={61--74},
+  year={1999}
+}
+
+
