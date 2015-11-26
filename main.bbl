@@ -109,4 +109,12 @@ Liu, S. and Canfield, R.~A., \enquote{Boundary velocity method for continuum
   shape sensitivity of nonlinear fluid–structure interaction problems,} {\em
   Journal of Fluids and Structures\/}, Vol.~40, No.~0, 2013, pp.~284 -- 301.
 
+\bibitem{peskin1977numerical}
+Peskin, C.~S., \enquote{Numerical analysis of blood flow in the heart,} {\em
+  Journal of computational physics\/}, Vol.~25, No.~3, 1977, pp.~220--252.
+
+\bibitem{anderson1995computational}
+Anderson, J.~D. and Wendt, J., {\em Computational fluid dynamics\/}, Vol. 206,
+  Springer, 1995.
+
 \end{thebibliography}
