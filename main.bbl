@@ -56,6 +56,17 @@ Haftka, R.~T. and Adelman, H.~M., \enquote{Recent developments in structural
   sensitivity analysis,} {\em Structural optimization\/}, Vol.~1, No.~3, 1989,
   pp.~137--151.
 
+\bibitem{borggaard1997pde}
+Borggaard, J. and Burns, J., \enquote{A PDE sensitivity equation method for
+  optimal aerodynamic design,} {\em Journal of Computational Physics\/},
+  Vol.~136, No.~2, 1997, pp.~366--384.
+
+\bibitem{hristova2006continuous}
+Hristova, H., Etienne, S., Pelletier, D., and Borggaard, J., \enquote{A
+  continuous sensitivity equation method for time-dependent incompressible
+  laminar flows,} {\em International Journal for numerical methods in
+  fluids\/}, Vol.~50, No.~7, 2006, pp.~817--844.
+
 \bibitem{Arora}
 Arora, J. and Haug, E., \enquote{Methods of Design Sensitivity Analysis in
   Structural Optimization,} {\em AIAA Journal\/}, Vol.~17, No.~9, 1979,
@@ -65,6 +76,10 @@ Arora, J. and Haug, E., \enquote{Methods of Design Sensitivity Analysis in
 Dems, K. and Mroz, Z., \enquote{Variational approach to first- and second-order
   sensitivity analysis of elastic structures,} {\em International Journal for
   Numerical Methods in Engineering\/}, Vol.~21, No.~4, 1985, pp.~637--661.
+
+\bibitem{borggaard1995sensitivity}
+Borggaard, J. and Burns, J., {\em A sensitivity equation approach to shape
+  optimization in fluid flows\/}, Springer, 1995.
 
 \bibitem{stanley2002design}
 Stanley, L. G.~D. and Stewart, D.~L., {\em Design Sensitivity Analysis:
