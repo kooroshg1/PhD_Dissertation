@@ -25,6 +25,17 @@ Naumann, U., {\em The art of differentiating computer programs: an introduction
 Choi, K.~K. and Kim, N.-H., {\em Structural sensitivity analysis and
   optimization 1: linear systems\/}, Springer Science \& Business Media, 2006.
 
+\bibitem{arora1979methods}
+Arora, J.~S. and Haug, E.~J., \enquote{Methods of design sensitivity analysis
+  in structural optimization,} {\em AIAA journal\/}, Vol.~17, No.~9, 1979,
+  pp.~970--974.
+
+\bibitem{reuther1999constrained}
+Reuther, J.~J., Jameson, A., Alonso, J.~J., Rimllnger, M.~J., and Saunders, D.,
+  \enquote{Constrained multipoint aerodynamic shape optimization using an
+  adjoint formulation and parallel computers, part 2,} {\em Journal of
+  aircraft\/}, Vol.~36, No.~1, 1999, pp.~61--74.
+
 \bibitem{gamboa2009optimization}
 Gamboa, P., Vale, J., P.~Lau, F., and Suleman, A., \enquote{Optimization of a
   morphing wing based on coupled aerodynamic and structural constraints,} {\em
