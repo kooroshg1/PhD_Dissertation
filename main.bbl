@@ -117,4 +117,40 @@ Peskin, C.~S., \enquote{Numerical analysis of blood flow in the heart,} {\em
 Anderson, J.~D. and Wendt, J., {\em Computational fluid dynamics\/}, Vol. 206,
   Springer, 1995.
 
+\bibitem{saiki1996numerical}
+Saiki, E. and Biringen, S., \enquote{Numerical simulation of a cylinder in
+  uniform flow: application of a virtual boundary method,} {\em Journal of
+  Computational Physics\/}, Vol.~123, No.~2, 1996, pp.~450--465.
+
+\bibitem{zhu2003interaction}
+Zhu, L. and Peskin, C.~S., \enquote{Interaction of two flapping filaments in a
+  flowing soap film,} {\em Physics of Fluids (1994-present)\/}, Vol.~15, No.~7,
+  2003, pp.~1954--1960.
+
+\bibitem{beyer1992analysis}
+Beyer, R.~P. and LeVeque, R.~J., \enquote{Analysis of a one-dimensional model
+  for the immersed boundary method,} {\em SIAM Journal on Numerical
+  Analysis\/}, Vol.~29, No.~2, 1992, pp.~332--364.
+
+\bibitem{peskin1989three}
+Peskin, C.~S. and McQueen, D.~M., \enquote{A three-dimensional computational
+  method for blood flow in the heart I. Immersed elastic fibers in a viscous
+  incompressible fluid,} {\em Journal of Computational Physics\/}, Vol.~81,
+  No.~2, 1989, pp.~372--405.
+
+\bibitem{fauci1988computational}
+Fauci, L.~J. and Peskin, C.~S., \enquote{A computational model of aquatic
+  animal locomotion,} {\em Journal of Computational Physics\/}, Vol.~77, No.~1,
+  1988, pp.~85--108.
+
+\bibitem{kempe2015imposing}
+Kempe, T., Lennartz, M., Schwarz, S., and Fr{\"o}hlich, J., \enquote{Imposing
+  the free-slip condition with a continuous forcing immersed boundary method,}
+  {\em Journal of Computational Physics\/}, Vol.~282, 2015, pp.~183--209.
+
+\bibitem{uhlmann2005immersed}
+Uhlmann, M., \enquote{An immersed boundary method with direct forcing for the
+  simulation of particulate flows,} {\em Journal of Computational Physics\/},
+  Vol.~209, No.~2, 2005, pp.~448--476.
+
 \end{thebibliography}

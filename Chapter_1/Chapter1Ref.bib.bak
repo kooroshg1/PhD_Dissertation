@@ -208,3 +208,61 @@
   publisher={Wiley Online Library}
 }
 
+@book{borggaard1995sensitivity,
+  title={A sensitivity equation approach to shape optimization in fluid flows},
+  author={Borggaard, Jeff and Burns, John},
+  year={1995},
+  publisher={Springer}
+}
+
+@article{peskin1977numerical,
+  title={Numerical analysis of blood flow in the heart},
+  author={Peskin, Charles S},
+  journal={Journal of computational physics},
+  volume={25},
+  number={3},
+  pages={220--252},
+  year={1977},
+  publisher={Elsevier}
+}
+
+@book{anderson1995computational,
+  title={Computational fluid dynamics},
+  author={Anderson, John David and Wendt, J},
+  volume={206},
+  year={1995},
+  publisher={Springer}
+}
+
+@article{saiki1996numerical,
+  title={Numerical simulation of a cylinder in uniform flow: application of a virtual boundary method},
+  author={Saiki, EM and Biringen, S},
+  journal={Journal of Computational Physics},
+  volume={123},
+  number={2},
+  pages={450--465},
+  year={1996},
+  publisher={Elsevier}
+}
+
+@article{zhu2003interaction,
+  title={Interaction of two flapping filaments in a flowing soap film},
+  author={Zhu, Luoding and Peskin, Charles S},
+  journal={Physics of Fluids (1994-present)},
+  volume={15},
+  number={7},
+  pages={1954--1960},
+  year={2003},
+  publisher={AIP Publishing}
+}
+
+@article{beyer1992analysis,
+  title={Analysis of a one-dimensional model for the immersed boundary method},
+  author={Beyer, Richard P and LeVeque, Randall J},
+  journal={SIAM Journal on Numerical Analysis},
+  volume={29},
+  number={2},
+  pages={332--364},
+  year={1992},
+  publisher={SIAM}
+}

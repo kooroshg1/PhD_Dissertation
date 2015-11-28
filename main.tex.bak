@@ -6,7 +6,7 @@
 	left=20mm,
 	top=20mm,
 	}
-\usepackage{graphicx, float} % For figures
+\usepackage{graphicx, float, subfigure} % For figures
 \usepackage{amssymb,amsmath} % For math
 %\usepackage{setspace}
 %\doublespacing
