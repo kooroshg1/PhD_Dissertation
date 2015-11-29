@@ -87,11 +87,17 @@ Non-body conformal Cartesian grid can also be utilized for this simulation as sh
 Depending on how the effect of solid boundaries are imposed, IB methods can be divided into four categories: i) Continuous forcing, ii) discrete forcing, iii) ghost cell, and iv) cut-cell method.
 
 \subsubsection{Continuous Forcing Method}
-This is the originaly used by Peskin \cite{peskin1977numerical} and later developed by others researchers \cite{saiki1996numerical, zhu2003interaction, beyer1992analysis}. In this approach, the boundary configuration is described by a curve $x(s,t)$ (Lagrangian nodes) where the location of each point on this boundary is governing by its equations of motion. The forces that the curve $x(s,t)$ exerts on the fluid is calculated buy the constitutive law of the curve $x(s,t)$ that relates the displacements calculated by the equation of motion to stress values. These stress values are transferred to the Navier-Stokes (NS) (Eulerian nodes) for the fluid by means of a Dirac delta function. Practical implimentation of this method resets in representing the Dirac delta function as a discrete function that has the same properties. This method is applied to variety of problems, including Cardiac blood flow \cite{peskin1989three}, animal locomotion \cite{fauci1988computational}, multiphase flows \cite{kempe2015imposing}, and particle sedimentation \cite{uhlmann2005immersed}.
+This is the originaly used by Peskin \cite{peskin1977numerical} and later developed by others researchers \cite{saiki1996numerical, zhu2003interaction, beyer1992analysis}. In this approach, the boundary configuration is described by a curve $x(s,t)$ (Lagrangian nodes) where the location of each point on this boundary is governed by its equations of motion. The forces that the curve $x(s,t)$ exerts on the fluid is calculated buy the constitutive law of the curve $x(s,t)$ that relates the displacements to stress values. These stress values are transferred to the Navier-Stokes (NS) (Eulerian nodes) for the fluid by means of a Dirac delta function. Practical implimentation of this method resets in representing the Dirac delta function as a discrete function that has the same properties. This method is applied to variety of problems, including Cardiac blood flow \cite{peskin1989three}, animal locomotion \cite{fauci1988computational}, multiphase flows \cite{kempe2015imposing}, and particle sedimentation \cite{uhlmann2005immersed}.
 
-(TALK ABOUT VIRTUAL BOUNDARY METHOD)
+Peskin's method is well suited for the elstic boundaries. For stiff boundaries, the constitutive laws of the solid boundaries will result in instabilities in the solution of governing equations \cite{mittal2005immersed}. The virtual boundary method of Goldstein \cite{goldstein1993modeling} enables us to handle these rigid boundaries. The main idea of this approach is the same as Peskin's method where the solid boundary is treated as a virtually existing surface embedded in the fluid. The force on this surface is calculated by the requirement that the fluid velocity should satisfy the no-slip condition. Since this body force is not known a priori, it is calculated in a feedback way as shown in Equation \eqref{eq:C1_feedbackForcing}.
 
+\begin{equation}\label{eq:C1_feedbackForcing}
+	F(x_k, t) = 
+	\alpha \int_0^t \left[ u(x_k, t) - U(x_k, t) \right] + 
+	\beta \left[ u(x_k, t) - U(x_k, t) \right]
+\end{equation}
 
+where $u(x_k, t)$ is the velocity at the solid boundary calculated from the solution of NS equations and $U(x_k, t)$ is the desired velocity on the solid boundary. $\alpha$ and $\beta$ are negative constants and chosen in such a way that the velocities on the boundary satisfy the predefined velocity, $U(x_k, t)$. These constants need to be tuned according to the problem.
 
 
 

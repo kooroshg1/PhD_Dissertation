@@ -266,3 +266,67 @@
   year={1992},
   publisher={SIAM}
 }
+
+@article{peskin1989three,
+  title={A three-dimensional computational method for blood flow in the heart I. Immersed elastic fibers in a viscous incompressible fluid},
+  author={Peskin, Charles S and McQueen, David M},
+  journal={Journal of Computational Physics},
+  volume={81},
+  number={2},
+  pages={372--405},
+  year={1989},
+  publisher={Elsevier}
+}
+
+@article{fauci1988computational,
+  title={A computational model of aquatic animal locomotion},
+  author={Fauci, Lisa J and Peskin, Charles S},
+  journal={Journal of Computational Physics},
+  volume={77},
+  number={1},
+  pages={85--108},
+  year={1988},
+  publisher={Elsevier}
+}
+
+@article{kempe2015imposing,
+  title={Imposing the free-slip condition with a continuous forcing immersed boundary method},
+  author={Kempe, Tobias and Lennartz, Matthias and Schwarz, Stephan and Fr{\"o}hlich, Jochen},
+  journal={Journal of Computational Physics},
+  volume={282},
+  pages={183--209},
+  year={2015},
+  publisher={Elsevier}
+}
+
+@article{uhlmann2005immersed,
+  title={An immersed boundary method with direct forcing for the simulation of particulate flows},
+  author={Uhlmann, Markus},
+  journal={Journal of Computational Physics},
+  volume={209},
+  number={2},
+  pages={448--476},
+  year={2005},
+  publisher={Elsevier}
+}
+
+@article{mittal2005immersed,
+  title={Immersed boundary methods},
+  author={Mittal, Rajat and Iaccarino, Gianluca},
+  journal={Annu. Rev. Fluid Mech.},
+  volume={37},
+  pages={239--261},
+  year={2005},
+  publisher={Annual Reviews}
+}
+
+@article{goldstein1993modeling,
+  title={Modeling a no-slip flow boundary with an external force field},
+  author={Goldstein, D and Handler, R and Sirovich, L},
+  journal={Journal of Computational Physics},
+  volume={105},
+  number={2},
+  pages={354--366},
+  year={1993},
+  publisher={Elsevier}
+}
