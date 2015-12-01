@@ -153,4 +153,84 @@ Uhlmann, M., \enquote{An immersed boundary method with direct forcing for the
   simulation of particulate flows,} {\em Journal of Computational Physics\/},
   Vol.~209, No.~2, 2005, pp.~448--476.
 
+\bibitem{mittal2005immersed}
+Mittal, R. and Iaccarino, G., \enquote{Immersed boundary methods,} {\em Annu.
+  Rev. Fluid Mech.\/}, Vol.~37, 2005, pp.~239--261.
+
+\bibitem{goldstein1993modeling}
+Goldstein, D., Handler, R., and Sirovich, L., \enquote{Modeling a no-slip flow
+  boundary with an external force field,} {\em Journal of Computational
+  Physics\/}, Vol.~105, No.~2, 1993, pp.~354--366.
+
+\bibitem{mohd1997combined}
+Mohd-Yusof, J., \enquote{Combined immersed-boundary/B-spline methods for
+  simulations of ow in complex geometries,} {\em Annual Research Briefs. NASA
+  Ames Research Center= Stanford University Center of Turbulence Research:
+  Stanford\/}, 1997, pp.~317--327.
+
+\bibitem{verzicco1998complex}
+Verzicco, R., Mohd-Yusof, J., Orlandi, P., and Haworth, D., \enquote{LES in
+  complex geometries using boundary body forces,} {\em Center for Turbulence
+  Research Proceedings of the Summer Program, NASA Ames= Stanford
+  University\/}, 1998, pp.~171--186.
+
+\bibitem{verzicco2002large}
+Verzicco, R., Fatica, M., Iaccarino, G., Moin, P., and Khalighi, B.,
+  \enquote{Large eddy simulation of a road vehicle with drag-reduction
+  devices,} {\em AIAA journal\/}, Vol.~40, No.~12, 2002, pp.~2447--2455.
+
+\bibitem{iaccarino2003immersed}
+Iaccarino, G. and Verzicco, R., \enquote{Immersed boundary technique for
+  turbulent flow simulations,} {\em Applied Mechanics Reviews\/}, Vol.~56,
+  No.~3, 2003, pp.~331--347.
+
+\bibitem{durlofsky1987analysis}
+Durlofsky, L. and Brady, J., \enquote{Analysis of the Brinkman equation as a
+  model for flow in porous media,} {\em Physics of Fluids\/}, Vol.~30, No.~11,
+  1987, pp.~3329--3341.
+
+\bibitem{arquis1984conditions}
+Arquis, E. and Caltagirone, J., \enquote{Sur les conditions hydrodynamiques au
+  voisinage d’une interface milieu fluide-milieu poreux: applicationa la
+  convection naturelle,} {\em CR Acad. Sci. Paris II\/}, Vol.~299, 1984,
+  pp.~1--4.
+
+\bibitem{angot1999analysis}
+Angot, P., \enquote{Analysis of singular perturbations on the Brinkman problem
+  for fictitious domain models of viscous flows,} {\em Mathematical methods in
+  the applied sciences\/}, Vol.~22, No.~16, 1999, pp.~1395--1412.
+
+\bibitem{gazzola2011simulations}
+Gazzola, M., Chatelain, P., Van~Rees, W.~M., and Koumoutsakos, P.,
+  \enquote{Simulations of single and multiple swimmers with non-divergence free
+  deforming geometries,} {\em Journal of Computational Physics\/}, Vol.~230,
+  No.~19, 2011, pp.~7093--7114.
+
+\bibitem{kevlahan2001computation}
+Kevlahan, N. K.-R. and Ghidaglia, J.-M., \enquote{Computation of turbulent flow
+  past an array of cylinders using a spectral method with Brinkman
+  penalization,} {\em European Journal of Mechanics-B/Fluids\/}, Vol.~20,
+  No.~3, 2001, pp.~333--350.
+
+\bibitem{clarke1986euler}
+Clarke, D.~K., Hassan, H., and Salas, M., \enquote{Euler calculations for
+  multielement airfoils using Cartesian grids,} {\em AIAA journal\/}, Vol.~24,
+  No.~3, 1986, pp.~353--358.
+
+\bibitem{kirkpatrick2003representation}
+Kirkpatrick, M., Armfield, S., and Kent, J., \enquote{A representation of
+  curved boundaries for the solution of the Navier--Stokes equations on a
+  staggered three-dimensional Cartesian grid,} {\em Journal of Computational
+  Physics\/}, Vol.~184, No.~1, 2003, pp.~1--36.
+
+\bibitem{hu2006conservative}
+Hu, X., Khoo, B., Adams, N.~A., and Huang, F., \enquote{A conservative
+  interface method for compressible flows,} {\em Journal of Computational
+  Physics\/}, Vol.~219, No.~2, 2006, pp.~553--578.
+
+\bibitem{udaykumar1999computation}
+Udaykumar, H., Mittal, R., and Shyy, W., \enquote{Computation of solid--liquid
+  phase fronts in the sharp interface limit on fixed grids,} {\em Journal of
+  computational physics\/}, Vol.~153, No.~2, 1999, pp.~535--574.
+
 \end{thebibliography}
