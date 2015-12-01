@@ -233,4 +233,43 @@ Udaykumar, H., Mittal, R., and Shyy, W., \enquote{Computation of solid--liquid
   phase fronts in the sharp interface limit on fixed grids,} {\em Journal of
   computational physics\/}, Vol.~153, No.~2, 1999, pp.~535--574.
 
+\bibitem{borrvall2003topology}
+Borrvall, T. and Petersson, J., \enquote{Topology optimization of fluids in
+  Stokes flow,} {\em International journal for numerical methods in fluids\/},
+  Vol.~41, No.~1, 2003, pp.~77--107.
+
+\bibitem{challis2009level}
+Challis, V.~J. and Guest, J.~K., \enquote{Level set topology optimization of
+  fluids in Stokes flow,} {\em International journal for numerical methods in
+  engineering\/}, Vol.~79, No.~10, 2009, pp.~1284--1308.
+
+\bibitem{deaton2014survey}
+Deaton, J.~D. and Grandhi, R.~V., \enquote{A survey of structural and
+  multidisciplinary continuum topology optimization: post 2000,} {\em
+  Structural and Multidisciplinary Optimization\/}, Vol.~49, No.~1, 2014,
+  pp.~1--38.
+
+\bibitem{leveque1997immersed}
+LeVeque, R.~J. and Li, Z., \enquote{Immersed interface methods for Stokes flow
+  with elastic boundaries or surface tension,} {\em SIAM Journal on Scientific
+  Computing\/}, Vol.~18, No.~3, 1997, pp.~709--735.
+
+\bibitem{pingen2007topology}
+Pingen, G., Evgrafov, A., and Maute, K., \enquote{Topology optimization of flow
+  domains using the lattice Boltzmann method,} {\em Structural and
+  Multidisciplinary Optimization\/}, Vol.~34, No.~6, 2007, pp.~507--524.
+
+\bibitem{mase2009continuum}
+Mase, G.~T., Smelser, R.~E., and Mase, G.~E., {\em Continuum mechanics for
+  engineers\/}, CRC press, 2009.
+
+\bibitem{cross2014local}
+Cross, D.~M., {\em Local Continuum Sensitivity Method for Shape Design
+  Derivatives Using Spatial Gradient Reconstruction\/}, Virginia Tech, 2014.
+
+\bibitem{haftka1986structural}
+Haftka, R.~T. and Grandhi, R.~V., \enquote{Structural shape optimization—a
+  survey,} {\em Computer Methods in Applied Mechanics and Engineering\/},
+  Vol.~57, No.~1, 1986, pp.~91--106.
+
 \end{thebibliography}
