@@ -40,7 +40,7 @@ To compare the discrete and continuum sensitivity analysis we chose the one-dime
 
 where $T$ is the temperature and $x$ is spatial variable. The boundary conditions are defined as constant temperatures at the two ends of the domain as shown in Figure \ref{fig:C2_benchmarkCase}. The length of domain is selected as $L$.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=14.00cm]{Chapter_2/figure/benchmark_case.png}
 	\caption{One dimensional domain with heat conduction.}
@@ -63,8 +63,76 @@ Since the analytical derivatives are known, we can compare it to the discrete an
 
 % ======================================================================================
 \section{Discrete sensitivity formulation}
-To formulate the discrete sensitivity equation, we start by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. The design variable effects the shape of the domain which is the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. We use 5 nodes to discretize the domain as shown in Figure \ref{fig:C2_discretizedDomain}. The distance between a specific node and its neighbouring nodes on the right and left are defined by $\Delta x_R$ and $\Delta x_L$ respectively. In order to investigate the effect of different discretization methods on the sensitivity analysis we will discretize 
+To formulate the discrete sensitivity equation, we start by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. The design variable effects the shape of the domain which is the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. We use 6 nodes to discretize the domain as shown in Figure \ref{fig:C2_discretizedDomain}.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14.00cm]{Chapter_2/figure/benchmark_case_computational_domain.png}
+	\caption{One dimensional computational domain for heat conduction.}
+	\label{fig:C2_discretizedDomain}
+\end{figure}
+
+To discretize Equation \eqref{eq:C2_laplaceEquation}, the first step is to approximate the second derivative. This is done by writing the Taylor series expansion at at arbitrary location $x_i$.
+
+\begin{equation*}
+	T(x) = 
+	T(x_0) + 
+	\frac{\partial T}{\partial x} \bigg|_{x_i} (x - x_i) + 
+	\frac{\partial^2 T}{\partial x^2} \bigg|_{x_i} (x - x_i)^2 + 
+	\mathcal{H} . \mathcal{O} . \mathcal{T}
+\end{equation*}
+
+To approximate the second derivative at the arbitrary node $x_i$ using central method we need to use the neighbouring nodes. The second order approximation for the second order derivative of central difference method is shown in Equation \eqref{eq:C2_finiteDifferenceSchemes}. The discretized equations are differentiated with respect to shape design variable. This requires the nodal distances to be included in the discretized equations. To maintain the generality, we assume that distance of node $T_i$ to $T_{i+1}$ is $\Delta_i$ and the distance of node $T_i$ to $T_{i-1}$ is $\Delta_{i-1}$.
+
+\begin{equation}\label{eq:C2_finiteDifferenceSchemes}
+	\frac{\partial^2 T}{\partial x^2} = 
+	\frac{T_{i-1} \Delta_{iL} - 
+	      T_{i} (\Delta_{iL} + \Delta_{iR}) + 
+	      T_{i+1} \Delta_{iR}}
+	     {\dfrac{1}{2} \left[ \Delta_{iL} \Delta_{iR}^2 + 
+	                         \Delta_{iL}^2 \Delta_{iR} \right]}
+\end{equation}
+
+The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquation} is done using definitions in Equation \eqref{eq:C2_finiteDifferenceSchemes} for each node excluding the boundary nodes. As mentioned in the previous section, the nodal values at boundary nodes, $(1)$ and $(2)$ are known. The discretized governing equations is written in the matrix form as shown in Equation \eqref{eq:C2_laplaceEquationMatrixForm}.
+
+\begin{equation}\label{eq:C2_laplaceEquationMatrixForm}
+	\begin{bmatrix}
+		\frac{-2}{\Delta_{2L} \Delta_{2R}} &
+		\frac{2}{\Delta_{2L} \Delta_{2R} + \Delta_{2L}^2} &
+		0 &
+		0 &
+		\\
+		\frac{2}{\Delta_{3R}^2 + \Delta_{3L} \Delta_{3R}} & 
+		\frac{-2}{\Delta_{3L} \Delta_{3R}} &
+		\frac{2}{\Delta_{3L} \Delta_{3R} + \Delta_{3L}^2} &
+		0
+		\\
+		0 &
+		\frac{2}{\Delta_{4R}^2 + \Delta_{4L} \Delta_{4R}} & 
+		\frac{-2}{\Delta_{4L} \Delta_{4R}} &
+		\frac{2}{\Delta_{4L} \Delta_{4R} + \Delta_{4L}^2} &
+		\\
+		0 &
+		0 &
+		\frac{2}{\Delta_{5R}^2 + \Delta_{5L} \Delta_{5R}} & 
+		\frac{-2}{\Delta_{5L} \Delta_{5R}}
+	\end{bmatrix}
+	\begin{bmatrix}
+		T_2 \\
+		T_3 \\
+		T_4 \\
+		T_5
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\frac{2T_1}{\Delta_{2R}^2 + \Delta_{2L} \Delta_{2R}} \\
+		0 \\
+		0 \\
+		\frac{2T_6}{\Delta_{5L} \Delta_{5R} + \Delta_{5L}^2}
+	\end{bmatrix}
+\end{equation}
+
+The comparison with 
 % ======================================================================================
 \section{Continuum sensitivity formulation}
 
