@@ -132,7 +132,16 @@ The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquat
 	\end{bmatrix}
 \end{equation}
 
-The comparison with 
+To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$, and $L = 1$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=9.00cm]{Chapter_2/figure/finitedifference_vs_analytical.eps}
+	\caption{Comparison between the analytical and finite difference solution for 1D heat equation.}
+	\label{fig:C2_verificationOfSolver}
+\end{figure}
+
+
 % ======================================================================================
 \section{Continuum sensitivity formulation}
 
