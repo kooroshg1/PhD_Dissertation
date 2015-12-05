@@ -124,15 +124,15 @@ The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquat
 		T_5
 	\end{bmatrix}
 	=
-	\begin{bmatrix}
-		\frac{2T_1}{\Delta_{2R}^2 + \Delta_{2L} \Delta_{2R}} \\
-		0 \\
+	-\begin{bmatrix}
+	 	\frac{2T_1}{\Delta_{2R}^2 + \Delta_{2L} \Delta_{2R}} \\
+ 		0 \\
 		0 \\
 		\frac{2T_6}{\Delta_{5L} \Delta_{5R} + \Delta_{5L}^2}
 	\end{bmatrix}
 \end{equation}
 
-To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$, and $L = 1$.
+To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$, and $L = 1$.  As shown in this figure, the discrete and continuum results match very well.
 
 \begin{figure}[h]
 	\centering
@@ -141,7 +141,18 @@ To verify the discretization process, we compare the analytical solution of this
 	\label{fig:C2_verificationOfSolver}
 \end{figure}
 
+The sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. The change in the length, affects the nodal distances. Therefore, it is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$. For a equally space grid, the nodal distance is written as
 
+
+\begin{equation*}
+	\Delta x = \frac{L}{n - 1}
+\end{equation*}
+
+where $L$ is the length of the domain, and $n$ is the number of nodes chosen to discretize the domain. The sensitivity of nodal distances to the length of the domain is calculated as
+
+\begin{equation}\label{eq:C2_nodeDistanceSensitivity}
+	\frac{\partial \Delta x}{\partial L} = \frac{1}{n-1}
+\end{equation}
 % ======================================================================================
 \section{Continuum sensitivity formulation}
 
