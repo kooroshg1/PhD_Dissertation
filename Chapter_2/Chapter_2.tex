@@ -97,25 +97,25 @@ The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquat
 
 \begin{equation}\label{eq:C2_laplaceEquationMatrixForm}
 	\begin{bmatrix}
-		\frac{-2}{\Delta_{2L} \Delta_{2R}} &
-		\frac{2}{\Delta_{2L} \Delta_{2R} + \Delta_{2L}^2} &
+		\frac{-2}{\Delta_{1} \Delta_{2}} &
+		\frac{2}{\Delta_{1} \Delta_{2} + \Delta_{1}^2} &
 		0 &
 		0 &
 		\\
-		\frac{2}{\Delta_{3R}^2 + \Delta_{3L} \Delta_{3R}} & 
-		\frac{-2}{\Delta_{3L} \Delta_{3R}} &
-		\frac{2}{\Delta_{3L} \Delta_{3R} + \Delta_{3L}^2} &
+		\frac{2}{\Delta_{3}^2 + \Delta_{2} \Delta_{3}} & 
+		\frac{-2}{\Delta_{2} \Delta_{3}} &
+		\frac{2}{\Delta_{2} \Delta_{3} + \Delta_{2}^2} &
 		0
 		\\
 		0 &
-		\frac{2}{\Delta_{4R}^2 + \Delta_{4L} \Delta_{4R}} & 
-		\frac{-2}{\Delta_{4L} \Delta_{4R}} &
-		\frac{2}{\Delta_{4L} \Delta_{4R} + \Delta_{4L}^2} &
+		\frac{2}{\Delta_{4}^2 + \Delta_{3} \Delta_{4}} & 
+		\frac{-2}{\Delta_{3} \Delta_{4}} &
+		\frac{2}{\Delta_{3} \Delta_{4} + \Delta_{3}^2} &
 		\\
 		0 &
 		0 &
-		\frac{2}{\Delta_{5R}^2 + \Delta_{5L} \Delta_{5R}} & 
-		\frac{-2}{\Delta_{5L} \Delta_{5R}}
+		\frac{2}{\Delta_{5}^2 + \Delta_{4} \Delta_{5}} & 
+		\frac{-2}{\Delta_{4} \Delta_{5}}
 	\end{bmatrix}
 	\begin{bmatrix}
 		T_2 \\
@@ -125,10 +125,10 @@ The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquat
 	\end{bmatrix}
 	=
 	-\begin{bmatrix}
-	 	\frac{2T_1}{\Delta_{2R}^2 + \Delta_{2L} \Delta_{2R}} \\
+	 	\frac{2T_1}{\Delta_{2}^2 + \Delta_{1} \Delta_{2}} \\
  		0 \\
 		0 \\
-		\frac{2T_6}{\Delta_{5L} \Delta_{5R} + \Delta_{5L}^2}
+		\frac{2T_6}{\Delta_{5} \Delta_{4} + \Delta_{5}^2}
 	\end{bmatrix}
 \end{equation}
 
@@ -141,8 +141,9 @@ To verify the discretization process, we compare the analytical solution of this
 	\label{fig:C2_verificationOfSolver}
 \end{figure}
 
-The sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. The change in the length, affects the nodal distances. Therefore, it is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$. For a equally space grid, the nodal distance is written as
+The sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. We assume that the change in the length, only affects the nodal distance between the last two nodes and the rest remain unchanged. This means that only the node next to the boundary will move and the rest of nodes will be stationary. This is required to make sure that the sensitivity at each of the degrees of freedom is only a function of change in shape not movement of material nodes.
 
+To calculate the sensitivities, It is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$. For a equally space grid, the nodal distance is written as
 
 \begin{equation*}
 	\Delta x = \frac{L}{n - 1}
@@ -153,6 +154,64 @@ where $L$ is the length of the domain, and $n$ is the number of nodes chosen to 
 \begin{equation}\label{eq:C2_nodeDistanceSensitivity}
 	\frac{\partial \Delta x}{\partial L} = \frac{1}{n-1}
 \end{equation}
+
+The discretized equation is differentiated as shown in Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}. It should be noted that since only the adjacent node to the boundary is affected by shape change, only that element in the matrix derivative has a value.
+
+\begin{equation}\label{eq:C2_laplaceEquationMatrixFormSensitivity}
+	\begin{bmatrix}
+		-2 & 1 & 0 & 0 \\
+		1 & -2 & 1 & 0 \\
+		0 & 1 & -2 & 1 \\
+		0 & 0 & 1 & -2
+	\end{bmatrix}
+	\begin{bmatrix}
+		T'_2 \\
+		T'_3 \\
+		T'_4 \\
+		T'_5
+	\end{bmatrix}
+	=
+	\frac{1}{2} \frac{\partial \Delta}{\partial L} \frac{1}{\Delta}
+	\begin{bmatrix}
+		0 \\
+		0 \\
+		0 \\
+		T_6
+	\end{bmatrix}
+	-
+	\underbrace{
+	\frac{1}{2} \frac{\partial \Delta}{\partial L} \frac{1}{\Delta}
+	\begin{bmatrix}
+		0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 \\
+		0 & 0 & -3 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		T_2 \\
+		T_3 \\
+		T_4 \\
+		T_5
+	\end{bmatrix}}_\text{effect of shape change}
+\end{equation}
+
+In order to better study above we mention the general sensitivity equation in the discrete form. Assume the the continuum governing equation, can be written in the discrete form as
+
+\begin{equation*}
+	\left[ K \right] \left[ U \right] = \left[ F \right]
+\end{equation*}
+
+where $[K]$ is the discrete operator that represents the governing equation, $[U]$ is the vector of response variable defined at each of the degrees of freedom, and $[F]$ is the vector of the boundary conditions. The sensitivity of this system with respect to design variable $b$ is derived as
+
+\begin{equation*}
+	\left[ K \right] \left[ \frac{\partial U}{\partial b} \right] = 
+	\left[ \frac{\partial F}{\partial b} \right] - 
+		\left[ \frac{\partial K}{\partial b} \right] \left[ U \right]
+\end{equation*}
+
+By comparing above equation with Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we can see that the last term represents the change in the stiffness matrix. This depends on how the governing equations are discretized. Therefore, to do the sensitivity analysis it is required to know how this matrix is put together so it can be differentiated. This is not possible in most cases since the details of discretization is not known for the commertial software packages.
+
+To verify the results of Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we compared it with the analytical sensitivity results as shown in Figure \ref{fig:C2_discreteSensitivityVerification}.
 % ======================================================================================
 \section{Continuum sensitivity formulation}
 

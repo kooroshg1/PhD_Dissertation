@@ -9,8 +9,8 @@ plt.rc('font', **font)
 linewidth = 9.0
 markersize = 20
 # -------------------------
-n = 6
-x = np.linspace(0, 1, 6)
+n = 8
+x = np.linspace(0, 1, n)
 dx = x[2] - x[1]
 T0 = 0
 Tn = 1
@@ -47,17 +47,21 @@ T = np.append(T0, T)
 
 # # Sensitivity analysis
 
-dDeltadL = 1 / (n - 1)
+dDeltadL = 1 / (1.5 *n - 4)
 Delta = x[2] - x[1]
 
 T = T[1:-1]
-dLdL = dDeltadL / Delta**3 * 2 * np.diag(np.ones(n-2)) - L
-F = np.zeros(n-2)
-F[0] = T0
-F[-1] = Tn
-dFdL = dDeltadL / Delta**3 * F
+dLdL = np.zeros([n-2, n-2])
+dLdL[-1, -2] = -3
+dLdL[-1, -1] = 1
+dLdL = 0.5 * dDeltadL * 1 / Delta * dLdL
+dFdL = 0.5 * dDeltadL * 1 / Delta * np.concatenate((np.zeros(n-3), [Tn]))
+dFdL = dFdL - dLdL.dot(T)
 
-RHS = (L.dot(T) + T) * 2 * dDeltadL / Delta**3
-dTdL = np.linalg.solve(L, RHS)
-print(dTdL / 150)
-print(x[1:-1])
+dTdL = np.linalg.solve(L, dFdL)
+
+print(T)
+print(dTdL)
+print(-x[1:-1]/(x[-1] - x[0])**2)
+
+# print(np.divide(dTdL, (-x[1:-1]/(x[-1] - x[0])**2)))

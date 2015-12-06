@@ -24,8 +24,8 @@
       <file leaf-file-name="finite_difference_schemes.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/finite_difference_schemes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8556701">
-              <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.5292096">
+              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding>
                 <element signature="e#23#41#0" expanded="true" />
               </folding>
@@ -81,6 +81,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -102,7 +103,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -396,6 +396,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/finite_difference_schemes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45841393">
@@ -412,8 +422,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/finite_difference_schemes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8556701">
-          <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.5292096">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding>
             <element signature="e#23#41#0" expanded="true" />
           </folding>
