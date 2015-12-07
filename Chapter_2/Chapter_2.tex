@@ -268,14 +268,10 @@ For the linear analysis, the governing  of \eqref{eq:C2_continuumSensitivityForm
 	A(u', t; b) = 0 
 \end{equation}
 
-This is valid since for the linear case, the differential operators of the governing equation does not depend on the response variable, $u$. To explain this concept, we look at the general case of linear elasticity. The governing equations are defined as
+This is valid since for the linear case, the differential operators of the governing equation does not depend on the response variable, $u$. To explain this concept, we look at the transient heat conduction in 1D domain. The governing equations are defined as
 
-\begin{subequations}
 \begin{align*}
-	\sigma_{ji,j} + f_i = \rho \partial_{tt} u_i \quad \text{equation of motion} \\
-	\epsilon_{ij} = \frac{1}{2} \left( u_{j,i} + u_{i,j} \right) \quad \text{strain-displacement} \\
-	\sigma_{ij} = \mathcal{C}_{ijkl} \epsilon_{kl} \quad \text{Constitutive equation}
+	\frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
 \end{align*}
-\end{subequations}
 
-where $\sigma_{ji}$ is the Cauchy stress tensor, $F_i$ are the body forces, $\rho$ is the mass density, $u_i$ is the displacement, $\epsilon_{ij}$ is the strain, and $\mathcal{C}_{ijkl}$ is the stiffness tensor. 
+where $T$ is the temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is is the thermal diffusivity ($k/\rho c_p$)
