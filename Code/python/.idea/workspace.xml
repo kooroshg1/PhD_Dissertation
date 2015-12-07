@@ -24,8 +24,8 @@
       <file leaf-file-name="finite_difference_schemes.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/finite_difference_schemes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5292096">
-              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.4707904">
+              <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
               <folding>
                 <element signature="e#23#41#0" expanded="true" />
               </folding>
@@ -54,9 +54,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="98" />
-    <option name="y" value="36" />
+    <option name="y" value="-6" />
     <option name="width" value="1822" />
-    <option name="height" value="1044" />
+    <option name="height" value="1086" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -81,8 +81,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -103,6 +101,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,7 +287,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="98" y="36" width="1822" height="1044" extended-state="6" />
+    <frame x="98" y="-6" width="1822" height="1086" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24958123" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -406,6 +406,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/finite_difference_schemes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45841393">
@@ -422,8 +432,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/finite_difference_schemes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5292096">
-          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.4707904">
+          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
           <folding>
             <element signature="e#23#41#0" expanded="true" />
           </folding>

@@ -64,4 +64,12 @@ print(T)
 print(dTdL)
 print(-x[1:-1]/(x[-1] - x[0])**2)
 
-# print(np.divide(dTdL, (-x[1:-1]/(x[-1] - x[0])**2)))
+plt.figure(figsize=(30,15))
+plt.xlabel('x')
+plt.ylabel('T')
+plt.plot(x[1:-1], dTdL, 'k-',
+         x[1:-1], -x[1:-1]/(x[-1] - x[0])**2, 'wo',
+         ms=20, mew=7, mec='r', lw=linewidth)
+plt.legend(['FD', 'Analytical'], loc='best')
+plt.savefig('finitedifference_vs_analytical.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.show()

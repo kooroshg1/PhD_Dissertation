@@ -211,9 +211,13 @@ where $[K]$ is the discrete operator that represents the governing equation, $[U
 
 By comparing above equation with Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we can see that the last term represents the change in the stiffness matrix. This depends on how the governing equations are discretized. Therefore, to do the sensitivity analysis it is required to know how this matrix is put together so it can be differentiated. This is not possible in most cases since the details of discretization is not known for the commertial software packages.
 
-To verify the results of Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we compared it with the analytical sensitivity results as shown in Figure \ref{fig:C2_discreteSensitivityVerification}.
+To verify the results of Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we compared it with the analytical sensitivity results are shown in Figure \ref{fig:C2_discreteSensitivityVerification}.
+
+\begin{figure}
+	\centering
+	\includegraphics[height=9.00cm]{Chapter_2/figure/SA_finitedifference_vs_analytical.eps}
+	\caption{Sensitivity analysis verification.}
+	\label{fig:C2_discreteSensitivityVerification}
+\end{figure}
 % ======================================================================================
 \section{Continuum sensitivity formulation}
-
-% ---------------------------------------------------------------------------------------------
-\subsection{Sensitivity Analysis}
