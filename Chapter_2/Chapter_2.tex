@@ -270,8 +270,76 @@ For the linear analysis, the governing  of \eqref{eq:C2_continuumSensitivityForm
 
 This is valid since for the linear case, the differential operators of the governing equation does not depend on the response variable, $u$. To explain this concept, we look at the transient heat conduction in 1D domain. The governing equations are defined as
 
-\begin{align*}
+\begin{equation}\label{eq:C2_transientHeatCondtionGE}
 	\frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
-\end{align*}
+\end{equation}
 
-where $T$ is the temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is is the thermal diffusivity ($k/\rho c_p$)
+where $T$ is the temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is is the thermal diffusivity ($k/\rho c_p$). This equation can be differentiated with respect to design variable $b$ as shown in the following equation.
+
+\begin{equation*}
+	\frac{\partial}{\partial b}
+	\left( \frac{\partial^2 T}{\partial x^2}\right) = 
+	\frac{\partial}{\partial b}
+	\left( \frac{1}{\alpha} \frac{\partial T}{\partial t}\right)
+\end{equation*}
+
+Due to linearity of the differential operators we can change the order of differentiation as follows
+
+\begin{equation}\label{eq:C2_transientHeatCondtionSA}
+	\frac{\partial^2}{\partial x^2}
+	\left( \frac{\partial T}{\partial b} \right) = 
+	\frac{1}{\alpha} \frac{\partial}{\partial t}
+	\left( \frac{\partial T}{\partial b}\right)
+\end{equation}
+
+By comparing Equations \eqref{eq:C2_transientHeatCondtionGE} and \eqref{eq:C2_transientHeatCondtionSA} we can see that the differential operators, $\partial^2 /\partial x^2$, and $\partial /\partial t$ remain unchanged. Therefore, same analysis can be used for solving this system of governing equations for the sensitivity variable, $\partial T/\partial b$.
+
+For nonlinear problems, the differential operators are functions of response variable as well. For example, the incompressible Euler's equation for a 2D flow is derived as
+
+\begin{subequations}\label{eq:C2_eulerEquations}
+\begin{gather}
+	\frac{\partial u}{\partial t} +
+	u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} +
+	\frac{\partial p}{\partial x} = 0 
+	\\
+	\frac{\partial v}{\partial t} +
+	u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} +
+	\frac{\partial p}{\partial y} = 0
+\end{gather}
+\end{subequations}
+
+where $u$ and $v$ are the velocity components in $x$ and $y$ directions respectively. $p$ is the pressure, $t$ is time, $x$, and $y$ are spatial coordinates. We can rewrite Equation \eqref{eq:C2_eulerEquations} in terms of differential operators too.
+
+\begin{subequations}
+\begin{gather*}
+	\mathcal{T} u +
+	\mathcal{C} u +
+	\mathcal{G}_x p = 0 
+	\\
+	\mathcal{T} v +
+	\mathcal{C} v +
+	\mathcal{G}_y p = 0 
+\end{gather*}
+\end{subequations}
+
+where $\mathcal{T}$ is the time derivative operator ($\partial /\partial t$), $\mathcal{C}$, is the convective operator ($u \partial / \partial x + v \partial / \partial y$). $\mathcal{G}_x$ and $\mathcal{G}_y$ are gradient operators in $x$ and $y$ respectively ($\partial /\partial x$ and $\partial /\partial y$). The gradient and time derivative operators are linear, therefore they can be treated as shown in the previous paragraphs. On the other hand, the convective operator is nonlinear and it should be differentiated alongside response variables as well. As a result, the sensitivity equations can be written in the operator form as
+
+\begin{subequations}\label{eq:C2_eulerEquationsSA}
+\begin{gather}
+	\mathcal{T} u' +
+	\mathcal{C}' u + \mathcal{C} u' +
+	\mathcal{G}_x p' = 0 
+	\\
+	\mathcal{T} v' +
+	\mathcal{C}' v + \mathcal{C} v' +
+	\mathcal{G}_y p' = 0 
+\end{gather}
+\end{subequations}
+
+where
+
+\begin{equation*}
+	\mathcal{C}' = u' \frac{\partial}{\partial x} + v' \frac{\partial}{\partial y}
+\end{equation*}
+
+Several interesting properties of CSA can be explained using Equation \eqref{eq:C2_eulerEquationsSA}. First of all, although the original Euler equation is nonlinear due to multiplication of response variables and their derivatives ($u$ and $\partial u/\partial x$), the resulting sensitivity equation is linear. This means that the sensitivity equations are easier to solve both in terms of algorithms and simulation time compared to the original equations. The challenging term to be calculated in Equation \eqref{eq:C2_eulerEquationsSA} are the convective terms. The first step in solving the sensitivity equations is to get the solution of the governing equations. This enables us to calculate the convective operator, $\mathcal{L}$ at each step of sensitivity solution based on the analysis data. $\mathcal{L}'$ is also calculated at each step of the solution of sensitivity equations based on the solution as previous time step. For a simple predictor–corrector method used to solving the original governing equations, this can be written as follows.
