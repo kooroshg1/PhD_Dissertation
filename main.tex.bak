@@ -25,5 +25,5 @@
 \input{Chapter_2/Chapter_2.tex}
 \input{Chapter_3/Chapter_3.tex}
 \bibliographystyle{aiaa}
-\bibliography{Chapter_1/Chapter1Ref, Chapter_2/Chapter2Ref, Chapter_3/Chapter3Ref}
+\bibliography{Chapter_1/Chapter1Ref,Chapter_2/Chapter2Ref,Chapter_3/Chapter3Ref}
 \end{document}

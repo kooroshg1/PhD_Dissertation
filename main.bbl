@@ -272,4 +272,56 @@ Haftka, R.~T. and Grandhi, R.~V., \enquote{Structural shape optimization—a
   survey,} {\em Computer Methods in Applied Mechanics and Engineering\/},
   Vol.~57, No.~1, 1986, pp.~91--106.
 
+\bibitem{gobal2014continuum}
+Gobal, K., Grandhi, R.~V., and Kolonay, R.~M., \enquote{Continuum Sensitivity
+  Analysis for Structural Shape Design Variables Using Finite-Volume Method,}
+  {\em AIAA Journal\/}, Vol.~53, No.~2, 2014, pp.~347--355.
+
+\bibitem{deaton2013stiffening}
+Deaton, J.~D. and Grandhi, R.~V., \enquote{Stiffening of restrained thermal
+  structures via topology optimization,} {\em Structural and Multidisciplinary
+  Optimization\/}, Vol.~48, No.~4, 2013, pp.~731--745.
+
+\bibitem{jain1996coupled}
+Jain, A., Jones, N.~P., and Scanlan, R.~H., \enquote{Coupled flutter and
+  buffeting analysis of long-span bridges,} {\em Journal of Structural
+  Engineering\/}, 1996.
+
+\bibitem{arrigan2011control}
+Arrigan, J., Pakrashi, V., Basu, B., and Nagarajaiah, S., \enquote{Control of
+  flapwise vibrations in wind turbine blades using semi-active tuned mass
+  dampers,} {\em Structural Control and Health Monitoring\/}, Vol.~18, No.~8,
+  2011, pp.~840--851.
+
+\bibitem{farhat2006provably}
+Farhat, C., Van~der Zee, K.~G., and Geuzaine, P., \enquote{Provably
+  second-order time-accurate loosely-coupled solution algorithms for transient
+  nonlinear computational aeroelasticity,} {\em Computer methods in applied
+  mechanics and engineering\/}, Vol.~195, No.~17, 2006, pp.~1973--2001.
+
+\bibitem{sotiropoulos2009review}
+Sotiropoulos, F. and Borazjani, I., \enquote{A review of state-of-the-art
+  numerical methods for simulating flow through mechanical heart valves,} {\em
+  Medical \& biological engineering \& computing\/}, Vol.~47, No.~3, 2009,
+  pp.~245--256.
+
+\bibitem{kern2006simulations}
+Kern, S. and Koumoutsakos, P., \enquote{Simulations of optimized anguilliform
+  swimming,} {\em Journal of Experimental Biology\/}, Vol.~209, No.~24, 2006,
+  pp.~4841--4857.
+
+\bibitem{lomtev1999discontinuous}
+Lomtev, I., Kirby, R., and Karniadakis, G., \enquote{A discontinuous Galerkin
+  ALE method for compressible viscous flows in moving domains,} {\em Journal of
+  Computational Physics\/}, Vol.~155, No.~1, 1999, pp.~128--159.
+
+\bibitem{farhat2004cfd}
+Farhat, C., \enquote{CFD-based nonlinear computational aeroelasticity,} {\em
+  Encyclopedia of computational mechanics\/}, Vol.~3, 2004, pp.~459--480.
+
+\bibitem{cheng2005fluid}
+Cheng, Y., Oertel, H., and Schenkel, T., \enquote{Fluid-structure coupled CFD
+  simulation of the left ventricular flow during filling phase,} {\em Annals of
+  biomedical engineering\/}, Vol.~33, No.~5, 2005, pp.~567--576.
+
 \end{thebibliography}
