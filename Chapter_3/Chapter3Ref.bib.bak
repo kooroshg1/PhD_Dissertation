@@ -104,4 +104,36 @@
   publisher={Springer}
 }
 
+@article{peskin1972flow,
+  title={Flow patterns around heart valves: a numerical method},
+  author={Peskin, Charles S},
+  journal={Journal of computational physics},
+  volume={10},
+  number={2},
+  pages={252--271},
+  year={1972},
+  publisher={Elsevier}
+}
 
+@article{lee2003stability,
+  title={Stability characteristics of the virtual boundary method in three-dimensional applications},
+  author={Lee, Changhoon},
+  journal={Journal of Computational Physics},
+  volume={184},
+  number={2},
+  pages={559--591},
+  year={2003},
+  publisher={Elsevier}
+}
+
+
+@article{shin2008assessment,
+  title={Assessment of regularized delta functions and feedback forcing schemes for an immersed boundary method},
+  author={Shin, Soo Jai and Huang, Wei-Xi and Sung, Hyung Jin},
+  journal={International Journal for Numerical Methods in Fluids},
+  volume={58},
+  number={3},
+  pages={263--286},
+  year={2008},
+  publisher={Wiley Online Library}
+}

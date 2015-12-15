@@ -87,4 +87,32 @@ Equation \eqref{eq:C3_benchmarkProblem} is transient in nature however, its stea
 We will use this analytical solution to verify the result of the different IB methods defined in the following sections.
 
 % ======================================================================================
-\section{Immersed Boundary Methods}
+\section{Immersed Boundary Classification}
+In general, IB methods can be classified in three main families: i) discrete forcing, ii) continuum forcing, and iii) cut-cell methods. This classification is based on how the interface conditions are handled in the IB algorithm. In this section we present the essence of each method and try to point their primary advantages and disadvantages. Moreover, each of the discussed IB techniques will be applied to the benchmark problem where the results are verified with the analytical solution. In general, the immersed boundary approach is based on modifying the NS equations for imposing the boundary conditions. This modification can be done in three different ways that leads to a fundamental dichotomy in IB method.
+
+\subsection{Discrete Forcing Method}
+
+\subsubsection{Formulation}
+\subsubsection{Implimentation for Couette Flow Problem}
+\subsection{Continuum Forcing Method}
+In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation
+
+\begin{equation}
+	\frac{\partial X_k}{\partial t} = u(X_k, t)
+\end{equation}
+
+where $u$ is the velocity of the fluid at location $X_k$. The location of fluid nodes, $x$, does not necessary coincide with the location of the Lagrangian points. Thus, it is required to map the velocities from the Eulerian domain, where the fluid's equation of motion are solved, to Lagrangian nodes. In a purely continuum problem, this can be done using the Dirac delta functions. The property of the Dirac delta function that enables the mapping between the Euler and Lagrangian domain is shown in the following equation
+
+\begin{equation}
+	\int_{\Omega_f} f(x) \delta(x - X_k) = f(X_k)
+\end{equation}
+
+As can be seen here, by convoluting the function of interest and the delta function, we can evaluate our function of interest at any location where the delta function is defined. By defining the delta function at $X_k$ and using velocity from CFD solver as function $f$, we can evaluate the needed velocity for IB at any arbitrary point $X_k$. Although this is the main idea of mapping data to Lagrangian domain, this approach becomes unstable in practice \cite{lee2003stability}. In the practical implementation of immersed boundary method, the effect of delta function need to be expanded to couple of nodes around $X_k$. This is achieved by relaxing the delta function. The relaxed delta function is generally refereed to as regularized delta function \cite{shin2008assessment}. The reqularized delta functions of Equation \eqref{eq:C3_regularizedDeltaFunctions} are ploted in Figure \ref{fig:C3_regularizedDeltaFunctions}.
+
+%\subsubsection{Formulation}
+%\subsubsection{Implimentation for Couette Flow Problem}
+%\subsection{Cut-cell Method}
+%\subsubsection{Formulation}
+%\subsubsection{Implimentation for Couette Flow Problem}
+%\section{Application in Continuum Sensitivity Analysis}
+%\section{Summary}

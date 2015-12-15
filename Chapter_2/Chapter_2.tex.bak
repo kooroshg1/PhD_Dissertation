@@ -2,7 +2,7 @@
 In this chapter, the concept behind discrete and continuum sensitivity formulation is discussed and the general approach for deriving the sensitivity equations is presented. The two sensitivity analysis techniques are applied to a heat transfer benchmark problem where the sensitivity of response to the shape of the domain is calculated. This problem is also used in the next chapter for implementation of different immersed boundary methods. The difference between local and total formulation of the sensitivity response is discussed and finally the independence of continuum sensitivity formulation to discretization method is proven. This enables use to reuse the solver of governing equation to calculate the sensitivity response. This is typically not possible for discrete sensitivity formulation.
 
 % ======================================================================================
-\section{General formulation}
+\section{General Formulation}
 The general computational domain is defined as shown in Figure \ref{fig:C2_continuumDomain}. The response variable on this domain can be from the fluid, i.e. pressure or velocity, or the solid, i.e. displacements. Nevertheless, the response is calculated using a governing equation subject to boundary conditions. In this work, the governing equation and boundary conditions are represented in the functional form as shown in Equation \eqref{eq:C2_governingEquationAndBC}.
 
 \begin{subequations}
@@ -31,7 +31,7 @@ The total derivative is known as material derivative in continuum mechanics \cit
 A common approach to calculate the domain sensitivity, is to use the same techniques used to deform the body-conformal mesh in a CFD simulation. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system can be modeled and solved using structural analysis techniques, where the sensitivities can be easily added to its formulation. This is effectively a shape sensitivity analysis for the structural analyses \cite{haftka1986structural}. This step can be removed from the analysis if the computational domain does not affected by design variable since $\partial x/\partial b$ is equal to zero for this case. This is removes the extra step of doing the structural shape sensitivity analysis for the mesh and also response variable gradient calculation. As mentioned in Chapter \ref{ch:introduction}, by using the immersed boundary method the mesh definition is decoupled from the boundary shape. Therefore, domain sensitivity is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
 
 % ======================================================================================
-\section{Benchmark case}
+\section{Benchmark Case}
 To compare the discrete and continuum sensitivity analysis we chose the one-dimensional heat transfer analysis in a rod. The temperature in governing by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
 
 \begin{equation}\label{eq:C2_laplaceEquation}
@@ -62,7 +62,7 @@ The analytical sensitivity of the temperature with respect to beam's length can 
 Since the analytical derivatives are known, we can compare it to the discrete and continuous sensitivity results.
 
 % ======================================================================================
-\section{Discrete sensitivity formulation}
+\section{Discrete Sensitivity Formulation}
 To formulate the discrete sensitivity equation, we start by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. The design variable effects the shape of the domain which is the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. We use 6 nodes to discretize the domain as shown in Figure \ref{fig:C2_discretizedDomain}.
 
 \begin{figure}[h]
@@ -221,7 +221,7 @@ To verify the results of Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitiv
 \end{figure}
 
 % ======================================================================================
-\section{Continuum sensitivity formulation}
+\section{Continuum Sensitivity Formulation}
 For a continuum system, the governing equations and boundary conditions can be written as
 
 \begin{subequations}\label{eq:C2_continuumGoverningEquation}
