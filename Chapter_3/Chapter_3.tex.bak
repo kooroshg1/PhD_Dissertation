@@ -107,17 +107,26 @@ where $u$ is the velocity of the fluid at location $X_k$. The location of fluid 
 	\int_{\Omega_f} f(x) \delta(x - X_k) = f(X_k)
 \end{equation}
 
-As can be seen here, by convoluting the function of interest and the delta function, we can evaluate our function of interest at any location where the delta function is defined. By defining the delta function at $X_k$ and using velocity from CFD solver as function $f$, we can evaluate the needed velocity for IB at any arbitrary point $X_k$. Although this is the main idea of mapping data to Lagrangian domain, this approach becomes unstable in practice \cite{lee2003stability}. In the practical implementation of immersed boundary method, the effect of delta function need to be expanded to couple of nodes around $X_k$. This is achieved by relaxing the delta function. The relaxed delta function is generally refereed to as regularized delta function \cite{shin2008assessment}. The reqularized delta functions of Equation \eqref{eq:C3_regularizedDeltaFunctions} are ploted in Figure \ref{fig:C3_regularizedDeltaFunctions}.
+As can be seen here, by convoluting the function of interest and the delta function, we can evaluate our function of interest at any location where the delta function is defined. By defining the delta function at $X_k$ and using velocity from CFD solver as function $f$, we can evaluate the needed velocity for IB at any arbitrary point $X_k$. Although this is the main idea of mapping data to Lagrangian domain, this approach becomes unstable in practice \cite{lee2003stability}. In the practical implementation of immersed boundary method, the effect of delta function need to be expanded to couple of nodes around $X_k$. This is achieved by relaxing the delta function. The relaxed delta function is generally refereed to as regularized delta function \cite{shin2008assessment}. The regularized delta function is defined using Equation \eqref{eq:C3_regularizedDeltaFunction} in three dimensions.
 
-\begin{subequations}
-\begin{equation}
+\begin{equation}\label{eq:C3_regularizedDeltaFunction}
+	\delta_h(x_1, x_2, x_3) = \frac{1}{dx_1 \cdot dx_2 \cdot dx_3}
+							   \phi \left( \frac{x_1 - \eta_1}{dx_1} \right)
+							   \phi \left( \frac{x_2 - \eta_2}{dx_2} \right)
+							   \phi \left( \frac{x_2 - \eta_3}{dx_3} \right)
+\end{equation}
+
+where $x_i$ is the spatial coordinate in each direction, $\eta_i$ is the location where the delta function is defined, and $dx_i$ is the grid size in each direction. In above equation $i$ can be $1$, $2$, or $3$. The $\phi$ function is defined in Equation \eqref{eq:C3_phiFunction}. As shown here there are different ways of defining this function. The input of $\phi$ function is $r$ which is defined as $(x_i - \eta_i) / dx_i$.
+
+\begin{subequations}\label{eq:C3_phiFunction}
+\begin{equation}\label{eq:C3_phiFunction_2point}
 	\phi(r) = 
 	\begin{cases}
 	1 - |r| \quad &|r| \leq 1 \\
 	0	\quad &\text{otherwise}
 	\end{cases}
 \end{equation}
-\begin{equation}
+\begin{equation}\label{eq:C3_phiFunction_3point}
 	\phi(r) = 
 	\begin{cases}
 		\frac{1}{3} \left( 1 + \sqrt{-3r^2 + 1} \right) \quad &|r| \leq 0.5 \\
@@ -125,7 +134,7 @@ As can be seen here, by convoluting the function of interest and the delta funct
 		0 & \text{otherwise}
 	\end{cases}
 \end{equation}
-\begin{equation}
+\begin{equation}\label{eq:C3_phiFunction_4point}
 	\phi(r) = 
 	\begin{cases}
 		\frac{1}{8}
@@ -141,36 +150,31 @@ As can be seen here, by convoluting the function of interest and the delta funct
 		0 &\text{otherwise}
 	\end{cases}
 \end{equation}
-\begin{equation}
-	\phi(r) = 
-	\begin{cases}
-		\frac{1}{8}
-		\left(
-		3 - 2|r| + \sqrt{1 + 4|r| - 4r^2}
-		\right) \quad &0 \leq |r| \leq 1
-		\\
-		\frac{1}{8}
-		\left(
-		5 - 2|r| + \sqrt{-7 + 12|r| - 4r^2}
-		\right) \quad &1 \leq |r| \leq 2
-		\\
-		0 &\text{otherwise}
-	\end{cases}
-\end{equation}
-\begin{equation}
+\begin{equation}\label{eq:C3_phiFunction_6point}
 	\phi(r) = 
 	\begin{cases}
 		\begin{split}
 		\frac{61}{112} - \frac{11}{42} |r| - \frac{11}{56} |r|^2 + \frac{1}{12} |r|^3 + 
 		\frac{\sqrt{3}}{336}
-		\left( 243 + 1584 |r| - 748 |r|^2 \right. \\
-		\left. - 1560 |r|^3 + 500 |r|^4 + 336 |r|^5 - 112 |r|^6
+		\left( 243 + 1584 |r| \right. \\
+		\left. - 748 |r|^2 - 1560 |r|^3 + 500 |r|^4 + 336 |r|^5 - 112 |r|^6
 		\right)^{1/2}
-		\end{split}
+		\end{split} \quad & 0 \leq |r| \leq 1
+		\\
+		\frac{21}{16} + \frac{7}{12} |r| - \frac{7}{8} |r|^2 + \frac{1}{6} |r|^3 - 
+		\frac{3}{2} \phi \left( |r| - 1 \right) & 1 \leq |r| \leq 2
+		\\
+		\frac{9}{8} - \frac{23}{12} |r| + \frac{3}{4} |r|^2 - \frac{1}{12} |r|^3 + 
+		\frac{1}{2} \phi \left( |r| - 2 \right) & 2 \leq |r| \leq 3
+		\\
+		0 & \text{otherwise}
 	\end{cases}
 \end{equation}
 \end{subequations}
 
+Equation \eqref{eq:C3_phiFunction_2point} is the 2-point delta function that does the linear interpolation between the points point \cite{saiki1996numerical}. Equation \eqref{eq:C3_phiFunction_3point} shoes the 3-point delta function used by Roma et al. \cite{roma1999adaptive}, and Equation \eqref{eq:C3_phiFunction_4point} and \eqref{eq:C3_phiFunction_6point} are 4-point and 6-point delta functions used by Peskin \cite{peskin2002immersed}.
+
+Now we can write the mapping from the Eulerian nodes of the fluid solver to Lagrangian nodes as follows
 %\subsubsection{Formulation}
 %\subsubsection{Implimentation for Couette Flow Problem}
 %\subsection{Cut-cell Method}
