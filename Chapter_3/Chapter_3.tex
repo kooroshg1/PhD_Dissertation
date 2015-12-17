@@ -52,7 +52,7 @@ where $\sigma$ is the Cauchy stress tensor, $\epsilon$ is the strain tensor, $u$
 To solve the coupled system of equations of \eqref{eq:C3_GE} and \eqref{eq:C3_linearEalsticityEquations} we need to have boundary conditions. The boundary conditions of \eqref{eq:C3_GE} are defined as pressure or velocity magnitudes on the outer boundaries of the domain. After solving Equation \eqref{eq:C3_GE}, the loads on the structure can be calculated by integrating the pressure from the fluid solid over the solid boundaries. This will be the boundary load used for solving Equation \eqref{eq:C3_linearEalsticityEquations}. When the governing equation for the solid region is solved, the displacement of the solid domain is known. This is fed into the CFD solver to update the solid boundary location for fluid domain. This will change the solution of fluid's solver resulting in different pressure distribution. This process is repeated until a convergence is satisfied. The convergence can be defined as change in the structure deflection for two subsequent steps for a static problem.
 
 % ======================================================================================
-\section{Benchmark Case}
+\section{Benchmark Case}\label{sec:C3_benchmark_case}
 We define a 1D benchmark problem to investigate different IB formulations in detail. In one dimensional space the equations of incompressible flow are not very interesting and it is not simple to write a one-dimensional analogue of the IB to capture all of its features. However, for a simple one dimensional problem we can understand different formulations of IB method and later apply it to higher dimensions. Moreover, for the sake of sensitivity analysis better understanding of the problem can be achieved for a simplified model. The other reason for working with a simplified model is the availability of analytical results that can be used for verifying the results we get from the numerical solvers. As the final note, for this benchmark case we mainly focused on the fluid domain, the structures can be easily added to this formulation.
 
 To derive the one dimensional benchmark case we start with the Navier-Stokes equations. Consider a viscous incompressible fluid in the channel $0 \geq y \leq 1$, $-\infty < x < \infty$ as shown in Figure \ref{fig:C3_benchmarkCase}.
@@ -90,11 +90,13 @@ We will use this analytical solution to verify the result of the different IB me
 \section{Immersed Boundary Classification}
 In general, IB methods can be classified in three main families: i) discrete forcing, ii) continuum forcing, and iii) cut-cell methods. This classification is based on how the interface conditions are handled in the IB algorithm. In this section we present the essence of each method and try to point their primary advantages and disadvantages. Moreover, each of the discussed IB techniques will be applied to the benchmark problem where the results are verified with the analytical solution. In general, the immersed boundary approach is based on modifying the NS equations for imposing the boundary conditions. This modification can be done in three different ways that leads to a fundamental dichotomy in IB method.
 
-\subsection{Discrete Forcing Method}
+% ======================================================================================
+\section{Discrete Forcing Method}
+\subsection{Formulation}
+\subsection{Implimentation for Couette Flow Problem}
 
-\subsubsection{Formulation}
-\subsubsection{Implimentation for Couette Flow Problem}
-\subsection{Continuum Forcing Method}
+% ======================================================================================
+\section{Continuum Forcing Method}
 In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation
 
 \begin{equation}
@@ -172,9 +174,119 @@ where $x_i$ is the spatial coordinate in each direction, $\eta_i$ is the locatio
 \end{equation}
 \end{subequations}
 
-Equation \eqref{eq:C3_phiFunction_2point} is the 2-point delta function that does the linear interpolation between the points point \cite{saiki1996numerical}. Equation \eqref{eq:C3_phiFunction_3point} shoes the 3-point delta function used by Roma et al. \cite{roma1999adaptive}, and Equation \eqref{eq:C3_phiFunction_4point} and \eqref{eq:C3_phiFunction_6point} are 4-point and 6-point delta functions used by Peskin \cite{peskin2002immersed}.
+Equation \eqref{eq:C3_phiFunction_2point} is the 2-point delta function that does the linear interpolation between the points point \cite{saiki1996numerical}. Equation \eqref{eq:C3_phiFunction_3point} shoes the 3-point delta function used by Roma et al. \cite{roma1999adaptive}, and Equation \eqref{eq:C3_phiFunction_4point} and \eqref{eq:C3_phiFunction_6point} are 4-point and 6-point delta functions used by Peskin \cite{peskin2002immersed}. The comparison between the shape of different $\phi(r)$ functions are shown in Figure \ref{fig:C3_phi_function}
 
-Now we can write the mapping from the Eulerian nodes of the fluid solver to Lagrangian nodes as follows.
+\begin{figure}
+	\centering
+	\includegraphics[width=14.cm]{Chapter_3/figure/phi_function.eps}
+	\caption{Comparison between different formulations for $\phi$}
+\end{figure}
+
+Now we can write the mapping from the Eulerian nodes of the fluid solver to Lagrangian nodes as shown in Equation \eqref{eq:C3_lagrange2euler}.
+
+\begin{equation}\label{eq:C3_lagrange2euler}
+	u(X_k) = \int_\Omega u(x) \delta(x - X_k) dx
+\end{equation}
+
+where $\Omega$ is the computational domain, $u(x)$ is the velocity at the Eulerian nodes, $x$ is the coordinate of the Eulerian nodes, $u(X_k)$ is the velocity at the desired Lagrangian node, and $X_k$ is the coordinate of the Lagrangian node. Most of the continuum forcing approaches are the same upto this point. They diverge depending of the way they calculate the forcing terms.
+
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-Classical IB method
+\subsection{Classical IB method}
+In the classical IB method, the forces at the immersed boundaries are calculate using appropriate constitutive laws, i.e. Hooks law. This can be expressed as follows.
+
+\begin{equation}
+	f(X_k) = \mathcal{M}(X_k)
+\end{equation}
+
+where $\mathcal{M}$ is an operator which describes the properties of the boundaries. This force is calculated at the Lagrangian points and need to be transferred back to the Eulerian nodes. This is done using the same delta functions used previously to map the Eulerian results to Lagrangian. This method is well suited for a case of elastic bodies but will break for the cases of rigid boundaries or when the rigidity of boundaries are much more than the fluid. The origin of this problem is due to the high cycle oscillations that occur near the boundaries.
+
+This approach is applied to the demonstration problem defined in Section \ref{sec:C3_benchmark_case}. We modelled the location of the fixed boundary using the classical IB method and verified the results using analytical formulas for this problem. The forcing function is added to the right-hand-side of the governing equation as follows
+
+\begin{equation}
+	\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial y^2} - f(t)
+\end{equation}
+
+where $f(t)$ is the forcing function using to model the boundary. This equation can be discretized using the explicit backward Euler method as follows
+
+\begin{equation}\label{eq:C3_discretizedEquationPeskinIB}
+	u^{n+1} = u^{n} + \Delta t \left( \frac{\partial^2 u^n}{\partial x^2} - f^n \right)
+\end{equation}
+
+The steps to solve this equation and model the stationary wall using the IB method are as follows
+
+\begin{enumerate}
+	\item Define the initial condition as $u^0$ and set $f^0$ equal to zero.
+	\item Calculate the velocity at the next time step, $u^1$, using Equation \eqref{eq:C3_discretizedEquationPeskinIB}
+	\item Based on the new velocity at $t=1$ calculate the velocity at the location where the stationary wall is supposed to be, $X$, using $\delta$ function ($U$).
+	\item Calculate the distance that this node will move in the current time step: $X^{n+1} = X^n + U \Delta t$
+	\item Based on the new location of the node, calculate the forces as: $F = K \left( X^{n+1} - X^0 \right)$, where $X^0$ is the desired location of the wall and $K$ is the stiffness of wall. 
+	\item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function.
+	\item Reiterate until the convergence is satisfied.
+\end{enumerate}
+
+For this problem we chose the time step as $0.1$ and used $100$ nodes to model the domain where the length of the domain is selected as $1.0$. The velocity at which the wall is moving is selected as $1.0 m/s$. We chose several different locations and different stiffness values for the wall. We verified the IB solution with the analytical results. We used a 2-point $\delta$ function to transfer data between Lagrangian and Eulerian domains. The results for this are shown in Figure \ref{fig:C3_peskinResults}.
+
+\begin{figure}[h]
+	\centering
+	\subfigure[Solution for $X = 0.385$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/peskin_method_0385.eps}
+	}
+	\quad
+	\subfigure[Error plot]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0385.eps}
+	}
+	\\
+	\subfigure[Solution for $X = 0.817$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/peskin_method_0817.eps}
+	}
+	\quad
+	\subfigure[Error plot]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0817.eps}
+	}
+	\\
+	\subfigure[Solution for $X = 0.817$]
+	{
+	\includegraphics[width=7.cm]{Chapter_3/figure/peskin_method_0600.eps}
+	}
+	\quad
+	\subfigure[Error plot]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0600.eps}
+	}
+	\caption{Comparison between IB and analytical results for different locations of stationary wall.}
+	\label{fig:C3_peskinResults}
+\end{figure}
+
+As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB and analytical results using $X=0.385$ and $X=0.6$ for the position of the wall. $X=0.385$ is a exactly in the middle of, $X=0.817$ is somewhere between two nodes. $X=0.6$ is exactly on one of the computational nodes. It can be seen that the IB method is able to capture the location of the wall within an acceptable accuracy. This error goes to zero when the location of Lagrangian point, i.e. is directly on top of the Eulerian node. It should be noted that this method is extremly sensitive to the value of $K$ in defining the forcing terms whose selection is an iterative process. Choosing a large value for $K$ will results in an unstable solution (divergence) whereas choosing a small value for $K$ will reduce the accuracy of the method.
+
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Virtual boundary method}
+The virtual boundary method is a different approach for imposing the effect of immersed boundary through force terms. This approach is well suited for both the rigid boundaries and also elastic boundaries. The difference between this approach and the classical IB method defined in the previous chapter is that it does not require the solution of the constitutive equations to calculate the force terms. This approach is based on the works of the works of Goldstein et al. \cite{goldstein1993modeling} to simulate the flow around the rigid bodies. The forcing term in the virtual boundary method is defined as
+
+\begin{equation}\label{eq:C3_virtualBoundaryMethod}
+	F(X_k, t) = 
+	\alpha \int_0^t \left[ u(X_k, t) - U(X_k, t) \right] dt + 
+	\beta \left[ u(X_k, t) - U(X_k, t) \right]
+\end{equation}
+
+where $F$ is the required force at the $k$-th Lagrangian point, $u(X_k, t)$ is the velocity calculated from the the Eulerian nodes using the $\delta$ function, and $U(X_k)$ is the desired velocity at the Lagrangian point $X_k$. The coefficient $\alpha$ and $\beta$ are selected to best enforce the boundary condition at the immersed solid boundary. Equation \eqref{eq:C3_virtualBoundaryMethod} is essentially a way to provide a feedback control to the system to make sure that the desired velocity ($U(X_k, t)$) is achieved at the immersed boundary. From a physical stand point, this equation represents a damped oscillator \cite{iaccarino2003immersed}.
+
+As before, we apply this technique to the demonstration problem defined in Section \ref{sec:C3_benchmark_case}. We use the backward Euler method to discretize the equations as defined in Equation \eqref{eq:C3_discretizedEquationPeskinIB}. It should be noted that since we are using the backward Euler method for time integration, a small time step is used to ensure the convergence of the method. However, since the cost of evaluating the right-hand-side of Equation \eqref{eq:C3_discretizedEquationPeskinIB} is negligible, the small time step size is not going to affect to solution process. The steps to solve this problem using the virtual boundary method can be defined as follows
+
+\begin{enumerate}
+	\item Define the initial condition as $u^0$ and set $f^0$ equal to zero.
+	\item Calculate the velocity at the next time step, $u^1$, using Equation \eqref{eq:C3_discretizedEquationPeskinIB}
+	\item Based on the new velocity at $t=1$ evaluate Equation \eqref{eq:C3_virtualBoundaryMethod}.
+	\item Calculate the distance that this node will move in the current time step: $X^{n+1} = X^n + U \Delta t$
+	\item Based on the new location of the node, calculate the forces as: $F = K \left( X^{n+1} - X^0 \right)$, where $X^0$ is the desired location of the wall and $K$ is the stiffness of wall. 
+	\item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function.
+	\item Reiterate until the convergence is satisfied.
+\end{enumerate}
+
 %\subsubsection{Formulation}
 %\subsubsection{Implimentation for Couette Flow Problem}
 %\subsection{Cut-cell Method}
