@@ -81,97 +81,97 @@ def genL(nx):
         L[iRow, iRow+1] = 1
     return L
 # ----------------------------
-# Solver
-nx = 8
-x = np.linspace(0, 1, nx)
+nx = 101
+x = np.linspace(0, 1, nx).reshape(-1, 1)
 dx = x[2] - x[1]
-nt = 10
-dt = 0.5
+dt = 0.1
 
-U0 = 1
-Un = 0
-u = np.zeros([nx, 1])
-u[0] = U0
-u[-1] = Un
+L = genL(nx) / dx**2
 
-# # 2nd Order Central difference
-# Assembling stiffness matrix
-def genL(nx):
-    L = np.zeros([nx, nx])
-    L[0, 0] = -2
-    L[0, 1] = 1
-    L[-1, -2] = 1
-    L[-1, -1] = -2
-    for iRow in range(1, len(L)-1):
-        L[iRow, iRow-1] = 1
-        L[iRow, iRow] = -2
-        L[iRow, iRow+1] = 1
-    return L
+BC = np.zeros([nx - 2, 1])
+BC[0] = 1
 
-L = genL(nx)
-L = L[1:-1, :]
-un = u
-unp1 = np.zeros([nx, 1])
-unp1[0] = U0
-unp1[-1] = Un
-err = 1.0
+un = np.zeros([nx, 1])
+un[0] = BC[0]
 
-delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1)
+Xn = 0.385 # Wall location
+delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1) # Delta function
 Ft = 0
-while err > 1e-5:
-    unp1[1:-1] = un[1:-1] + dt * (L.dot(un) + F)
-    Unp1 = np.trapz(delta * unp1[1:-1], x[1:-1], axis=0)
+f = 0
+alpha = -1
+beta = 0
+for it in range(1, 60000):
+    RHS1 = BC * dt / (2 * dx**2)
+    RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
+    RHS3 = L[1:-1, :].dot(un) * dt / 2
+    RHS = RHS1 + RHS2 + RHS3 + f
+    A = np.eye(nx - 2, nx - 2) - L[1:-1, 1:-1] * dt / 2
+    unp1 = np.linalg.solve(A, RHS)
+    err = np.max(np.abs(unp1 - un[1:-1]))
+    if err < 1e-5:
+        print(it)
+        break
     Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
-    Ft = Ft + (Unp1 + Un) * dt / 2
+    Unp1 = np.trapz(delta * unp1, x[1:-1], axis=0)
+    Ft = Ft + (Un + Unp1) * dt / 2
     Fc = Un
     F = alpha * Ft + beta * Fc
-    err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
-    un[1:-1] = unp1[1:-1]
+    f = F * delta
+    un = np.append(np.append(BC[0], unp1), 0).reshape(-1, 1)
 
-plt.figure()
-plt.plot(x, unp1)
+print(np.trapz(delta * un[1:-1], x[1:-1], axis=0))
+plt.figure(figsize=(30, 15))
+plt.plot(x, un, 'k',
+         x, -BC[0] * x / Xn + BC[0], 'wo',
+         lw=linewidth, mew=linewidth, ms=markersize)
+plt.xlim([0, Xn])
+plt.ylim([0, BC[0]])
+plt.xlabel('X')
+plt.ylabel('Response (u)')
+plt.legend(['IB', 'Analytical'])
+plt.grid('on')
+plt.savefig('vb_x0385_u1.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.savefig('vb_x06_u100.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.figure(figsize=(30, 15))
+plt.plot(x, un + BC[0] * x / Xn - BC[0], 'k',
+         lw=linewidth, mew=linewidth, ms=markersize)
+plt.xlim([0, Xn])
+plt.xlabel('X')
+plt.ylabel('Percentage of Error')
+plt.grid('on')
+plt.savefig('vb_x0385_u1_err.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.savefig('vb_x06_u100_err.eps', format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
 
-# # ----------------------------
-# # Solver
-# nx = 8
+
+# ---------------------
+# Working implicit solver
+# nx = 5
 # x = np.linspace(0, 1, nx)
 # dx = x[2] - x[1]
-# nt = 10
-# dt = 0.5
+# dt = 0.1
 #
-# U0 = 1
-# Un = 0
-# u = np.zeros([nx, 1])
-# u[0] = U0
-# u[-1] = Un
+# L = genL(nx) / dx**2
 #
-# # # 2nd Order Central difference
-# # Assembling stiffness matrix
-# def genL(nx):
-#     L = np.zeros([nx, nx])
-#     L[0, 0] = -2
-#     L[0, 1] = 1
-#     L[-1, -2] = 1
-#     L[-1, -1] = -2
-#     for iRow in range(1, len(L)-1):
-#         L[iRow, iRow-1] = 1
-#         L[iRow, iRow] = -2
-#         L[iRow, iRow+1] = 1
-#     return L
+# BC = np.zeros([nx - 2, 1])
+# BC[0] = 1
 #
-# L = genL(nx)
-# L = L[1:-1, :]
-# un = u
-# unp1 = np.zeros([nx, 1])
-# unp1[0] = U0
-# unp1[-1] = Un
-# err = 1.0
-# while err > 1e-5:
-#     unp1[1:-1] = un[1:-1] + dt * L.dot(un)
-#     err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
-#     un[1:-1] = unp1[1:-1]
-#
-# plt.figure()
-# plt.plot(x, unp1)
-# plt.show()
+# un = np.zeros([nx, 1])
+# un[0] = 1
+# for it in range(1, 600):
+#     RHS1 = BC * dt / (2 * dx**2)
+#     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
+#     RHS3 = L[1:-1, :].dot(un) * dt / 2
+#     RHS = RHS1 + RHS2 + RHS3
+#     A = np.eye(nx - 2, nx - 2) - L[1:-1, 1:-1] * dt / 2
+#     unp1 = np.linalg.solve(A, RHS)
+#     err = np.max(np.abs(unp1 - un[1:-1]))
+#     if err < 1e-5:
+#         break
+#     un = np.append(np.append(1, unp1), 0).reshape(-1, 1)
+#     print(un)
+
+
+
+
+
