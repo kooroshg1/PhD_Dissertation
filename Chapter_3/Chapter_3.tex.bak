@@ -280,12 +280,52 @@ As before, we apply this technique to the demonstration problem defined in Secti
 \begin{enumerate}
 	\item Define the initial condition as $u^0$ and set $f^0$ equal to zero.
 	\item Calculate the velocity at the next time step, $u^1$, using Equation \eqref{eq:C3_discretizedEquationPeskinIB}
+	\item Map the velocity results to the Lagrangian nodes using the $\delta$ function
 	\item Based on the new velocity at $t=1$ evaluate Equation \eqref{eq:C3_virtualBoundaryMethod}.
-	\item Calculate the distance that this node will move in the current time step: $X^{n+1} = X^n + U \Delta t$
-	\item Based on the new location of the node, calculate the forces as: $F = K \left( X^{n+1} - X^0 \right)$, where $X^0$ is the desired location of the wall and $K$ is the stiffness of wall. 
 	\item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function.
 	\item Reiterate until the convergence is satisfied.
 \end{enumerate}
+
+Comparing the virtual boundary method to the classical IB method, we can see that less steps are required for this formulation. Moreover, there is no need to solve the constitutive equation for the solid domain which reduces the total computational cost.
+
+The time step for solving Equation \eqref{eq:C3_discretizedEquationPeskinIB} is chosen as $0.1$ and we use $100$ nodes to model the domain where the length of the domain is selected as $1.0$. The velocity at which the moving wall is selected as $1.0 m/s$. We chose several different locations for the wall. We verified the IB solution with the analytical results. We used 2-point and 4-point $\delta$ function to transfer data between Lagrangian and Eulerian domains. The results for these are shown in Figure \ref{fig:C3_peskinResults}.
+
+\begin{figure}[h]
+	\centering
+	\subfigure[Solution for $X = 0.385$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/peskin_method_0385.eps}
+	}
+	\quad
+	\subfigure[Error plot]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0385.eps}
+	}
+	\\
+	\subfigure[Solution for $X = 0.817$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/peskin_method_0817.eps}
+	}
+	\quad
+	\subfigure[Error plot]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0817.eps}
+	}
+	\\
+	\subfigure[Solution for $X = 0.817$]
+	{
+	\includegraphics[width=7.cm]{Chapter_3/figure/peskin_method_0600.eps}
+	}
+	\quad
+	\subfigure[Error plot]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0600.eps}
+	}
+	\caption{Comparison between IB and analytical results for different locations of stationary wall.}
+	\label{fig:C3_peskinResults}
+\end{figure}
+
+As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB and analytical results using $X=0.385$ and $X=0.6$ for the position of the wall. $X=0.385$ is a exactly in the middle of, $X=0.817$ is somewhere between two nodes. $X=0.6$ is exactly on one of the computational nodes. It can be seen that the IB method is able to capture the location of the wall within an acceptable accuracy. This error goes to zero when the location of Lagrangian point, i.e. is directly on top of the Eulerian node. It should be noted that this method is extremly sensitive to the value of $K$ in defining the forcing terms whose selection is an iterative process. Choosing a large value for $K$ will results in an unstable solution (divergence) whereas choosing a small value for $K$ will reduce the accuracy of the method.
 
 %\subsubsection{Formulation}
 %\subsubsection{Implimentation for Couette Flow Problem}

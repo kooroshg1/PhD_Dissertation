@@ -85,7 +85,7 @@ nx = 5
 x = np.linspace(0, 1, nx+1).reshape(-1, 1)
 x = x[:-1]
 dx = x[2] - x[1]
-dt = 0.1
+dt = 0.01
 
 U0 = 1
 Un = 0
@@ -94,24 +94,80 @@ u[0] = U0
 u[-1] = Un
 
 L = genL(nx) / dx**2
-
+# L = L[1:-1, :]
 un = u
 unp1 = np.zeros([nx, 1])
 unp1[0] = U0
 unp1[-1] = Un
-f = 0
-I = np.eye(nx, nx)
-ft = 0
-for it in range(1, 10):
-    RHS = np.dot(I + dt * 0.5 * L, un) + f
-    A = I - dt * 0.5 * L
-    unp1 = np.linalg.solve(A[1:-1, 1:-1], RHS[1:-1])
-    unp1 = np.append(np.append(0, unp1), 0)
+err = 1.0
 
-    ft = ft +
-    un = unp1
-    # unp1 = np.linalg.solve(I[1:-1, 1:-1] - dt * 0.5 * L[1:-1, 1:-1],
-    #                        (I[1:-1, :] + dt * 0.5 * L[1:-1, :]).dot(un) + dt * f)
-    # unp1 = np.append(np.append(U0, unp1), Un)
+f = 0
+X0 = 0.5
+Xn = X0
+delta = genDelta(x, Xn, type='2point').reshape(-1, 1)
+alpha = -10
+beta = -0
+Ft = 0
+counter = 0
+Unm1 = 0
+
+I = np.eye(nx, nx)
+for it in range(1, 200):
+    BC = np.zeros([nx - 2, 1])
+    BC[0] = (1 - dt/2)
+    RHS = np.dot(I[1:-1, :] + dt * 0.5 * L[1:-1, :], un) + f * dt + BC
+    A = I[1:-1, 1:-1] - dt * 0.5 * L[1:-1, 1:-1]
+    unp1 = np.linalg.solve(A, RHS)
+    un = np.append(np.append(1, unp1), 0).reshape(-1,1)
+    #
+    # Un = np.trapz(delta * un, x, axis=0)
+    # Unp1 = np.trapz(delta * unp1, x, axis=0)
+    # Ft = Ft + dt * 0.5 * (Un + Unp1)
+    # Fc = Un
+    # F = alpha * Ft + beta * Fc
+    # f = F * delta
     # un = unp1
-    # print(un)
+
+#
+plt.figure()
+plt.plot(unp1)
+plt.show()
+    # Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
+    # Unp1 = np.trapz(delta * unp1[1:-1], x[1:-1], axis=0)
+    # timeIntegration = timeIntegration + dt * 0.5 * (Un + Unp1)
+    # pdb.set_trace()
+# while err > 1e-8:
+# for it in range(0, 1000000):
+#     counter += 1
+#     unp1[1:-1] = un[1:-1] + dt * (L.dot(un) + f)
+#     Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
+#     timeIntegration = timeIntegration + 0.5 * (Un + Unm1) * dt
+#     Unm1 = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
+#     F = alpha * timeIntegration + beta * (Un)
+#     f = F * delta
+#     # print(Un)
+#     # if counter > 5000:
+#     #     break
+#     err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
+#     un[1:-1] = unp1[1:-1]
+#
+# skip = 3
+# plt.figure(figsize=(30, 15))
+# plt.plot(x, unp1, 'k',
+#          x[::skip], -x[::skip]/X0+1, 'wo',
+#          lw=linewidth, mew=linewidth, ms=markersize)
+# plt.xlim([0, X0])
+# plt.ylim([0, 1])
+# plt.xlabel('X')
+# plt.ylabel('Response (u)')
+# plt.legend(['IB', 'Analytical'])
+# plt.savefig('peskin_method_0817.eps', format='eps', dpi=1000, bbox_inches='tight')
+#
+# plt.figure(figsize=(30, 15))
+# plt.plot(x, np.abs(np.divide(unp1+x/X0-1, -x/X0+1)), 'k',
+#          lw=linewidth, mew=linewidth, ms=markersize)
+# plt.xlim([0, X0])
+# plt.xlabel('X')
+# plt.ylabel('Percentage of Error')
+# plt.savefig('err_peskin_method_0817.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.show()
