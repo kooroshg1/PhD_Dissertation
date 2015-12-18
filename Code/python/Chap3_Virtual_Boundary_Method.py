@@ -80,12 +80,13 @@ def genL(nx):
         L[iRow, iRow] = -2
         L[iRow, iRow+1] = 1
     return L
-# -----------------------------
-nx = 5
-x = np.linspace(0, 1, nx+1).reshape(-1, 1)
-x = x[:-1]
+# ----------------------------
+# Solver
+nx = 8
+x = np.linspace(0, 1, nx)
 dx = x[2] - x[1]
-dt = 0.01
+nt = 10
+dt = 0.5
 
 U0 = 1
 Un = 0
@@ -93,81 +94,84 @@ u = np.zeros([nx, 1])
 u[0] = U0
 u[-1] = Un
 
-L = genL(nx) / dx**2
-# L = L[1:-1, :]
+# # 2nd Order Central difference
+# Assembling stiffness matrix
+def genL(nx):
+    L = np.zeros([nx, nx])
+    L[0, 0] = -2
+    L[0, 1] = 1
+    L[-1, -2] = 1
+    L[-1, -1] = -2
+    for iRow in range(1, len(L)-1):
+        L[iRow, iRow-1] = 1
+        L[iRow, iRow] = -2
+        L[iRow, iRow+1] = 1
+    return L
+
+L = genL(nx)
+L = L[1:-1, :]
 un = u
 unp1 = np.zeros([nx, 1])
 unp1[0] = U0
 unp1[-1] = Un
 err = 1.0
 
-f = 0
-X0 = 0.5
-Xn = X0
-delta = genDelta(x, Xn, type='2point').reshape(-1, 1)
-alpha = -10
-beta = -0
+delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1)
 Ft = 0
-counter = 0
-Unm1 = 0
+while err > 1e-5:
+    unp1[1:-1] = un[1:-1] + dt * (L.dot(un) + F)
+    Unp1 = np.trapz(delta * unp1[1:-1], x[1:-1], axis=0)
+    Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
+    Ft = Ft + (Unp1 + Un) * dt / 2
+    Fc = Un
+    F = alpha * Ft + beta * Fc
+    err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
+    un[1:-1] = unp1[1:-1]
 
-I = np.eye(nx, nx)
-for it in range(1, 200):
-    BC = np.zeros([nx - 2, 1])
-    BC[0] = (1 - dt/2)
-    RHS = np.dot(I[1:-1, :] + dt * 0.5 * L[1:-1, :], un) + f * dt + BC
-    A = I[1:-1, 1:-1] - dt * 0.5 * L[1:-1, 1:-1]
-    unp1 = np.linalg.solve(A, RHS)
-    un = np.append(np.append(1, unp1), 0).reshape(-1,1)
-    #
-    # Un = np.trapz(delta * un, x, axis=0)
-    # Unp1 = np.trapz(delta * unp1, x, axis=0)
-    # Ft = Ft + dt * 0.5 * (Un + Unp1)
-    # Fc = Un
-    # F = alpha * Ft + beta * Fc
-    # f = F * delta
-    # un = unp1
-
-#
 plt.figure()
-plt.plot(unp1)
+plt.plot(x, unp1)
 plt.show()
-    # Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
-    # Unp1 = np.trapz(delta * unp1[1:-1], x[1:-1], axis=0)
-    # timeIntegration = timeIntegration + dt * 0.5 * (Un + Unp1)
-    # pdb.set_trace()
-# while err > 1e-8:
-# for it in range(0, 1000000):
-#     counter += 1
-#     unp1[1:-1] = un[1:-1] + dt * (L.dot(un) + f)
-#     Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
-#     timeIntegration = timeIntegration + 0.5 * (Un + Unm1) * dt
-#     Unm1 = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
-#     F = alpha * timeIntegration + beta * (Un)
-#     f = F * delta
-#     # print(Un)
-#     # if counter > 5000:
-#     #     break
+
+# # ----------------------------
+# # Solver
+# nx = 8
+# x = np.linspace(0, 1, nx)
+# dx = x[2] - x[1]
+# nt = 10
+# dt = 0.5
+#
+# U0 = 1
+# Un = 0
+# u = np.zeros([nx, 1])
+# u[0] = U0
+# u[-1] = Un
+#
+# # # 2nd Order Central difference
+# # Assembling stiffness matrix
+# def genL(nx):
+#     L = np.zeros([nx, nx])
+#     L[0, 0] = -2
+#     L[0, 1] = 1
+#     L[-1, -2] = 1
+#     L[-1, -1] = -2
+#     for iRow in range(1, len(L)-1):
+#         L[iRow, iRow-1] = 1
+#         L[iRow, iRow] = -2
+#         L[iRow, iRow+1] = 1
+#     return L
+#
+# L = genL(nx)
+# L = L[1:-1, :]
+# un = u
+# unp1 = np.zeros([nx, 1])
+# unp1[0] = U0
+# unp1[-1] = Un
+# err = 1.0
+# while err > 1e-5:
+#     unp1[1:-1] = un[1:-1] + dt * L.dot(un)
 #     err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
 #     un[1:-1] = unp1[1:-1]
 #
-# skip = 3
-# plt.figure(figsize=(30, 15))
-# plt.plot(x, unp1, 'k',
-#          x[::skip], -x[::skip]/X0+1, 'wo',
-#          lw=linewidth, mew=linewidth, ms=markersize)
-# plt.xlim([0, X0])
-# plt.ylim([0, 1])
-# plt.xlabel('X')
-# plt.ylabel('Response (u)')
-# plt.legend(['IB', 'Analytical'])
-# plt.savefig('peskin_method_0817.eps', format='eps', dpi=1000, bbox_inches='tight')
-#
-# plt.figure(figsize=(30, 15))
-# plt.plot(x, np.abs(np.divide(unp1+x/X0-1, -x/X0+1)), 'k',
-#          lw=linewidth, mew=linewidth, ms=markersize)
-# plt.xlim([0, X0])
-# plt.xlabel('X')
-# plt.ylabel('Percentage of Error')
-# plt.savefig('err_peskin_method_0817.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.figure()
+# plt.plot(x, unp1)
 # plt.show()
