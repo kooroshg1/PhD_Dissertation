@@ -348,6 +348,35 @@ For this problem, we are choosing the location of wall at two different location
 
 As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB and analytical results using $X=0.385$ and $X=0.6$ for the position of the wall. As can be seen here, the virtual boundary method results are in better agreement with the analytical results compated to the classical IB method. This is due to the fact the for IB method, the boundary can move and is not perfect. Therefore, the boundary conditions are assigned in an approximate manner. Moreover, as can be seen here, the virtual boundary method can handle different magnitude for the velocity without modification to the method. This makes this approach a more general approach for rigid boundaries compared to classical IB approach. Moreover, as can be seen in these results the location of boundary is captured well even if its location does not coincide the the computational nodes.
 
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Penalization method}
+The third class of continuum immersed boundary techniques are known as penalization method that was first introduced by Arquis and Caltagirone \cite{ arquis1984conditions}. In this method, the solid boundaries are modeled as porous media. Porosity or void fraction is a measure of the void spaces in a material, and is a fraction of the volume of voids over the total volume, between 0 and 1. For the solid domain the porosity value is near zero whereas for the fluid domain its value is close to one. Flow through a porous domain is described using the Darcy's law. This is a simple proportional relationship between the instantaneous discharge rate through a porous medium, the viscosity of the fluid and the pressure drop over a given distance.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=14.cm]{Chapter_3/figure/Darcys_Law.png}
+	\caption{Flow through a porous pipe.}
+\end{figure}
+
+For a flow through a porous domain in a pipe shown in Figure \ref{fig:C3_darcyEquationPipe}, Darcy's law is written as
+
+\begin{equation}\label{eq:C3_DarcysLaw}
+	Q = \frac{\kappa A \Delta p}{\mu L}
+\end{equation}
+
+where $Q$ is the total flow discharge, $\kappa$ is the permeability of the domain, $\Delta p$ is the pressure drop due to the porosity between two ends of the pipe, $\mu$ is the fluid's viscosity, and $L$ is the length of the domain. Darcy's law can be considered as a relation between the flow velocity and pressure drop. This pressure drop  is used in the penalization method to represent the solid boundaries by modelling the force term using Equation \eqref{eq:C3_DarcysLaw}. The force term is defined as follows
+
+\begin{equation}\label{eq:C3_forceTermIBpenelization}
+	f = - \mathcal{H}(\mathcal{X}) \frac{\mu}{\kappa} v
+\end{equation}
+
+where $v$ is is the velocity of the flow. In order to apply the force term only to the region inside the the solid boundary, the penalization force is multiplied by a Heaviside function, $\mathcal{H}(\mathcal{X})$, that is a function of relative distance of the points in the domain to the boundary of the solid region. The Heaviside function $\mathcal{H}$ has the value of \emph{one} for all points inside the solid boundary and is \emph{zero} for points outside the boundary. This will give us a zero forcing term for points outside the solid boundary and non-zero for points inside. Therefore, the pressure drop is only applied to the points inside the solid domain. This is explained in more details in the following example.
+
+Assume that the solid boundary is a circle, located at $(1,2)$ with a radius of $2$. This curve is defined using the following equation.
+
+\begin{equation}
+	(x - 1)^2 + (y - 2)^2 = 4
+\end{equation}
 %\subsubsection{Formulation}
 %\subsubsection{Implimentation for Couette Flow Problem}
 %\subsection{Cut-cell Method}
