@@ -352,7 +352,7 @@ As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB an
 \subsection{Penalization method}
 The third class of continuum immersed boundary techniques are known as penalization method that was first introduced by Arquis and Caltagirone \cite{ arquis1984conditions}. In this method, the solid boundaries are modeled as porous media. Porosity or void fraction is a measure of the void spaces in a material, and is a fraction of the volume of voids over the total volume, between 0 and 1. For the solid domain the porosity value is near zero whereas for the fluid domain its value is close to one. Flow through a porous domain is described using the Darcy's law. This is a simple proportional relationship between the instantaneous discharge rate through a porous medium, the viscosity of the fluid and the pressure drop over a given distance.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=14.cm]{Chapter_3/figure/Darcys_Law.png}
 	\caption{Flow through a porous pipe.}
@@ -377,6 +377,34 @@ Assume that the solid boundary is a circle, located at $(1,2)$ with a radius of 
 \begin{equation}
 	(x - 1)^2 + (y - 2)^2 = 4
 \end{equation}
+
+The relative location of an arbitrary point $x_0 = (\eta, \rho)$ with respect to this boundary is defined using the following equation
+
+\begin{equation}
+	\mathcal{X}(\eta, \rho) = 4 - (\eta - 1)^2 - (\rho - 2)^2
+\end{equation}
+
+Depending of the sign of $\mathcal{X}$, we can make the following conclusions
+
+\begin{equation}
+\begin{cases}
+	\mathcal{X} > 0 \quad \text{$x_0$ is inside the solid boundary} \\
+	\mathcal{X} < 0 \quad \text{$x_0$ is outside the solid boundary} \\
+	\mathcal{X} = 0 \quad \text{$x_0$ is on the boundary}
+\end{cases}
+\end{equation}
+
+Sign of $\mathcal{X}$ divides the physical domain into three regions. To use this function for force term assignment to mesh cell, we need to convent its values to $0$ and $1$. The force terms outside the solid boundaries are multiplied by zero whereas the force terms inside the solid boundary are multiplied by one. This is done by feeding the values of function $\mathcal{X}$ to a Heaviside function, $\mathcal{H}$. The Heaviside function, or the unit step function, is a discontinuous function whose value is zero for negative argument and one for positive argument as shown in Figure \ref{fig:C3_heavisideFunction}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14.cm]{Chapter_3/figure/Heaviside_Function.eps}
+	\caption{The Heaviside function.}
+	\label{{fig:C3_heavisideFunction}}
+\end{figure}
+
+By feeding the function $\mathcal{X}$ into the Heaviside function, we get the value of one for nodes inside the solid boundary and zero for outside. These are then multiplied to the force terms calculated using Equation \eqref{eq:C3_forceTermIBpenelization}. This enables us to apply the force term only within the solid domain. This method is applied to the demonstration problem of section \ref{sec:C3_benchmark_case}. For this problem, we looked at the effect of the wall velocity, permeability value, and number of mesh cells on the accuracy of the method. The results are compared with analytical results for this problem like the previous sections.
+
 %\subsubsection{Formulation}
 %\subsubsection{Implimentation for Couette Flow Problem}
 %\subsection{Cut-cell Method}
