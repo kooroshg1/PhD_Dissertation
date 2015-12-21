@@ -29,20 +29,22 @@ def genL(nx):
         L[iRow, iRow+1] = 1
     return L
 
-nx = 50
+nx = 81
 x = np.linspace(0, 1, nx).reshape(-1, 1)
 dx = x[2] - x[1]
-dt = 0.0001
+dt = 0.00001
 
 L = genL(nx) / dx**2
 
+U = 1000
 BC = np.zeros([nx - 2, 1])
-BC[0] = 1
+BC[0] = U
 
 un = np.zeros([nx, 1])
-un[0] = 1
-kappa = 10001
-Xn = 0.65
+un[0] = U
+kappa = 100001
+Xn = 0.4325
+# print(x)
 for it in range(1, 60000):
     RHS1 = BC * dt / (2 * dx**2)
     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
@@ -56,30 +58,39 @@ for it in range(1, 60000):
     if err < 1e-10:
         print(it)
         break
-    un = np.append(np.append(1, unp1), 0).reshape(-1, 1)
+    un = np.append(np.append(BC[0], unp1), 0).reshape(-1, 1)
     # print(un)
 
-plt.figure()
-# plt.figure(figsize=(30, 15))
+xInd = np.argmax(x > Xn) - 1
+uIB = un
+uAnal = -BC[0] * x / Xn + BC[0]
+rmsd = np.linalg.norm(uIB[:xInd] - uAnal[:xInd]) / (np.sqrt(len(un[:xInd])) * (np.max(np.abs(uAnal)) -
+                                                                               np.min(np.abs(uAnal))))
+np.savetxt('uIB.txt', uIB)
+np.savetxt('uAnal.txt', uAnal)
+print(rmsd)
+skip = 5
+# plt.figure()
+plt.figure(figsize=(30, 15))
 plt.plot(x, un, 'k',
-         x, -1 * x / Xn + 1, 'wo',
+         x[::skip], -BC[0] * x[::skip] / Xn + BC[0], 'r--',
          lw=linewidth, mew=linewidth, ms=markersize)
 plt.xlabel('X')
 plt.ylabel('Response (u)')
 plt.legend(['IB', 'Analytical'])
 plt.xlim([0, Xn])
-plt.ylim([0, 1])
+plt.ylim([0, U])
 plt.grid('on')
-# plt.savefig('vb_x0385_u1.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.savefig('penalization_nodeNumber_161.eps', format='eps', dpi=1000, bbox_inches='tight')
 
-plt.figure()
+# plt.figure()
 # plt.figure(figsize=(30, 15))
-plt.plot(x, un + 1 * x / Xn - 1, 'k',
-         lw=linewidth, mew=linewidth, ms=markersize)
-plt.xlim([0, Xn])
-plt.xlabel('X')
-plt.ylabel('Percentage of Error')
-plt.grid('on')
+# plt.plot(x, un + 1 * x / Xn - 1, 'k',
+#          lw=linewidth, mew=linewidth, ms=markersize)
+# plt.xlim([0, Xn])
+# plt.xlabel('X')
+# plt.ylabel('Percentage of Error')
+# plt.grid('on')
 # plt.savefig('vb_x0385_u1_err.eps', format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
 
