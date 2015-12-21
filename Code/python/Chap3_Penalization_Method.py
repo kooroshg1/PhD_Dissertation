@@ -36,13 +36,13 @@ dt = 0.00001
 
 L = genL(nx) / dx**2
 
-U = 1000
+U = 10
 BC = np.zeros([nx - 2, 1])
 BC[0] = U
 
 un = np.zeros([nx, 1])
 un[0] = U
-kappa = 100001
+kappa = 100000
 Xn = 0.4325
 # print(x)
 for it in range(1, 60000):
@@ -69,11 +69,11 @@ rmsd = np.linalg.norm(uIB[:xInd] - uAnal[:xInd]) / (np.sqrt(len(un[:xInd])) * (n
 np.savetxt('uIB.txt', uIB)
 np.savetxt('uAnal.txt', uAnal)
 print(rmsd)
-skip = 5
+skip = 2
 # plt.figure()
 plt.figure(figsize=(30, 15))
 plt.plot(x, un, 'k',
-         x[::skip], -BC[0] * x[::skip] / Xn + BC[0], 'r--',
+         x[::skip], -BC[0] * x[::skip] / Xn + BC[0], 'wo',
          lw=linewidth, mew=linewidth, ms=markersize)
 plt.xlabel('X')
 plt.ylabel('Response (u)')
@@ -81,7 +81,7 @@ plt.legend(['IB', 'Analytical'])
 plt.xlim([0, Xn])
 plt.ylim([0, U])
 plt.grid('on')
-# plt.savefig('penalization_nodeNumber_161.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.savefig('penalization_porosity_100000.eps', format='eps', dpi=1000, bbox_inches='tight')
 
 # plt.figure()
 # plt.figure(figsize=(30, 15))

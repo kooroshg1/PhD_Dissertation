@@ -80,107 +80,97 @@ def genL(nx):
         L[iRow, iRow+1] = 1
     return L
 # -----------------------------
-nx = 100
-x = np.linspace(0, 1, nx+1).reshape(-1, 1)
-x = x[:-1]
+# ---------------------
+nx = 81
+x = np.linspace(0, 1, nx)
 dx = x[2] - x[1]
-dt = 0.5
+dt = 1e-5
 
-U0 = 1
-Un = 0
-u = np.zeros([nx, 1])
-u[0] = U0
-u[-1] = Un
+L = genL(nx) / dx**2
 
-L = genL(nx)
-L = L[1:-1, :]
-un = u
-unp1 = np.zeros([nx, 1])
-unp1[0] = U0
-unp1[-1] = Un
-err = 1.0
+wallU = 10
+BC = np.zeros([nx - 2, 1])
+BC[0] = wallU
 
-f = 0
-K = 0.000
-X0 = 0.817
+un = np.zeros([nx, 1])
+un[0] = BC[0]
+
+K = 10
+X0 = 0.51885
 Xn = X0
-delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1)
-
-counter = 0
-while err > 1e-5:
-    counter += 1
-    unp1[1:-1] = un[1:-1] + dt * (L.dot(un) - f)
+deltaType = '2point'
+delta = genDelta(x[1:-1], Xn, type=deltaType).reshape(-1, 1)
+for it in range(1, 60000):
+    RHS1 = BC * dt / (2 * dx**2)
+    RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
+    RHS3 = L[1:-1, :].dot(un) * dt / 2
     U = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
     Xnp1 = Xn + dt * U
     F = K * (Xnp1 - X0)
-    f = F * delta
+    f = F * delta * dt
     Xn = Xnp1
-    if counter > 5000:
+    RHS = RHS1 + RHS2 + RHS3 - f
+    A = np.eye(nx - 2, nx - 2) - L[1:-1, 1:-1] * dt / 2
+    unp1 = np.linalg.solve(A, RHS)
+    err = np.max(np.abs(unp1 - un[1:-1]))
+    if np.mod(it, 2000) == 0:
+        print('Error = ', err)
+    if err < 1e-6:
+        print('Number of iterations = ', it)
         break
-    err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
-    un[1:-1] = unp1[1:-1]
+    un = np.append(np.append(BC[0], unp1), 0).reshape(-1, 1)
 
-skip = 3
+xInd = np.argmax(x > X0) - 1
+uIB = un
+uAnal = -BC[0] * x / X0 + BC[0]
+rmsd = np.sqrt(np.sum((uIB[:xInd, 0] - uAnal[:xInd])**2) / len(uAnal)) / (np.max(np.abs(uAnal)) - np.min(np.abs(uAnal)))
+
+print('RMSE = ', rmsd)
+
+skip = 1
+# fileName = 'classicalIB_wallVelocity_' + deltaType + '_' + np.str(K) + '.eps'
+fileName = 'classicalIB_wallStiffness_' + deltaType + '_' + '10' + '.eps'
+# print(fileName)
 plt.figure(figsize=(30, 15))
-plt.plot(x, unp1, 'k',
-         x[::skip], -x[::skip]/X0+1, 'wo',
+plt.plot(x, un, 'k',
+         x[::skip], -BC[0] * x[::skip] / X0 + BC[0], 'wo',
          lw=linewidth, mew=linewidth, ms=markersize)
-plt.xlim([0, X0])
-plt.ylim([0, 1])
 plt.xlabel('X')
 plt.ylabel('Response (u)')
 plt.legend(['IB', 'Analytical'])
-plt.savefig('peskin_method_0817.eps', format='eps', dpi=1000, bbox_inches='tight')
-# figsize=(30, 15)
-plt.figure(figsize=(30, 15))
-plt.plot(x, np.abs(np.divide(unp1+x/X0-1, -x/X0+1)), 'k',
-         lw=linewidth, mew=linewidth, ms=markersize)
 plt.xlim([0, X0])
-plt.xlabel('X')
-plt.ylabel('Percentage of Error')
-plt.savefig('err_peskin_method_0817.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.ylim([0, BC[0]])
+plt.grid('on')
+plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
 
-# # ----------------------------
-# # Solver
-# nx = 8
-# x = np.linspace(0, 1, nx)
-# dx = x[2] - x[1]
-# nt = 10
-# dt = 0.5
-#
-# U0 = 1
-# Un = 0
-# u = np.zeros([nx, 1])
-# u[0] = U0
-# u[-1] = Un
-#
-# # # 2nd Order Central difference
-# # Assembling stiffness matrix
-# def genL(nx):
-#     L = np.zeros([nx, nx])
-#     L[0, 0] = -2
-#     L[0, 1] = 1
-#     L[-1, -2] = 1
-#     L[-1, -1] = -2
-#     for iRow in range(1, len(L)-1):
-#         L[iRow, iRow-1] = 1
-#         L[iRow, iRow] = -2
-#         L[iRow, iRow+1] = 1
-#     return L
-#
-# L = genL(nx)
-# L = L[1:-1, :]
-# un = u
-# unp1 = np.zeros([nx, 1])
-# unp1[0] = U0
-# unp1[-1] = Un
-# err = 1.0
-# while err > 1e-5:
-#     unp1[1:-1] = un[1:-1] + dt * L.dot(un)
-#     err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
-#     un[1:-1] = unp1[1:-1]
-#
-# plt.figure()
-# plt.plot(x, unp1)
-# plt.show()
+# #
+# # # # 2nd Order Central difference
+# # # Assembling stiffness matrix
+# # def genL(nx):
+# #     L = np.zeros([nx, nx])
+# #     L[0, 0] = -2
+# #     L[0, 1] = 1
+# #     L[-1, -2] = 1
+# #     L[-1, -1] = -2
+# #     for iRow in range(1, len(L)-1):
+# #         L[iRow, iRow-1] = 1
+# #         L[iRow, iRow] = -2
+# #         L[iRow, iRow+1] = 1
+# #     return L
+# #
+# # L = genL(nx)
+# # L = L[1:-1, :]
+# # un = u
+# # unp1 = np.zeros([nx, 1])
+# # unp1[0] = U0
+# # unp1[-1] = Un
+# # err = 1.0
+# # while err > 1e-5:
+# #     unp1[1:-1] = un[1:-1] + dt * L.dot(un)
+# #     err = np.max(np.abs(unp1[1:-1] - un[1:-1]))
+# #     un[1:-1] = unp1[1:-1]
+# #
+# # plt.figure()
+# # plt.plot(x, unp1)
+# # plt.show()

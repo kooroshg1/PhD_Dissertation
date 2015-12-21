@@ -57,7 +57,7 @@ We define a 1D benchmark problem to investigate different IB formulations in det
 
 To derive the one dimensional benchmark case we start with the Navier-Stokes equations. Consider a viscous incompressible fluid in the channel $0 \geq y \leq 1$, $-\infty < x < \infty$ as shown in Figure \ref{fig:C3_benchmarkCase}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=14.00cm]{Chapter_3/figure/C3_infinite_channel.png}
 	\caption{1D benchmark case for IB method.}
@@ -206,10 +206,11 @@ This approach is applied to the demonstration problem defined in Section \ref{se
 	\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial y^2} - f(t)
 \end{equation}
 
-where $f(t)$ is the forcing function using to model the boundary. This equation can be discretized using the explicit backward Euler method as follows
+where $f(t)$ is the forcing function using to model the boundary. This equation is discretized using the Cranck-Nicholson method as follows
 
 \begin{equation}\label{eq:C3_discretizedEquationPeskinIB}
-	u^{n+1} = u^{n} + \Delta t \left( \frac{\partial^2 u^n}{\partial x^2} - f^n \right)
+	u^{n+1} = u^{n} + \frac{\Delta t}{2} \left( \frac{\partial^2 u^{n+1}}{\partial x^2} + 
+	                                            \frac{\partial^2 u^n}{\partial x^2}\right) - \Delta t f^n 
 \end{equation}
 
 The steps to solve this equation and model the stationary wall using the IB method are as follows
@@ -224,44 +225,156 @@ The steps to solve this equation and model the stationary wall using the IB meth
 	\item Reiterate until the convergence is satisfied.
 \end{enumerate}
 
-For this problem we chose the time step as $0.1$ and used $100$ nodes to model the domain where the length of the domain is selected as $1.0$. The velocity at which the wall is moving is selected as $1.0 m/s$. We chose several different locations and different stiffness values for the wall. We verified the IB solution with the analytical results. We used a 2-point $\delta$ function to transfer data between Lagrangian and Eulerian domains. The results for this are shown in Figure \ref{fig:C3_peskinResults}.
+For the classical IB method, we investigated the accuracy of the results to the number of nodes, wall velocity, and the stiffness used to model the wall. The immersed boundary simulation is compared with analytical solution of this problem. We chose the normalized root mean square error to compared the analytical and IB results. This is defined as follows.
 
-\begin{figure}[h]
+\begin{equation*}
+	NRMSE = \dfrac{\sqrt{\dfrac{\sum_{n=1}{N} \left( \hat{y}_n - y \right)^2}{n}}}{y_{max} - y_{min}}
+\end{equation*}
+
+where $\hat{y}_t$ is the predicted value, $y$ is the true value, and $n$ is the number data points. Normalizing by $y_{max} - y_{min}$ enables us to compare models with different scales. This is especially useful when compared the results for different wall velocities.
+
+For the first investigation, we selected the wall stiffness as $10^2$ and its location is selected as $x_{wall} = 0.51885$. We chose this location so that it does not coincide with the location of computational nodes. The time step is chosen as $10^{-5}$ and the wall velocity is fixed at $1 m/s$. For this simulation we used both 2-point and 4-point delta functions to transfer results between Lagrangian and Eulerian nodes. The computation domain is discretized using $11$, $41$, $81$, and $161$ nodes. The results of IB method is verified with analytical results.
+
+\begin{figure}[H]
 	\centering
-	\subfigure[Solution for $X = 0.385$]
+	\subfigure[N = 11, 2-point delta function]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/peskin_method_0385.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_2point_11.eps}
 	}
 	\quad
-	\subfigure[Error plot]
+	\subfigure[N = 11, 4-point delta function]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0385.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_4point_11.eps}
 	}
 	\\
-	\subfigure[Solution for $X = 0.817$]
+	\subfigure[N = 41, 2-point delta function]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/peskin_method_0817.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_2point_41.eps}
 	}
 	\quad
-	\subfigure[Error plot]
+	\subfigure[N = 41, 4-point delta function]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0817.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_4point_41.eps}
 	}
 	\\
-	\subfigure[Solution for $X = 0.817$]
+	\subfigure[N = 81, 2-point delta function]
 	{
-	\includegraphics[width=7.cm]{Chapter_3/figure/peskin_method_0600.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_2point_81.eps}
 	}
 	\quad
-	\subfigure[Error plot]
+	\subfigure[N = 81, 4-point delta function]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/err_peskin_method_0600.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_4point_81.eps}
 	}
-	\caption{Comparison between IB and analytical results for different locations of stationary wall.}
-	\label{fig:C3_peskinResults}
+	\\
+	\subfigure[N = 161, 2-point delta function]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_2point_161.eps}
+	}
+	\quad
+	\subfigure[N = 161, 4-point delta function]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_nodeNumber_4point_161.eps}
+	}
+	\caption{Comparison between IB and analytical results for different porosity values.}
+	\label{fig:C3_classicalIBResultNodeNumber}
 \end{figure}
 
-As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB and analytical results using $X=0.385$ and $X=0.6$ for the position of the wall. $X=0.385$ is a exactly in the middle of, $X=0.817$ is somewhere between two nodes. $X=0.6$ is exactly on one of the computational nodes. It can be seen that the IB method is able to capture the location of the wall within an acceptable accuracy. This error goes to zero when the location of Lagrangian point, i.e. is directly on top of the Eulerian node. It should be noted that this method is extremly sensitive to the value of $K$ in defining the forcing terms whose selection is an iterative process. Choosing a large value for $K$ will results in an unstable solution (divergence) whereas choosing a small value for $K$ will reduce the accuracy of the method.
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c | c}
+	  & \multicolumn{2}{c}{RMSE value} \\ \hline
+	 Node number & 2-point delta function & 4-point delta function \\ \hline \hline
+	 11 & 0.0105 & 0.0292 \\ \hline
+	 41 & 0.0035 & 0.002 \\ \hline
+	 81 & 0.0026 & 0.0022 \\ \hline
+	 161 & 0.00023 & 0.0002 \\
+\end{tabular}
+\caption{RMSE value for different node numbers and delta functions.}
+\label{table:C3_classicalIBResultNodeNumberRMSE}
+\end{table}
+
+As shown in Figure \ref{fig:C3_classicalIBResultNodeNumber} and Table \ref{table:C3_classicalIBResultNodeNumberRMSE}, by increasing the number of nodes, the error in IB result decreases. However, changing the delta function from 2-point to 4-point does not effect the accuracy of the solution significantly. The higher order delta function can also decreases the accuracy of the solution for very low number of nodes (here 11). 
+
+For the second investigation, we looked at the effect of changing the moving wall velocity on the solution accuracy. For this simulation, we fixed the number of nodes to 81 and set the stiffness value to $10^2$. The wall location is fixed at $0.51885$. The time step is also chosen as $10^{-5}$. For this problem, we only focused on 2-point delta function. We chose the wall velocity as $10$, $10^2$, $10^3$, and $10^4$. As shown in Figure \ref{fig:C3_classicalIBResultWallVelocity} and Table \ref{fig:C3_classicalIBResultWallVelocityRMSE}, the method is capable of handling flow with different velocity without a loss in accuracy of the results. However, the simulation time increases with increase in wall velocity.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$u_{wall} = 10 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallVelocity_2point_10.eps}
+	}
+	\quad
+	\subfigure[$u_{wall} = 10^2 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallVelocity_2point_100.eps}
+	}
+	\\
+	\subfigure[$u_{wall} = 10^3 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallVelocity_2point_1000.eps}
+	}
+	\quad
+	\subfigure[$u_{wall} = 10^4 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallVelocity_2point_10000.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall velocities.}
+	\label{fig:C3_classicalIBResultWallVelocity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall velocity & RMSE \\ \hline \hline
+	 10 & 0.0024\\ \hline
+	 $10^2$ & 0.0024 \\ \hline
+	 $10^3$ & 0.0024 \\ \hline
+	 $10^4$ & 0.0024 \\
+\end{tabular}
+\caption{RMSE value for different wall velocities.}
+\label{table:C3_classicalIBResultWallVelocityRMSE}
+\end{table}
+
+For the last case study of classical IB method, we looked at the effect of the wall stiffness on the accuracy of the solution. For this case, we fixed the wall location at $x_{wall} = 0.51885$ and defined the wall velocity as $10 m/s$. The time step is selected as $10^{-5}$. We looked at the wall stiffness of $0.1$, $1$, $10$, and $100$. As shown in Figure \ref{fig:C3_classicalIBResultWallStiffness} and Table \ref{table:C3_classicalIBResultWallStiffnessRMSE}, wall stiffness has a considerable effect of the solution result. Therefore, a convergence study for the wall stiffness value is usually required if one wants to model the stiff boundaries.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$K_{wall} = 0.1$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallStiffness_2point_01.eps}
+	}
+	\quad
+	\subfigure[$K_{wall} = 1$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallStiffness_2point_1.eps}
+	}
+	\\
+	\subfigure[$K_{wall} = 10$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallStiffness_2point_10.eps}
+	}
+	\quad
+	\subfigure[$K_{wall} = 100$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/classicalIB_wallStiffness_2point_100.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall velocities.}
+	\label{fig:C3_classicalIBResultWallStiffness}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall velocity & RMSE \\ \hline \hline
+	 0.1 & 0.1912 \\ \hline
+	 1 & 0.1759  \\ \hline
+	 10 & 0.0665 \\ \hline
+	 100 & 0.001 \\
+\end{tabular}
+\caption{RMSE value for different wall stiffness values.}
+\label{table:C3_classicalIBResultWallStiffnessRMSE}
+\end{table}
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Virtual boundary method}
@@ -301,7 +414,7 @@ Comparing the virtual boundary method to the classical IB method, we can see tha
 
 For this problem, we are choosing the location of wall at two different locations, $x = 0.6$ and $x = 0.385$. The first node is exactly on top of a computational node and the second is between two nodes. We also looked at two different velocities for the moving wall, $u_0=1$ and $u_0 = 100$. The time step for solving Equation \eqref{eq:C3_virtualBoundaryDiscretization} is chosen as $0.1$ and we use $100$ nodes to model the domain where the length of the domain is selected as $1.0$. We used 2-point and 4-point $\delta$ function to transfer data between Lagrangian and Eulerian domains. The results for these are shown in Figure \ref{fig:C3_virtualBoundaryResults}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\subfigure[Solution for $X = 0.385$ and moving wall velocity of $1 m/s$]
 	{
@@ -352,7 +465,7 @@ As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB an
 \subsection{Penalization method}
 The third class of continuum immersed boundary techniques are known as penalization method that was first introduced by Arquis and Caltagirone \cite{ arquis1984conditions}. In this method, the solid boundaries are modeled as porous media. Porosity or void fraction is a measure of the void spaces in a material, and is a fraction of the volume of voids over the total volume, between 0 and 1. For the solid domain the porosity value is near zero whereas for the fluid domain its value is close to one. Flow through a porous domain is described using the Darcy's law. This is a simple proportional relationship between the instantaneous discharge rate through a porous medium, the viscosity of the fluid and the pressure drop over a given distance.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=14.cm]{Chapter_3/figure/Darcys_Law.png}
 	\caption{Flow through a porous pipe.}
@@ -396,18 +509,18 @@ Depending of the sign of $\mathcal{X}$, we can make the following conclusions
 
 Sign of $\mathcal{X}$ divides the physical domain into three regions. To use this function for force term assignment to mesh cell, we need to convent its values to $0$ and $1$. The force terms outside the solid boundaries are multiplied by zero whereas the force terms inside the solid boundary are multiplied by one. This is done by feeding the values of function $\mathcal{X}$ to a Heaviside function, $\mathcal{H}$. The Heaviside function, or the unit step function, is a discontinuous function whose value is zero for negative argument and one for positive argument as shown in Figure \ref{fig:C3_heavisideFunction}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=14.cm]{Chapter_3/figure/Heaviside_Function.eps}
 	\caption{The Heaviside function.}
 	\label{{fig:C3_heavisideFunction}}
 \end{figure}
 
-By feeding the function $\mathcal{X}$ into the Heaviside function, we get the value of one for nodes inside the solid boundary and zero for outside. These are then multiplied to the force terms calculated using Equation \eqref{eq:C3_forceTermIBpenelization}. This enables us to apply the force term only within the solid domain. This method is applied to the demonstration problem of section \ref{sec:C3_benchmark_case}. For this problem, we looked at the effect of the wall velocity, permeability value, and number of mesh cells on the accuracy of the method. The results are compared with analytical results for this problem like the previous sections.
+By feeding the function $\mathcal{X}$ into the Heaviside function, we get the value of one for nodes inside the solid boundary and zero for outside. These are then multiplied to the force terms calculated using Equation \eqref{eq:C3_forceTermIBpenelization}. This enables us to apply the force term only within the solid domain. This method is applied to the demonstration problem of section \ref{sec:C3_benchmark_case}. For this problem, we looked at the effect of the number of mesh cells, wall velocity, and the permeability value on the accuracy of the method. The results are compared with analytical results for this problem like the previous sections.
 
 For the first set of results, we looked at the effect of mesh size on the accuracy of the solution. The domain length is chosen as $1.0 m$ where the position of the fixed wall is selected as $0.6125$. We chose this so that the computational nodes won't coincide the with the wall location. This better represents the application of the IB method. We chose the node numbers as 11, 41, 81, and 161. As shown in Figure \ref{fig:C3_penalizationResultNodeNumber}, as we increase the number of the total error between the numerical and analytical results decreases. For the Case where there is computational node exactly on top the location for the stationary wall ($n=161$), the two results match perfectly. The IB results are shown using solid line and the analytical results are represented using white circles.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\subfigure[n = 11]
 	{
@@ -429,12 +542,12 @@ For the first set of results, we looked at the effect of mesh size on the accura
 	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_nodeNumber_161.eps}
 	}
 	\caption{Comparison between IB and analytical results for different number of nodes.}
-	\label{fig:C3_peskinResults}
+	\label{fig:C3_penalizationResultNodeNumber}
 \end{figure}
 
-For the comparison between the IB and the analytical results we used the RSME value. These are shown in Table \ref{table:C3_penalizationMethodRSME}.
+For the comparison between the IB and the analytical results we used the RSME value. These are shown in Table \ref{table:C3_penalizationResultNodeNumberRMSE}.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{c | c}
 	Node number & RMSE value \\ \hline \hline
@@ -444,12 +557,93 @@ For the comparison between the IB and the analytical results we used the RSME va
 	161 & 0.001
 \end{tabular}
 \caption{RMSE value for different number of nodes}
-\label{table:C3_penalizationMethodRSME}
+\label{table:C3_penalizationResultNodeNumberRMSE}
 \end{table}
 
-As can be seen in Table \ref{table:C3_penalizationMethodRSME}, even for $n = 161$, the RMSE value is not zero. This is because in the penalization method, even for low values of porosity, there is still a small flow going through the solid domain.
+As can be seen in Table \ref{table:C3_penalizationResultNodeNumberRMSE}, even for $n = 161$, the RMSE value is not zero. This is because in the penalization method, even for low values of porosity, there is still a small flow going through the solid domain.
 
-For the next study, we look at the effect of the different velocity of moving wall on the accuracy of the domain. For this analysis we defined the fixed wall at $x=0.4325$ and discretized the domain using $81$ nodes. The inlet velocity is defined as $1$, $10$, $100$, and $1000$ and we compared the IB with analytical results. We chose the time step as $10^{-5}$ and the porosity value as $\kappa = 100001$.
+For the next investigation, we look at the effect of the different velocity of moving wall on the accuracy of the penalization method. For this analysis we defined the fixed wall at $x=0.4325$ and discretized the domain using $81$ nodes. The inlet velocity is selected as $1$, $10$, $100$, and $1000$. To verify the methodology, we compared the IB with analytical results. We chose the time step as $10^{-5}$ and the porosity value as $\kappa = 10^{-5}$. As shown in Figure \ref{fig:C3_penalizationResultInletVelocity} and the RMSE values in Table \ref{table:C3_penalizationResultInletVelocityRMSE}, the inlet velocity does not affect the the accuracy of the response. Moreover, all of these simulation are done using the same time step and porosity value.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$U_{in} = 1 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_inletVelocity_1.eps}
+	}
+	\quad
+	\subfigure[$U_{in} = 10 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_inletVelocity_10.eps}
+	}
+	\\
+	\subfigure[$U_{in} = 100 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_inletVelocity_100.eps}
+	}
+	\quad
+	\subfigure[$U_{in} = 1000 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_inletVelocity_1000.eps}
+	}
+	\caption{Comparison between IB and analytical results for different inlet velocity.}
+	\label{fig:C3_penalizationResultInletVelocity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	Inlet velocity (m/s) & RMSE value \\ \hline \hline
+	1 & 0.0056 \\ \hline
+	10 & 0.0056 \\ \hline
+	100 & 0.0056 \\ \hline
+	1000 & 0.0056
+\end{tabular}
+\caption{RMSE value for different inlet velocities.}
+\label{table:C3_penalizationResultInletVelocityRMSE}
+\end{table}
+
+Finally, we looked at the effect of different porosity values on the accuracy of the simulation. For this purpose, we fixed the wall location at $x_{wall} = 0.435$ and defined the velocity of the moving wall as $10 m/s$. The length of the domain is selected as $1 m$ and discretized using 81 nodes. We chose the time step as $10^{-5}$. We investigated the accuracy of penalization method to porosity values of $10^{-2}$, $10^{-3}$, $10^{-4}$, $10^{-5}$ by comparing the IB simulation with analytical results. The results shown in Figure \ref{fig:C3_penalizationResultPorosity} and Table \ref{table:C3_penalizationResultPorosityRMSE} shows the strong dependency of the simulation results of the porosity, $\kappa$, value. To select an appropriate porosity, several simulations need to be run and the convergence needs to be studied.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$\kappa = 10^{-2}$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_porosity_100.eps}
+	}
+	\quad
+	\subfigure[$\kappa = 10^{-3}$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_porosity_1000.eps}
+	}
+	\\
+	\subfigure[$\kappa = 10^{-4}$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_porosity_10000.eps}
+	}
+	\quad
+	\subfigure[$\kappa = 10^{-5}$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/penalization_porosity_100000.eps}
+	}
+	\caption{Comparison between IB and analytical results for different porosity values.}
+	\label{fig:C3_penalizationResultPorosity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	Porosity (m/s) & RMSE value \\ \hline \hline
+	$10^{-2}$ & 0.079 \\ \hline
+	$10^{-3}$ & 0.028 \\ \hline
+	$10^{-4}$ & 0.01 \\ \hline
+	$10^{-5}$ & 0.0056
+\end{tabular}
+\caption{RMSE value for different porosity values.}
+\label{table:C3_penalizationResultPorosityRMSE}
+\end{table}
+
+The penalization method is probably the easiest one in the continuous IB methods to implement however, its accuracy is very dependent on the number of nodes used. This is because there are no mechanisms to exactly define the location of solid boundaries in the penalization method. This can lead to loss of accuracy and oscillations near the boundaries. The porosity value, $\kappa$, needs to be selected by running multiple simulations are compare the results for convergence. Although even with low values of porosities, there is a leakage in the solid domain that reduces the accuracy of the simulations.
+
 %\subsubsection{Formulation}
 %\subsubsection{Implimentation for Couette Flow Problem}
 %\subsection{Cut-cell Method}
