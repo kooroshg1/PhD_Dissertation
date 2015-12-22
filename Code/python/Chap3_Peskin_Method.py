@@ -81,7 +81,7 @@ def genL(nx):
     return L
 # -----------------------------
 # ---------------------
-nx = 81
+nx = 161
 x = np.linspace(0, 1, nx)
 dx = x[2] - x[1]
 dt = 1e-5
@@ -96,10 +96,11 @@ un = np.zeros([nx, 1])
 un[0] = BC[0]
 
 K = 10
-X0 = 0.51885
+X0 = 0.726
 Xn = X0
 deltaType = '2point'
 delta = genDelta(x[1:-1], Xn, type=deltaType).reshape(-1, 1)
+
 for it in range(1, 60000):
     RHS1 = BC * dt / (2 * dx**2)
     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])

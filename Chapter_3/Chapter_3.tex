@@ -378,7 +378,7 @@ For the last case study of classical IB method, we looked at the effect of the w
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Virtual boundary method}
-The virtual boundary method is a different approach for imposing the effect of immersed boundary through force terms. This approach is well suited for both the rigid boundaries and also elastic boundaries. The difference between this approach and the classical IB method defined in the previous chapter is that it does not require the solution of the constitutive equations to calculate the force terms. This approach is based on the works of the works of Goldstein et al. \cite{goldstein1993modeling} to simulate the flow around the rigid bodies. The forcing term in the virtual boundary method is defined as
+The virtual boundary method is a different approach for imposing the effect of immersed boundary through force terms. This approach is well suited for both the rigid and elastic boundaries. The difference between this approach and the classical IB method is that it does not require the solution of the constitutive equations to calculate the force terms. This approach is based on the works of the works of Goldstein et al. \cite{goldstein1993modeling} to simulate the flow around the rigid bodies. The forcing term in the virtual boundary method is defined as
 
 \begin{equation}\label{eq:C3_virtualBoundaryMethod}
 	F(X_k, t) = 
@@ -412,55 +412,102 @@ where $n$ is the time step that we are at. The steps to solve this problem using
 
 Comparing the virtual boundary method to the classical IB method, we can see that less steps are required for this formulation. Moreover, there is no need to solve the constitutive equation for the solid domain which reduces the total computational cost.
 
-For this problem, we are choosing the location of wall at two different locations, $x = 0.6$ and $x = 0.385$. The first node is exactly on top of a computational node and the second is between two nodes. We also looked at two different velocities for the moving wall, $u_0=1$ and $u_0 = 100$. The time step for solving Equation \eqref{eq:C3_virtualBoundaryDiscretization} is chosen as $0.1$ and we use $100$ nodes to model the domain where the length of the domain is selected as $1.0$. We used 2-point and 4-point $\delta$ function to transfer data between Lagrangian and Eulerian domains. The results for these are shown in Figure \ref{fig:C3_virtualBoundaryResults}.
+Like the classical IB method, we investigate the effect of mesh size, moving wall velocity, and values for $\alpha$ and $\beta$ constants of the solution accuracy. The numerical results are verified with the analytical solution of this problem. We use the RMSE value as a metric to compare the results.
+
+We looked at the effect of mesh size on the solution accuracy of the virtual boundary method. For this case, the moving wall velocity is fixed at $10 m/s$ with the location of fixed wall at $x_{wall} = 0.726$. The time step for this simulation is chosen as $10^{-5}$ with $\alpha = -1000$ and $\beta = -10$. We chose the node number as $11$, $41$, $81$, and $161$. The total length of the domain is chosen as $1 m$. As shown in Figure \ref{C3_virtualBoundaryResultNodeNumber} and Table \ref{table:C3_virtualBoundaryResultNodeNumberRMSE}, by increasing the nodes number the simulation results become more accurate. However, the convergence is reached earlier compared to the classical IB method of last section. This means that the computational effort to get the same accuracy compared to classical IB method is much less when using the virtual boundary method. 
 
 \begin{figure}[H]
 	\centering
-	\subfigure[Solution for $X = 0.385$ and moving wall velocity of $1 m/s$]
+	\subfigure[N = 11]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x0385_u1.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_nodeNumber_11.eps}
 	}
 	\quad
-	\subfigure[Error plot]
+	\subfigure[N = 41]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x0385_u1_err.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_nodeNumber_41.eps}
 	}
 	\\
-	\subfigure[Solution for $X = 0.6$ and moving wall velocity of $1 m/s$]
+	\subfigure[N = 81]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x06_u1.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_nodeNumber_81.eps}
 	}
 	\quad
-	\subfigure[Error plot]
+	\subfigure[N = 161]
 	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x06_u1_err.eps}
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_nodeNumber_161.eps}
 	}
-	\\
-	\subfigure[Solution for $X = 0.385$ and moving wall velocity of $100 m/s$]
-	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x0385_u100.eps}
-	}
-	\quad
-	\subfigure[Error plot]
-	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x0385_u100_err.eps}
-	}
-	\\
-	\subfigure[Solution for $X = 0.6$ and moving wall velocity of $100 m/s$]
-	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x06_u100.eps}
-	}
-	\quad
-	\subfigure[Error plot]
-	{
-	\includegraphics[width=7.0cm]{Chapter_3/figure/vb_x06_u100_err.eps}
-	}
-	\caption{Comparison between IB and analytical results for different locations of stationary wall.}
-	\label{fig:C3_peskinResults}
+	\caption{Comparison between IB and analytical results for different porosity values.}
+	\label{fig:C3_virtualBoundaryResultNodeNumber}
 \end{figure}
 
-As shown in Figure \ref{fig:C3_peskinResults}, we compared the solution of IB and analytical results using $X=0.385$ and $X=0.6$ for the position of the wall. As can be seen here, the virtual boundary method results are in better agreement with the analytical results compated to the classical IB method. This is due to the fact the for IB method, the boundary can move and is not perfect. Therefore, the boundary conditions are assigned in an approximate manner. Moreover, as can be seen here, the virtual boundary method can handle different magnitude for the velocity without modification to the method. This makes this approach a more general approach for rigid boundaries compared to classical IB approach. Moreover, as can be seen in these results the location of boundary is captured well even if its location does not coincide the the computational nodes.
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c }
+	 Node number & RMSE \\ \hline \hline
+	 11 & 0.012 \\ \hline
+	 41 & 0.00065 \\ \hline
+	 81 & 0.00063 \\ \hline
+	 161 & 0.00058 \\
+\end{tabular}
+\caption{RMSE value for different node numbers.}
+\label{table:C3_virtualBoundaryResultNodeNumberRMSE}
+\end{table}
 
+We looked at the effect of wall velocity of the solution accuracy. As before the length of the domain is fixed at $1 m$ with wall defined at $x_{wall} = 0.726$, the time step is chosen as $10^{-5}$. We chose the $\alpha$ and $\beta$ constants as $-1000$ and $-10$ respectively. We simulated the flow selecting the wall velocity as $10$, $100$, $1000$, and $10000$. The results are compared with the analytical results. As shown in Figure \ref{fig:C3_virtualBoundaryResultWallVelocity} and Table \ref{table:C3_virtualBoundaryResultWallVelocityRMSE}, the wall velocity does not affect the accuracy of the solution. When compared with the results of the classical IB method in previous section, we can see that the virtual boundary method produces more accurate results. Moreover, the simulation time is much less than the classical IB method.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$u_{wall} = 10 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_wallVelocity_10.eps}
+	}
+	\quad
+	\subfigure[$u_{wall} = 10^2 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_wallVelocity_100.eps}
+	}
+	\\
+	\subfigure[$u_{wall} = 10^3 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_wallVelocity_1000.eps}
+	}
+	\quad
+	\subfigure[$u_{wall} = 10^4 m/s$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_wallVelocity_10000.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall velocities.}
+	\label{fig:C3_virtualBoundaryResultWallVelocity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall velocity & RMSE \\ \hline \hline
+	 10 & 0.000616\\ \hline
+	 $10^2$ & 0.000616 \\ \hline
+	 $10^3$ & 0.000616 \\ \hline
+	 $10^4$ & 0.000616 \\
+\end{tabular}
+\caption{RMSE value for different wall velocities.}
+\label{table:C3_virtualBoundaryResultWallVelocityRMSE}
+\end{table}
+
+Finally we looked at the effect of constants $\alpha$ and $\beta$ on the accuracy of the solution. We discretized the domain using $81$ nodes with wall velocity equal to $100$ with time step equal to $10^{-5}$. The location of the fixed wall is chosen as $x_{wall} = 0.726$. The flow between the plates is modelled using different coefficients for $\alpha$ and $\beta$ as shown in Table \ref{table:C3_alphaBetaValues}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c | c}
+	 Case number & $\alpha$ & $\beta$ \\ \hline \hline
+	 1 & 10 & 0.000616\\ \hline
+	 2 & $10^2$ & 0.000616 \\ \hline
+	 3 & $10^3$ & 0.000616 \\ \hline
+	 4 & $10^4$ & 0.000616 \\
+\end{tabular}
+\caption{RMSE value for different wall velocities.}
+\label{table:C3_alphaBetaValues}
+\end{table}
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Penalization method}
 The third class of continuum immersed boundary techniques are known as penalization method that was first introduced by Arquis and Caltagirone \cite{ arquis1984conditions}. In this method, the solid boundaries are modeled as porous media. Porosity or void fraction is a measure of the void spaces in a material, and is a fraction of the volume of voids over the total volume, between 0 and 1. For the solid domain the porosity value is near zero whereas for the fluid domain its value is close to one. Flow through a porous domain is described using the Darcy's law. This is a simple proportional relationship between the instantaneous discharge rate through a porous medium, the viscosity of the fluid and the pressure drop over a given distance.

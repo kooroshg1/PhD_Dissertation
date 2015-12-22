@@ -81,25 +81,27 @@ def genL(nx):
         L[iRow, iRow+1] = 1
     return L
 # ----------------------------
-nx = 101
+nx = 81
 x = np.linspace(0, 1, nx).reshape(-1, 1)
 dx = x[2] - x[1]
-dt = 0.1
+dt = 1e-5
 
 L = genL(nx) / dx**2
 
+wallVelocity = 10000
 BC = np.zeros([nx - 2, 1])
-BC[0] = 1
+BC[0] = wallVelocity
 
 un = np.zeros([nx, 1])
 un[0] = BC[0]
 
-Xn = 0.385 # Wall location
+X0 = 0.726
+Xn = X0 # Wall location
 delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1) # Delta function
 Ft = 0
 f = 0
-alpha = -1
-beta = 0
+alpha = -1000
+beta = -10
 for it in range(1, 60000):
     RHS1 = BC * dt / (2 * dx**2)
     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
@@ -108,7 +110,9 @@ for it in range(1, 60000):
     A = np.eye(nx - 2, nx - 2) - L[1:-1, 1:-1] * dt / 2
     unp1 = np.linalg.solve(A, RHS)
     err = np.max(np.abs(unp1 - un[1:-1]))
-    if err < 1e-5:
+    if np.mod(it, 2000) == 0:
+        print('Error = ', err)
+    if err < 1e-8:
         print(it)
         break
     Un = np.trapz(delta * un[1:-1], x[1:-1], axis=0)
@@ -116,13 +120,24 @@ for it in range(1, 60000):
     Ft = Ft + (Un + Unp1) * dt / 2
     Fc = Un
     F = alpha * Ft + beta * Fc
-    f = F * delta
+    f = F * delta * dt
     un = np.append(np.append(BC[0], unp1), 0).reshape(-1, 1)
 
-print(np.trapz(delta * un[1:-1], x[1:-1], axis=0))
+xInd = np.argmax(x > X0) - 1
+print('x @wall = ', x[xInd, 0])
+uIB = un
+uAnal = -BC[0] * x / X0 + BC[0]
+rmsd = np.sqrt(np.sum((uIB[:xInd, 0] - uAnal[:xInd, 0])**2) / len(uAnal)) / (np.max(np.abs(uAnal)) -
+                                                                             np.min(np.abs(uAnal)))
+
+print('RMSE = ', rmsd)
+print('U @wall = ', np.trapz(delta * un[1:-1], x[1:-1], axis=0))
+
+fileName = 'virtualBoundary_wallVelocity_' + np.str(wallVelocity) + '.eps'
+skip = 3
 plt.figure(figsize=(30, 15))
 plt.plot(x, un, 'k',
-         x, -BC[0] * x / Xn + BC[0], 'wo',
+         x[::skip], -BC[0] * x[::skip] / Xn + BC[0], 'wo',
          lw=linewidth, mew=linewidth, ms=markersize)
 plt.xlim([0, Xn])
 plt.ylim([0, BC[0]])
@@ -130,16 +145,16 @@ plt.xlabel('X')
 plt.ylabel('Response (u)')
 plt.legend(['IB', 'Analytical'])
 plt.grid('on')
-plt.savefig('vb_x0385_u1.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 # plt.savefig('vb_x06_u100.eps', format='eps', dpi=1000, bbox_inches='tight')
-plt.figure(figsize=(30, 15))
-plt.plot(x, un + BC[0] * x / Xn - BC[0], 'k',
-         lw=linewidth, mew=linewidth, ms=markersize)
-plt.xlim([0, Xn])
-plt.xlabel('X')
-plt.ylabel('Percentage of Error')
-plt.grid('on')
-plt.savefig('vb_x0385_u1_err.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.figure(figsize=(30, 15))
+# plt.plot(x, un + BC[0] * x / Xn - BC[0], 'k',
+#          lw=linewidth, mew=linewidth, ms=markersize)
+# plt.xlim([0, Xn])
+# plt.xlabel('X')
+# plt.ylabel('Percentage of Error')
+# plt.grid('on')
+# plt.savefig('vb_x0385_u1_err.eps', format='eps', dpi=1000, bbox_inches='tight')
 # plt.savefig('vb_x06_u100_err.eps', format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
 
