@@ -88,7 +88,7 @@ dt = 1e-5
 
 L = genL(nx) / dx**2
 
-wallVelocity = 10000
+wallVelocity = 100
 BC = np.zeros([nx - 2, 1])
 BC[0] = wallVelocity
 
@@ -100,8 +100,8 @@ Xn = X0 # Wall location
 delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1) # Delta function
 Ft = 0
 f = 0
-alpha = -1000
-beta = -10
+alpha = -100
+beta = -100
 for it in range(1, 60000):
     RHS1 = BC * dt / (2 * dx**2)
     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
@@ -133,7 +133,7 @@ rmsd = np.sqrt(np.sum((uIB[:xInd, 0] - uAnal[:xInd, 0])**2) / len(uAnal)) / (np.
 print('RMSE = ', rmsd)
 print('U @wall = ', np.trapz(delta * un[1:-1], x[1:-1], axis=0))
 
-fileName = 'virtualBoundary_wallVelocity_' + np.str(wallVelocity) + '.eps'
+fileName = 'virtualBoundary_constant_alpha_' + np.str(-alpha) + '_beta_' + np.str(-beta) + '.eps'
 skip = 3
 plt.figure(figsize=(30, 15))
 plt.plot(x, un, 'k',

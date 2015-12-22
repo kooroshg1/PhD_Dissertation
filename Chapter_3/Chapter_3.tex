@@ -92,9 +92,55 @@ In general, IB methods can be classified in three main families: i) discrete for
 
 % ======================================================================================
 \section{Discrete Forcing Method}
-\subsection{Formulation}
-\subsection{Implimentation for Couette Flow Problem}
+The discrete forcing approach was first introduced in the works of Mohd-Yusof \cite{mohd1997combined} in late nineties. The discrete forcing approach is defining the force in the numerical solution from the known characteristic of the repose. For the case of flow over immersed boundaries, this known characteristic is the flow velocity on the immersed boundary. The general formulation for the discrete forcing method starts with the discretized NS equation
 
+\begin{equation}
+	\frac{u^{n+1} - u^n}{\Delta t} = RHS^{n+1/2} + f^{n+1/2}
+\end{equation}
+
+where $u^{n+1}$ is the velocity at the next time step, $u^n$ is the velocity at the current time step, $\Delta t$ is the time step, and $RHS^{n+1/2}$ contains both the viscous terms and pressure gradient. $f^{n+1/2}$ is the forcing term that needs to be calculated in such a way that yields $u^{n+1} = V$, where $V$ is the known velocity of the immersed boundary. Therefore, the force term is calculated as
+
+\begin{equation}
+	f^{n+1/2} = -RHS^{n+1/2} + \frac{V - u^n}{\Delta t}
+\end{equation}
+
+This is valid only if the location of the immersed boundary coincides with the computational nodes. Interpolation from the fluid's computational nodes to the immersed boundary is needed for the cases where the two do not coincide. Depending on how this interpolation is done and where the force terms are calculated, the discrete forcing immersed boundary method is put into two main family based on this.
+
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Direct forcing approach}
+
+
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Ghost cell method}
+In the ghost cell method, the conditions on the immersed boundary are imposed through a set of Ghost cells. These are the cells in the solid region that have at least one neighbour in the fluid domain. For example, the node $\phi$ in Figure \ref{fig:C3_ghostCell} is a ghost cell.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=7.00cm]{Chapter_3/figure/discrete_forcing_approach.png}
+	\caption{Representation of nodes in the vicinity of an immersed boundary used in the ghost-cell approach.}
+	\label{fig:C3_ghostCell}
+\end{figure}
+
+For each ghost cell, an interpolation is used to implicitly satisfy the desired value of response on the immersed boundary. The easiest interpolation used is the bilinear interpolation (trilinear in 3D) where the value of $\phi$ can be defined as
+
+\begin{equation}
+	\phi = C_1 x_1 x_2 + C_2 x_1 + C_3 x_2 + C_4
+\end{equation}
+
+where the four coefficients in above equation is calculated based on the values of flow response at $U_1$, $U_2$, $U_3$ from the solution and the known value at the boundary point $b$. Boundary point $b$, is the normal intercept from the ghost node to the immersed boundary. The linear interpolation is well suited for the laminar flows or for high Reynolds number flows where the gird points are located in the viscous sublayer \cite{iaccarino2003immersed}. For high Reynolds number where higher accuracy is required, higher-order interpolation are used. An example of such interpolations are suggested by Majumdat et al., where they employed a linear interpolation in the tangential direction and quadratic in the normal direction \cite{majumdar2001rans}. 
+
+The ghost cell method, introduce the boundary conditions on the immersed boundary surface directly into the discrete equations. Therefore, the forcing term depends on the discretization process and its practical implementation is not straightforward compared to the continuous forcing approach which is discussed in the next section. The steps for implementing the ghost cell method can be summarized as follows
+
+\begin{enumerate}
+	\item Mark computational nodes as fluids, solids, and ghost cells based on their relative location to the boundary
+	\item For each of ghost cells, define an interpolation scheme based on the neighbouring nodes
+	\item Update the discretized equations for nodes with ghost cell in their boundaries using the interpolation scheme
+	\item Solve the resulting equations for the response
+	\item Update the interpolation scheme and discrete equations based on the new values
+	\item loop until convergence is satisfied
+\end{enumerate}
+
+The ghost cell method is applied to the demonstration problem introduced in Section \ref{sec:C3_benchmark_case}.
 % ======================================================================================
 \section{Continuum Forcing Method}
 In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation
@@ -500,13 +546,53 @@ Finally we looked at the effect of constants $\alpha$ and $\beta$ on the accurac
 \centering
 \begin{tabular}{c | c | c}
 	 Case number & $\alpha$ & $\beta$ \\ \hline \hline
-	 1 & 10 & 0.000616\\ \hline
-	 2 & $10^2$ & 0.000616 \\ \hline
-	 3 & $10^3$ & 0.000616 \\ \hline
-	 4 & $10^4$ & 0.000616 \\
+	 1 & -10 & -10 \\ \hline
+	 2 & -100 & -10 \\ \hline
+	 3 & -100 & -1 \\ \hline
+	 4 & -100 & -100 \\
 \end{tabular}
-\caption{RMSE value for different wall velocities.}
+\caption{Different values used for investigating the effect of $\alpha$ and $\beta$.}
 \label{table:C3_alphaBetaValues}
+\end{table}
+
+As can be seen in Figure \ref{fig:C3_virtualBoundaryResultConstant} and Table \ref{fig:C3_virtualBoundaryResultConstantRSME}, $\alpha$ value has a considerable effect of the accuracy of the results. Increasing the $\alpha$ value with an order of magnitude results in a considerable improvement in the accuracy of the solution. However, $\beta$ value does not contribute to the accuracy but improves the stability of the solution. The solutions with larger $\beta$ values converged in less number of iterations.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$\alpha = -10, \beta = -10$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_constant_alpha_10_beta_10.eps}
+	}
+	\quad
+	\subfigure[$\alpha = -100, \beta = -10$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_constant_alpha_100_beta_10.eps}
+	}
+	\\
+	\subfigure[$\alpha = -100, \beta = -1$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_constant_alpha_100_beta_1.eps}
+	}
+	\quad
+	\subfigure[$\alpha = -100, \beta = -100$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/virtualBoundary_constant_alpha_100_beta_100.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall velocities.}
+	\label{fig:C3_virtualBoundaryResultConstant}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c | c}
+	 $\alpha$ & $\beta$ & RMSE \\ \hline \hline
+	 -10 & -10 & 0.0327 \\ \hline
+	 -100 & -10 & 0.00138 \\ \hline
+	 -100 & -1 & 0.00129 \\ \hline
+	 -100 & -100 & 0.00346 \\
+\end{tabular}
+\caption{Different values used for investigating the effect of $\alpha$ and $\beta$.}
+\label{table:C3_virtualBoundaryResultConstantRSME}
 \end{table}
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Penalization method}
