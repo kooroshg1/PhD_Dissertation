@@ -249,7 +249,7 @@ The Euler method is used for time integration of the discrete equations. In the 
 \end{equation}
 \end{subequations}
 
-where $L'$ is the modified differential operator of Equation \eqref{C3_centralDifferenceAfter}.
+where $L'$ is the modified differential operator of Equation \eqref{eq:C3_centralDifferenceAfter}. It is clear that excessive modification of the discrete solver is required for implementation of the immersed boundary. This discretization method is applied to the benchmark case, we the effect of node number, location of the stationary wall, and the wall velocity on the solution accuracy is investigated.
 % ======================================================================================
 \section{Continuum Forcing Method}
 In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation
