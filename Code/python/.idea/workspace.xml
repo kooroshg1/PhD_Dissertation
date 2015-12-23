@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Chap3_Virtual_Boundary_Method.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Chap3_Virtual_Boundary_Method.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chap3_Virtual_Boundary_Method.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77210885">
-              <caret line="103" column="11" selection-start-line="103" selection-start-column="11" selection-end-line="103" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="126" column="28" selection-start-line="126" selection-start-column="7" selection-end-line="126" selection-end-column="28" />
               <folding>
                 <element signature="e#1101#2102#0" expanded="false" />
                 <element signature="e#2143#2467#0" expanded="false" />
@@ -34,30 +34,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chap3_Penalization_Method.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Chap3_Penalization_Method.py">
+      <file leaf-file-name="Chap3_ghostCell.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Chap3_ghostCell.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="75" column="57" selection-start-line="75" selection-start-column="57" selection-end-line="76" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.737013">
+              <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
               <folding>
-                <element signature="e#297#417#0" expanded="false" />
-                <element signature="e#436#731#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Chap3_Peskin_Method.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Chap3_Peskin_Method.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="131" column="24" selection-start-line="131" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-              <folding>
-                <element signature="e#294#428#0" expanded="false" />
-                <element signature="e#446#727#0" expanded="false" />
-                <element signature="e#745#1072#0" expanded="false" />
-                <element signature="e#1090#2091#0" expanded="false" />
-                <element signature="e#2132#2456#0" expanded="false" />
+                <element signature="e#23#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,6 +66,7 @@
         <option value="$PROJECT_DIR$/Chap3_Penalization_Method.py" />
         <option value="$PROJECT_DIR$/Chap3_Peskin_Method.py" />
         <option value="$PROJECT_DIR$/Chap3_Virtual_Boundary_Method.py" />
+        <option value="$PROJECT_DIR$/Chap3_ghostCell.py" />
       </list>
     </option>
   </component>
@@ -90,10 +74,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1920" />
-    <option name="y" value="52" />
-    <option name="width" value="960" />
-    <option name="height" value="1028" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -177,24 +161,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.Chap3_Virtual_Boundary_Method">
-    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.Chap3_ghostCell">
     <configuration default="false" name="Chap3_Peskin_Method" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -259,6 +226,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap3_Penalization_Method.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Chap3_ghostCell" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap3_ghostCell.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -386,19 +370,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Chap3_Peskin_Method" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Chap3_Virtual_Boundary_Method" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Chap3_Heaviside_function" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Chap3_Penalization_Method" />
+      <item index="0" class="java.lang.String" itemvalue="Python.Chap3_Peskin_Method" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Chap3_Virtual_Boundary_Method" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Chap3_Heaviside_function" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Chap3_Penalization_Method" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Chap3_ghostCell" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Chap3_Virtual_Boundary_Method" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Chap3_Peskin_Method" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Chap3_Penalization_Method" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Chap3_Heaviside_function" />
-        <item index="4" class="java.lang.String" itemvalue="Python.test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Chap3_ghostCell" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Chap3_Virtual_Boundary_Method" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Chap3_Peskin_Method" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Chap3_Penalization_Method" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Chap3_Heaviside_function" />
       </list>
     </recent_temporary>
   </component>
@@ -416,17 +400,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="52" width="960" height="1028" extended-state="4" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48345783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24727075" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3982684" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33690986" sideWeight="0.4978166" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32708332" sideWeight="0.4978166" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5021834" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -796,13 +780,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Chap3_regularizedDeltaFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Chap3_Virtual_Boundary_Method.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77210885">
-          <caret line="103" column="11" selection-start-line="103" selection-start-column="11" selection-end-line="103" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="126" column="28" selection-start-line="126" selection-start-column="7" selection-end-line="126" selection-end-column="28" />
           <folding>
             <element signature="e#1101#2102#0" expanded="false" />
             <element signature="e#2143#2467#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap3_ghostCell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.737013">
+          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

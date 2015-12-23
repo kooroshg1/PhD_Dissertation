@@ -133,8 +133,14 @@ The ghost cell method, introduce the boundary conditions on the immersed boundar
 
 \begin{enumerate}
 	\item Mark computational nodes as fluids, solids, and ghost cells based on their relative location to the boundary
-	\item For each of ghost cells, define an interpolation schemes
+	\item For each of ghost cells, define an interpolation scheme based on the neighbouring nodes
+	\item Update the discretized equations for nodes with ghost cell in their boundaries using the interpolation scheme
+	\item Solve the resulting equations for the response
+	\item Update the interpolation scheme and discrete equations based on the new values
+	\item loop until convergence is satisfied
 \end{enumerate}
+
+The ghost cell method is applied to the demonstration problem introduced in Section \ref{sec:C3_benchmark_case}. We chose linear interpolation for this problem since the velocities are rather small. looked at the effect of moving wall velocity and the number of nodes on the accuracy of the solution. The IB results are verified using the analytical solution of the problem.
 % ======================================================================================
 \section{Continuum Forcing Method}
 In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation

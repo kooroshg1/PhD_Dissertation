@@ -101,6 +101,7 @@ delta = genDelta(x[1:-1], Xn, type='2point').reshape(-1, 1) # Delta function
 Ft = 0
 f = 0
 alpha = -100
+
 beta = -100
 for it in range(1, 60000):
     RHS1 = BC * dt / (2 * dx**2)
