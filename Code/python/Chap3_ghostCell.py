@@ -1,7 +1,14 @@
 __author__ = 'koorosh'
 import numpy as np
 import matplotlib.pyplot as plt
-
+# -----------------------------
+font = {'family' : 'monospace',
+        'weight' : 'normal',
+        'size'   : 52}
+plt.rc('font', **font)
+linewidth = 5.0
+markersize = 15
+# -----------------------------
 def genL(nx):
     # # 2nd Order Central difference
     # Assembling stiffness matrix
@@ -22,43 +29,53 @@ def genL(nx):
         L[iRow, iRow + 2] = 1
     return L
 
-nx = 4
+nx = 40
 x = np.linspace(0, 1, nx + 2)
 dx = x[2] - x[1]
 dt = 0.1
 
 L = genL(nx)
 Umwall = 1
-Xswall = 0.5
+Xswall = 0.13
 indPhi = np.argmax(x > Xswall)
 xswall = (Xswall - x[indPhi - 1]) / dx
 Lp = np.zeros(L.shape)
 Lline = np.zeros(nx + 2)
 Lline[indPhi] = 1
 Lline[indPhi - 1] = (1 - xswall) / xswall
-print(L)
-print()
+
 L[indPhi - 1 - 1, :] = L[indPhi - 1 - 1, :] - Lline
+L[indPhi - 1, :] = L[indPhi - 1, :] * 0
 L[indPhi + 1 - 1, :] = L[indPhi + 1 - 1, :] - Lline
-print(np.round(L))
-# BC = np.zeros([nx - 2, 1])
-# BC[0] = Umwall
-#
-# un = np.zeros([nx, 1])
-# un[0] = Umwall
-# for it in range(1, 600):
-#     RHS1 = BC * dt / (2 * dx**2)
-#     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
-#     RHS3 = L[1:-1, :].dot(un) * dt / 2
-#     RHS = RHS1 + RHS2 + RHS3
-#     A = np.eye(nx - 2, nx - 2) - L[1:-1, 1:-1] * dt / 2
-#     unp1 = np.linalg.solve(A, RHS)
-#     err = np.max(np.abs(unp1 - un[1:-1]))
-#     if err < 1e-5:
-#         break
-#     un = np.append(np.append(Umwall, unp1), 0).reshape(-1, 1)
-#
-# print(un)
-# plt.figure()
-# plt.plot(x, un)
-# plt.show()
+
+un = np.zeros([nx + 2, 1])
+un[0] = 1
+
+I = np.eye(nx + 2, nx + 2)
+I[indPhi, indPhi] = 0
+I[indPhi, indPhi - 1] = -(1 - xswall) / xswall
+
+for it in range(1, 60000):
+    unp1 = I[1:-1, 1:-1].dot(un[1:-1]) + dt * L.dot(un)
+    un = np.append(np.append(un[0], unp1), 0)
+
+uAnal = - Umwall / Xswall * x + Umwall
+uIB = un
+
+xInd = np.argmax(x > Xswall) - 1
+rmsd = np.sqrt(np.sum((uIB[:xInd] - uAnal[:xInd])**2) / len(uAnal)) / (np.max(np.abs(uAnal)) - np.min(np.abs(uAnal)))
+print('RMSE = ', rmsd)
+
+# fileName = 'virtualBoundary_constant_alpha_' + np.str(-alpha) + '_beta_' + np.str(-beta) + '.eps'
+plt.figure(figsize=(30, 15))
+plt.plot(x, un, 'k',
+         x, uAnal, 'wo',
+         lw=linewidth, mew=linewidth, ms=markersize)
+plt.xlim([0, Xswall])
+plt.ylim([0, Umwall])
+plt.xlabel('X')
+plt.ylabel('Response (u)')
+plt.legend(['IB', 'Analytical'])
+plt.grid('on')
+# plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
+plt.show()

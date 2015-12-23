@@ -140,7 +140,116 @@ The ghost cell method, introduce the boundary conditions on the immersed boundar
 	\item loop until convergence is satisfied
 \end{enumerate}
 
-The ghost cell method is applied to the demonstration problem introduced in Section \ref{sec:C3_benchmark_case}.
+The ghost cell method is applied to the demonstration problem introduced in Section \ref{sec:C3_benchmark_case}. We chose linear interpolation for this problem since the velocities are rather small. looked at the effect of moving wall velocity and the number of nodes on the accuracy of the solution. The IB results are verified using the analytical solution of the problem. We derive the ghost cell method, by discretizing the domain using 6 nodes using central difference method. For demonstration we define the location of wall between nodes $2$ and $3$ as shown in Figure \ref{fig:C3_discretizedGhostCell}. This makes node $3$ the ghost cell for this problem.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10.00cm]{Chapter_3/figure/ghost_cell_discretization.png}
+	\caption{Discretized domain for the ghost cell IB method where the \lq\lq wall\rq\rq\ is represented using hashed box.}
+	\label{fig:C3_discretizedGhostCell}
+\end{figure}
+
+The solid wall is defined at location $x$ in the local coordinate of the space between nodes $2$ and $3$. By using this coordinate and linear interpolation between nodes $2$ and $3$, the response on the wall is defined as
+
+\begin{equation}
+	x u_3 + (1 - x) u_2 = u_{swall}
+\end{equation}
+
+where $u_i$ is response at node $i$ and $u_{swall}$ is the predefined velocity at the stationary wall. For this problem, we know that $u_{swall}$ is equal to zero. Therefore, the response at the ghost cell, $u_3$, needs to be equal to the following to ensure zero velocity on the fixed wall.
+
+\begin{equation}\label{eq:C3_ghostCellValue}
+	u_3 = -\frac{1 - x}{x} u_2
+\end{equation}
+
+The second-order central-difference differential operator for this problem is shown in Equation \eqref{eq:C3_centralDifferenceBefore}. By substituting Equation \eqref{eq:C3_ghostCellValue} in Equation \eqref{eq:C3_centralDifferenceBefore}, we modify the differential operator in a way that it incorporates the effect of solid boundary. This modified operator is shown in Equation \eqref{eq:C3_centralDifferenceAfter}. It should be noted that since the value of $u_3$ is known from Equation \eqref{eq:C3_ghostCellValue}, its corresponding equation is remove from Equation \eqref{eq:C3_centralDifferenceBefore}.
+
+\begin{subequations}
+\begin{equation}\label{eq:C3_centralDifferenceBefore}
+	L = 
+	\begin{bmatrix}
+	1 & -2 & 1 & 0 & 0 & 0 \\
+	0 & 1 & -2 & 1 & 0 & 0 \\
+	0 & 0 & 1 & -2 & 1 & 0 \\
+	0 & 0 & 0 & 1 & -2 & 1
+	\end{bmatrix} \quad \text{:original operator}
+\end{equation}
+\begin{equation}\label{eq:C3_centralDifferenceAfter}
+	L' = 
+	\begin{bmatrix}
+	1 & -2 & 1 & 0 & 0 & 0 \\
+	0 & 1 & -2-(1-x)/x & 0 & 0 & 0 \\
+	0 & 0 & 1+2(1-x)/x & 0 & 1 & 0 \\
+	0 & 0 & -(1-x)/x & 0 & -2 & 1
+	\end{bmatrix} \quad \text{:modified operator}
+\end{equation}
+\end{subequations}
+
+The differential operator of Equation \eqref{eq:C3_centralDifferenceAfter} needs to be updated based on the new location of wall. This may cause a different column to become zero. As a results, we need to know the discretization technique used in solving the governing equations in order to implement the ghost method method. This is not usually possible for the commercial packages.
+
+The Euler method is used for time integration of the discrete equations. In the discrete form, this is written as shown in Equation \eqref{eq:C3_euelrMethodBefore}. The time integration is also need to be modified to incorporate the effect of the ghost cell. This is done by incorporating the known value of ghost cell in the time integration as shown in Equation \eqref{eq:C3_euelrMethodAfter}.
+
+\begin{subequations}
+\begin{equation}\label{eq:C3_euelrMethodBefore}
+	\begin{bmatrix}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+	u_1^{n+1} \\
+	u_2^{n+1} \\
+	u_3^{n+1} \\
+	u_4^{n+1}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+	u_1^{n} \\
+	u_2^{n} \\
+	u_3^{n} \\
+	u_4^{n}
+	\end{bmatrix}
+	+ 
+	\Delta t L \mathbf{u}^n
+\end{equation}
+\begin{equation}\label{eq:C3_euelrMethodAfter}
+	\begin{bmatrix}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+	u_1^{n+1} \\
+	u_2^{n+1} \\
+	u_3^{n+1} \\
+	u_4^{n+1}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 \\
+	0 & -(1-x)/x & 0 & 0 \\
+	0 & 0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+	u_1^{n} \\
+	u_2^{n} \\
+	u_3^{n} \\
+	u_4^{n}
+	\end{bmatrix}
+	+ 
+	\Delta t L' \mathbf{u}^n
+\end{equation}
+\end{subequations}
+
+where $L'$ is the modified differential operator of Equation \eqref{C3_centralDifferenceAfter}.
 % ======================================================================================
 \section{Continuum Forcing Method}
 In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation
