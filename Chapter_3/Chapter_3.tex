@@ -249,7 +249,135 @@ The Euler method is used for time integration of the discrete equations. In the 
 \end{equation}
 \end{subequations}
 
-where $L'$ is the modified differential operator of Equation \eqref{eq:C3_centralDifferenceAfter}. It is clear that excessive modification of the discrete solver is required for implementation of the immersed boundary. This discretization method is applied to the benchmark case, we the effect of node number, location of the stationary wall, and the wall velocity on the solution accuracy is investigated.
+where $L'$ is the modified differential operator of Equation \eqref{eq:C3_centralDifferenceAfter}. It is clear that excessive modification of the discrete solver is required for implementation of the immersed boundary. This discretization method is applied to the benchmark case, where the effect of node number, location of the stationary wall, and the wall velocity on the solution accuracy are investigated.
+
+For the first case, we look at the effect of node number. We choose the length of domain as $1m$ with the wall located at $x_{wall} = 0.6541$. The time step is selected as $0.1$ with the moving wall velocity as $10 m/s$. The node numbers at selected as $11$, $41$, $81$, and $161$ for this purpose. We compared the accuracy of the solution by comparing it to the analytical result. We chose the normalized root mean square error to compared the analytical and IB results. This is defined as follows.
+
+\begin{equation*}
+	NRMSE = \dfrac{\sqrt{\dfrac{\sum_{n=1}{N} \left( \hat{y}_n - y \right)^2}{n}}}{y_{max} - y_{min}}
+\end{equation*}
+
+where $\hat{y}_t$ is the predicted value, $y$ is the true value, and $n$ is the number data points. Normalizing by $y_{max} - y_{min}$ enables us to compare models with different scales. This is especially useful when compared the results for different wall velocities.
+
+As shown in Figure \ref{fig:C3_ghostCell_nodeNumber} and \ref{table:C3_ghostCell_nodeNumber_RMSE}, the number of nodes does not affect the solution accuracy. It is possible to get good accuracies even with low number of nodes. This is because the boundary condition is exactly satisfied at the wall location due to the ghost cell.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[N = 11]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_nodeNumber_11.eps}
+	}
+	\quad
+	\subfigure[N = 41]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_nodeNumber_41.eps}
+	}
+	\\
+	\subfigure[N = 81]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_nodeNumber_81.eps}
+	}
+	\quad
+	\subfigure[N = 161]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_nodeNumber_161.eps}
+	}
+	\caption{Comparison between IB and analytical results for different node numbers.}
+	\label{fig:C3_ghostCell_nodeNumber}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Node number & RMSE value \\ \hline \hline
+	 11 & $1.49 \times 10^{-15}$ \\ \hline
+	 41 & $2.08 \times 10^{-15}$ \\ \hline
+	 81 & $4.19 \times 10^{-10}$ \\ \hline
+	 161 & $9.94 \times 10^{-10}$ \\
+\end{tabular}
+\caption{RMSE value for different node numbers.}
+\label{table:C3_ghostCell_nodeNumber_RMSE}
+\end{table}
+
+We solved the same problem but by fixing the number of nodes to $41$ and changing the location of fixed bar to see its effect of the solution. The wall is defined at $0.124$, $0.379$, $0.723$, $0.936$ where none of these location coincide with the computational nodes. As shown in Figure \ref{fig:C3_ghostCell_wallLocation} and Table \ref{table:C3_ghostCell_wallLocation_RMSE}, the solution accuracy is not affected by wall location as well.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[N = 11]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallLocation_124.eps}
+	}
+	\quad
+	\subfigure[N = 41]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallLocation_379.eps}
+	}
+	\\
+	\subfigure[N = 81]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallLocation_723.eps}
+	}
+	\quad
+	\subfigure[N = 161]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallLocation_936.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall location.}
+	\label{fig:C3_ghostCell_wallLocation}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall location & RMSE value \\ \hline \hline
+	 0.124 & 5.49E-17 \\ \hline
+	 0.379 & 3.16E-15 \\ \hline
+	 0.723 & 2.72E-14 \\ \hline
+	 0.936 & 4.99E-14
+\end{tabular}
+\caption{RMSE value for different wall location.}
+\label{table:C3_ghostCell_wallLocation_RMSE}
+\end{table}
+
+For the final investigation, we looked at the effect of wall velocity of the solution accuracy. For this case, the number of nodes is fixed as $41$ and the stationary wall is located at $x_{wall} = 0.479$. The moving wall velocity is selected as $100$, $1000$, $10000$, and $100000$. As shown in Figure \ref{fig:C3_ghostCell_wallVelocity} and Table \ref{table:C3_ghostCell_wallVelocity_RMSE}, the wall velocity does not affect the accuracy of the solution.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[N = 11]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallVelocity_100.eps}
+	}
+	\quad
+	\subfigure[N = 41]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallVelocity_1000.eps}
+	}
+	\\
+	\subfigure[N = 81]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallVelocity_10000.eps}
+	}
+	\quad
+	\subfigure[N = 161]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/ghostCell_wallVelocity_100000.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall velocities.}
+	\label{fig:C3_ghostCell_wallVelocity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall velocity & RMSE value \\ \hline \hline
+	 100 & $8.89 \times 10^{-15}$ \\ \hline
+	 1000 & $8.36 \times 10^{-15}$ \\ \hline
+	 10000 & $8.31 \times 10^{-15}$ \\ \hline
+	 100000 & $8.62 \times 10^{-15}$ \\ \hline
+\end{tabular}
+\caption{RMSE value for different wall velocities.}
+\label{table:C3_ghostCell_wallVelocity_RMSE}
+\end{table}
 % ======================================================================================
 \section{Continuum Forcing Method}
 In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation

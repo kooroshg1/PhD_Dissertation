@@ -29,14 +29,14 @@ def genL(nx):
         L[iRow, iRow + 2] = 1
     return L
 
-nx = 40
+nx = 41
 x = np.linspace(0, 1, nx + 2)
 dx = x[2] - x[1]
 dt = 0.1
 
 L = genL(nx)
-Umwall = 1
-Xswall = 0.13
+Umwall = 10000
+Xswall = 0.479
 indPhi = np.argmax(x > Xswall)
 xswall = (Xswall - x[indPhi - 1]) / dx
 Lp = np.zeros(L.shape)
@@ -49,7 +49,7 @@ L[indPhi - 1, :] = L[indPhi - 1, :] * 0
 L[indPhi + 1 - 1, :] = L[indPhi + 1 - 1, :] - Lline
 
 un = np.zeros([nx + 2, 1])
-un[0] = 1
+un[0] = Umwall
 
 I = np.eye(nx + 2, nx + 2)
 I[indPhi, indPhi] = 0
@@ -66,10 +66,11 @@ xInd = np.argmax(x > Xswall) - 1
 rmsd = np.sqrt(np.sum((uIB[:xInd] - uAnal[:xInd])**2) / len(uAnal)) / (np.max(np.abs(uAnal)) - np.min(np.abs(uAnal)))
 print('RMSE = ', rmsd)
 
-# fileName = 'virtualBoundary_constant_alpha_' + np.str(-alpha) + '_beta_' + np.str(-beta) + '.eps'
+fileName = 'ghostCell_wallVelocity_' + np.str(Umwall) + '.eps'
+skip = 1
 plt.figure(figsize=(30, 15))
 plt.plot(x, un, 'k',
-         x, uAnal, 'wo',
+         x[::skip], uAnal[::skip], 'wo',
          lw=linewidth, mew=linewidth, ms=markersize)
 plt.xlim([0, Xswall])
 plt.ylim([0, Umwall])
@@ -77,5 +78,5 @@ plt.xlabel('X')
 plt.ylabel('Response (u)')
 plt.legend(['IB', 'Analytical'])
 plt.grid('on')
-# plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
+plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
