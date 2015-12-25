@@ -35,8 +35,8 @@ dx = x[2] - x[1]
 dt = 1e-1
 
 L = genL(nx)
-Umwall = 1
-Xswall = 0.842
+Umwall = 10000
+Xswall = 0.5741
 indWn = np.argmax(x > Xswall) - 1
 indWn1 = indWn - 1
 un1w = 0
@@ -64,17 +64,17 @@ xInd = np.argmax(x > Xswall) - 1
 rmsd = np.sqrt(np.sum((uIB[:xInd] - uAnal[:xInd])**2) / len(uAnal)) / (np.max(np.abs(uAnal)) - np.min(np.abs(uAnal)))
 print('RMSE = ', rmsd)
 
-fileName = 'indirectForcing_wallLocation_' + np.str(np.int(Xswall*1000)) + '.eps'
+fileName = 'indirectForcing_wallVelocity_' + np.str(np.int(Umwall)) + '.eps'
 skip = 1
 plt.figure(figsize=(30, 15))
-plt.plot(x, un, 'k',
-         x[::skip], uAnal[::skip], 'wo',
+plt.plot(x, uAnal, 'k',
+         x[::skip], un[::skip], 'wo',
          lw=linewidth, mew=linewidth, ms=markersize)
 plt.xlim([0, Xswall])
 plt.ylim([0, Umwall])
 plt.xlabel('X')
 plt.ylabel('Response (u)')
-plt.legend(['IB', 'Analytical'])
+plt.legend(['Analytical', 'IB'])
 plt.grid('on')
 plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 plt.show()

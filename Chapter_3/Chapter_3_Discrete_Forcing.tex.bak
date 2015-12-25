@@ -72,9 +72,48 @@ where $u(i, n)$ is the velocity of fluid at location $i$ and time $n$, $\Delta x
 \label{table:C3_indirectForcing_wallLocationRSME}
 \end{table}
 
-For the second case, we looked at the effect of node number
+For the second case, we looked at the effect of node number on the accuracy of the simulation using indirect forcing method. For this case, the wall velocity is fixed at $1 m/s$ and the stationary wall is located at $0.5741$. The number of nodes is chosen as $11$, $41$, $81$, and $161$. As can be seen in Figure \ref{fig:C3_indirectForcing_nodeNumber} and Table \ref{fig:C3_indirectForcing_nodeNumberRSME}, the number of nodes does not affect the accuracy of indirect forcing approach.
 
-effect of wall velocity
+\begin{figure}[H]
+	\centering
+	\subfigure[$x_{wall} = 0.178$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_nodeNumber_11.eps}
+	}
+	\quad
+	\subfigure[$x_{wall} = 0.351$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_nodeNumber_41.eps}
+	}
+	\\
+	\subfigure[$x_{wall} = 0.612$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_nodeNumber_81.eps}
+	}
+	\quad
+	\subfigure[$x_{wall} = 0.842$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_nodeNumber_161.eps}
+	}
+	\caption{Comparison between IB and analytical results for different node numbers.}
+	\label{fig:C3_indirectForcing_nodeNumber}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall location & RMSE value \\ \hline \hline
+	 11 & $1.20 \times 10^{-15}$ \\ \hline
+	 41 & $1.50 \times 10^{-15}$ \\ \hline
+	 81 & $5.64 \times 10^{-15}$ \\ \hline
+	 161 & $3.76 \times 10^{-15}$
+\end{tabular}
+\caption{RMSE value for different node numbers.}
+\label{table:C3_indirectForcing_nodeNumberRSME}
+\end{table}
+
+For the final case, we looked at the effect of wall velocity on the accuracy of the simulation accuracy. For this case, the node number is fixed at $41$ and the stationary wall is located at $0.5741$. The wall velocity is chosen as $10$, $100$, $1000$, and $10000$. As can be seen in Figure \ref{fig:C3_indirectForcing_wallVelocity} and Table \ref{fig:C3_indirectForcing_wallVelocityRSME}, the wall velocity does not affect the accuracy of indirect forcing approach.
+
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Direct forcing method}
 In the direct forcing method, the conditions on the immersed boundary are imposed through a set of Ghost cells. These are the cells in the solid region that have at least one neighbour in the fluid domain. For example, the node $\phi$ in Figure \ref{fig:C3_ghostCell} is a ghost cell.
