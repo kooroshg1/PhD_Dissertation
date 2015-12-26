@@ -12,6 +12,11 @@ Pettit, C.~L., \enquote{Uncertainty quantification in aeroelasticity: recent
   results and research challenges,} {\em Journal of Aircraft\/}, Vol.~41,
   No.~5, 2004, pp.~1217--1229.
 
+\bibitem{sobieszczanski1997multidisciplinary}
+Sobieszczanski-Sobieski, J. and Haftka, R.~T., \enquote{Multidisciplinary
+  aerospace design optimization: survey of recent developments,} {\em
+  Structural optimization\/}, Vol.~14, No.~1, 1997, pp.~1--23.
+
 \bibitem{martins2003complex}
 Martins, J.~R., Sturdza, P., and Alonso, J.~J., \enquote{The complex-step
   derivative approximation,} {\em ACM Transactions on Mathematical Software
@@ -36,6 +41,23 @@ Reuther, J.~J., Jameson, A., Alonso, J.~J., Rimllnger, M.~J., and Saunders, D.,
   adjoint formulation and parallel computers, part 2,} {\em Journal of
   aircraft\/}, Vol.~36, No.~1, 1999, pp.~61--74.
 
+\bibitem{newman1997aerodynamic}
+Newman, J.~C., Taylor, A.~C., and Barnwell, R.~W., {\em Aerodynamic shape
+  sensitivity analysis and design optimization of complex configurations using
+  unstructured grids\/}, National Aeronautics and Space Administration, 1997.
+
+\bibitem{morris2008cfd}
+Morris, A., Allen, C., and Rendall, T., \enquote{CFD-based optimization of
+  aerofoils using radial basis functions for domain element parameterization
+  and mesh deformation,} {\em International journal for numerical methods in
+  fluids\/}, Vol.~58, No.~8, 2008, pp.~827--860.
+
+\bibitem{cambridge2004aerodynamic}
+Jameson, A., Shankaran, S., Martinelli, L., and Haimes, B.,
+  \enquote{Aerodynamic Shape Optimization of Complete Aircraft Configurations
+  using Unstructured Grids,} {\em 42nd AIAA Aerospace Sciences Meeting and
+  Exhibit\/}, AIAA 2004-533, 2004.
+
 \bibitem{gamboa2009optimization}
 Gamboa, P., Vale, J., P.~Lau, F., and Suleman, A., \enquote{Optimization of a
   morphing wing based on coupled aerodynamic and structural constraints,} {\em
@@ -50,6 +72,11 @@ Pandya, M.~J. and Baysal, O., \enquote{Gradient-based aerodynamic shape
 Kim, H.-J., Sasaki, D., Obayashi, S., and Nakahashi, K., \enquote{Aerodynamic
   optimization of supersonic transport wing using unstructured adjoint method,}
   {\em AIAA journal\/}, Vol.~39, No.~6, 2001, pp.~1011--1020.
+
+\bibitem{lyu2014aerodynamic}
+Lyu, Z. and Martins, J.~R., \enquote{Aerodynamic design optimization studies of
+  a blended-wing-body aircraft,} {\em Journal of Aircraft\/}, Vol.~51, No.~5,
+  2014, pp.~1604--1617.
 
 \bibitem{haftka1989recent}
 Haftka, R.~T. and Adelman, H.~M., \enquote{Recent developments in structural
@@ -76,6 +103,11 @@ Arora, J. and Haug, E., \enquote{Methods of Design Sensitivity Analysis in
 Dems, K. and Mroz, Z., \enquote{Variational approach to first- and second-order
   sensitivity analysis of elastic structures,} {\em International Journal for
   Numerical Methods in Engineering\/}, Vol.~21, No.~4, 1985, pp.~637--661.
+
+\bibitem{cross2014local}
+Cross, D.~M. and Canfield, R.~A., \enquote{Local continuum shape sensitivity
+  with spatial gradient reconstruction,} {\em Structural and Multidisciplinary
+  Optimization\/}, Vol.~50, No.~6, 2014, pp.~975--1000.
 
 \bibitem{borggaard1995sensitivity}
 Borggaard, J. and Burns, J., {\em A sensitivity equation approach to shape
@@ -263,10 +295,6 @@ Pingen, G., Evgrafov, A., and Maute, K., \enquote{Topology optimization of flow
 Mase, G.~T., Smelser, R.~E., and Mase, G.~E., {\em Continuum mechanics for
   engineers\/}, CRC press, 2009.
 
-\bibitem{cross2014local}
-Cross, D.~M., {\em Local Continuum Sensitivity Method for Shape Design
-  Derivatives Using Spatial Gradient Reconstruction\/}, Virginia Tech, 2014.
-
 \bibitem{haftka1986structural}
 Haftka, R.~T. and Grandhi, R.~V., \enquote{Structural shape optimization—a
   survey,} {\em Computer Methods in Applied Mechanics and Engineering\/},
@@ -323,5 +351,41 @@ Farhat, C., \enquote{CFD-based nonlinear computational aeroelasticity,} {\em
 Cheng, Y., Oertel, H., and Schenkel, T., \enquote{Fluid-structure coupled CFD
   simulation of the left ventricular flow during filling phase,} {\em Annals of
   biomedical engineering\/}, Vol.~33, No.~5, 2005, pp.~567--576.
+
+\bibitem{majumdar2001rans}
+Majumdar, S., Iaccarino, G., and Durbin, P., \enquote{RANS solvers with
+  adaptive structured boundary non-conforming grids,} {\em Annual Research
+  Briefs, Center for Turbulence Research, Stanford University\/}, 2001,
+  pp.~353--466.
+
+\bibitem{peskin1972flow}
+Peskin, C.~S., \enquote{Flow patterns around heart valves: a numerical method,}
+  {\em Journal of computational physics\/}, Vol.~10, No.~2, 1972, pp.~252--271.
+
+\bibitem{lee2003stability}
+Lee, C., \enquote{Stability characteristics of the virtual boundary method in
+  three-dimensional applications,} {\em Journal of Computational Physics\/},
+  Vol.~184, No.~2, 2003, pp.~559--591.
+
+\bibitem{shin2008assessment}
+Shin, S.~J., Huang, W.-X., and Sung, H.~J., \enquote{Assessment of regularized
+  delta functions and feedback forcing schemes for an immersed boundary
+  method,} {\em International Journal for Numerical Methods in Fluids\/},
+  Vol.~58, No.~3, 2008, pp.~263--286.
+
+\bibitem{roma1999adaptive}
+Roma, A.~M., Peskin, C.~S., and Berger, M.~J., \enquote{An adaptive version of
+  the immersed boundary method,} {\em Journal of computational physics\/},
+  Vol.~153, No.~2, 1999, pp.~509--534.
+
+\bibitem{peskin2002immersed}
+Peskin, C.~S., \enquote{The immersed boundary method,} {\em Acta numerica\/},
+  Vol.~11, 2002, pp.~479--517.
+
+\bibitem{kreissl2011explicit}
+Kreissl, S., Pingen, G., and Maute, K., \enquote{An explicit level set approach
+  for generalized shape optimization of fluids with the lattice Boltzmann
+  method,} {\em International Journal for Numerical Methods in Fluids\/},
+  Vol.~65, No.~5, 2011, pp.~496--519.
 
 \end{thebibliography}

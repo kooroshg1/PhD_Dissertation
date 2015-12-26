@@ -519,11 +519,72 @@
   publisher={Springer}
 }
 
+@article{sobieszczanski1997multidisciplinary,
+  title={Multidisciplinary aerospace design optimization: survey of recent developments},
+  author={Sobieszczanski-Sobieski, Jaroslaw and Haftka, Raphael T},
+  journal={Structural optimization},
+  volume={14},
+  number={1},
+  pages={1--23},
+  year={1997},
+  publisher={Springer}
+}
 
+@book{newman1997aerodynamic,
+  title={Aerodynamic shape sensitivity analysis and design optimization of complex configurations using unstructured grids},
+  author={Newman, James C and Taylor, Arthur C and Barnwell, Richard W},
+  year={1997},
+  publisher={National Aeronautics and Space Administration}
+}
 
+@article{morris2008cfd,
+  title={CFD-based optimization of aerofoils using radial basis functions for domain element parameterization and mesh deformation},
+  author={Morris, AM and Allen, CB and Rendall, TCS},
+  journal={International journal for numerical methods in fluids},
+  volume={58},
+  number={8},
+  pages={827--860},
+  year={2008},
+  publisher={Wiley Online Library}
+}
 
+@conference{cambridge2004aerodynamic,
+    author    = "Antony Jameson and Sriram Shankaran and Luigi Martinelli and Bob Haimes",
+    title     = "Aerodynamic Shape Optimization of Complete Aircraft Configurations using Unstructured Grids",
+    booktitle = "42nd AIAA Aerospace Sciences Meeting and Exhibit",
+    year      = "2004",
+    publisher= "AIAA 2004-533",
+}
 
+@article{lyu2014aerodynamic,
+  title={Aerodynamic design optimization studies of a blended-wing-body aircraft},
+  author={Lyu, Zhoujie and Martins, Joaquim RRA},
+  journal={Journal of Aircraft},
+  volume={51},
+  number={5},
+  pages={1604--1617},
+  year={2014},
+  publisher={American Institute of Aeronautics and Astronautics}
+}
 
+@article{liu2010fluid,
+  title={Fluid-structure transient gust response sensitivity for a nonlinear joined wing model},
+  author={Liu, Shaobin and Wickert, PD and Canfield, Robert A},
+  journal={AIAA Paper},
+  volume={3118},
+  year={2010}
+}
+
+@article{cross2014local,
+  title={Local continuum shape sensitivity with spatial gradient reconstruction},
+  author={Cross, David M and Canfield, Robert A},
+  journal={Structural and Multidisciplinary Optimization},
+  volume={50},
+  number={6},
+  pages={975--1000},
+  year={2014},
+  publisher={Springer}
+}
 
 
 
