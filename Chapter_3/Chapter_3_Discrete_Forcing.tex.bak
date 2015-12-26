@@ -114,6 +114,45 @@ For the second case, we looked at the effect of node number on the accuracy of t
 
 For the final case, we looked at the effect of wall velocity on the accuracy of the simulation accuracy. For this case, the node number is fixed at $41$ and the stationary wall is located at $0.5741$. The wall velocity is chosen as $10$, $100$, $1000$, and $10000$. As can be seen in Figure \ref{fig:C3_indirectForcing_wallVelocity} and Table \ref{fig:C3_indirectForcing_wallVelocityRSME}, the wall velocity does not affect the accuracy of indirect forcing approach.
 
+\begin{figure}[H]
+	\centering
+	\subfigure[$x_{wall} = 0.178$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_wallVelocity_10.eps}
+	}
+	\quad
+	\subfigure[$x_{wall} = 0.351$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_wallVelocity_100.eps}
+	}
+	\\
+	\subfigure[$x_{wall} = 0.612$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_wallVelocity_1000.eps}
+	}
+	\quad
+	\subfigure[$x_{wall} = 0.842$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_3/figure/indirectForcing_wallVelocity_10000.eps}
+	}
+	\caption{Comparison between IB and analytical results for different wall velocities.}
+	\label{fig:C3_indirectForcing_wallVelocity}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c}
+	 Wall velocity & RMSE value \\ \hline \hline
+	 10 & $1.49 \times 10^{-14}$ \\ \hline
+	 100 & $1.52 \times 10^{-14}$ \\ \hline
+	 1000 & $1.45 \times 10^{-14}$ \\ \hline
+	 10000 & $1.48 \times 10^{-14}$
+
+\end{tabular}
+\caption{RMSE value for different wall velocities.}
+\label{table:C3_indirectForcing_wallVelocityRSME}
+\end{table}
+
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Direct forcing method}
 In the direct forcing method, the conditions on the immersed boundary are imposed through a set of Ghost cells. These are the cells in the solid region that have at least one neighbour in the fluid domain. For example, the node $\phi$ in Figure \ref{fig:C3_ghostCell} is a ghost cell.
