@@ -194,28 +194,6 @@ Goldstein, D., Handler, R., and Sirovich, L., \enquote{Modeling a no-slip flow
   boundary with an external force field,} {\em Journal of Computational
   Physics\/}, Vol.~105, No.~2, 1993, pp.~354--366.
 
-\bibitem{mohd1997combined}
-Mohd-Yusof, J., \enquote{Combined immersed-boundary/B-spline methods for
-  simulations of ow in complex geometries,} {\em Annual Research Briefs. NASA
-  Ames Research Center= Stanford University Center of Turbulence Research:
-  Stanford\/}, 1997, pp.~317--327.
-
-\bibitem{verzicco1998complex}
-Verzicco, R., Mohd-Yusof, J., Orlandi, P., and Haworth, D., \enquote{LES in
-  complex geometries using boundary body forces,} {\em Center for Turbulence
-  Research Proceedings of the Summer Program, NASA Ames= Stanford
-  University\/}, 1998, pp.~171--186.
-
-\bibitem{verzicco2002large}
-Verzicco, R., Fatica, M., Iaccarino, G., Moin, P., and Khalighi, B.,
-  \enquote{Large eddy simulation of a road vehicle with drag-reduction
-  devices,} {\em AIAA journal\/}, Vol.~40, No.~12, 2002, pp.~2447--2455.
-
-\bibitem{iaccarino2003immersed}
-Iaccarino, G. and Verzicco, R., \enquote{Immersed boundary technique for
-  turbulent flow simulations,} {\em Applied Mechanics Reviews\/}, Vol.~56,
-  No.~3, 2003, pp.~331--347.
-
 \bibitem{durlofsky1987analysis}
 Durlofsky, L. and Brady, J., \enquote{Analysis of the Brinkman equation as a
   model for flow in porous media,} {\em Physics of Fluids\/}, Vol.~30, No.~11,
@@ -243,6 +221,28 @@ Kevlahan, N. K.-R. and Ghidaglia, J.-M., \enquote{Computation of turbulent flow
   past an array of cylinders using a spectral method with Brinkman
   penalization,} {\em European Journal of Mechanics-B/Fluids\/}, Vol.~20,
   No.~3, 2001, pp.~333--350.
+
+\bibitem{mohd1997combined}
+Mohd-Yusof, J., \enquote{Combined immersed-boundary/B-spline methods for
+  simulations of ow in complex geometries,} {\em Annual Research Briefs. NASA
+  Ames Research Center= Stanford University Center of Turbulence Research:
+  Stanford\/}, 1997, pp.~317--327.
+
+\bibitem{verzicco1998complex}
+Verzicco, R., Mohd-Yusof, J., Orlandi, P., and Haworth, D., \enquote{LES in
+  complex geometries using boundary body forces,} {\em Center for Turbulence
+  Research Proceedings of the Summer Program, NASA Ames= Stanford
+  University\/}, 1998, pp.~171--186.
+
+\bibitem{verzicco2002large}
+Verzicco, R., Fatica, M., Iaccarino, G., Moin, P., and Khalighi, B.,
+  \enquote{Large eddy simulation of a road vehicle with drag-reduction
+  devices,} {\em AIAA journal\/}, Vol.~40, No.~12, 2002, pp.~2447--2455.
+
+\bibitem{iaccarino2003immersed}
+Iaccarino, G. and Verzicco, R., \enquote{Immersed boundary technique for
+  turbulent flow simulations,} {\em Applied Mechanics Reviews\/}, Vol.~56,
+  No.~3, 2003, pp.~331--347.
 
 \bibitem{clarke1986euler}
 Clarke, D.~K., Hassan, H., and Salas, M., \enquote{Euler calculations for
