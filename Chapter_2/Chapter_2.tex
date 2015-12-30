@@ -1,9 +1,18 @@
 \chapter{Design Sensitivity Analysis}
-In this chapter, the concept behind discrete and continuum sensitivity formulation is discussed and the general approach for deriving the sensitivity equations is presented. The two sensitivity analysis techniques are applied to a heat transfer benchmark problem where the sensitivity of response to the shape of the domain is calculated. This problem is also used in the next chapter for implementation of different immersed boundary methods. The difference between local and total formulation of the sensitivity response is discussed and finally the independence of continuum sensitivity formulation to discretization method is proven. This enables use to reuse the solver of governing equation to calculate the sensitivity response. This is typically not possible for discrete sensitivity formulation.
+In this chapter, the concept behind discrete and continuum sensitivity formulation is discussed and the general approach for deriving the sensitivity equations is presented. The difference between local and total formulation of the sensitivity response is discussed and finally the independence of continuum sensitivity formulations to discretization method is proven. This enables use to reuse the solver of governing equation to calculate the sensitivity response. This is typically not possible for discrete sensitivity formulation. The two sensitivity analysis techniques are applied to a heat transfer benchmark problem where the sensitivity of response to the shape of the domain is calculated. This problem is also used in the next chapter for implementation of different immersed boundary methods.
 
 % ======================================================================================
 \section{General Formulation}
-The general computational domain is defined as shown in Figure \ref{fig:C2_continuumDomain}. The response variable on this domain can be from the fluid, i.e. pressure or velocity, or the solid, i.e. displacements. Nevertheless, the response is calculated using a governing equation subject to boundary conditions. In this work, the governing equation and boundary conditions are represented in the functional form as shown in Equation \eqref{eq:C2_governingEquationAndBC}.
+The general shape for the computational domain is defined in Figure \ref{fig:C2_continuumDomain}. The response variable on this domain can represent a fluid, i.e. pressure or velocity, or can be calculated for a solid, i.e. displacements. Nevertheless, in any of these cases the response is calculated by solving a governing equation subject to boundary conditions. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=4.00cm]{Chapter_2/figure/general_domain.png}
+	\caption{General computational domain $\Omega$ with boundary $\Gamma$.}
+	\label{fig:C2_continuumDomain}
+\end{figure}
+
+In this work, the governing equation and boundary conditions are represented in the functional form as shown in Equation \eqref{eq:C2_governingEquationAndBC}.
 
 \begin{subequations}
 \begin{gather}
@@ -15,20 +24,22 @@ The general computational domain is defined as shown in Figure \ref{fig:C2_conti
 \end{gather}\label{eq:C2_governingEquationAndBC}
 \end{subequations}
 
-where $\mathbf{A}$ is the governing equation such as Navier-Stokes equations or elastic equations and $\mathbf{B}$ is the boundary condition definition. $\mathbf{u}$ is the response variable such as displacement or pressure. $t$ is time, $\mathbf{b}$ is the design variable such as shape or size, and $\mathbf{x}$ is the spatial coordinate. $\mathbf{f}$ and $\mathbf{g}$ is the value of governing equation and boundary condition. The sensitivity of response variable with respect to $i$-th design variable $b_i$, $\partial \mathbf{u}/\partial b_i$, can be calculate using some sensitivity analysis technique. This is done in the following sections.
+where $\mathbf{A}$ is the governing equation such as Navier-Stokes equations for the fluid or elastic equations for the solid domain and $\mathbf{B}$ is the boundary condition. $\mathbf{u}$ is the response variable such as displacement or pressure. $t$ is time, $\mathbf{b}$ is the design variable such as shape or size, and $\mathbf{x}$ is the spatial coordinate. $\mathbf{f}$ and $\mathbf{g}$ are the values of governing equation and boundary conditions. It should be noted that in this formulation for the governing equation, the functions $\mathbf{A}$ and $\mathbf{B}$ are only implicitly dependent on the design variable $\mathbf{b}$. This is important when deriving the sensitivity equations later in this chapter. This implicit dependence is represented by using the semicolon symbols in the definition of $\mathbf{A}$ and $\mathbf{B}$.
 
-The total sensitivity of response variable, $\mathbf{u}$ with respect to the $i$-th design variable is written as
+For the general case of problem formulation, the total sensitivity of response variable, $\mathbf{u}$, with respect to the $i$-th design variable, $b_i$, is written as
 
 \begin{equation}\label{eq:C2_totalSensitivityDef}
 	\frac{D \mathbf{u}}{D b_i} = 
-	\frac{\partial \mathbf{u}}{\partial b_i} + 
-	\frac{\partial \mathbf{u}}{\partial \mathbf{x}} \cdot
-	\frac{\partial \mathbf{x}}{\partial b_i} 
+	\underbrace{\frac{\partial \mathbf{u}}{\partial b_i}}_\text{local derivative} + 
+	\underbrace{\frac{\partial \mathbf{u}}{\partial \mathbf{x}} \cdot
+	\frac{\partial \mathbf{x}}{\partial b_i}}_\text{convective term}
 \end{equation}
 
-The total derivative is known as material derivative in continuum mechanics \cite{mase2009continuum}. This total sensitivity defines the change of response variable, $\mathbf{u}$, subjected to design variable and space dependent changes. The material derivative consists of the local derivative, $\partial \mathbf{u}/\partial b_i$, plus the convective term, $\partial \mathbf{u}/\partial \mathbf{x} \cdot \partial \mathbf{x}/\partial b_i$. The local derivative is the measure of change in the response variable due to change in the design parameter. Whereas, the convective term accounts for the movement of this point in space due to change in the design variable. This is specially applicable to shape sensitivity calculating where the change in design variable, will cause the material points to move \cite{cross2014local}. The convective term consists of two separate gradients: i) $\partial \mathbf{u} / \partial \mathbf{x}$ which represents the spatial gradient of the response variable in the domain, and ii) $\partial \mathbf{x} / \partial b_i$ which defines the sensitivity of the spatial domain with respect to the change in design variable. The later defines how the computational nodes moves as the design variable changes. The response variable spatial gradient term can be calculated using the analysis results, using finite difference approach or derivative of shape functions in FEA formulation. Calculation of domain sensitivity, $\partial \mathbf{x} / \partial b_i$, requires more attention.
+The total derivative is known as material derivative in continuum mechanics \cite{mase2009continuum}. This total sensitivity defines the change of response variable, $\mathbf{u}$, subjected to design variable and space dependent changes. The material derivative consists of the local derivative, $\partial \mathbf{u}/\partial b_i$, plus the convective term, $\partial \mathbf{u}/\partial \mathbf{x} \cdot \partial \mathbf{x}/\partial b_i$. The local derivative is the measure of change in the response variable due to change in the design parameter. Whereas, the convective term accounts for the movement of points in space due to change in the design variable. This is specially applicable to shape sensitivity analysis where the change in design variable, will clearly cause the material points to move \cite{cross2014local}.
 
-A common approach to calculate the domain sensitivity, is to use the same techniques used to deform the body-conformal mesh in a CFD simulation. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system can be modeled and solved using structural analysis techniques, where the sensitivities can be easily added to its formulation. This is effectively a shape sensitivity analysis for the structural analyses \cite{haftka1986structural}. This step can be removed from the analysis if the computational domain does not affected by design variable since $\partial x/\partial b$ is equal to zero for this case. This is removes the extra step of doing the structural shape sensitivity analysis for the mesh and also response variable gradient calculation. As mentioned in Chapter \ref{ch:introduction}, by using the immersed boundary method the mesh definition is decoupled from the boundary shape. Therefore, domain sensitivity is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
+The convective term consists of two separate gradients: i) $\partial \mathbf{u} / \partial \mathbf{x}$ which represents the spatial gradient of the response variable, and ii) $\partial \mathbf{x} / \partial b_i$ that defines the sensitivity of the location of computational nodes with respect to changes in the design variable. The response gradient is calculated using the analysis results, using finite difference approach or derivative of shape functions in FEA formulation. Calculation of domain sensitivity, $\partial \mathbf{x} / \partial b_i$, requires more attention.
+
+A common approach for calculating the domain sensitivity, is to use the techniques used to deform the body-conformal mesh in CFD/FEA simulations. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system is modeled and solved using structural analysis techniques, where the sensitivities can be easily implemented. This is effectively a shape sensitivity analysis for the structural analyses \cite{haftka1986structural}. This step can be removed from the analysis if the computational domain does not affected by design variable since $\partial x/\partial b$ is equal to zero for this case. This is removes the extra step of doing the structural shape sensitivity analysis for the mesh and also response variable gradient calculation. As mentioned in Chapter \ref{ch:introduction}, by using the immersed boundary method the mesh definition is decoupled from the boundary shape. Therefore, domain sensitivity is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
 
 % ======================================================================================
 \section{Benchmark Case}
@@ -59,11 +70,11 @@ The analytical sensitivity of the temperature with respect to beam's length can 
 	\frac{\partial T}{\partial L} = -\frac{T_L - T_0}{L^2} x
 \end{equation}
 
-Since the analytical derivatives are known, we can compare it to the discrete and continuous sensitivity results.
+This is later used for verifying the discrete and continuous sensitivity results.
 
 % ======================================================================================
 \section{Discrete Sensitivity Formulation}
-To formulate the discrete sensitivity equation, we start by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. The design variable effects the shape of the domain which is the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. We use 6 nodes to discretize the domain as shown in Figure \ref{fig:C2_discretizedDomain}.
+The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. The design variable effects the shape of the domain which is the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. We use 6 nodes to discretize the domain as shown in Figure \ref{fig:C2_discretizedDomain}.
 
 \begin{figure}[h]
 	\centering
