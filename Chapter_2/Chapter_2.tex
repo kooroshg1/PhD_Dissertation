@@ -39,17 +39,17 @@ The total derivative is known as material derivative in continuum mechanics \cit
 
 The convective term consists of two separate gradients: i) $\partial \mathbf{u} / \partial \mathbf{x}$ which represents the spatial gradient of the response variable, and ii) $\partial \mathbf{x} / \partial b_i$ that defines the sensitivity of the location of computational nodes with respect to changes in the design variable. The response gradient is calculated using the analysis results, using finite difference approach or derivative of shape functions in FEA formulation. Calculation of domain sensitivity, $\partial \mathbf{x} / \partial b_i$, requires more attention.
 
-A common approach for calculating the domain sensitivity, is to use the techniques used to deform the body-conformal mesh in CFD/FEA simulations. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system is modeled and solved using structural analysis techniques, where the sensitivities can be easily implemented. This is effectively a shape sensitivity analysis for the structural analyses \cite{haftka1986structural}. This step can be removed from the analysis if the computational domain does not affected by design variable since $\partial x/\partial b$ is equal to zero for this case. This is removes the extra step of doing the structural shape sensitivity analysis for the mesh and also response variable gradient calculation. As mentioned in Chapter \ref{ch:introduction}, by using the immersed boundary method the mesh definition is decoupled from the boundary shape. Therefore, domain sensitivity is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
+A common approach for calculating the domain sensitivity, is to use the techniques used to deform the body-conformal mesh in CFD/FEA simulations. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system is modeled and solved using structural analysis techniques, where the sensitivities can be easily implemented. This is effectively a shape sensitivity analysis for the structural problem \cite{haftka1986structural}. This step is removed from the analysis if the computational domain is not affected by the design variable since $\partial x/\partial b$ is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
 
 % ======================================================================================
 \section{Benchmark Case}
-To compare the discrete and continuum sensitivity analysis we chose the one-dimensional heat transfer analysis in a rod. The temperature in governing by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
+To compare the discrete and continuum sensitivity analysis formulations, the one-dimensional heat transfer analysis in a beam is chosen. The temperature is governed by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
 
 \begin{equation}\label{eq:C2_laplaceEquation}
-	\frac{\partial^2 T}{\partial x^2} = 0
+	\frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
 \end{equation}
 
-where $T$ is the temperature and $x$ is spatial variable. The boundary conditions are defined as constant temperatures at the two ends of the domain as shown in Figure \ref{fig:C2_benchmarkCase}. The length of domain is selected as $L$.
+where $T$ is the temperature, $x$ is spatial variable, $t$ is time, and $\alpha$ is the thermal diffusivity. For this problem we are only interested in the steady state solution of the system, therefore the right-hand-side of Equation \eqref{eq:C2_laplaceEquation} is equal to zero. The boundary conditions are defined as constant temperatures at the two ends of the domain as $T_0$ and $T_L$. The length of domain is selected as $L$. This is shown in Figure \ref{fig:C2_benchmarkCase}
 
 \begin{figure}[h]
 	\centering
@@ -58,13 +58,13 @@ where $T$ is the temperature and $x$ is spatial variable. The boundary condition
 	\label{fig:C2_benchmarkCase}
 \end{figure}
 
-The analytical solution of Equation \eqref{eq:C2_laplaceEquation} can be written as follows
+The analytical solution for this problem is available and is written as shown in Equation \eqref{eq:C2_benchmarkCaseAnalyticalSolution}
 
 \begin{equation}\label{eq:C2_benchmarkCaseAnalyticalSolution}
 	T = \frac{T_L - T_0}{L} x + T_0
 \end{equation}
 
-The analytical sensitivity of the temperature with respect to beam's length can be calculated by differentiating Equation \eqref{eq:C2_benchmarkCaseAnalyticalSolution} with respect to $L$.
+The analytical sensitivity of the temperature with respect to beam's length is calculated by differentiating Equation \eqref{eq:C2_benchmarkCaseAnalyticalSolution} with respect to $L$.
 
 \begin{equation}
 	\frac{\partial T}{\partial L} = -\frac{T_L - T_0}{L^2} x
@@ -74,26 +74,18 @@ This is later used for verifying the discrete and continuous sensitivity results
 
 % ======================================================================================
 \section{Discrete Sensitivity Formulation}
-The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. The design variable effects the shape of the domain which is the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. We use 6 nodes to discretize the domain as shown in Figure \ref{fig:C2_discretizedDomain}.
+The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. Other techniques such as finite volume or finite elements can be used for the discretization of the governing equations as well. For this problem, the design variable affects the shape of the domain which is related to the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. The domain is discretized using 6 nodes as shown in Figure \ref{fig:C2_discretizedDomain}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=14.00cm]{Chapter_2/figure/benchmark_case_computational_domain.png}
-	\caption{One dimensional computational domain for heat conduction.}
+	\caption{One dimensional computational domain for the heat conduction problem.}
 	\label{fig:C2_discretizedDomain}
 \end{figure}
 
-To discretize Equation \eqref{eq:C2_laplaceEquation}, the first step is to approximate the second derivative. This is done by writing the Taylor series expansion at at arbitrary location $x_i$.
+The second derivative in Equation \eqref{eq:C2_laplaceEquation} needs to be approximated for discretization. This is done by writing the Taylor series expansion at at arbitrary location $x_i$. By using the central difference method the second order approximation for the second order derivative is written as shown in Equation \eqref{eq:C2_finiteDifferenceSchemes}.
 
-\begin{equation*}
-	T(x) = 
-	T(x_0) + 
-	\frac{\partial T}{\partial x} \bigg|_{x_i} (x - x_i) + 
-	\frac{\partial^2 T}{\partial x^2} \bigg|_{x_i} (x - x_i)^2 + 
-	\mathcal{H} . \mathcal{O} . \mathcal{T}
-\end{equation*}
-
-To approximate the second derivative at the arbitrary node $x_i$ using central method we need to use the neighbouring nodes. The second order approximation for the second order derivative of central difference method is shown in Equation \eqref{eq:C2_finiteDifferenceSchemes}. The discretized equations are differentiated with respect to shape design variable. This requires the nodal distances to be included in the discretized equations. To maintain the generality, we assume that distance of node $T_i$ to $T_{i+1}$ is $\Delta_i$ and the distance of node $T_i$ to $T_{i-1}$ is $\Delta_{i-1}$.
+To maintain the generality, we assume that distance of node $T_i$ to $T_{i+1}$ is $\Delta_i$ and the distance of node $T_i$ to $T_{i-1}$ is $\Delta_{i-1}$.
 
 \begin{equation}\label{eq:C2_finiteDifferenceSchemes}
 	\frac{\partial^2 T}{\partial x^2} = 
@@ -104,7 +96,7 @@ To approximate the second derivative at the arbitrary node $x_i$ using central m
 	                         \Delta_{iL}^2 \Delta_{iR} \right]}
 \end{equation}
 
-The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquation} is done using definitions in Equation \eqref{eq:C2_finiteDifferenceSchemes} for each node excluding the boundary nodes. As mentioned in the previous section, the nodal values at boundary nodes, $(1)$ and $(2)$ are known. The discretized governing equations is written in the matrix form as shown in Equation \eqref{eq:C2_laplaceEquationMatrixForm}.
+The discretized governing equations is written in the matrix form as shown in Equation \eqref{eq:C2_laplaceEquationMatrixForm}.
 
 \begin{equation}\label{eq:C2_laplaceEquationMatrixForm}
 	\begin{bmatrix}
@@ -143,7 +135,7 @@ The approximation of the second derivative in Equation \eqref{eq:C2_laplaceEquat
 	\end{bmatrix}
 \end{equation}
 
-To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$, and $L = 1$.  As shown in this figure, the discrete and continuum results match very well.
+To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$ as the boundary conditions, and $L = 1$.  As shown in this figure, the discrete and continuum results match very well.
 
 \begin{figure}[h]
 	\centering
@@ -152,21 +144,21 @@ To verify the discretization process, we compare the analytical solution of this
 	\label{fig:C2_verificationOfSolver}
 \end{figure}
 
-The sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. We assume that the change in the length, only affects the nodal distance between the last two nodes and the rest remain unchanged. This means that only the node next to the boundary will move and the rest of nodes will be stationary. This is required to make sure that the sensitivity at each of the degrees of freedom is only a function of change in shape not movement of material nodes.
+The discrete sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. We assume that the change in the length, only affects the nodal distance between the last two nodes and the rest remain unchanged. This means that only the node next to the boundary will move and the rest of nodes will be stationary. This is required to make sure that the sensitivity at each of the degrees of freedom is only a function of change in shape not movement of material nodes therefore, $\partial x/\partial b$ is equal to zero.
 
-To calculate the sensitivities, It is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$. For a equally space grid, the nodal distance is written as
+In order to differentiate Equation  \eqref{eq:C2_laplaceEquationMatrixForm}, It is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$, $\partial \Delta_i/\partial L$. For a equally space grid, the nodal distance is written as
 
 \begin{equation*}
-	\Delta x = \frac{L}{n - 1}
+	\Delta = \frac{L}{n - 1}
 \end{equation*}
 
-where $L$ is the length of the domain, and $n$ is the number of nodes chosen to discretize the domain. The sensitivity of nodal distances to the length of the domain is calculated as
+where $L$ is the length of the domain, and $n$ is the number of nodes used to discretize the domain. Therefore, the sensitivity of nodal distances to the length of the domain is calculated as
 
 \begin{equation}\label{eq:C2_nodeDistanceSensitivity}
-	\frac{\partial \Delta x}{\partial L} = \frac{1}{n-1}
+	\frac{\partial \Delta}{\partial L} = \frac{1}{n-1}
 \end{equation}
 
-The discretized equation is differentiated as shown in Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}. It should be noted that since only the adjacent node to the boundary is affected by shape change, only that element in the matrix derivative has a value.
+The differentiated form of the discretized equation is written as shown in Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}. It should be noted that since only the adjacent node to the boundary is affected by shape change, only that element in the matrix derivative has a value.
 
 \begin{equation}\label{eq:C2_laplaceEquationMatrixFormSensitivity}
 	\begin{bmatrix}
