@@ -9,7 +9,7 @@ plt.rc('font', **font)
 linewidth = 9.0
 markersize = 20
 # -----------------------------
-n = 8
+n = 161
 x = np.linspace(0, 1, n)
 dx = x[2] - x[1]
 T0 = 0
@@ -35,12 +35,19 @@ dTdb = np.linalg.solve(L, -F)
 dTdb = np.append(dTdb, -1)
 dTdb = np.append(0, dTdb)
 
+dTdL_DSA = dTdb
+dTdL_Anal = -x
+rmsd = np.sqrt(np.sum((dTdL_DSA - dTdL_Anal)**2) / len(dTdL_Anal)) / (np.max(np.abs(dTdL_Anal)) -
+                                                                      np.min(np.abs(dTdL_Anal)))
+print(rmsd)
+skip = 8
+fileName = 'CSA_n' + np.str(n) + '.eps'
 plt.figure(figsize=(30,15))
-plt.plot(x, dTdb, 'k',
-         x, -x, 'wo',
+plt.plot(x, -x, 'k',
+         x[::skip], dTdb[::skip], 'wo',
          ms=20, mew=7, mec='r', lw=linewidth)
 plt.legend(['CSA', 'Analytical'], loc='best')
 plt.xlabel('X')
 plt.ylabel('dT/db')
-plt.savefig('CSA_vs_analytical.eps', format='eps', dpi=1000, bbox_inches='tight')
+# plt.savefig('CSA_vs_analytical.eps', format='eps', dpi=1000, bbox_inches='tight')
 plt.show()

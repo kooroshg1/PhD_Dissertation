@@ -9,7 +9,7 @@ plt.rc('font', **font)
 linewidth = 9.0
 markersize = 20
 # -------------------------
-n = 8
+n = 11
 x = np.linspace(0, 1, n)
 dx = x[2] - x[1]
 T0 = 0
@@ -60,16 +60,20 @@ dFdL = dFdL - dLdL.dot(T)
 
 dTdL = np.linalg.solve(L, dFdL)
 
-print(T)
-print(dTdL)
-print(-x[1:-1]/(x[-1] - x[0])**2)
+dTdL_DSA = dTdL
+dTdL_Anal = -x[1:-1]/(x[-1] - x[0])**2
+rmsd = np.sqrt(np.sum((dTdL_DSA - dTdL_Anal)**2) / len(dTdL_Anal)) / (np.max(np.abs(dTdL_Anal)) -
+                                                                      np.min(np.abs(dTdL_Anal)))
+print(rmsd)
 
+skip = 1
+fileName = 'DSA_n' + np.str(n) + '.eps'
 plt.figure(figsize=(30,15))
 plt.xlabel('x')
 plt.ylabel('T')
-plt.plot(x[1:-1], dTdL, 'k-',
-         x[1:-1], -x[1:-1]/(x[-1] - x[0])**2, 'wo',
+plt.plot(x, -x/(x[-1] - x[0])**2, 'k-',
+         x[1:-1:skip], dTdL[::skip], 'wo',
          ms=20, mew=7, mec='r', lw=linewidth)
-plt.legend(['FD', 'Analytical'], loc='best')
-plt.savefig('finitedifference_vs_analytical.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.legend(['DSA', 'Analytical'], loc='best')
+plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
