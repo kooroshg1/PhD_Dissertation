@@ -251,10 +251,10 @@ where $\hat{y}$ is the value calculated using DSA and $y$ is the true value calc
 \centering
 \begin{tabular}{c | c }
 	 Node number & NRMSD \\ \hline \hline
-	 11 & 1.68E-016 \\ \hline
-	 41 & 2.49E-015 \\ \hline
-	 81 & 1.49E-015 \\ \hline
-	 161 & 2.85E-015 \\
+	 11 & $1.68 \times 10^{-16}$ \\ \hline
+	 41 & $2.49 \times 10^{-15}$ \\ \hline
+	 81 & $1.49 \times 10^{-15}$ \\ \hline
+	 161 & $2.85 \times 10^{-15}$ \\
 \end{tabular}
 \caption{RMSE value for different node numbers and delta functions.}
 \label{table:C2_DSA_NRMSD}
@@ -499,12 +499,43 @@ The governing equation of \eqref{eq:C2_laplaceSAequation} with boundary conditio
 
 The continuum sensitivity analysis (CSA) result is verified using the analytical solution of Equation \eqref{eq:C2_benchmarkCaseAnalyticalSolution} as shown in Figure \ref{fig:C2_comparisonBetweenCSAandAnalytical}. Different number of discretization nodes are used for the comparison between the results. For the qualitative comparison between the results, the NRMSD as defined in Equation \eqref{eq:C2_NRMSD} used. As shown if Figure \ref{fig:C2_comparisonBetweenCSAandAnalytical} and Table \ref{table:C2_CSA_NRMSD} the two results match perfectly.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[height=9.00cm]{Chapter_2/figure/SA_CSA_vs_analytical.eps}
-	\caption{Comparison between the analytical and continuum sensitivity analysis2 solution for 1D heat equation.}
-	\label{fig:C2_verificationOfSolver}
+	\subfigure[$n = 11$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/CSA_n11.eps}
+	}
+	\quad
+	\subfigure[$n = 41$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/CSA_n41.eps}
+	}
+	\\
+	\subfigure[$n = 81$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/CSA_n81.eps}
+	}
+	\quad
+	\subfigure[$n = 161$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/CSA_n161.eps}
+	}
+	\caption{Comparison between continuum sensitivity analysis and analytical results for different number of nodes.}
+	\label{fig:C2_comparisonBetweenCSAandAnalytical}
 \end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c }
+	 Node number & NRMSD \\ \hline \hline
+	 11 & $6.96 \times 10^{-17}$ \\ \hline
+	 41 & $2.02 \times 10^{-15}$ \\ \hline
+	 81 & $1.43 \times 10^{-15}$ \\ \hline
+	 161 & $2.77 \times 10^{-15}$ \\
+\end{tabular}
+\caption{RMSE value for different node numbers and delta functions.}
+\label{table:C2_CSA_NRMSD}
+\end{table}
 
 It should be noted that the sensitivity equations are derived and solved in the local form. This does not include the effect of nodes moving in the computational domain. If the analysis requires the sensitivity at the material points, an additional step is required to convert the local sensitivities to their total form using the chain rule as shown in the following equation.
 
@@ -512,8 +543,8 @@ It should be noted that the sensitivity equations are derived and solved in the 
 	\frac{DT}{Db} = \frac{\partial t}{\partial b} + \frac{\partial T}{\partial x} \cdot \frac{\partial x}{\partial b}
 \end{equation*}
 
-This will add extra cost to the simulation due to additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes due to change in shape. Therefore, if the computational nodes can be fixed in this, the $\partial x/\partial b$ term will be equal to zero. We out proposing the achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more details.
+This will add extra cost to the simulation due to additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes due to change in shape. Therefore, if the computational nodes can be fixed in this, the $\partial x/\partial b$ term will be equal to zero. We are proposing to achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more details.
 
 % ======================================================================================
 \section{Summary}
-In summery, we looked at two main approaches used to calculate the sensitivity response of a system. The discrete method is based on differentiating the discretized governing equations whereas in continuum method the governing equation are differentiated first and then discretized. We applied these techniques to a simple 1D problem of heat transfer and calculated the sensitivity of response to shape design parameter. The sensitivities are calculated in the local form for each of these methods and compared with the analytical results where they show good comparison. We also showed that by using the continuum sensitivity analysis we can reuse the differential operators used in the solution of governing equations. This effectively means that the black-box solver used in the simulation step can be reused with new boundary conditions for solving the sensitivity response. As showed in the example problem, this is not possible when using discrete method. This is mainly due to the fact that the discrete operators will be affected by differentiating with respect to design variables. So more details about the analysis needs to be known when using discrete approach compared to the continuum. Continuum sensitivity approach is used in this document due to its ability to treat the analysis as black-box for solving both the governing equations and the sensitivity response. However, the result of sensitivity analysis is still the local sensitivities which needs to be transformed to the total form using the chain rule. This is not favourable because it is another step on top of an already expensive analysis. We are proposing to use a non-body conformal approach such as immersed boundary method for analysis to remove this step from sensitivity calculation.
+In summery, we looked at two main approaches used to calculate the sensitivity response of a system. The discrete method is based on differentiating the discretized governing equations whereas in continuum method the governing equation are differentiated first and then discretized. We applied these techniques to a simple 1D problem of heat transfer and calculated the sensitivity of response to shape design parameter. The sensitivities are calculated in the local form for each of these methods and compared with the analytical results where they show good comparison. It is showed that by using the continuum sensitivity analysis, the differential operators used in the solution of governing equations are reused in the sensitivity analysis. This effectively means that the black-box solver used in the simulation step can be reused with new boundary conditions for solving the sensitivity response. As showed in the example problem, this is not possible when using discrete method. This is mainly due to the fact that the discrete operators will be affected by differentiating the discretized governing equations with respect to design variables. Therefore, more details about the analysis needs to be known when using discrete approach compared to the continuum. Continuum sensitivity approach is used in this document due to its ability to treat the analysis as black-box for solving both the governing equations and the sensitivity response. However, the result of sensitivity analysis is still the local sensitivities which needs to be transformed to the total form using the chain rule. This is not favourable because it is another step on top of an already expensive analysis. We are proposing to use a non-body conformal approaches such as immersed boundary method for analysis to remove this step from the sensitivity calculation.
