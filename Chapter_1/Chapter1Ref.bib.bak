@@ -30,6 +30,18 @@
   publisher={ACM}
 }
 
+@article{martins2005coupled,
+  title={A coupled-adjoint sensitivity analysis method for high-fidelity aero-structural design},
+  author={Martins, Joaquim RRA and Alonso, Juan J and Reuther, James J},
+  journal={Optimization and Engineering},
+  volume={6},
+  number={1},
+  pages={33--62},
+  year={2005},
+  publisher={Springer}
+}
+
+
 @book{naumann2012art,
   title={The art of differentiating computer programs: an introduction to algorithmic differentiation},
   author={Naumann, Uwe},
@@ -596,6 +608,21 @@
   year={2011}
 }
 
+@book{vanderplaats1984numerical,
+  title={Numerical optimization techniques for engineering design: with applications},
+  author={Vanderplaats, G.N.},
+  isbn={9780070669642},
+  lccn={83014938},
+  series={McGraw-Hill Series in Mechanical Engineering},
+  url={https://books.google.com/books?id=XY1RAAAAMAAJ},
+  year={1984},
+  publisher={McGraw-Hill Ryerson, Limited}
+}
 
-
+@article{cross2014local,
+  title={Local Continuum Sensitivity Method for Shape Design Derivatives Using Spatial Gradient Reconstruction},
+  author={Cross, David Michael},
+  year={2014},
+  publisher={Virginia Tech}
+}
 

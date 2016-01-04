@@ -1,6 +1,11 @@
 \begin{thebibliography}{10}
 \newcommand{\enquote}[1]{``#1''}
 
+\bibitem{sridhar2011aircraft}
+Sridhar, B., Ng, H., and Chen, N., \enquote{Aircraft trajectory optimization
+  and contrails avoidance in the presence of winds,} {\em Journal of Guidance,
+  Control, and Dynamics\/}, Vol.~34, No.~5, 2011, pp.~1577--1584.
+
 \bibitem{han2013improving}
 Han, Z.-H., G{\"o}rtz, S., and Zimmermann, R., \enquote{Improving
   variable-fidelity surrogate modeling via gradient-enhanced kriging and a
@@ -30,6 +35,11 @@ Naumann, U., {\em The art of differentiating computer programs: an introduction
 Choi, K.~K. and Kim, N.-H., {\em Structural sensitivity analysis and
   optimization 1: linear systems\/}, Springer Science \& Business Media, 2006.
 
+\bibitem{vanderplaats1984numerical}
+Vanderplaats, G., {\em Numerical optimization techniques for engineering
+  design: with applications\/}, McGraw-Hill Series in Mechanical Engineering,
+  McGraw-Hill Ryerson, Limited, 1984.
+
 \bibitem{arora1979methods}
 Arora, J.~S. and Haug, E.~J., \enquote{Methods of design sensitivity analysis
   in structural optimization,} {\em AIAA journal\/}, Vol.~17, No.~9, 1979,
@@ -40,6 +50,11 @@ Reuther, J.~J., Jameson, A., Alonso, J.~J., Rimllnger, M.~J., and Saunders, D.,
   \enquote{Constrained multipoint aerodynamic shape optimization using an
   adjoint formulation and parallel computers, part 2,} {\em Journal of
   aircraft\/}, Vol.~36, No.~1, 1999, pp.~61--74.
+
+\bibitem{martins2005coupled}
+Martins, J.~R., Alonso, J.~J., and Reuther, J.~J., \enquote{A coupled-adjoint
+  sensitivity analysis method for high-fidelity aero-structural design,} {\em
+  Optimization and Engineering\/}, Vol.~6, No.~1, 2005, pp.~33--62.
 
 \bibitem{newman1997aerodynamic}
 Newman, J.~C., Taylor, A.~C., and Barnwell, R.~W., {\em Aerodynamic shape
@@ -94,6 +109,11 @@ Hristova, H., Etienne, S., Pelletier, D., and Borggaard, J., \enquote{A
   laminar flows,} {\em International Journal for numerical methods in
   fluids\/}, Vol.~50, No.~7, 2006, pp.~817--844.
 
+\bibitem{cross2014local}
+Cross, D.~M. and Canfield, R.~A., \enquote{Local continuum shape sensitivity
+  with spatial gradient reconstruction,} {\em Structural and Multidisciplinary
+  Optimization\/}, Vol.~50, No.~6, 2014, pp.~975--1000.
+
 \bibitem{Arora}
 Arora, J. and Haug, E., \enquote{Methods of Design Sensitivity Analysis in
   Structural Optimization,} {\em AIAA Journal\/}, Vol.~17, No.~9, 1979,
@@ -103,11 +123,6 @@ Arora, J. and Haug, E., \enquote{Methods of Design Sensitivity Analysis in
 Dems, K. and Mroz, Z., \enquote{Variational approach to first- and second-order
   sensitivity analysis of elastic structures,} {\em International Journal for
   Numerical Methods in Engineering\/}, Vol.~21, No.~4, 1985, pp.~637--661.
-
-\bibitem{cross2014local}
-Cross, D.~M. and Canfield, R.~A., \enquote{Local continuum shape sensitivity
-  with spatial gradient reconstruction,} {\em Structural and Multidisciplinary
-  Optimization\/}, Vol.~50, No.~6, 2014, pp.~975--1000.
 
 \bibitem{borggaard1995sensitivity}
 Borggaard, J. and Burns, J., {\em A sensitivity equation approach to shape
