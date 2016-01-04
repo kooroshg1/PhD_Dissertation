@@ -1,5 +1,5 @@
 \chapter{Design Sensitivity Analysis}
-In this chapter, the concept behind discrete and continuum sensitivity formulation is discussed and the general approach for deriving the sensitivity equations is presented. The difference between local and total formulation of the sensitivity response is discussed and finally the independence of continuum sensitivity formulations to discretization method is proven. This enables use to reuse the solver of governing equation to calculate the sensitivity response. This is typically not possible for discrete sensitivity formulation. The two sensitivity analysis techniques are applied to a heat transfer benchmark problem where the sensitivity of response to the shape of the domain is calculated. This problem is also used in the next chapter for implementation of different immersed boundary methods.
+In this chapter, the concept behind discrete and continuum sensitivity formulation is discussed and the general approach for deriving the sensitivity equations is presented. The difference between local and total formulation of the sensitivity response is discussed and finally the independence of continuum sensitivity formulations to discretization method is proven. This enables us to reuse the solver of governing equations to calculate the sensitivity response. This is typically not possible for discrete sensitivity formulation. The two sensitivity analysis techniques are applied to a heat transfer benchmark problem where the sensitivity of response to the shape of the domain is calculated. This problem is also used in the next chapter for implementation of different immersed boundary methods.
 
 % ======================================================================================
 \section{General Formulation}
@@ -12,7 +12,7 @@ The general shape for the computational domain is defined in Figure \ref{fig:C2_
 	\label{fig:C2_continuumDomain}
 \end{figure}
 
-In this work, the governing equation and boundary conditions are represented in the functional form as shown in Equation \eqref{eq:C2_governingEquationAndBC}.
+In this work, the governing equation and the boundary conditions are represented in the functional form as shown in Equation \eqref{eq:C2_governingEquationAndBC}.
 
 \begin{subequations}
 \begin{gather}
