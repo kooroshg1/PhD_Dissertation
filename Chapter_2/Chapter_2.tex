@@ -14,17 +14,18 @@ The general shape for the computational domain is defined in Figure \ref{fig:C2_
 
 In this work, the governing equation and the boundary conditions are represented in the functional form as shown in Equation \eqref{eq:C2_governingEquationAndBC}.
 
-\begin{subequations}
-\begin{gather}
+\begin{subequations}\label{eq:C2_governingEquationAndBC}
+\begin{equation}\label{eq:C2_generalGoverningEquation}
 	\mathbf{A}(\mathbf{u}, t; \mathbf{b}) = \mathbf{f}(\mathbf{x}, t; \mathbf{b})
 	\quad \text{on} \quad \Omega
-	\\
+\end{equation}
+\begin{equation}\label{eq:C2_generalBoundaryCondition}
 	\mathbf{B}(\mathbf{u}, t; \mathbf{b}) = \mathbf{g}(\mathbf{x}, t; \mathbf{b})	
 	\quad \text{on} \quad \Gamma
-\end{gather}\label{eq:C2_governingEquationAndBC}
+\end{equation}
 \end{subequations}
 
-where $\mathbf{A}$ is the governing equation such as Navier-Stokes equations for the fluid or elastic equations for the solid domain and $\mathbf{B}$ is the boundary condition. $\mathbf{u}$ is the response variable such as displacement or pressure. $t$ is time, $\mathbf{b}$ is the design variable such as shape or size, and $\mathbf{x}$ is the spatial coordinate. $\mathbf{f}$ and $\mathbf{g}$ are the values of governing equation and boundary conditions. It should be noted that in this formulation for the governing equation, the functions $\mathbf{A}$ and $\mathbf{B}$ are only implicitly dependent on the design variable $\mathbf{b}$. This is important when deriving the sensitivity equations later in this chapter. This implicit dependence is represented by using the semicolon symbols in the definition of $\mathbf{A}$ and $\mathbf{B}$.
+where $\mathbf{A}$ is the governing equation such as Navier-Stokes equations for the fluid or elastic equations for the solid domain and $\mathbf{B}$ is the boundary condition. $\mathbf{u}$ is the response variable such as displacement or pressure. $t$ is time, $\mathbf{b}$ is the design variable such as shape or size, and $\mathbf{x}$ is the spatial coordinate. $\mathbf{f}$ and $\mathbf{g}$ are the values of governing equation and boundary conditions. It should be noted that in this formulation, the functions $\mathbf{A}$ and $\mathbf{B}$ are only implicitly dependent on the design variable $\mathbf{b}$. This is important when deriving the sensitivity equations later in this chapter. This implicit dependence is represented by using the semicolon symbol in the definition of $\mathbf{A}$ and $\mathbf{B}$.
 
 For the general case of problem formulation, the total sensitivity of response variable, $\mathbf{u}$, with respect to the $i$-th design variable, $b_i$, is written as
 
@@ -35,9 +36,9 @@ For the general case of problem formulation, the total sensitivity of response v
 	\frac{\partial \mathbf{x}}{\partial b_i}}_\text{convective term}
 \end{equation}
 
-The total derivative is known as material derivative in continuum mechanics \cite{mase2009continuum}. This total sensitivity defines the change of response variable, $\mathbf{u}$, subjected to design variable and space dependent changes. The material derivative consists of the local derivative, $\partial \mathbf{u}/\partial b_i$, plus the convective term, $\partial \mathbf{u}/\partial \mathbf{x} \cdot \partial \mathbf{x}/\partial b_i$. The local derivative is the measure of change in the response variable due to change in the design parameter. Whereas, the convective term accounts for the movement of points in space due to change in the design variable. This is specially applicable to shape sensitivity analysis where the change in design variable, will clearly cause the material points to move \cite{cross2014local}.
+The total derivative is known as material derivative in continuum mechanics \cite{mase2009continuum}. This total sensitivity defines the change of response variable, $\mathbf{u}$, with respect to design variable and space dependent changes. The material derivative consists of the local derivative, $\partial \mathbf{u}/\partial b_i$, plus the convective term, $\partial \mathbf{u}/\partial \mathbf{x} \cdot \partial \mathbf{x}/\partial b_i$. The local derivative is the measure of change in the response variable due to change in the design parameter. Whereas, the convective term accounts for the movement of points in space due to change in the design variable. This is specially applicable to shape sensitivity analysis where the change in design variable, will clearly cause the material points to move \cite{cross2014local}.
 
-The convective term consists of two separate gradients: i) $\partial \mathbf{u} / \partial \mathbf{x}$ which represents the spatial gradient of the response variable, and ii) $\partial \mathbf{x} / \partial b_i$ that defines the sensitivity of the location of computational nodes with respect to changes in the design variable. The response gradient is calculated using the analysis results, using finite difference approach or derivative of shape functions in FEA formulation. Calculation of domain sensitivity, $\partial \mathbf{x} / \partial b_i$, requires more attention.
+The convective term consists of two separate gradients: i) $\partial \mathbf{u} / \partial \mathbf{x}$ which represents the spatial gradient of the response variable, and ii) $\partial \mathbf{x} / \partial b_i$ that defines the sensitivity of the location of computational nodes with respect to changes in the design variable. The response gradient, $\partial u/\partial x$, is calculated from the analysis results, using finite difference approach or derivative of shape functions in FEA formulation. Calculation of domain sensitivity, $\partial \mathbf{x} / \partial b_i$, requires more attention.
 
 A common approach for calculating the domain sensitivity, is to use the techniques used to deform the body-conformal mesh in CFD/FEA simulations. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system is modeled and solved using structural analysis techniques, where the sensitivities can be easily implemented. This is effectively a shape sensitivity analysis for the structural problem \cite{haftka1986structural}. This step is removed from the analysis if the computational domain is not affected by the design variable since $\partial x/\partial b$ is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
 
@@ -45,11 +46,17 @@ A common approach for calculating the domain sensitivity, is to use the techniqu
 \section{Benchmark Case}
 To compare the discrete and continuum sensitivity analysis formulations, the one-dimensional heat transfer analysis in a beam is chosen. The temperature is governed by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
 
-\begin{equation}\label{eq:C2_laplaceEquation}
+\begin{equation}\label{eq:C2_transientHeatEquation}
 	\frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
 \end{equation}
 
-where $T$ is the temperature, $x$ is spatial variable, $t$ is time, and $\alpha$ is the thermal diffusivity. For this problem we are only interested in the steady state solution of the system, therefore the right-hand-side of Equation \eqref{eq:C2_laplaceEquation} is equal to zero. The boundary conditions are defined as constant temperatures at the two ends of the domain as $T_0$ and $T_L$. The length of domain is selected as $L$. This is shown in Figure \ref{fig:C2_benchmarkCase}
+where $T$ is the temperature, $x$ is spatial variable, $t$ is time, and $\alpha$ is the thermal diffusivity. For this problem we are only interested in the steady state solution of the system, therefore the right-hand-side of Equation \eqref{eq:C2_transientHeatEquation} is equal to zero. Therefore, the governing equation for this problem is written as
+
+\begin{equation}\label{eq:C2_laplaceEquation}
+	\frac{\partial^2 T}{\partial x^2} = 0
+\end{equation}
+
+The boundary conditions are defined as constant temperatures at the two ends of the domain as $T_0$ and $T_L$. The length of domain is selected as $L$. This is shown in Figure \ref{fig:C2_benchmarkCase}
 
 \begin{figure}[h]
 	\centering
@@ -74,7 +81,7 @@ This is later used for verifying the discrete and continuous sensitivity results
 
 % ======================================================================================
 \section{Discrete Sensitivity Formulation}
-The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not sensitivity calculation. Other techniques such as finite volume or finite elements can be used for the discretization of the governing equations as well. For this problem, the design variable affects the shape of the domain which is related to the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. The domain is discretized using 6 nodes as shown in Figure \ref{fig:C2_discretizedDomain}.
+The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not for sensitivity calculation. Other techniques such as finite volume or finite elements can be used for the discretization of the governing equations as well. For this problem, the design variable affects the shape of the domain which is related to the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. The domain is discretized by using 6 nodes as shown in Figure \ref{fig:C2_discretizedDomain}.
 
 \begin{figure}[h]
 	\centering
@@ -83,7 +90,7 @@ The discrete sensitivity equations are formulated by discretizing the governing 
 	\label{fig:C2_discretizedDomain}
 \end{figure}
 
-The second derivative in Equation \eqref{eq:C2_laplaceEquation} needs to be approximated for discretization. This is done by writing the Taylor series expansion at at arbitrary location $x_i$. By using the central difference method the second order approximation for the second order derivative is written as shown in Equation \eqref{eq:C2_finiteDifferenceSchemes}.
+The second derivative of Equation \eqref{eq:C2_laplaceEquation} needs to be approximated for discretization. This is done by writing the Taylor series expansion of temperature at arbitrary location $x_i$. By using the central difference method the second order approximation for the second order derivative is written as shown in Equation \eqref{eq:C2_finiteDifferenceSchemes}.
 
 To maintain the generality, we assume that distance of node $T_i$ to $T_{i+1}$ is $\Delta_i$ and the distance of node $T_i$ to $T_{i-1}$ is $\Delta_{i-1}$.
 
@@ -96,7 +103,7 @@ To maintain the generality, we assume that distance of node $T_i$ to $T_{i+1}$ i
 	                         \Delta_{iL}^2 \Delta_{iR} \right]}
 \end{equation}
 
-The discretized governing equations is written in the matrix form as shown in Equation \eqref{eq:C2_laplaceEquationMatrixForm}.
+The discretized governing equation of \eqref{eq:C2_finiteDifferenceSchemes} is written in a matrix form as shown in Equation \eqref{eq:C2_laplaceEquationMatrixForm}.
 
 \begin{equation}\label{eq:C2_laplaceEquationMatrixForm}
 	\begin{bmatrix}
@@ -140,13 +147,13 @@ To verify the discretization process, we compare the analytical solution of this
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=9.00cm]{Chapter_2/figure/finitedifference_vs_analytical.eps}
-	\caption{Comparison between the analytical and finite difference solution for 1D heat equation.}
+	\caption{Comparison between the analytical and finite difference solutions for 1D heat equation.}
 	\label{fig:C2_verificationOfSolver}
 \end{figure}
 
 The discrete sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. We assume that the change in the length, only affects the nodal distance between the last two nodes and the rest remain unchanged. This means that only the node next to the boundary will move and the rest of nodes will be stationary. This is required to make sure that the sensitivity at each of the degrees of freedom is only a function of change in shape not movement of material nodes therefore, $\partial x/\partial b$ is equal to zero.
 
-In order to differentiate Equation  \eqref{eq:C2_laplaceEquationMatrixForm}, It is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$, $\partial \Delta_i/\partial L$. For a equally space grid, the nodal distance is written as
+In order to differentiate Equation  \eqref{eq:C2_laplaceEquationMatrixForm}, it is required to calculate the derivative of nodal distances in Equation \eqref{eq:C2_laplaceEquationMatrixForm} with respect to $L$, $\partial \Delta_i/\partial L$. For an equally spaced grid, the nodal distance is written as
 
 \begin{equation*}
 	\Delta = \frac{L}{n - 1}
@@ -198,29 +205,29 @@ The differentiated form of the discretized equation is written as shown in Equat
 	\end{bmatrix}}_\text{effect of shape change}
 \end{equation}
 
-In order to better study above we mention the general sensitivity equation in the discrete form. Assume the the continuum governing equation, can be written in the discrete form as
+where $T^\prime_i$ represents the sensitivity of temperature with respect to length of the domain. In order to better study Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we mention the general sensitivity equation in a discrete form. Assume the continuum governing equation \eqref{eq:C2_generalGoverningEquation}, is be written in the discrete form as
 
-\begin{equation*}
+\begin{equation}
 	\left[ K \right] \left[ U \right] = \left[ F \right]
-\end{equation*}
+\end{equation}
 
-where $[K]$ is the discrete operator that represents the governing equation, $[U]$ is the vector of response variable defined at each of the degrees of freedom, and $[F]$ is the vector of the boundary conditions. The sensitivity of this system with respect to design variable $b$ is derived as
+where $[K]$ is the discrete operator that represents the governing equation, $[U]$ is the vector of response variables defined at each of the degrees of freedom, and $[F]$ is the vector of the boundary conditions. The sensitivity of this system with respect to design variable $b$ is derived as
 
-\begin{equation*}
+\begin{equation}\label{eq:C2_discreteSensitivityEquation}
 	\left[ K \right] \left[ \frac{\partial U}{\partial b} \right] = 
 	\left[ \frac{\partial F}{\partial b} \right] - 
 		\left[ \frac{\partial K}{\partial b} \right] \left[ U \right]
-\end{equation*}
+\end{equation}
 
-By comparing above equation with Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we can see that the last term represents the change in the stiffness matrix. This depends on how the governing equations are discretized. Therefore, to do the sensitivity analysis it is required to know how this matrix is put together so it can be differentiated. This is not possible in most cases since the details of discretization is not known for the commertial software packages.
+By comparing Equation \eqref{eq:C2_discreteSensitivityEquation} with Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we can see that the last term represents the change in the stiffness matrix. This depends on how the governing equations are discretized. Therefore, to do the sensitivity analysis it is required to know how this matrix is derived so it can be differentiated. This is not possible in most cases since the details of discretization are not known for the commertial software packages.
 
-To verify the results of Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we compared it with the analytical sensitivity results are shown in Figure \ref{fig:C2_discreteSensitivityVerification}. We discretized the domain using $11$, $41$, $81$, and $161$ nodes for this purpose, however this does not affect the accuracy of the solution. We chose the normalized root-mean-square deviation (NRMSD) for comparing the sensitivity results. This is defined as shown in Equation \eqref{eq:C2_NRMSD}.
+To verify the results of Equation \eqref{eq:C2_laplaceEquationMatrixFormSensitivity}, we compared it with the analytical sensitivity results as shown in Figure \ref{fig:C2_discreteSensitivityVerification}. We discretized the domain using $11$, $41$, $81$, and $161$ nodes for this purpose, however this does not affect the solution accuracy. We chose the normalized root-mean-square deviation (NRMSD) for comparing the sensitivity results. This is defined as shown in Equation \eqref{eq:C2_NRMSD}.
 
 \begin{equation}\label{eq:C2_NRMSD}
 	NRMSD = \dfrac{\sqrt{\dfrac{\sum (\hat{y}_t - y)^2}{n}}}{y_{max} - y_{min}}
 \end{equation}
 
-where $\hat{y}$ is the value calculated using DSA and $y$ is the true value calculated by analytical equation. The results for the NRMSD for this problem for different values of node numbers are shown in Table \ref{table:C2_DSA_NRMSD}.
+where $\hat{y}$ is the value calculated using DSA and $y$ is the true value calculated by analytical equation. The results for the NRMSD for this problem for different number of nodes are shown in Table \ref{table:C2_DSA_NRMSD}.
 
 \begin{figure}[H]
 	\centering
@@ -249,14 +256,15 @@ where $\hat{y}$ is the value calculated using DSA and $y$ is the true value calc
 
 \begin{table}[H]
 \centering
-\begin{tabular}{c | c }
-	 Node number & NRMSD \\ \hline \hline
-	 11 & $1.68 \times 10^{-16}$ \\ \hline
-	 41 & $2.49 \times 10^{-15}$ \\ \hline
-	 81 & $1.49 \times 10^{-15}$ \\ \hline
-	 161 & $2.85 \times 10^{-15}$ \\
+\begin{tabular}{| c | c |}
+	\hline
+	Number of nodes & NRMSD \\ \hline \hline
+	11 & $1.68 \times 10^{-16}$ \\ \hline
+	41 & $2.49 \times 10^{-15}$ \\ \hline
+	81 & $1.49 \times 10^{-15}$ \\ \hline
+	161 & $2.85 \times 10^{-15}$ \\ \hline
 \end{tabular}
-\caption{RMSE value for different node numbers and delta functions.}
+\caption{RMSE value for different number of nodes.}
 \label{table:C2_DSA_NRMSD}
 \end{table}
 
@@ -264,7 +272,7 @@ As shown in Figure \ref{fig:C2_discreteSensitivityVerification} and Table \ref{t
 
 % ======================================================================================
 \section{Continuum Sensitivity Formulation}
-For a continuum system, the governing equations and boundary conditions are written as
+For a continuous system, the governing equations and boundary conditions are written as
 
 \begin{subequations}\label{eq:C2_continuumGoverningEquation}
 \begin{align}
@@ -293,7 +301,7 @@ where $(\text{ })'$ and $\dot{(\text{ })}$ are local and total derivative which 
 \end{align*}
 \end{subequations}
 
-It should be noted that the governing equations are differentiated in the local form and the boundary conditions are differentiated in the total form. Local differentiation of the governing equations enables us to treat the solver nonintrusively \cite{cross2014local}. However, in order to capture the effect of shape change, the boundary conditions need to be differentiated in the total form. The boundary condition definition is further simplified by assuming linearly. This is a valid assumption for many practical cases such as structural analysis or computational fluid dynamics. The boundary conditions are usually in the form of known gradient or values, i.e. outflow and free-slip wall for CFD and predefined displacement/force for structural analysis. It should be noted that this assumption is not valid for problems such as contacts. The boundary condition is written as
+It should be noted that the governing equations are differentiated in the local form and the boundary conditions are differentiated in the total form. Local differentiation of the governing equations enables us to treat the solver non-intrusively \cite{cross2014local}. However, in order to capture the effect of shape change, the boundary conditions need to be differentiated in the total form. The boundary condition definition is further simplified by assuming linearly. This is a valid assumption for many practical cases such as structural analysis or computational fluid dynamics. The boundary conditions are usually in the form of known gradient or values, i.e. outflow and free-slip wall for CFD and predefined displacement/force for structural analysis. It should be noted that this assumption is not valid for problems such as contacts. The boundary condition is written as
 
 \begin{align}\label{eq:C2_linearSAboundaryCondtions}
 \begin{split}
@@ -310,13 +318,13 @@ For the linear analysis, the governing  of \eqref{eq:C2_continuumSensitivityForm
 	A(u', t; b) = 0 
 \end{equation}
 
-This is valid since for the linear case, the differential operators of the governing equation does not depend on the response variable, $u$. To explain this concept, we look at the transient heat conduction in 1D domain. The governing equations are defined as
+This is valid since for the linear case, the differential operators of the governing equation do not depend on the response variable, $u$. To explain this concept, we look at the transient heat conduction in 1D domain. The governing equations are defined as
 
 \begin{equation}\label{eq:C2_transientHeatCondtionGE}
 	\frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
 \end{equation}
 
-where $T$ is the temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is is the thermal diffusivity ($k/\rho c_p$). This equation can be differentiated with respect to design variable $b$ as shown in the following equation.
+where $T$ is the temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is is the thermal diffusivity ($k/\rho c_p$). This equation can be differentiated with respect to a design variable $b$ as shown in the following equation.
 
 \begin{equation*}
 	\frac{\partial}{\partial b}
@@ -334,7 +342,7 @@ Due to linearity of the differential operators we can change the order of differ
 	\left( \frac{\partial T}{\partial b}\right)
 \end{equation}
 
-By comparing Equations \eqref{eq:C2_transientHeatCondtionGE} and \eqref{eq:C2_transientHeatCondtionSA} we can see that the differential operators, $\partial^2 /\partial x^2$, and $\partial /\partial t$ remain unchanged. Therefore, same analysis can be used for solving this system of governing equations for the sensitivity variable, $\partial T/\partial b$.
+By comparing Equations \eqref{eq:C2_transientHeatCondtionGE} and \eqref{eq:C2_transientHeatCondtionSA} we can see that the differential operators, $\partial^2 /\partial x^2$, and $\partial /\partial t$ remain unchanged. Therefore, same solver can be used for solving this system of governing equations and for the sensitivity variable, $\partial T/\partial b$.
 
 For nonlinear problems, the differential operators are functions of response variable as well. For example, the incompressible Euler's equation for a 2D flow is derived as
 
@@ -350,7 +358,7 @@ For nonlinear problems, the differential operators are functions of response var
 \end{gather}
 \end{subequations}
 
-where $u$ and $v$ are the velocity components in $x$ and $y$ directions respectively. $p$ is the pressure, $t$ is time, $x$, and $y$ are spatial coordinates. We can rewrite Equation \eqref{eq:C2_eulerEquations} in terms of differential operators too.
+where $u$ and $v$ are the velocity components in $x$ and $y$ directions respectively. $p$ is pressure, $t$ is time, $x$ and $y$ are spatial coordinates. We can rewrite Equation \eqref{eq:C2_eulerEquations} in terms of differential operators too.
 
 \begin{subequations}
 \begin{gather*}
@@ -370,7 +378,7 @@ where $\mathcal{T}$ is the time derivative operator ($\partial /\partial t$), $\
 	\mathcal{C} = u \frac{\partial}{\partial x} + v \frac{\partial}{\partial y}
 \end{equation}
 
-$\mathcal{G}_x$ and $\mathcal{G}_y$ are gradient operators in $x$ and $y$ respectively ($\partial /\partial x$ and $\partial /\partial y$). The gradient and time derivative operators are linear, therefore they can be treated as shown in the previous paragraphs. On the other hand, the convective operator is nonlinear and it should be differentiated alongside response variables as well. As a result, the sensitivity equations can be written in the operator form as
+$\mathcal{G}_x$ and $\mathcal{G}_y$ are gradient operators in $x$ and $y$ respectively ($\partial /\partial x$ and $\partial /\partial y$). The gradient and time derivative operators are linear, therefore they can be treated as shown in the previous paragraphs. On the other hand, the convective operator is nonlinear and it should be differentiated with response variables as well. As a result, the sensitivity equations can be written in the operator form as
 
 \begin{subequations}\label{eq:C2_eulerEquationsSA}
 \begin{gather}
@@ -404,18 +412,18 @@ The first step in solving the sensitivity equations is to get the solution of th
 	\quad \text{: corrector}
 \end{align*}
 
-In above equation, $\bar{\mathcal{C}}$ in the convective operator evaluated using $\bar{u}$. It should be noted that in order to generate the operator we do not need to know the details of how it has been put together. We only supply the required material for generating the convective operator and the black-box solver will generate it for us. This input is response variable when solving the governing equation, and is the sensitivity of response variable for sensitivity analysis. Therefore, the solver can still be considered as a black box that we do not modify.
+In above equations, $\bar{\mathcal{C}}$ in the convective operator evaluated using $\bar{u}$. It should be noted that in order to generate the operator we do not need to know the details of how it has been put together. We only supply the required material for generating the convective operator and the black-box solver will generate it for us. This input is response variable when solving the governing equation, and is the sensitivity of response variable for sensitivity analysis. Therefore, the solver can still be considered as a black box that we do not modify.
 
 As for the discrete sensitivity case, we use the continuum sensitivity formulation for calculating the sensitivity of temperature with respect to length of a 1D domain. The domain is defined in Figure \ref{fig:C2_benchmarkCase} with the temperature in the domain is governed by Equation \eqref{eq:C2_laplaceEquation}. The boundary conditions are defined as $T_0$ at $x=0$ and $T_L$ at $x=L$.
 
-To get the sensitivity equations, governing equations are differentiated in the local form and boundary conditions are differentiated in total form. The boundary conditions needs to be differentiated in the total form to reflect the movement of the boundary in space. The governing equations can be differentiated in the local form to calculate the local sensitivities. This is done in the following equation.
+To get the sensitivity equations, governing equations are differentiated in the local form and boundary conditions are differentiated in total form as shown in Equation \eqref{eq:C2_differentiatedLaplaceEquation}.
 
-\begin{equation*}
+\begin{equation}\label{eq:C2_differentiatedLaplaceEquation}
 	\frac{\partial}{\partial L}
 	\left( \frac{\partial^2 T}{\partial x^2} = 0 \right)
-\end{equation*}
+\end{equation}
 
-Since the differential operator is linear the order of differentiations are changed. This will give us the following equation for the sensitivity calculation.
+Since the differential operator is linear, the order of differentiations is changed. This will give us the following equation for the sensitivity calculation.
 
 \begin{equation}\label{eq:C2_laplaceSAequation}
 	\frac{\partial^2}{\partial x^2} \left( \frac{\partial T}{\partial L} \right) = 0
@@ -423,21 +431,21 @@ Since the differential operator is linear the order of differentiations are chan
 
 The boundary conditions for this problem are written as follows to be consistent with the general formulation of the boundary conditions. 
 
-\begin{equation*}
+\begin{equation}\label{eq:C2_laplaceEquationBoundaryCondition}
 \begin{cases}
 	\mathcal{B}T = T_0 \qquad \text{at x = 0} \\
 	\mathcal{B}T = T_L \qquad \text{at x = L}
 \end{cases}
-\end{equation*}
+\end{equation}
 
-where $\mathcal{B}$ is the operator acting on the boundary. For this problem, it is equal $1$. Above equation is differentiated in the total form since the boundaries are moving. This results in
+where $\mathcal{B}$ is the operator acting on the boundary. For this problem, it is equal to $1$. Equation \eqref{eq:C2_laplaceEquationBoundaryCondition} is differentiated in the total form since the boundaries are moving. This results in
 
-\begin{equation*}
+\begin{equation}
 \begin{cases}
 	\dot{\mathcal{B}} T + \mathcal{B} \dot{T} = \dot{T}_0 \qquad \text{at x = 0} \\
 	\dot{\mathcal{B}} T + \mathcal{B} \dot{T} = \dot{T}_L \qquad \text{at x = L}
 \end{cases}
-\end{equation*}
+\end{equation}
 
 $\mathcal{B}$ and $\dot{T}_0$ are constants and have zero derivative. $\dot{T}$ is written in terms of the local derivative and convective terms using the chain rule. This results in the following definition for the sensitivity equation boundary conditions.
 
@@ -449,7 +457,7 @@ $\mathcal{B}$ and $\dot{T}_0$ are constants and have zero derivative. $\dot{T}$ 
 \end{cases}
 \end{equation*}
 
-To calculate the mesh sensitivity at the boundary, the dependency of spatial variable, $x$, and the shape of the domain, $L$, needs to be known. For the 1D domain, this is defined as follows
+To calculate the mesh sensitivity at the boundary, the dependency of spatial variable, $x$, and the shape of the domain, $L$, need to be known. For the 1D domain, this is defined as follows
 
 \begin{equation*}
 	x = \alpha L
@@ -481,23 +489,24 @@ This can be further simplified by substituting $x$ in the definition of boundary
 \end{cases}
 \end{equation}
 
-The last thing to be noted is the spatial derivative of response variable at the boundaries, $\partial T/\partial x$. This terms shows up due to the movement of the boundary due to shape design variable when using the chain rule. This term is calculated from the analysis results by using the same technique used for discretizing the governing equations. For this problem, finite difference method is used to calculate this derivative from the analysis results.
+The last thing to be noted is the spatial derivative of response variable at the boundaries, $\partial T/\partial x$. This term appears due to the boundary movement with change in shape design variable when using the chain rule. This term is calculated from the analysis results by using the same technique used for discretizing the governing equations. For this problem, the finite difference method is used to calculate this derivative from the analysis results.
 
-The governing equation of \eqref{eq:C2_laplaceSAequation} with boundary condition \eqref{eq:C2_laplaceSAboundaryCondition} is solved using the same solver that we used for solving the original governing equation since these two are effectively the same problem. The comparison between the original governing equation and the sensitivity equation is shown in Table \ref{table:C2_comparisonBetweenGEandSA}.
+The governing equation of \eqref{eq:C2_laplaceSAequation} with boundary condition \eqref{eq:C2_laplaceSAboundaryCondition} is solved using the same solver that we used for solving the original governing equation since these two are effectively having the same form. The comparison between the original governing equation and the sensitivity equation is shown in Table \ref{table:C2_comparisonBetweenGEandSA}.
 
 \begin{center}
 \begin{table}[h]
-\begin{tabular}{c | c | c | c | c}
+\begin{tabular}{| c | c | c | c | c |}
+	\hline
 	Analysis Type & Equation & Unknowns & Discretized form & Discretization method \\ \hline \hline
 	Governing equation & $\partial^2 T/\partial x^2$ & $T$ & $[K][T] = [F_{BC}]$ & Central difference \\ \hline
-	Sensitivity equation & $\partial^2 T'/\partial x^2$ & $T'$ & $[K][T'] = [F'_{BC}]$ & Central difference
+	Sensitivity equation & $\partial^2 T'/\partial x^2$ & $T'$ & $[K][T'] = [F'_{BC}]$ & Central difference \\ \hline
 \end{tabular}
 \caption{Comparison between the governing and sensitivity equations.}
 \label{table:C2_comparisonBetweenGEandSA}
 \end{table}
 \end{center}
 
-The continuum sensitivity analysis (CSA) result is verified using the analytical solution of Equation \eqref{eq:C2_benchmarkCaseAnalyticalSolution} as shown in Figure \ref{fig:C2_comparisonBetweenCSAandAnalytical}. Different number of discretization nodes are used for the comparison between the results. For the qualitative comparison between the results, the NRMSD as defined in Equation \eqref{eq:C2_NRMSD} used. As shown if Figure \ref{fig:C2_comparisonBetweenCSAandAnalytical} and Table \ref{table:C2_CSA_NRMSD} the two results match perfectly.
+The continuum sensitivity analysis (CSA) result is verified using the analytical solution of Equation \eqref{eq:C2_benchmarkCaseAnalyticalSolution} as shown in Figure \ref{fig:C2_comparisonBetweenCSAandAnalytical}. Different number of discretization nodes are used for the comparison between the results. For the qualitative comparison between the results, the NRMSD as defined in Equation \eqref{eq:C2_NRMSD} is used. As shown if Figure \ref{fig:C2_comparisonBetweenCSAandAnalytical} and Table \ref{table:C2_CSA_NRMSD}, the two results match perfectly.
 
 \begin{figure}[H]
 	\centering
@@ -526,25 +535,26 @@ The continuum sensitivity analysis (CSA) result is verified using the analytical
 
 \begin{table}[H]
 \centering
-\begin{tabular}{c | c }
-	 Node number & NRMSD \\ \hline \hline
-	 11 & $6.96 \times 10^{-17}$ \\ \hline
-	 41 & $2.02 \times 10^{-15}$ \\ \hline
-	 81 & $1.43 \times 10^{-15}$ \\ \hline
-	 161 & $2.77 \times 10^{-15}$ \\
+\begin{tabular}{| c | c |}
+	\hline
+	Number of nodes & NRMSD \\ \hline \hline
+	11 & $6.96 \times 10^{-17}$ \\ \hline
+	41 & $2.02 \times 10^{-15}$ \\ \hline
+	81 & $1.43 \times 10^{-15}$ \\ \hline
+	161 & $2.77 \times 10^{-15}$ \\ \hline
 \end{tabular}
-\caption{RMSE value for different node numbers and delta functions.}
+\caption{RMSE value for different number of nodes.}
 \label{table:C2_CSA_NRMSD}
 \end{table}
 
 It should be noted that the sensitivity equations are derived and solved in the local form. This does not include the effect of nodes moving in the computational domain. If the analysis requires the sensitivity at the material points, an additional step is required to convert the local sensitivities to their total form using the chain rule as shown in the following equation.
 
 \begin{equation*}
-	\frac{DT}{Db} = \frac{\partial t}{\partial b} + \frac{\partial T}{\partial x} \cdot \frac{\partial x}{\partial b}
+	\frac{DT}{Db} = \frac{\partial T}{\partial b} + \frac{\partial T}{\partial x} \cdot \frac{\partial x}{\partial b}
 \end{equation*}
 
-This will add extra cost to the simulation due to additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes due to change in shape. Therefore, if the computational nodes can be fixed in this, the $\partial x/\partial b$ term will be equal to zero. We are proposing to achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more details.
+This will add an extra cost to the simulation due to additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes due to change in shape. Therefore, if the computational nodes can be fixed, the $\partial x/\partial b$ term will be equal to zero. We are proposing to achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more details.
 
 % ======================================================================================
 \section{Summary}
-In summery, we looked at two main approaches used to calculate the sensitivity response of a system. The discrete method is based on differentiating the discretized governing equations whereas in continuum method the governing equation are differentiated first and then discretized. We applied these techniques to a simple 1D problem of heat transfer and calculated the sensitivity of response to shape design parameter. The sensitivities are calculated in the local form for each of these methods and compared with the analytical results where they show good comparison. It is showed that by using the continuum sensitivity analysis, the differential operators used in the solution of governing equations are reused in the sensitivity analysis. This effectively means that the black-box solver used in the simulation step can be reused with new boundary conditions for solving the sensitivity response. As showed in the example problem, this is not possible when using discrete method. This is mainly due to the fact that the discrete operators will be affected by differentiating the discretized governing equations with respect to design variables. Therefore, more details about the analysis needs to be known when using discrete approach compared to the continuum. Continuum sensitivity approach is used in this document due to its ability to treat the analysis as black-box for solving both the governing equations and the sensitivity response. However, the result of sensitivity analysis is still the local sensitivities which needs to be transformed to the total form using the chain rule. This is not favourable because it is another step on top of an already expensive analysis. We are proposing to use a non-body conformal approaches such as immersed boundary method for analysis to remove this step from the sensitivity calculation.
+In summary, we looked at two main approaches used to calculate the sensitivity response of a system. The discrete method is based on differentiating the discretized governing equations whereas in continuum method the governing equation are differentiated first and then discretized. We applied these techniques to a simple 1-D heat transfer problem and calculated the sensitivity of response to shape design parameter. The sensitivities are calculated in the local form for each of these methods and compared with the analytical results where they show good comparison. It is showed that by using the continuum sensitivity analysis, the differential operators used in the solution of governing equations are reused in the sensitivity analysis. This effectively means that the black-box solver used in the simulation step can be reused with new boundary conditions for solving the sensitivity response. As showed in the example problem, this is not possible when using discrete method. This is mainly due to the fact that the discrete operators will be affected by differentiating the discretized governing equations with respect to design variables. Therefore, more details about the analysis needs to be known when using discrete approach compared to the continuum. Continuum sensitivity approach is used in this research due to its ability to treat the analysis as black-box for solving both the governing equations and the sensitivity response. However, the result of sensitivity analysis is still the local sensitivities which needs to be transformed to the total form using the chain rule. This is not favourable because it is another step on top of an already expensive analysis. We are proposing to use a non-body conformal approach such as immersed boundary method for analysis to remove this step from the sensitivity calculation.
