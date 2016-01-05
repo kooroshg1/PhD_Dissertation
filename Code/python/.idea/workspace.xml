@@ -21,11 +21,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Chap2_LaplaceAnalysis_DSA.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Chap2_LaplaceAnalysis_DSA.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3074324">
+            <state vertical-scroll-proportion="0.0">
               <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="108" column="43" selection-start-line="105" selection-start-column="4" selection-end-line="108" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="symbolic_calculations.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/symbolic_calculations.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33445945">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,6 +74,7 @@
         <option value="$PROJECT_DIR$/Chap2_CSAvsAnalytical.py" />
         <option value="$PROJECT_DIR$/finite_difference_schemes.py" />
         <option value="$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py" />
+        <option value="$PROJECT_DIR$/symbolic_calculations.py" />
       </list>
     </option>
   </component>
@@ -148,24 +169,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.Chap2_LaplaceAnalysis_DSA">
-    <configuration default="false" name="Chap3_ghostCell" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap3_ghostCell.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.symbolic_calculations">
     <configuration default="false" name="Chap3_indirect" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -230,6 +234,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="symbolic_calculations" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/symbolic_calculations.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -357,19 +378,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Chap3_ghostCell" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Chap3_indirect" />
-      <item index="2" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+      <item index="0" class="java.lang.String" itemvalue="Python.Chap3_indirect" />
+      <item index="1" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+      <item index="4" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
-        <item index="1" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Chap3_indirect" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Chap3_ghostCell" />
+        <item index="0" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+        <item index="2" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Chap3_indirect" />
       </list>
     </recent_temporary>
   </component>
@@ -602,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55756205">
-          <caret line="108" column="43" selection-start-line="105" selection-start-column="4" selection-end-line="108" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chap3_Heaviside_function.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21290323">
@@ -653,8 +667,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3074324">
+        <state vertical-scroll-proportion="0.0">
           <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="43" selection-start-line="105" selection-start-column="4" selection-end-line="108" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symbolic_calculations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33445945">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -320,6 +320,30 @@ Gobal, K., Grandhi, R.~V., and Kolonay, R.~M., \enquote{Continuum Sensitivity
   Analysis for Structural Shape Design Variables Using Finite-Volume Method,}
   {\em AIAA Journal\/}, Vol.~53, No.~2, 2014, pp.~347--355.
 
+\bibitem{dowding2001sensitivity}
+Dowding, K.~J. and Blackwell, B.~F., \enquote{Sensitivity analysis for
+  nonlinear heat conduction,} {\em Journal of Heat Transfer\/}, Vol.~123,
+  No.~1, 2001, pp.~1--10.
+
+\bibitem{szopa2005second}
+Szopa, R., Siedlecki, J., and Wojciechowska, W., \enquote{Second order
+  sensitivity analysis of heat conduction problems,} {\em Scientific Research
+  of the Institute of Mathematics and Computer Science\/}, Vol.~4, No.~1, 2005,
+  pp.~255--263.
+
+\bibitem{sorli2004computational}
+Sorli, K. and Skaar, I.~M., \enquote{Sensitivity Analysis For Thermal Design
+  And Monitoring Problems Of Refractories,} Begel House Inc., April 19-24,
+  2004, Norway.
+
+\bibitem{szabo1991finite}
+Szabo, B.~A. and Babu{\v{s}}ka, I., {\em Finite element analysis\/}, John Wiley
+  \& Sons, 1991.
+
+\bibitem{wickert2009least}
+Wickert, D.~P., \enquote{Least-squares, continuous sensitivity analysis for
+  nonlinear fluid-structure interaction,} Tech. rep., DTIC Document, 2009.
+
 \bibitem{deaton2013stiffening}
 Deaton, J.~D. and Grandhi, R.~V., \enquote{Stiffening of restrained thermal
   structures via topology optimization,} {\em Structural and Multidisciplinary

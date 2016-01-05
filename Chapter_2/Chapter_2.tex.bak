@@ -44,9 +44,11 @@ A common approach for calculating the domain sensitivity, is to use the techniqu
 
 % ======================================================================================
 \section{Benchmark Cases}
-To compare the discrete and continuum sensitivity analysis formulations, two problems from different disciplines are selected. As a simplified representation of the fluid/thermal systems the one-dimensional heat transfer analysis in a beam is selected as the benchmark case. This problem is used by different researchers for investigating sensitivity analysis for nonlinear systems \cite{dowding2001sensitivity} and thermal design and monitoring \cite{szopa2005second, sorli2004computational}. The special interest in this problem is due to avaiabily of analytical solution since this can be used to verify the numerical results of the sensitivity analysis.
+To compare the discrete and continuum sensitivity analysis formulations, two problems from different disciplines are selected. As a simplified representation for the fluid/thermal systems, the one-dimensional heat transfer analysis in a beam is selected. This problem is used by different researchers for investigating sensitivity analysis for nonlinear systems \cite{dowding2001sensitivity} and thermal design and monitoring \cite{szopa2005second, sorli2004computational}. The special interest in this problem is due to availability of analytical solution since this can be used to verify the numerical results of the sensitivity analysis. For the solid mechanics problem, a finite element model of an axial bar with distributed load is selected \cite{szabo1991finite}. This problem is used by different researchers as a demonstration case for sensitivity analysis \cite{cross2014local, wickert2009least}. These benchmark cases are explained in more details in the following sections.
 
-To compare the discrete and continuum sensitivity analysis formulations, the one-dimensional heat transfer analysis in a beam is chosen. The temperature is governed by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+\subsection{Heat transfer benchmark case}
+The temperature in the one dimensional domain is governed by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
 
 \begin{equation}\label{eq:C2_transientHeatEquation}
 	\frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
@@ -81,6 +83,38 @@ The analytical sensitivity of the temperature with respect to beam's length is c
 
 This is later used for verifying the discrete and continuous sensitivity results.
 
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+\subsection{Solid mechanics benchmark case}
+The axial bar is shown in Figure \ref{fig:C2_axialBarPhysicalShape}. The length of the bar is selected as $L = 1$ with axial stiffness of $EA = 1$. The distributed load is selected as a sine wave, $T(x) = sin(\pi x/L)$, with an extra axial load at the end, $P = 1 / \pi$. The beam is fixed using a spring of stiffness, $k = 10$, at $x = L$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14.00cm]{Chapter_2/figure/solid_mechanics_benchmark.png}
+	\caption{Axial bar under distributed loading.}
+	\label{fig:C2_axialBarPhysicalShape}
+\end{figure}
+
+The governing equation for the displacement of the axial bar and its corresponding boundary conditions are defined as shown in Equation \eqref{eq:C2_axialBarGEandBC}. The length of the bar is selected as the design variable therefore, it is included explicitly in the governing equation and boundary condition definitions.
+
+\begin{subequations}
+\begin{equation}\label{eq:C2_axialBarGE}
+	\frac{\partial^2 u}{\partial x^2} + \sin \left( \frac{\pi}{L} x \right) = 0
+\end{equation}
+\begin{equation}\label{eq:C2_axialBarBC}
+	\begin{cases}
+	\dfrac{\partial u}{\partial x} \bigg|_{x = 0} = \dfrac{1}{\pi} \\
+	\dfrac{\partial u}{\partial x} \bigg|_{x = L} = -10 u(L)
+	\end{cases}
+\end{equation}
+\end{subequations}\label{eq:C2_axialBarGEandBC}
+
+For this problem, the analytical solution is written as shown in Equation \eqref{eq:C2_axialBarSolution}.
+
+\begin{equation}
+	u(x; L) = 
+	\frac{L^2}{\pi^2} \sin \left( \frac{\pi x}{L} \right) + 
+	\frac{2L + 10(L - 1)(L - x) - 1}{10 \pi}
+\end{equation}
 % ======================================================================================
 \section{Discrete Sensitivity Formulation}
 The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not for sensitivity calculation. Other techniques such as finite volume or finite elements can be used for the discretization of the governing equations as well. For this problem, the design variable affects the shape of the domain which is related to the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. The domain is discretized by using 6 nodes as shown in Figure \ref{fig:C2_discretizedDomain}.
