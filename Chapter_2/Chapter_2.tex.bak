@@ -43,7 +43,9 @@ The convective term consists of two separate gradients: i) $\partial \mathbf{u} 
 A common approach for calculating the domain sensitivity, is to use the techniques used to deform the body-conformal mesh in CFD/FEA simulations. These methods are usually based on representing the computational grid as a system of springs that connected to each other at the nodes. This system is modeled and solved using structural analysis techniques, where the sensitivities can be easily implemented. This is effectively a shape sensitivity analysis for the structural problem \cite{haftka1986structural}. This step is removed from the analysis if the computational domain is not affected by the design variable since $\partial x/\partial b$ is equal to zero \cite{gobal2014continuum}. This is one of the reasons to use the immersed boundary calculation since it reduces the cost of the simulation. This is discussed in more details in Chapter \ref{ch:immersedBoundary}.
 
 % ======================================================================================
-\section{Benchmark Case}
+\section{Benchmark Cases}
+To compare the discrete and continuum sensitivity analysis formulations, two problems from different disciplines are selected. As a simplified representation of the fluid/thermal systems the one-dimensional heat transfer analysis in a beam is selected as the benchmark case. This problem is used by different researchers for investigating sensitivity analysis for nonlinear systems \cite{dowding2001sensitivity} and thermal design and monitoring \cite{szopa2005second, sorli2004computational}. The special interest in this problem is due to avaiabily of analytical solution since this can be used to verify the numerical results of the sensitivity analysis.
+
 To compare the discrete and continuum sensitivity analysis formulations, the one-dimensional heat transfer analysis in a beam is chosen. The temperature is governed by the Laplace equation as shown in Equation \eqref{eq:C2_laplaceEquation}.
 
 \begin{equation}\label{eq:C2_transientHeatEquation}
@@ -142,14 +144,46 @@ The discretized governing equation of \eqref{eq:C2_finiteDifferenceSchemes} is w
 	\end{bmatrix}
 \end{equation}
 
-To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$ as the boundary conditions, and $L = 1$.  As shown in this figure, the discrete and continuum results match very well.
+To verify the discretization process, we compare the analytical solution of this problem with the result of Equation \eqref{eq:C2_laplaceEquationMatrixForm} in Figure \ref{fig:C2_verificationOfSolver}. For this problem we choose $T_1 = 0$, $T_6 = 1$ as the boundary conditions, and $L = 1$.  As shown in this figure, the discrete and continuum results match very well for different number of nodes. This is done by comparing the absolute error between the analytical and approximate results as shown in Table \ref{table:C2_solutionError}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[height=9.00cm]{Chapter_2/figure/finitedifference_vs_analytical.eps}
-	\caption{Comparison between the analytical and finite difference solutions for 1D heat equation.}
+	\subfigure[$n = 6$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n6.eps}
+	}
+	\quad
+	\subfigure[$n = 12$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n12.eps}
+	}
+	\\
+	\subfigure[$n = 24$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n24.eps}
+	}
+	\quad
+	\subfigure[$n = 48$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n48.eps}
+	}
+	\caption{Comparison between the analytical and finite difference solutions for 1D heat equation for different number of nodes.}
 	\label{fig:C2_verificationOfSolver}
 \end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{| c | c |}
+	\hline
+	Number of nodes & absolute error \\ \hline \hline
+	6 & $1.85 \times 10^{-16}$ \\ \hline
+	12 & $2.03 \times 10^{-16}$ \\ \hline
+	24 & $1.27 \times 10^{-15}$ \\ \hline
+	48 & $8.55 \times 10^{-15}$ \\ \hline
+\end{tabular}
+\caption{Absolute error value for different number of nodes.}
+\label{table:C2_solutionError}
+\end{table}
 
 The discrete sensitivity equations are derived by differentiating the discretized governing equation of \eqref{eq:C2_laplaceEquationMatrixForm} with respect to the length of the domain. We assume that the change in the length, only affects the nodal distance between the last two nodes and the rest remain unchanged. This means that only the node next to the boundary will move and the rest of nodes will be stationary. This is required to make sure that the sensitivity at each of the degrees of freedom is only a function of change in shape not movement of material nodes therefore, $\partial x/\partial b$ is equal to zero.
 
@@ -550,7 +584,7 @@ The continuum sensitivity analysis (CSA) result is verified using the analytical
 It should be noted that the sensitivity equations are derived and solved in the local form. This does not include the effect of nodes moving in the computational domain. If the analysis requires the sensitivity at the material points, an additional step is required to convert the local sensitivities to their total form using the chain rule as shown in the following equation.
 
 \begin{equation*}
-	\frac{DT}{Db} = \frac{\partial t}{\partial b} + \frac{\partial T}{\partial x} \cdot \frac{\partial x}{\partial b}
+	\frac{DT}{Db} = \frac{\partial T}{\partial b} + \frac{\partial T}{\partial x} \cdot \frac{\partial x}{\partial b}
 \end{equation*}
 
 This will add an extra cost to the simulation due to additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes due to change in shape. Therefore, if the computational nodes can be fixed, the $\partial x/\partial b$ term will be equal to zero. We are proposing to achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more details.

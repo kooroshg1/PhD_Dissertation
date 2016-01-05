@@ -9,7 +9,7 @@ plt.rc('font', **font)
 linewidth = 9.0
 markersize = 20
 # -------------------------
-n = 6
+n = 48
 x = np.linspace(0, 1, n)
 dx = x[2] - x[1]
 T0 = 0
@@ -35,6 +35,9 @@ T = np.linalg.solve(L, -F)
 T = np.append(T, Tn)
 T = np.append(T0, T)
 
+err = np.divide((T[1:] - x[1:]), x[1:])
+print(np.max(np.abs(err)))
+
 plt.figure(figsize=(30,15))
 plt.xlabel('x')
 plt.ylabel('T')
@@ -42,7 +45,7 @@ plt.plot(x, T, 'k-',
          x, x, 'wo',
          ms=20, mew=7, mec='r', lw=linewidth)
 plt.legend(['Approximate', 'Analytical'], loc='best')
-plt.savefig('finitedifference_vs_analytical.eps', format='eps', dpi=1000, bbox_inches='tight')
+plt.savefig('finitedifference_vs_analytical_n48.eps', format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
 
 # # Sensitivity analysis
