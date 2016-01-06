@@ -11,4 +11,4 @@ u = 1 / (EA * k * sym.pi**2) * \
 u = sym.simplify(u.subs({EA:1, k:10, P:1/sym.pi}))
 # print(sym.pretty(u))
 dudL = sym.simplify(sym.diff(u, L))
-print(sym.pretty(dudL))
+print(sym.pretty(dudL.subs({L:1})))
