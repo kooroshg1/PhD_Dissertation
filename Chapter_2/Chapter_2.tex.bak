@@ -110,13 +110,23 @@ The governing equation for the displacement of the axial bar and its correspondi
 
 For this problem, the analytical solution is written as shown in Equation \eqref{eq:C2_axialBarSolution}.
 
-\begin{equation}
+\begin{equation}\label{eq:C2_axialBarSolution}
 	u(x; L) = 
 	\frac{L^2}{\pi^2} \sin \left( \frac{\pi x}{L} \right) + 
 	\frac{2L + 10(L - 1)(L - x) - 1}{10 \pi}
 \end{equation}
+
+The displacement equation of \eqref{eq:C2_axialBarSolution} is differentiated to calculate the sensitivity of displacement to the length of the bar. The sensitivity equation \eqref{eq:C2_axialBarSensitivitySolution} is later used to verify the results of continuum and discrete sensitivity formulations.
+
+\begin{equation}\label{eq:C2_axialBarSensitivitySolution}
+	\dfrac{\partial u}{\partial L} = 
+	\dfrac{2L}{\pi^2} \sin \left( \frac{\pi x}{L} \right) - 
+	\dfrac{x}{\pi} \cos \left( \frac{\pi x}{L} \right) + 
+	\dfrac{10L - 5x - 4}{5 \pi}
+\end{equation}
 % ======================================================================================
 \section{Discrete Sensitivity Formulation}
+\subsection{Implementation for heat transfer}
 The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not for sensitivity calculation. Other techniques such as finite volume or finite elements can be used for the discretization of the governing equations as well. For this problem, the design variable affects the shape of the domain which is related to the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. The domain is discretized by using 6 nodes as shown in Figure \ref{fig:C2_discretizedDomain}.
 
 \begin{figure}[h]

@@ -31,22 +31,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
+      <file leaf-file-name="Chap2_Axial_beam.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="43" selection-start-line="105" selection-start-column="4" selection-end-line="108" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="symbolic_calculations.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/symbolic_calculations.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33445945">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.30405405">
+              <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+              <folding>
+                <element signature="e#23#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,6 +67,7 @@
         <option value="$PROJECT_DIR$/finite_difference_schemes.py" />
         <option value="$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py" />
         <option value="$PROJECT_DIR$/symbolic_calculations.py" />
+        <option value="$PROJECT_DIR$/Chap2_Axial_beam.py" />
       </list>
     </option>
   </component>
@@ -82,9 +75,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1920" />
+    <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1920" />
+    <option name="width" value="1855" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -169,24 +162,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.symbolic_calculations">
-    <configuration default="false" name="Chap3_indirect" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap3_indirect.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.Chap2_Axial_beam">
     <configuration default="false" name="finite_difference_schemes" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -238,7 +214,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="symbolic_calculations" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="symbolic_calculations" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -251,6 +227,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/symbolic_calculations.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Chap2_Axial_beam" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_Axial_beam.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -378,19 +371,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Chap3_indirect" />
-      <item index="1" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
-      <item index="4" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
+      <item index="0" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+      <item index="3" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
-        <item index="2" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Chap3_indirect" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
+        <item index="1" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+        <item index="3" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
       </list>
     </recent_temporary>
   </component>
@@ -408,14 +401,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="24" width="1920" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17132314" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17740175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39791667" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35208333" sideWeight="0.4978166" order="2" side_tool="false" content_ui="tabs" />
@@ -683,9 +676,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symbolic_calculations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33445945">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30405405">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,6 +1,7 @@
 __author__ = 'koorosh'
 import sympy as sym
 
+# Symbolic solution of the axial bar problem of chapter 2
 EA, k, L, P, x = sym.symbols('EA k L P x', real=True)
 
 u = 1 / (EA * k * sym.pi**2) * \
@@ -8,4 +9,6 @@ u = 1 / (EA * k * sym.pi**2) * \
 
 # u = sym.simplify(u.subs({L:1, EA:1, k:10, P:1/sym.pi}))
 u = sym.simplify(u.subs({EA:1, k:10, P:1/sym.pi}))
-print(sym.pretty(u))
+# print(sym.pretty(u))
+dudL = sym.simplify(sym.diff(u, L))
+print(sym.pretty(dudL))
