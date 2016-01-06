@@ -25,20 +25,28 @@
         <entry file="file://$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chap2_Axial_beam.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam.py">
+      <file leaf-file-name="Chap2_Axial_beam_analysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30405405">
-              <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-              <folding>
-                <element signature="e#23#41#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="59" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chap2_Axial_beam_sensitivity_analysis.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam_sensitivity_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5743243">
+              <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,6 +76,7 @@
         <option value="$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py" />
         <option value="$PROJECT_DIR$/symbolic_calculations.py" />
         <option value="$PROJECT_DIR$/Chap2_Axial_beam.py" />
+        <option value="$PROJECT_DIR$/Chap2_Axial_beam_sensitivity_analysis.py" />
       </list>
     </option>
   </component>
@@ -162,7 +171,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.Chap2_Axial_beam">
+  <component name="RunManager" selected="Python.Chap2_Axial_beam_sensitivity_analysis">
     <configuration default="false" name="finite_difference_schemes" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -176,23 +185,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/finite_difference_schemes.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Chap2_CSAvsAnalytical" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_CSAvsAnalytical.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -244,6 +236,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_Axial_beam.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Chap2_Axial_beam_sensitivity_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_Axial_beam_sensitivity_analysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -372,18 +381,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
-      <item index="3" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+      <item index="2" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam_sensitivity_analysis" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
-        <item index="1" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
-        <item index="3" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Chap2_CSAvsAnalytical" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam_sensitivity_analysis" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
+        <item index="2" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Chap2_LaplaceAnalysis_DSA" />
+        <item index="4" class="java.lang.String" itemvalue="Python.finite_difference_schemes" />
       </list>
     </recent_temporary>
   </component>
@@ -658,14 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -682,13 +683,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam.py">
+    <entry file="file://$PROJECT_DIR$/Chap2_LaplaceAnalysis_DSA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30405405">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="59" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap2_Axial_beam_sensitivity_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5743243">
+          <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
