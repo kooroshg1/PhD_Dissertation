@@ -226,3 +226,85 @@ As shown in Figure \ref{fig:C2_discreteSensitivityVerification} and Table \ref{t
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Implementation for solid mechanics problem}
+Finite elements are used to discretized the axial bar problem shows in Figure \ref{fig:C2_axialBarPhysicalShape}. The governing equation of \eqref{eq:C2_axialBarGE} is discretized using a uniform mesh, linear shape functions, and point one point Gauss integration. As mentioned in Section \ref{section:C2_solid_mechanics_benchmark}, the design variable is selected as the length of the bar and it will affect the distances between the nodes. In order to keep the local and total derivatives equal, we fix the interior computational nodes in space and change the length of the bar by only moving the last node. Therefore, the shape design variable only affects the size of the last element and it should be included in the discretized equations. This is shown in Figure \ref{fig:C2_axialBarComputationalDomain}. Since the internal nodes do not move, the design velocity is zero for these nodes.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[Original domain.]
+	{
+	\includegraphics[width=14.0cm]{Chapter_2/figure/bar_computational_before.png}
+	}
+	\\
+	\subfigure[Deformed domain.]
+	{
+	\includegraphics[width=14.0cm]{Chapter_2/figure/bar_computational_after.png}
+	}
+	\caption{Changing the length of bar by fixing the interior computational nodes and moving only the boundary (red) node. Node numbers are represented by $i$ and element numbers by $(i)$.}
+	\label{fig:C2_axialBarComputationalDomain}
+\end{figure}
+
+For the case of three elements, the stiffness matrix is written as
+
+\begin{equation}\label{eq:C2_stiffnessMatrixOfBar}
+	[K] = 
+	EA
+	\begin{bmatrix}
+	1/l_1 & -1/l_1 & 0 & 0 \\
+	-1/l_1 & 1/l_1 + 1/l_2 & -1/l_2 & 0 \\
+	0 & -1/l_2 & 1/l_2 + 1/l_3 & -1/l_3 \\
+	0 & 0 & -1/l_3 & 1/l_3
+	\end{bmatrix}
+\end{equation}
+
+where $l_i$ are the length of the elements. It should be noted that only $l_3$ is affected by changing the length of the domain in this formulation of the problem. The disretized equation for this problem is written as shown in Equation \eqref{eq:C2_discretizedBarEquation}.
+
+\begin{equation}\label{eq:C2_discretizedBarEquation}
+	[K - K_s] [U] = [F_d] - [F_p]
+\end{equation}
+
+where $[K]$ is the stiffness matrix of the bar, $[K_s]$ is the stiffness of the spring boundary, $[F_d]$ is the distributed load, and $[F_p]$ is the point load. The point load is substracted because of its negative direction for this problem. For the case of $EA = 1$, $F_d = \sin(\pi x / 2)$, $L = 1$, $P = 1 / \pi$ and $K_s = 10$ the solution of Equation \eqref{eq:C2_discretizedBarEquation} is compared with the analytical results of the problem as shown in Equation \eqref{eq:C2_axialBarSolution} in Figure \ref{fig:C2_axialBarSolution}. We chose Normalized Root-Mean-Square Deviation as the metric of comparison. This is calculated as shown in Equation \eqref{eq:C2_NRMSD_beam}
+
+\begin{equation}\label{eq:C2_NRMSD_beam}
+	NRMSD = \dfrac{\sqrt{\dfrac{\sum_{t=1}^n \left( \hat{y}_t - y \right)^2}{n}}}{y_{max} - y_{min}}
+\end{equation}
+
+where $\hat{y}_t$ is the numerical and $y$ is the analytical result.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14.00cm]{Chapter_2/figure/axial_bar_governing_equation_mesh_convergence.eps}
+	\caption{Mesh convergence of the finite elements analysis for axial bar.}
+	\label{fig:C2_axialBarSolution}
+\end{figure}
+
+The discrete sensitivity equation is derived by differentiating Equation \eqref{eq:C2_discretizedBarEquation} with respect to the shape of the domain as shown in Equation \eqref{eq:C2_discretizedSAequation_beforeSimplification}.
+
+\begin{equation}\label{eq:C2_discretizedSAequation_beforeSimplification}
+	\left[ \frac{\partial K}{\partial b} - \frac{\partial K_s}{\partial b} \right] [U] + 
+	[K - K_s] \left[ \frac{\partial U}{\partial b} \right] = 
+	\left[ \frac{\partial F_d}{\partial b} \right] - 
+	\left[ \frac{\partial F_p}{\partial b} \right]
+\end{equation}
+
+where $b$ is the design variable. $[K_s]$ is not affected by the design variable, therefore its derivative with respect to $b$ is equal to zero. Same argument can be made for the point load $F_p$. Using these observations, Equation \eqref{eq:C2_discretizedSAequation_beforeSimplification} is simplified as
+
+\begin{equation}\label{eq:C2_discretizedSensitivityEquation}
+	\left[ \frac{\partial U}{\partial b} \right] = 
+	[K - K_s]^{-1}
+	\left\{
+	\left[ \frac{\partial F_d}{\partial b} \right] - \left[ \frac{\partial K}{\partial b} \right] [U]
+	\right\}
+\end{equation}
+
+In Equation \eqref{eq:C2_discretizedSensitivityEquation}, $[U]$ is known as the result of solving the governing equation \eqref{eq:C2_discretizedBarEquation}, and $\dfrac{\partial F_d}{\partial b}$ is easily calculated since the distributed force is analytically known. $\dfrac{\partial K}{\partial b}$ is calculated by differentiating Equation \eqref{eq:C2_stiffnessMatrixOfBar}. It should be noted that change in the length of the bar, $L$, only affects $l_3$. Therefore, $\dfrac{\partial l_3}{\partial L}$ is equal to one. Finally, the sensitivity of stiffness matrix to the shape design variable for a simple case of Equation \eqref{eq:C2_stiffnessMatrixOfBar} is written as
+
+\begin{equation}\label{eq:C2_sensitivityOfStiffnessMatrixOfBar}
+	\left[ \frac{\partial K}{\partial L} \right] = 
+	-EA
+	\begin{bmatrix}
+	0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 \\
+	0 & 0 & 1/l_3^2 & -1/l_3^2 \\
+	0 & 0 & -1/l_3^2 & 1/l_3^2
+	\end{bmatrix}
+\end{equation}

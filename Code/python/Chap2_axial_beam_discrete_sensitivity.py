@@ -77,7 +77,7 @@ def calcNRMSD(Y, y):
     # Y: Analytical, y: numerical
     return np.sqrt(np.sum((y - Y)**2) / len(y)) / (np.max(Y) - np.min(Y))
 
-nEl = 4 * 2**np.arange(0, 6, 1)
+nEl = 4 * 2**np.arange(0, 8, 1)
 NRMSD_GE = np.zeros([len(nEl), 1])
 NRMSD_SA = np.zeros([len(nEl), 1])
 
@@ -88,12 +88,16 @@ for i in range(0, len(nEl)):
     NRMSD_GE[i] = calcNRMSD(Uanal, U)
     NRMSD_SA[i] = calcNRMSD(UdotAnal[:-1], Udot[:-1])
 
-plt.figure()
+fileName = 'axial_bar_governing_equation_mesh_convergence.eps'
+plt.figure(figsize=(30, 15))
 plt.semilogy(nEl, NRMSD_GE, 'k',
              nEl, NRMSD_SA,'k--',
              lw=linewidth, mew=linewidth, ms=markersize)
 plt.legend(['Governing equations', 'Sensitivity analysis'])
+# plt.semilogy(nEl, NRMSD_GE, 'k',
+#              lw=linewidth, mew=linewidth, ms=markersize)
 plt.grid('on')
 plt.xlabel('Number of elements')
 plt.ylabel('NRMSE')
+# plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 plt.show()
