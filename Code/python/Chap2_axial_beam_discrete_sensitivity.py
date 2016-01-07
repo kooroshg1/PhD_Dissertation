@@ -1,7 +1,14 @@
 __author__ = 'koorosh'
 import numpy as np
 import matplotlib.pyplot as plt
-
+# -----------------------------
+font = {'family' : 'monospace',
+        'weight' : 'normal',
+        'size'   : 52}
+plt.rc('font', **font)
+linewidth = 5.0
+markersize = 15
+# -----------------------------
 nEl = 4
 L = 1.0
 EA = 1.0
@@ -70,10 +77,23 @@ def calcNRMSD(Y, y):
     # Y: Analytical, y: numerical
     return np.sqrt(np.sum((y - Y)**2) / len(y)) / (np.max(Y) - np.min(Y))
 
-U, Udot = FEA(nEl)
-Uanal, UdotAnal = ANAL(nEl)
+nEl = 4 * 2**np.arange(0, 6, 1)
+NRMSD_GE = np.zeros([len(nEl), 1])
+NRMSD_SA = np.zeros([len(nEl), 1])
 
-NRMSD_GE = calcNRMSD(Uanal, U)
-NRMSD_SA = calcNRMSD(UdotAnal[:-1], Udot[:-1])
-print(NRMSD_SA)
-print(NRMSD_GE)
+for i in range(0, len(nEl)):
+    U, Udot = FEA(nEl[i])
+    Uanal, UdotAnal = ANAL(nEl[i])
+
+    NRMSD_GE[i] = calcNRMSD(Uanal, U)
+    NRMSD_SA[i] = calcNRMSD(UdotAnal[:-1], Udot[:-1])
+
+plt.figure()
+plt.semilogy(nEl, NRMSD_GE, 'k',
+             nEl, NRMSD_SA,'k--',
+             lw=linewidth, mew=linewidth, ms=markersize)
+plt.legend(['Governing equations', 'Sensitivity analysis'])
+plt.grid('on')
+plt.xlabel('Number of elements')
+plt.ylabel('NRMSE')
+plt.show()
