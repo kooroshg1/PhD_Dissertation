@@ -88,7 +88,7 @@ for i in range(0, len(nEl)):
     NRMSD_GE[i] = calcNRMSD(Uanal, U)
     NRMSD_SA[i] = calcNRMSD(UdotAnal[:-1], Udot[:-1])
 
-fileName = 'axial_bar_governing_equation_mesh_convergence.eps'
+fileName = 'axial_bar_discrete_sensitivity_analysis.eps'
 plt.figure(figsize=(30, 15))
 plt.semilogy(nEl, NRMSD_GE, 'k',
              nEl, NRMSD_SA,'k--',
@@ -99,5 +99,5 @@ plt.legend(['Governing equations', 'Sensitivity analysis'])
 plt.grid('on')
 plt.xlabel('Number of elements')
 plt.ylabel('NRMSE')
-# plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
+plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 plt.show()

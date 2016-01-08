@@ -1,4 +1,6 @@
-\section{Discrete Sensitivity Formulation}
+\section{Discrete Sensitivity Analysis}
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Formulation}
 The derivation of the discrete sensitivity equations starts with the discrete form of the governing equations. For the linear case, the governing equation \eqref{eq:C2_generalGoverningEquation} is discretized as shown in Equation \eqref{eq:C2_discreteGoverningEquation}
 
 \begin{equation}\label{eq:C2_discreteGoverningEquation}
@@ -16,7 +18,7 @@ where $[K]$ is the discrete operator that represents the governing equation, $[U
 Solving Equation \eqref{eq:C2_discreteSensitivityEquation} yields a solution for sensitivity of response variable, $\partial u/\partial b$. This is achievable if the values of $\partial F/\partial b$ and $\partial K/\partial b$ are known. It should be noted that $U$ is a known value by the governing equation \eqref{eq:C2_discreteGoverningEquation} is solved. For the case of design independent loads, $\partial F/\partial b$ is equal to zero. This happens in many situations such as design optimization with pure mechanical loads. This assumption is violated for the cases when changing the design variables alter the loadings on the structure. The best example for this case is design of thermally loaded structures where due to thermal expansions, changing the size of elements will affect the thermal loadings \cite{deaton2013stiffening}. Calculating the $\partial K/\partial b$ term requires a detailed understanding about the discretization approach. This often requires source code modification which makes this method difficult to implement for commercial codes such as ABAQUS or FLUENT. The discrete method is highly accurate approach for calculating the sensitivities as will demonstrated with the following examples however, it is almost impossible to impliment in general purpose solvers.
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-\subsection{Implementation for heat transfer}
+\subsection{Implementation for heat transfer problem}
 The discrete sensitivity equations are formulated by discretizing the governing equation \eqref{eq:C2_laplaceEquation} using finite difference method. It should be noted that the finite difference is used for discretization of continuum governing equation and not for sensitivity calculation. Other techniques such as finite volume or finite elements can be used for the discretization of the governing equations as well. For this problem, the design variable affects the shape of the domain which is related to the distance between the nodes in the discrete manner. Therefore, for the sake of sensitivity analysis it is required to keep the nodal distances in the discretized solution as well. The domain is discretized by using 6 nodes as shown in Figure \ref{fig:C2_discretizedDomain}.
 
 \begin{figure}[h]
@@ -262,10 +264,10 @@ where $l_i$ are the length of the elements. It should be noted that only $l_3$ i
 	[K - K_s] [U] = [F_d] - [F_p]
 \end{equation}
 
-where $[K]$ is the stiffness matrix of the bar, $[K_s]$ is the stiffness of the spring boundary, $[F_d]$ is the distributed load, and $[F_p]$ is the point load. The point load is substracted because of its negative direction for this problem. For the case of $EA = 1$, $F_d = \sin(\pi x / 2)$, $L = 1$, $P = 1 / \pi$ and $K_s = 10$ the solution of Equation \eqref{eq:C2_discretizedBarEquation} is compared with the analytical results of the problem as shown in Equation \eqref{eq:C2_axialBarSolution} in Figure \ref{fig:C2_axialBarSolution}. We chose Normalized Root-Mean-Square Deviation as the metric of comparison. This is calculated as shown in Equation \eqref{eq:C2_NRMSD_beam}
+where $[K]$ is the stiffness matrix of the bar, $[K_s]$ is the stiffness of the spring boundary, $[F_d]$ is the distributed load, and $[F_p]$ is the point load. The point load is substracted because of its negative direction for this problem. For the case of $EA = 1$, $F_d = \sin(\pi x / 2)$, $L = 1$, $P = 1 / \pi$ and $K_s = 10$ the solution of Equation \eqref{eq:C2_discretizedBarEquation} is compared with the analytical results of the problem as shown in Equation \eqref{eq:C2_axialBarSolution} in Figure \ref{fig:C2_axialBarSolution}. We chose Normalized Root-Mean-Square Error (NRMSE) as the metric of comparison. This is calculated as shown in Equation \eqref{eq:C2_NRMSE_beam}
 
-\begin{equation}\label{eq:C2_NRMSD_beam}
-	NRMSD = \dfrac{\sqrt{\dfrac{\sum_{t=1}^n \left( \hat{y}_t - y \right)^2}{n}}}{y_{max} - y_{min}}
+\begin{equation}\label{eq:C2_NRMSE_beam}
+	NRMSE = \dfrac{\sqrt{\dfrac{\sum_{t=1}^n \left( \hat{y}_t - y \right)^2}{n}}}{y_{max} - y_{min}}
 \end{equation}
 
 where $\hat{y}_t$ is the numerical and $y$ is the analytical result.
@@ -308,3 +310,12 @@ In Equation \eqref{eq:C2_discretizedSensitivityEquation}, $[U]$ is known as the 
 	0 & 0 & -1/l_3^2 & 1/l_3^2
 	\end{bmatrix}
 \end{equation}
+
+The sensitivity results of solving the discrete Equation \eqref{eq:C2_discretizedSensitivityEquation} are compared with the analytical result from Equation \eqref{eq:C2_axialBarSensitivitySolution}. This comparison is shown as NRMSE values in Figure \ref{fig:C2_barDiscreteSensitivityAnalysis}. As shown here, the analytical and discrete sensitivity results agree very well. Moreover, the error decreases as we increases the number of elements.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14.00cm]{Chapter_2/figure/axial_bar_discrete_sensitivity_analysis.eps}
+	\caption{Mesh convergence of the discrete sensitivity analysis for the axial bar.}
+	\label{fig:C2_barDiscreteSensitivityAnalysis}
+\end{figure}

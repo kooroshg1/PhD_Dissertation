@@ -308,3 +308,5 @@ In Equation \eqref{eq:C2_discretizedSensitivityEquation}, $[U]$ is known as the 
 	0 & 0 & -1/l_3^2 & 1/l_3^2
 	\end{bmatrix}
 \end{equation}
+
+The sensitivity results of solving the discrete Equation \eqref{eq:C2_discretizedSensitivityEquation}
