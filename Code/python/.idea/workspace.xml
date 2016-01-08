@@ -31,15 +31,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chap2_axial_beam_discrete_sensitivity.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Chap2_axial_beam_discrete_sensitivity.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_discrete_sensitivity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4527027">
-              <caret line="90" column="51" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="52" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="52" />
               <folding>
-                <element signature="e#402#1801#0" expanded="false" />
                 <element signature="e#1875#2155#0" expanded="false" />
                 <element signature="e#2182#2285#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chap2_axial_beam_continuum_sensitivity.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_continuum_sensitivity.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6081081">
+              <caret line="100" column="37" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
+              <folding>
+                <element signature="e#2030#2310#0" expanded="false" />
+                <element signature="e#2337#2440#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -83,6 +95,7 @@
         <option value="$PROJECT_DIR$/Chap2_Axial_beam_sensitivity_analysis.py" />
         <option value="$PROJECT_DIR$/Chap2_axial_beam.py" />
         <option value="$PROJECT_DIR$/Chap2_axial_beam_discrete_sensitivity.py" />
+        <option value="$PROJECT_DIR$/Chap2_axial_beam_continuum_sensitivity.py" />
       </list>
     </option>
   </component>
@@ -90,9 +103,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1920" />
+    <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1920" />
+    <option name="width" value="1855" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -177,7 +190,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.Chap2_axial_beam_discrete_sensitivity">
+  <component name="RunManager" selected="Python.Chap2_axial_beam_continuum_sensitivity">
     <configuration default="false" name="symbolic_calculations" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -191,23 +204,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/symbolic_calculations.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Chap2_Axial_beam" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_Axial_beam.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -259,6 +255,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_axial_beam_discrete_sensitivity.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Chap2_axial_beam_continuum_sensitivity" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chap2_axial_beam_continuum_sensitivity.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -387,18 +400,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam_sensitivity_analysis" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Chap2_axial_beam" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Chap2_axial_beam_discrete_sensitivity" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam_sensitivity_analysis" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Chap2_axial_beam" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Chap2_axial_beam_discrete_sensitivity" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Chap2_axial_beam_continuum_sensitivity" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Chap2_axial_beam_discrete_sensitivity" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Chap2_axial_beam" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam_sensitivity_analysis" />
-        <item index="3" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Chap2_axial_beam_continuum_sensitivity" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Chap2_axial_beam_discrete_sensitivity" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Chap2_axial_beam" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Chap2_Axial_beam_sensitivity_analysis" />
+        <item index="4" class="java.lang.String" itemvalue="Python.symbolic_calculations" />
       </list>
     </recent_temporary>
   </component>
@@ -416,14 +429,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="24" width="1920" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17132314" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17740175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39791667" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35208333" sideWeight="0.4978166" order="2" side_tool="false" content_ui="tabs" />
@@ -707,12 +720,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_discrete_sensitivity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4527027">
-          <caret line="90" column="51" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="52" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="52" />
           <folding>
-            <element signature="e#402#1801#0" expanded="false" />
             <element signature="e#1875#2155#0" expanded="false" />
             <element signature="e#2182#2285#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_continuum_sensitivity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6081081">
+          <caret line="100" column="37" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
+          <folding>
+            <element signature="e#2030#2310#0" expanded="false" />
+            <element signature="e#2337#2440#0" expanded="false" />
           </folding>
         </state>
       </provider>

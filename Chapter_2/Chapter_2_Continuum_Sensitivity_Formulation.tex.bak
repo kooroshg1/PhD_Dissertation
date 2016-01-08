@@ -295,7 +295,7 @@ To derive the continuum sensitivity equations, the governing equation of \eqref{
 	\frac{\pi x}{L^2} \cos \left( \frac{\pi x}{L} \right) = 0
 \end{equation}
 
-The boundary conditions are calculated by differentiating the boundary conditions defined in Equation \eqref{eq:C2_axialBarBC}.
+The boundary conditions are calculated by differentiating the boundary conditions defined in Equation \eqref{eq:C2_axialBarBC}. It should be noted that the boundary conditions are differentiated in total form.
 
 \begin{equation}\label{eq:C2_axialBarContinuumSensitivityBoundaryConditions}
 	\begin{cases}
@@ -303,8 +303,22 @@ The boundary conditions are calculated by differentiating the boundary condition
 	\dfrac{\partial }{\partial L} \left( \dfrac{1}{\pi} \right) = 0
 	\\
 	\dfrac{\partial}{\partial x} \left( \dfrac{\partial u}{\partial L} \right) \bigg|_{x = L} = 
-	-10 \dfrac{\partial u}{\partial L} \bigg|_{x = L}
+	\left\{
+	K \left[ \frac{\partial u}{\partial L} + \frac{\partial u}{\partial x} \frac{\partial x}{\partial L} \right] - 
+	\frac{\partial^2 u}{\partial x^2} \frac{\partial x}{\partial L}
+	\right\} \bigg|_{x = L}
 	\end{cases}
 \end{equation}
 
+For this problem, the spatial coordinate $x$ is defined as $x = \zeta L$ where $\zeta = x / L$. Therefore, the design velocity 
+
 Solving the governing equation \eqref{eq:C2_axialBarContinuumSensitivityEquation} along with boundary conditions \eqref{eq:C2_axialBarContinuumSensitivityBoundaryConditions} leads to the sensitivity values of displacement in the domain, $\partial u/\partial L$. Comparing the sensitivity equation and boundary conditions \eqref{eq:C2_axialBarContinuumSensitivityEquation} and \eqref{eq:C2_axialBarContinuumSensitivityBoundaryConditions} to the governing equation and its corresponding boundary conditions of \eqref{eq:C2_axialBarGE} and \eqref{eq:C2_axialBarBC}, it is safe to say that these equations are the same. Only the boundary conditions are different between these two system of equations. Therefore, the same numerical solver that was used for solving the governing equation can be used to solve the sensitivity equations without any modifications. The only change would be in the values of the boundary conditions. However, change in the boundary conditions does not change the structure of the black box solver.
+
+To calculate the sensitivities, the governing equation and boundary conditions of \eqref{eq:C2_axialBarContinuumSensitivityEquation} and \eqref{eq:C2_axialBarContinuumSensitivityBoundaryConditions} are discretized using the finite element method as discussed through equations \eqref{eq:C2_stiffnessMatrixOfBar} and \eqref{eq:C2_discretizedBarEquation}. It should be noted that $[K]$ and $[K_s]$ are the same matrices that used in Equation \eqref{eq:C2_stiffnessMatrixOfBar}, $[F_p]$ is equal to zero, and $F_d = -\dfrac{\pi x}{L^2} \cos \left( \dfrac{\pi x}{L} \right)$. For verification, the results for the sensitivity analysis are compared with the analytical results of sensitivity as defined by Equation \eqref{eq:C2_axialBarSensitivitySolution}. We used the NRMSE metric to compare the two different results as defined in Equation \eqref{eq:C2_NRMSE_beam}. The comparison of the results are shown in Figure \ref{fig:C2_continuumSensitivityResults}. As shown here, the results for both discrete and continuum sensitivity analysis converge with the same rate.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14.00cm]{Chapter_2/figure/axial_bar_continuum_sensitivity_analysis.eps}
+	\caption{Mesh convergence of the continuum (CSA) and discrete (DSA) sensitivity equations for axial bar problem. The results for the convergence of the analysis (FEA) also included in this graph.}
+	\label{fig:C2_continuumSensitivityResults}
+\end{figure}
