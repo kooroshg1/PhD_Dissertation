@@ -290,16 +290,21 @@ This will add an extra cost to the simulation due to additional step for calcula
 \subsection{Implementation for solid mechanics problem}
 To derive the continuum sensitivity equations, the governing equation of \eqref{eq:C2_axialBarGE} is differentiated with respect to the design variable, $L$, as shown in Equation \eqref{eq:C2_axialBarContinuumSensitivityEquation}.
 
-\begin{equation}
+\begin{equation}\label{eq:C2_axialBarContinuumSensitivityEquation}
 	\frac{\partial^2}{\partial x^2} \left( \frac{\partial u}{\partial L} \right) - 
 	\frac{\pi x}{L^2} \cos \left( \frac{\pi x}{L} \right) = 0
 \end{equation}
 
 The boundary conditions are calculated by differentiating the boundary conditions defined in Equation \eqref{eq:C2_axialBarBC}.
 
-\begin{equation}
+\begin{equation}\label{eq:C2_axialBarContinuumSensitivityBoundaryConditions}
 	\begin{cases}
-	\dfrac{\partial u}{\partial x} \bigg|_{x = 0} = \dfrac{1}{\pi} \\
-	\dfrac{\partial u}{\partial x} \bigg|_{x = L} = -10 u(L)
+	\dfrac{\partial}{\partial x} \left( \dfrac{\partial u}{\partial L} \right) \bigg|_{x = 0} = 
+	\dfrac{\partial }{\partial L} \left( \dfrac{1}{\pi} \right) = 0
+	\\
+	\dfrac{\partial}{\partial x} \left( \dfrac{\partial u}{\partial L} \right) \bigg|_{x = L} = 
+	-10 \dfrac{\partial u}{\partial L} \bigg|_{x = L}
 	\end{cases}
 \end{equation}
+
+Solving the governing equation \eqref{eq:C2_axialBarContinuumSensitivityEquation} along with boundary conditions \eqref{eq:C2_axialBarContinuumSensitivityBoundaryConditions} leads to the sensitivity values of displacement in the domain, $\partial u/\partial L$. Comparing the sensitivity equation and boundary conditions \eqref{eq:C2_axialBarContinuumSensitivityEquation} and \eqref{eq:C2_axialBarContinuumSensitivityBoundaryConditions} to the governing equation and its corresponding boundary conditions of \eqref{eq:C2_axialBarGE} and \eqref{eq:C2_axialBarBC}, it is safe to say that these equations are the same. Only the boundary conditions are different between these two system of equations. Therefore, the same numerical solver that was used for solving the governing equation can be used to solve the sensitivity equations without any modifications. The only change would be in the values of the boundary conditions. However, change in the boundary conditions does not change the structure of the black box solver.

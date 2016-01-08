@@ -264,7 +264,7 @@ where $l_i$ are the length of the elements. It should be noted that only $l_3$ i
 	[K - K_s] [U] = [F_d] - [F_p]
 \end{equation}
 
-where $[K]$ is the stiffness matrix of the bar, $[K_s]$ is the stiffness of the spring boundary, $[F_d]$ is the distributed load, and $[F_p]$ is the point load. The point load is substracted because of its negative direction for this problem. For the case of $EA = 1$, $F_d = \sin(\pi x / 2)$, $L = 1$, $P = 1 / \pi$ and $K_s = 10$ the solution of Equation \eqref{eq:C2_discretizedBarEquation} is compared with the analytical results of the problem as shown in Equation \eqref{eq:C2_axialBarSolution} in Figure \ref{fig:C2_axialBarSolution}. We chose Normalized Root-Mean-Square Error (NRMSE) as the metric of comparison. This is calculated as shown in Equation \eqref{eq:C2_NRMSE_beam}
+where $[K]$ is the stiffness matrix of the bar, $[K_s]$ is the stiffness of the spring boundary, $[F_d]$ is the distributed load, and $[F_p]$ is the point load. The point load is substracted because of its negative direction for this problem. For the case of $EA = 1$, $F_d = \sin(\pi x / 2)$, $L = 1$, $F_p = 1 / \pi$ and $K_s = 10$ the solution of Equation \eqref{eq:C2_discretizedBarEquation} is compared with the analytical results of the problem as shown in Equation \eqref{eq:C2_axialBarSolution} in Figure \ref{fig:C2_axialBarSolution}. We chose Normalized Root-Mean-Square Error (NRMSE) as the metric of comparison. This is calculated as shown in Equation \eqref{eq:C2_NRMSE_beam}
 
 \begin{equation}\label{eq:C2_NRMSE_beam}
 	NRMSE = \dfrac{\sqrt{\dfrac{\sum_{t=1}^n \left( \hat{y}_t - y \right)^2}{n}}}{y_{max} - y_{min}}
