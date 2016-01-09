@@ -18,7 +18,13 @@ where $\mathbf{u}$ is the velocity vector, $P$ is pressure, $\mu$ is the kinemat
 	\label{fig:C4_lagrangianAndEulerianDomain}
 \end{figure}
 
-The forcing function in the penalization method is calculated at the Eulerian nodes using Equation \eqref{eq:C4_penalizationForcingFunction} and is applied to computational nodes inside the solid boundary. 
+The forcing function in the penalization method is calculated at the Eulerian nodes and is applied to computational nodes inside the solid boundary using a step function as shown in Equation \eqref{eq:C4_penalizationForcingFunction}.
+
+\begin{equation}\label{eq:C4_penalizationForcingFunction}
+	\mathbf{f} = -\mathcal{S}(\mathcal{X}) \kappa \mathbf{u}
+\end{equation}
+
+where $\mathcal{S}$ is the step function, $\mathcal{X}$ defines the relative location of locations inside the domain with respect to the IB boundary, $\kappa$ is the penalization parameter, and $\mathbf{u}$ is the fluid velocity.
 
 \begin{equation}\label{eq:C3_feedbackForcingFunction}
 	\mathbf{f}(\mathbf{X}, t) = 
