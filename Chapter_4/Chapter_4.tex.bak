@@ -44,16 +44,70 @@ In the virtual boundary method, the forcing function is calculated at the \emph{
 where $\mathbf{u}(\mathbf{X}, t)$ is the fluid's velocity at the Lagrangian points $\mathbf{X}$ and $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point. For the no-slip boundary condition at the solid boundary, the desired velocity $\mathbf{V}(\mathbf{X}, t)$ is zero at each of the Lagrangian points. The Eulerian nodes where the fluid's governing equation is solved does not necessary coincide with the Lagrangian points. Moreover, the forcing functions that are evaluated at the Lagrangian nodes need to tranfered to the Eulerian nodes where the governing equations for the fluid is solved. As mentioned in Chapter \ref{ch:immersedBoundary}, different mapping functions are used for transferring data between the Lagrangian and Eulerian nodes. However, none of these functions are continuously differentiable as required for the continuum sensitivity analysis. To address this issue a regularized delta function is introduced.
 
 \subsection{Regularized Heaviside/Delta Function}
-The regularized Heaviside function is a step function that is smoothed so that its derivative can be calculated numerically. The regularized Heaviside function is also known as sigmoid function in mathematics and is characterized as a real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. An example of Heaviside function is shown in Figure \ref{fig:C4_heavisideFunctionExample}.
+The Regularized Heaviside (RH) function is a step function that is smoothed so that its derivative can be calculated numerically. The RH function is also known as sigmoid function in mathematics and is characterized as a real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. The RH function is used instead of the step function to penalized the governing equation.  Several different RH functions defined in Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} are shown in Figure \ref{fig:C4_heavisideFunctionExample}.
+
+\begin{subequations}\label{eq:C4_regularizedHeavisideFunctionFormulas}
+\begin{align}
+	\mathcal{H}_1 &= \frac{1}{2} + \frac{1}{\pi} \arctan \left( x \right) \\
+	\mathcal{H}_2 &= \frac{1}{1 + e^{-2x}} \\
+	\mathcal{H}_3 &= e^{-e^{-x}} \\
+	\mathcal{H}_4 &= \frac{1 + \tanh(x / 4)}{2}
+\end{align}
+\end{subequations}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=10.00cm]{Chapter_4/figure/heaviside_function_example.eps}
-	\caption{Regularized Heaviside function, $\mathcal{H}(x) = 1 / (1 + e^{-x})$.}
+	\includegraphics[width=12.00cm]{Chapter_4/figure/heaviside_function_example.eps}
+	\caption{Comparison between different regularized Heaviside functions ($\mathcal{H}_i$) and step function ($\mathcal{S}$).}
 	\label{fig:C4_heavisideFunctionExample}
 \end{figure}
 
-The regularized Heaviside function is used instead of the step function to penalized the governing equation.
+As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all the RH functions are symmetric around $x = 0$ other than $\mathcal{H}_3$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain and NS equations are penalized based on the location of this boundary. In this work, the RH function is selected as $\mathcal{H}_2 = \dfrac{1}{1 + e^{-2x}}$ since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter} the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
+
+\begin{equation}\label{eq:C4_heavisideFunction}
+	\mathcal{H} = \frac{1}{1 + e^{-x / \eta}}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12.00cm]{Chapter_4/figure/heaviside_function_with_control.eps}
+	\caption{Effect of control parameter $\eta$ on the RH function.}
+	\label{fig:C4_heavisideFunctionWithControlParamter}
+\end{figure}
+
+The penalized NS equation using the RH function of Equation \eqref{fig:C4_heavisideFunctionExample} is continuous and can be differentiated to derive the continuum sensitivity equations.
+
+For IB simulations incorporating the virtual boundary method, the Regularized Delta (RD) function is a substitute used for transferring data between the Lagrangian and Eulerian nodes. In mathematics, the Dirac delta function is defined as the derivative of the unit step function. To be consistant with the mathematical formulation, the RD function is calculated by differentiating the RH functions of Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} as shown in Equation \eqref{eq:C4_regularizedDeltaFunctionFormulas}. These RD functions are plotted in Figure \ref{fig:C4_deltaFunctionExample}.
+
+\begin{subequations}\label{eq:C4_regularizedDeltaFunctionFormulas}
+\begin{align}
+	\mathcal{D}_1 &= \frac{1}{\pi \left(x^{2} + 1\right)} \\
+	\mathcal{D}_2 &= \frac{2 e^{- 2 x}}{\left(e^{- 2 x} + 1\right)^{2}} \\
+	\mathcal{D}_3 &= \frac{e^{- x}}{e^{e^{- x}}} \\
+	\mathcal{D}_4 &= - 0.125 \tanh^{2}{\left (\frac{x}{4} \right )} + 0.125
+\end{align}
+\end{subequations}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12.00cm]{Chapter_4/figure/delta_function_example.eps}
+	\caption{Comparison between different regularized delta functions ($\mathcal{D}_i$). The integral of all these functions over $x\in(-\infty, \infty)$ is equal to one.}
+	\label{fig:C4_deltaFunctionExample}
+\end{figure}
+
+In this work, the RD function $\mathcal{D}_2$ is selected for implimentation in the virtual boundary method. The sharpness of this RD function is further controlled by using the $\eta$ function as used in the definition of the corresponding RH function. This is defined in Equation \eqref{eq:C4_deltaFunction}. The RD function for different value for $\eta$ is shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}
+
+\begin{equation}\label{eq:C4_heavisideFunction}
+	\mathcal{D} = \frac{e^{- \dfrac{x}{\eta}}}{t \left(1 + e^{- \dfrac{x}{\eta}}\right)^{2}}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12.00cm]{Chapter_4/figure/delta_function_with_control.eps}
+	\caption{Effect of control parameter $\eta$ on the RD function.}
+	\label{fig:C4_deltaFunctionWithControlParamter}
+\end{figure}
+
 
 \subsection{Direct Method}
 
