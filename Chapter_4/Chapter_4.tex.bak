@@ -48,10 +48,12 @@ The regularized Heaviside function is a step function that is smoothed so that i
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=7.00cm]{Chapter_4/figure/heaviside_function_example.eps}
+	\includegraphics[width=10.00cm]{Chapter_4/figure/heaviside_function_example.eps}
 	\caption{Regularized Heaviside function, $\mathcal{H}(x) = 1 / (1 + e^{-x})$.}
 	\label{fig:C4_heavisideFunctionExample}
 \end{figure}
+
+The regularized Heaviside function is used instead of the step function to penalized the governing equation.
 
 \subsection{Direct Method}
 

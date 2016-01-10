@@ -44,7 +44,7 @@ In the virtual boundary method, the forcing function is calculated at the \emph{
 where $\mathbf{u}(\mathbf{X}, t)$ is the fluid's velocity at the Lagrangian points $\mathbf{X}$ and $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point. For the no-slip boundary condition at the solid boundary, the desired velocity $\mathbf{V}(\mathbf{X}, t)$ is zero at each of the Lagrangian points. The Eulerian nodes where the fluid's governing equation is solved does not necessary coincide with the Lagrangian points. Moreover, the forcing functions that are evaluated at the Lagrangian nodes need to tranfered to the Eulerian nodes where the governing equations for the fluid is solved. As mentioned in Chapter \ref{ch:immersedBoundary}, different mapping functions are used for transferring data between the Lagrangian and Eulerian nodes. However, none of these functions are continuously differentiable as required for the continuum sensitivity analysis. To address this issue a regularized delta function is introduced.
 
 \subsection{Regularized Heaviside/Delta Function}
-The regularized Heaviside function is a step function that is smoothed so that its derivative can be calculated numerically. The regularized Heaviside function is also known as sigmoid function in mathematics and is characterized as a real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. An example of Heaviside function is shown in Figure \ref{fig:C4_heavisideFunctionExample}.
+The regularized Heaviside function is a step function that is smoothed so that its derivative can be calculated numerically. The regularized Heaviside function is also known as sigmoid function in mathematics and is characterized as a real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. The regularized Heaviside function is used instead of the step function to penalized the governing equation.  Several different regularized Heaviside functions are shown in Figure \ref{fig:C4_heavisideFunction}.
 
 \begin{figure}[H]
 	\centering
@@ -53,7 +53,7 @@ The regularized Heaviside function is a step function that is smoothed so that i
 	\label{fig:C4_heavisideFunctionExample}
 \end{figure}
 
-The regularized Heaviside function is used instead of the step function to penalized the governing equation.
+
 
 \subsection{Direct Method}
 
