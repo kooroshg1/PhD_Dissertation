@@ -1,7 +1,6 @@
 \chapter{Shape Sensitivity Analysis using Immersed Boundary Method}
 In this chapter we apply the continuum sensitivity analysis to the CFD simulations conducted using the Immersed Boundary (IB) method. In this chapter the focus is on calculating the sensitivity of flow variables such as pressure and velocity to the design variable that controls the shape of the boundary, i.e. radius of a cylinder, camber of an airfoil. The boundary of the solid domain is represented using an analytical function. However, as will be shown in the following chapters this is not a required for this method. In this chapter the modifications on the IB approach to make it suitable for continuum sensitivity formulation is discussed. To the best of the author's knowledge, this is the first time that sensitivity analysis is done for CFD simulations based the continuum IB formulation.
-% ======================================================================================
-\section{Sensitivity Problem Formulation}
+
 In contrast to traditional body conformal methods, in IB approach the solid boundaries are represented by modifying the governing equation near the boundaries. In the case of continuum IB method, this is done by adding the appropriate force term to the cells adjacent to the immersed boundary. The value of these forces are calculated either using a feedback forcing \cite{goldstein1993modeling} or a penalization function \cite{arquis1984conditions}. The Navier-Stokes (NS) equations are written as shown in Equation \eqref{eq:C4_NS}.
 
 \begin{equation}\label{eq:C4_NS}
@@ -43,7 +42,8 @@ In the virtual boundary method, the forcing function is calculated at the \emph{
 
 where $\mathbf{u}(\mathbf{X}, t)$ is the fluid's velocity at the Lagrangian points $\mathbf{X}$ and $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point. For the no-slip boundary condition at the solid boundary, the desired velocity $\mathbf{V}(\mathbf{X}, t)$ is zero at each of the Lagrangian points. The Eulerian nodes where the fluid's governing equation is solved does not necessary coincide with the Lagrangian points. Moreover, the forcing functions that are evaluated at the Lagrangian nodes need to tranfered to the Eulerian nodes where the governing equations for the fluid is solved. As mentioned in Chapter \ref{ch:immersedBoundary}, different mapping functions are used for transferring data between the Lagrangian and Eulerian nodes. However, none of these functions are continuously differentiable as required for the continuum sensitivity analysis. To address this issue a regularized delta function is introduced.
 
-\subsection{Regularized Heaviside/Delta Function}
+% ============================================================================
+\section{Regularized Heaviside/Delta Function}
 The Regularized Heaviside (RH) function is a step function that is smoothed so that its derivative can be calculated numerically. The RH function is also known as sigmoid function in mathematics and is characterized as a real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. The RH function is used instead of the step function to penalized the governing equation.  Several different RH functions defined in Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} are shown in Figure \ref{fig:C4_heavisideFunctionExample}.
 
 \begin{subequations}\label{eq:C4_regularizedHeavisideFunctionFormulas}
@@ -97,8 +97,8 @@ For IB simulations incorporating the virtual boundary method, the Regularized De
 
 In this work, the RD function $\mathcal{D}_2$ is selected for implimentation in the virtual boundary method. The sharpness of this RD function is further controlled by using the $\eta$ function as used in the definition of the corresponding RH function. This is defined in Equation \eqref{eq:C4_deltaFunction}. The RD function for different value for $\eta$ is shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}.
 
-\begin{equation}\label{eq:C4_heavisideFunction}
-	\mathcal{D} = \frac{e^{- \dfrac{x}{\eta}}}{t \left(1 + e^{- \dfrac{x}{\eta}}\right)^{2}}
+\begin{equation}\label{eq:C4_deltaFunction}
+	\mathcal{D} = \frac{e^{- \dfrac{x}{\eta}}}{\eta \left(1 + e^{- \dfrac{x}{\eta}}\right)^{2}}
 \end{equation}
 
 \begin{figure}[H]
@@ -110,7 +110,34 @@ In this work, the RD function $\mathcal{D}_2$ is selected for implimentation in 
 
 As shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}, the RD function has continuous derivatives. This enables the use of virtual boundary method to be used as a part continuum sensitivity analysis for sensitivity calculation through providing differentiable governing equations.
 
+% ============================================================================
+\section{Sensitivity Analysis Formulation}
+In this section, the sensitivity equations are derived for IB representation of solid boundaries. Two separate IB method are selected for the sensitivity analysis, the penalization method and the virtual boundaries method. The direct and adjoint sensitivity equations for design variables that control the shape of the IB are derived for these analysis and later applied two different demonstration problems. 
+
 \subsection{Direct Method}
+As mentioned in Chapter \ref{ch:sensitivityAnalysis}, the direct method for sensitivity analysis is preferred where the number of design variables are less than number of the functions that the sensitivities are calculated for. For this approach, the governing equations are differentiated with respect to the arbitrary shape design variable, $b$.
+
+For the penalization method, a level-set definition of the solid boundary is used to assign penalization factors to the nodes. As defined in Chapter \ref{ch:immersedBoundary}, the boundary is defined using an analytical function $\mathcal{X}$ that depends on the shape design variable. Using the RH function, the governing equation for flow over the immersed boundaries using penalization method is written as shown in Equation \eqref{eq:C4_NSwithPenalizationIB}.
+
+\begin{equation}\label{eq:C4_NSwithPenalizationIB}
+	\frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} = 
+	-\frac{\nabla P}{\rho} + \nu \nabla^2 \mathbf{u} -\mathcal{H}(\mathcal{X}(b)) \kappa \mathbf{u}
+\end{equation}
+
+Equation \eqref{eq:C4_NSwithPenalizationIB} is differentiated with respect to design variable $b$ to derive the continuum sensitivity equations. The symbol $(\text{ })'$ is used instead of $\partial /\partial b$ in the sensitivity equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}.
+
+\begin{equation}\label{eq:C4_NSwithPenalizationIBsensitivity}
+	\frac{\partial \mathbf{u}'}{\partial t} +
+	\mathbf{u}' \cdot \nabla \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u}' = 
+	-\frac{\partial P'}{\rho} + 
+	\nu \nabla^2 \mathbf{u}' - 
+	\underbrace{\frac{\partial \mathcal{H}}{\partial \mathcal{X}} \frac{\partial \mathcal{X}}{\partial b} \kappa \mathbf{u}}_\text{effect of shape change} - 
+	\mathcal{H}(\mathcal{X}) \kappa \mathbf{u}'
+\end{equation}
+
+Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity} is solved for the velocity and pressure sensitivities ($\mathbf{u}'$, $P'$) by knowing the values of $\mathbf{u}$ from the analysis. As shown in Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}, the effect of shape change is introduced to the sensitivity equation through the derivative of the RH function. $\partial \mathcal{H}/\partial \mathcal{X}$ is easily calculated by analytical differentiating the RH function with respect to $\mathcal{X}$. The evaluation of $\partial \mathcal{X}/\partial b$ is also straight forward since it was assumed that the solid boundary is defined analytically. The boundary conditions for Equation \eqref{eq:C4_NSwithPenalizationIB} are often independent of the shape design variables. Therefore, their derivative is zero. This enables us to solve the governing Equation of \eqref{eq:C4_NSwithPenalizationIBsensitivity} for the sensitivity response.
+
+Sensitivity implementation for the virtual boundary method is more demanding. Using the RD function, the NS equation using virtual boundary method for solid boundary definition is written as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB}
 
 \subsection{Adjoint Method}
 
