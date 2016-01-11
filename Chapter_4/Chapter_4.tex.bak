@@ -49,9 +49,9 @@ The Regularized Heaviside (RH) function is a step function that is smoothed so t
 \begin{subequations}\label{eq:C4_regularizedHeavisideFunctionFormulas}
 \begin{align}
 	\mathcal{H}_1 &= \frac{1}{2} + \frac{1}{\pi} \arctan \left( x \right) \\
-	\mathcal{H}_2 &= \frac{1}{1 + e^{-2x}} \\
+	\mathcal{H}_2 &= \frac{1}{1 + e^{-x}} \\
 	\mathcal{H}_3 &= e^{-e^{-x}} \\
-	\mathcal{H}_4 &= \frac{1 + \tanh(x / 4)}{2}
+	\mathcal{H}_4 &= \frac{1 + \tanh(x)}{2}
 \end{align}
 \end{subequations}
 
@@ -62,10 +62,10 @@ The Regularized Heaviside (RH) function is a step function that is smoothed so t
 	\label{fig:C4_heavisideFunctionExample}
 \end{figure}
 
-As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all the RH functions are symmetric around $x = 0$ other than $\mathcal{H}_3$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain and NS equations are penalized based on the location of this boundary. In this work, the RH function is selected as $\mathcal{H}_2 = \dfrac{1}{1 + e^{-2x}}$ since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter} the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
+As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all the RH functions are symmetric around $x = 0$ other than $\mathcal{H}_3$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain and NS equations are penalized based on the location of this boundary. In this work, the RH function is selected as $\mathcal{H}_4 = \frac{1 + \tanh(x)}{2}$ since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter} the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
 
 \begin{equation}\label{eq:C4_heavisideFunction}
-	\mathcal{H} = \frac{1}{1 + e^{-x / \eta}}
+	\mathcal{H} = \frac{1 + \tanh(x / \eta)}{2}
 \end{equation}
 
 \begin{figure}[H]
@@ -82,9 +82,9 @@ For IB simulations incorporating the virtual boundary method, the Regularized De
 \begin{subequations}\label{eq:C4_regularizedDeltaFunctionFormulas}
 \begin{align}
 	\mathcal{D}_1 &= \frac{1}{\pi \left(x^{2} + 1\right)} \\
-	\mathcal{D}_2 &= \frac{2 e^{- 2 x}}{\left(e^{- 2 x} + 1\right)^{2}} \\
+	\mathcal{D}_2 &= \frac{e^{- x}}{\left(1 + e^{- x}\right)^{2}} \\
 	\mathcal{D}_3 &= \frac{e^{- x}}{e^{e^{- x}}} \\
-	\mathcal{D}_4 &= - 0.125 \tanh^{2}{\left (\frac{x}{4} \right )} + 0.125
+	\mathcal{D}_4 &= - \frac{\tanh^{2}{\left (x \right )} + 1}{2}
 \end{align}
 \end{subequations}
 
@@ -95,10 +95,10 @@ For IB simulations incorporating the virtual boundary method, the Regularized De
 	\label{fig:C4_deltaFunctionExample}
 \end{figure}
 
-In this work, the RD function $\mathcal{D}_2$ is selected for implimentation in the virtual boundary method. The sharpness of this RD function is further controlled by using the $\eta$ function as used in the definition of the corresponding RH function. This is defined in Equation \eqref{eq:C4_deltaFunction}. The RD function for different value for $\eta$ is shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}.
+RD functions $\mathcal{D}_2$ and $\mathcal{D}_3$ exhibits instability issues due to different powers of exponential in the numerator and denominator and $\mathcal{D}_1$ does not have a required sharpness expected from a RD function. Therefore, in this work, the RD function $\mathcal{D}_4$ is selected for implementation in the virtual boundary method. The sharpness of this RD function is further controlled by using the $\eta$ function as used in the definition of the corresponding RH function. This is defined in Equation \eqref{eq:C4_deltaFunction}. The RD function for different value for $\eta$ is shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}.
 
 \begin{equation}\label{eq:C4_deltaFunction}
-	\mathcal{D} = \frac{e^{- \dfrac{x}{\eta}}}{\eta \left(1 + e^{- \dfrac{x}{\eta}}\right)^{2}}
+	\mathcal{D} = \dfrac{1}{\eta} \left( \dfrac{-\tanh^{2}{\left (\dfrac{x}{\eta} \right )} + 1}{2} \right)
 \end{equation}
 
 \begin{figure}[H]
@@ -137,7 +137,28 @@ Equation \eqref{eq:C4_NSwithPenalizationIB} is differentiated with respect to de
 
 Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity} is solved for the velocity and pressure sensitivities ($\mathbf{u}'$, $P'$) by knowing the values of $\mathbf{u}$ from the analysis. As shown in Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}, the effect of shape change is introduced to the sensitivity equation through the derivative of the RH function. $\partial \mathcal{H}/\partial \mathcal{X}$ is easily calculated by analytical differentiating the RH function with respect to $\mathcal{X}$. The evaluation of $\partial \mathcal{X}/\partial b$ is also straight forward since it was assumed that the solid boundary is defined analytically. The boundary conditions for Equation \eqref{eq:C4_NSwithPenalizationIB} are often independent of the shape design variables. Therefore, their derivative is zero. This enables us to solve the governing Equation of \eqref{eq:C4_NSwithPenalizationIBsensitivity} for the sensitivity response.
 
-Sensitivity implementation for the virtual boundary method is more demanding. Using the RD function, the NS equation using virtual boundary method for solid boundary definition is written as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB}
+Sensitivity implementation for the virtual boundary method is more demanding. Using the RD function, the NS equation using virtual boundary method for solid boundary definition is written as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB}.
+
+\begin{align}\label{eq:C4_NSwithvirtualBoundaryIB}
+	\frac{\partial \mathbf{u}}{\partial t} + 
+	\mathbf{u} \cdot \nabla \mathbf{u} = 
+	&-\frac{\nabla P}{\rho} + 
+	\nu \nabla^2 \mathbf{u} + \nonumber \\
+	&\left\{
+	\alpha
+	\int_0^t
+	\left[
+		\int \mathbf{u}(\mathbf{x}, \tau) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x} - \mathbf{V}(\mathbf{X}, \tau)
+	\right] d\tau \right.
+	+ \nonumber \\
+	&
+	\left.
+	\beta
+	\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x} - \mathbf{V}(\mathbf{X}, t)
+	\right\} \bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})
+\end{align}
+
+In above equation, $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point on the solid boundary and $\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x}$ is the current velocity at the Lagrangian node $\mathbf{X}$ on the solid boundary calculated from the Eulerian nodes on the fluid's domain. To transfer the forces back to the Eulerian nodes, the same normalized RD function is used as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} by $\bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})$ where the term in the parenthesis ($\mathbf{x} - \mathbf{X}$) is responsible for casting the RD function at the location of the Lagrangian point $\mathbf{X}$. The term normalized mean that the maximum value for the RD function $\mathcal{D}$ is equal to one. This is essential to have a conservative transformation between the Eulerian and Lagrangian computational nodes. Assume that 
 
 \subsection{Adjoint Method}
 

@@ -23,9 +23,9 @@ D3 = sym.diff(H3, x)
 D4 = sym.diff(H4, x)
 
 # print(sym.latex(D1.subs({t:1})))
-# print(sym.latex(D2.subs({t:0.5})))
+# print(sym.latex(D2.subs({t:1})))
 # print(sym.latex(D3.subs({t:1})))
-# print(sym.latex(D4.subs({t:4})))
+# print(sym.latex(D4.subs({t:1})))
 
 D1 = sym.lambdify([x, t], D1, "numpy")
 D2 = sym.lambdify([x, t], D2, "numpy")
@@ -33,9 +33,9 @@ D3 = sym.lambdify([x, t], D3, "numpy")
 D4 = sym.lambdify([x, t], D4, "numpy")
 
 t1 = 1
-t2 = 0.5
+t2 = 1
 t3 = 1
-t4 = 4
+t4 = 1
 x = np.linspace(-10, 10, 1000)
 xInt = np.linspace(-100, 100, 1000000)
 # print(np.trapz(D1(xInt, t1), xInt))
@@ -56,15 +56,15 @@ xInt = np.linspace(-100, 100, 1000000)
 # plt.grid('on')
 # plt.minorticks_on()
 # plt.grid(which='minor')
-# # plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
+# plt.savefig(fileName, format='eps', dpi=1000, bbox_inches='tight')
 # plt.show()
 
 fileName = 'delta_function_with_control.eps'
 plt.figure(figsize=(30, 15))
-plt.plot(x, D2(x, 2),
-         x, D2(x, 1),
-         x, D2(x, 0.25),
-         x, D2(x, 0.1),
+plt.plot(x, D4(x, 2),
+         x, D4(x, 1),
+         x, D4(x, 0.25),
+         x, D4(x, 0.1),
          lw=linewidth)
 plt.legend([r'$\eta = 2$', r'$\eta = 1$', r'$\eta = 0.25$', r'$\eta = 0.1$'])
 plt.xlabel(r'$x$')

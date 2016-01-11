@@ -29,9 +29,9 @@ x = np.linspace(-10, 10, 1000)
 # plt.figure(figsize=(30, 15))
 # # plt.figure()
 # plt.plot(x, H1(x, 1),
-#          x, H2(x, 0.5),
+#          x, H2(x, 1),
 #          x, H3(x, 1),
-#          x, H4(x, 4),
+#          x, H4(x, 1),
 #          x, S(x),
 #          lw=linewidth)
 # plt.xlabel(r'$x$')
@@ -47,10 +47,10 @@ x = np.linspace(-10, 10, 1000)
 fileName = 'heaviside_function_with_control.eps'
 plt.figure(figsize=(30, 15))
 # plt.figure()
-plt.plot(x, H2(x, 5),
-         x, H2(x, 1),
-         x, H2(x, 0.2),
-         x, H2(x, 0.04),
+plt.plot(x, H4(x, 5),
+         x, H4(x, 1),
+         x, H4(x, 0.2),
+         x, H4(x, 0.04),
          x, S(x),
          lw=linewidth)
 plt.xlabel(r'$x$')
