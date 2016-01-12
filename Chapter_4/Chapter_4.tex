@@ -158,7 +158,87 @@ Sensitivity implementation for the virtual boundary method is more demanding. Us
 	\right\} \bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})
 \end{align}
 
-In above equation, $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point on the solid boundary and $\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x}$ is the current velocity at the Lagrangian node $\mathbf{X}$ on the solid boundary calculated from the Eulerian nodes on the fluid's domain. To transfer the forces back to the Eulerian nodes, the same normalized RD function is used as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} by $\bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})$ where the term in the parenthesis ($\mathbf{x} - \mathbf{X}$) is responsible for casting the RD function at the location of the Lagrangian point $\mathbf{X}$. The term normalized mean that the maximum value for the RD function $\mathcal{D}$ is equal to one. This is essential to have a conservative transformation between the Eulerian and Lagrangian computational nodes. This is shown in the following example.
+In above equation, $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point on the solid boundary and $\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x}$ is the current velocity at the Lagrangian node $\mathbf{X}$ on the solid boundary calculated from the Eulerian nodes on the fluid's domain. To transfer the forces back to the Eulerian nodes, the same normalized RD function is used as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} by $\bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})$ where the term in the parenthesis ($\mathbf{x} - \mathbf{X}$) is responsible for casting the RD function at the location of the Lagrangian point $\mathbf{X}$. The term normalized mean that the maximum value for the RD function $\mathcal{D}$ is equal to one. This is essential to have a conservative transformation between the Eulerian and Lagrangian computational nodes. The mapping procedure is illustrated in the following example.
+
+Assume that the analytical function $y=x^2$ is evaluated at $9$ location between $0$ and $1$. To know the function value at locations $X = 0.3321$ and $X = 0.5813$ that does not coincide with the location where the function is evaluated, it is required to use the following equation. We used the RD definition of Equation \eqref{eq:C4_deltaFunction} with $\eta = 0.1$ for this purpose.
+
+\begin{equation}\label{eq:C4_euler2lagrange}
+	y(X) = \sum_{i=1}^9 \mathcal{D}_i Y_i \Delta x_i
+\end{equation}
+
+where the subscript $i$ This equation used the data from nodes around $X$ to calculate the function value. To convert the data at $X$ (Lagrangian node) back to the surrounding nodes where the original function was evaluated, the following equation is used.
+
+\begin{equation}
+	y(x) = y(X) \bar{\mathcal{D}}(x - X)
+\end{equation}
+
+where $\bar{\mathcal{D}}(x - X)$ is a vector of numbers. The transfer of data from Eulerian nodes to Lagrangian is shown in Figure \ref{fig:C4_euler2lagrangeExample}. In this figure, the original function is represented by the solid black line and the sampling location are represented by black circles. The exact function value at the Lagrangian point is shown by red circle and the calculated value from Equation \eqref{eq:C4_euler2lagrange} is shown by blue cross. The numerical results for the comparison between the interpolated and actual values are shown in Table \ref{table:C4_euler2lagrangeExample}. The green squares represent the mapped back data to the Eulerian domain from the data at the Lagrangian point $X$ shown with red circle in Figure \ref{fig:C4_euler2lagrangeExample}. As shown here, the data at Lagrangian nodes mainly affects the two closest Eulerian nodes. The effect of Lagrangian data at $X$ decreases by moving further from $X$. The mapping from the Lagrangian to Eulerian domain has larger error compared to the mapping from Eulerian to Lagrangian grid. However, since this is done in a loop the error diminishes as simulation moves in time.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[$X = 0.3321$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_4/figure/euler2lagrange_example_03321.eps}
+	}
+	\quad
+	\subfigure[$X = 0.5813$]
+	{
+	\includegraphics[width=7.0cm]{Chapter_4/figure/euler2lagrange_example_05813.eps}
+	}
+	\caption{Mapping the results between the Eulerian and Lagrangian computational nodes.}
+	\label{fig:C4_euler2lagrangeExample}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{| c | c |}
+	\hline
+	Lagrangian node location ($X$) & Absolute error \\ \hline \hline
+	0.3321 & 0.0077 \\ \hline
+	0.5813 & 0.0021 \\ \hline
+\end{tabular}
+\caption{Comparison between the true and interpolated result using the RD function at arbitrary Lagrangian location, $X$.}
+\label{table:C4_euler2lagrangeExample}
+\end{table}
+
+Using this continuous mapping between the Eulerian and Lagrangian domains, the governing equation of \eqref{eq:C4_NSwithvirtualBoundaryIB} is differentiated with respect to design variable $b$ to derive the sensitivity equations. $(\text{ })'$ is used instead of the sensitivity operator, $\partial/\partial b$.
+
+\begin{align}\label{eq:C4_NSwithvirtualBoundaryIBsensitivity}
+	\frac{\partial \mathbf{u}'}{\partial t} &+ 
+	\mathbf{u}' \cdot \nabla \mathbf{u} +
+	\mathbf{u} \cdot \nabla \mathbf{u}' = 
+	-\frac{\nabla P'}{\rho} + 
+	\nu \nabla^2 \mathbf{u}' + \nonumber \\
+	&\left\{
+	\alpha
+	\int_0^t
+	\left[
+		\int \mathbf{u}'(\mathbf{x}, \tau) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x} + 
+		\int \mathbf{u}(\mathbf{x}, \tau) \frac{\partial \mathcal{D}}{\partial X} \frac{\partial X}{\partial b} d\mathbf{x}
+	\right] d\tau \right.
+	+ \nonumber \\
+	&
+	\left.
+	\beta
+	\int \mathbf{u}'(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x} +
+	\int \mathbf{u}(\mathbf{x}, t) \frac{\partial \mathcal{D}}{\partial X} \frac{\partial X}{\partial b} d\mathbf{x}
+	\right\} \bar{\mathcal{D}}(\mathbf{x} - \mathbf{X}) + \nonumber \\
+	&\left\{
+	\alpha
+	\int_0^t
+	\left[
+		\int \mathbf{u}(\mathbf{x}, \tau) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x} - \mathbf{V}(\mathbf{X}, \tau)
+	\right] d\tau \right.
+	+ \nonumber \\
+	&
+	\left.
+	\beta
+	\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x} - \mathbf{V}(\mathbf{X}, t)
+	\right\}
+	\frac{\partial \bar{\mathcal{D}}}{\partial X} \frac{\partial X}{\partial b}
+\end{align}
+
+Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity} is solved for the sensitivity response $\mathbf{u}'$, where $\mathbf{u}$ is known from the analysis results. The effect of shape change is introduced in the sensitivity equation through the derivative of the RD function, $\dfrac{\partial D}{\partial X} \dfrac{\partial X}{\partial b}$. The first term in this description is easily calculated since the RD function is known. The derivative of Lagrangian node location, $X$, to the design variable, $b$, is known since the solid boundary is defined analytically. The boundary conditions of Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} are often design independent and have zero sensitivity.
 
 \subsection{Adjoint Method}
 
