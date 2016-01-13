@@ -241,6 +241,27 @@ Using this continuous mapping between the Eulerian and Lagrangian domains, the g
 Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity} is solved for the sensitivity response $\mathbf{u}'$, where $\mathbf{u}$ is known from the analysis results. The effect of shape change is introduced in the sensitivity equation through the derivative of the RD function, $\dfrac{\partial D}{\partial X} \dfrac{\partial X}{\partial b}$. The first term in this description is easily calculated since the RD function is known. The derivative of Lagrangian node location, $X$, to the design variable, $b$, is known since the solid boundary is defined analytically. The boundary conditions of Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} are often design independent and have zero sensitivity.
 
 \subsection{Adjoint Method}
+The adjoint method is preferred when the number of the functions the sensitivity is calculated for is less than the number of design variables. To derive the continuous adjoint sensitivity, the governing equation is defined as $\mathcal{R}(\mathbf{u}, \mathbf{b}) = 0$ and the function of which the sensitivities are calculated is defined as $h(\mathbf{u}, \mathbf{b})$. In these equations, $\mathbf{u}$ is the response variable, i.e. velocity, pressure, or displacement, and $\mathbf{b}$ is the design variable. To derive the adjoint formulation, the Lagrangian is defined as shown in Equation \eqref{eq:C4_lagrangianForAdjoint}. It should be noted that if $\mathbf{u}$ satisfies the governing equation, the Lagrangian, $\Gamma$, is equal to the function of interest. Therefore, its sensitivity is equal to sensitivity of the Lagrangian.
+
+\begin{equation}\label{eq:C4_lagrangianForAdjoint}
+	\Gamma(\mathbf{u}, \mathbf{b}) = h(\mathbf{u}, \mathbf{b}) + \lambda \mathcal{R}(\mathbf{u}, \mathbf{b})
+\end{equation}
+
+Differentiating Equation \eqref{eq:C4_lagrangianForAdjoint} and rewriting the terms results in the following equation. 
+
+\begin{equation}
+	\frac{d \Gamma}{d b_i} = 
+	\frac{\partial h}{\partial b_i} + 
+	\left[ \frac{\partial h}{\partial \mathbf{u}} + \lambda \frac{\partial \mathcal{R}}{\partial b_i} \right]
+	\frac{\partial \textbf{u}}{\partial b_i} + 
+	\lambda \frac{\partial \mathcal{R}}{\partial b_i}
+\end{equation}
+
+To avoid calculating $\dfrac{\partial \textbf{u}}{\partial b_i}$, its coefficient is set equal to zero. This results in Equation \eqref{eq:C4_adjointVectorDefinition} for the adjoint variable $\lambda$.
+
+\begin{equation}\label{eq:C4_adjointVectorDefinition}
+	\lambda = -\left( \frac{\partial \mathcal{R}}{\partial \mathbf{u}} \right)^{-1} \frac{\partial h}{\partial \mathbf{u}}
+\end{equation}
 
 \section{Shape Sensitivity Analysis for 1D problem}
 
