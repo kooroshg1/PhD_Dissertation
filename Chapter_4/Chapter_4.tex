@@ -263,6 +263,31 @@ To avoid calculating $\dfrac{\partial \textbf{u}}{\partial b_i}$, its coefficien
 	\lambda = -\left( \frac{\partial \mathcal{R}}{\partial \mathbf{u}} \right)^{-1} \frac{\partial h}{\partial \mathbf{u}}
 \end{equation}
 
+By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\mathbf{u}, \mathbf{b})$, is written as shown in Equation \eqref{eq:C4_functionSensitivityAdjoint}
+
+\begin{equation}\label{eq:C4_functionSensitivityAdjoint}
+	\frac{d \Gamma}{d b_i} = 
+	\frac{\partial h}{\partial b_i} + 
+	\lambda \frac{\partial \mathcal{R}}{\partial b_i}
+\end{equation}
+
+The adjoint formulation is implemented for a simple continuous system as defined in Figure \ref{fig:C4_stepBeamAdjoint}. The design variables are selected as the cross-sectional areas of the axial bars, $A_1$ and $A_2$. The length of bars are selected as $L_1$ and $L_2$ with a force applied at the tip, $F$. We are interested in the sensitivity of stress in bar (1) with respect to the cross-section areas $A_1$ and $A_2$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=7.00cm]{Chapter_4/figure/beam_adjoint_example_problem.png}
+	\caption{Step bar problem.}
+	\label{fig:C4_stepBeamAdjoint}
+\end{figure}
+
+The governing equation for this problem is defined in Equation \eqref{eq:C4_governingEquationForAdjointExample}.
+
+\begin{equation}\label{eq:C4_governingEquationForAdjointExample}
+	\mathcal{R}(\sigma, A_1, A_2) = \frac{\partial (\sigma A)}{\partial x}
+\end{equation}
+
+
+
 \section{Shape Sensitivity Analysis for 1D problem}
 
 \section{Shape Sensitivity of Flow over a Cylinder}
