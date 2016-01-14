@@ -286,7 +286,131 @@ The governing equation for this problem is defined in Equation \eqref{eq:C4_gove
 	\mathcal{R}(\sigma, A_1, A_2) = \frac{\partial (\sigma A)}{\partial x}
 \end{equation}
 
+The solution for stress in the domain is found by integrating Equation \eqref{eq:C4_governingEquationForAdjointExample}. However, due to discontinuity at $x = L_1$, the integration is done for each section of the domain as shown in Equation \eqref{eq:C4_solutionForBarProblem}. These results agree with what is expected for the stress distribution for this problem.
 
+\begin{subequations}\label{eq:C4_solutionForBarProblem}
+\begin{equation}
+	\int_0^{x < L_1} \frac{\partial (\sigma A)}{\partial x} dx = 0 \rightarrow \sigma_x A_1 - F = 0 \rightarrow \sigma_x = \frac{F}{A_1}
+\end{equation}
+\begin{equation}
+	\int_{L_1}^{L_1 + x} \frac{\partial (\sigma A)}{\partial x} dx = 0 \rightarrow \sigma_x A_2 - F = 0 \rightarrow \sigma_x = \frac{F}{A_2}
+\end{equation}
+\end{subequations}
+
+The sensitivity of the stress in the first element to the design variables, is first calculated using the direct method. This requires solving the sensitivity equation once for each of the design variables. The sensitivity equation is written by differentiating the governing equation \eqref{eq:C4_governingEquationForAdjointExample} as shown in Equation \eqref{eq:C4_sensitivityEquationForDirectMethodBar}.
+
+\begin{equation}\label{eq:C4_sensitivityEquationForDirectMethodBar}
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma}{\partial A_i} A + \sigma \frac{\partial A}{\partial A_i}
+	\right) = 0
+\end{equation}
+
+The sensitivity of stress in the first bar is calculated by integrated above equation. This needs to be done for each of the design variables as shown in Equation \eqref{eq:C4_directSensitivityMethodForBarExample}.
+
+\begin{subequations}
+\begin{align}
+	\int_0^x
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma}{\partial A_1} A + \sigma \frac{\partial A}{\partial A_1}
+	\right) dx &= 0 \nonumber \\
+	\frac{\partial \sigma}{\partial A_1} A_1 + \sigma_1 &= 0 \rightarrow 
+	\frac{\partial \sigma_1}{\partial A_1} = -\frac{\sigma_1}{A_1}
+\end{align}
+\begin{align}
+	\int_0^x
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma}{\partial A_2} A + \sigma \frac{\partial A}{\partial A_2}
+	\right) dx &= 0 \nonumber \\
+	\frac{\partial \sigma}{\partial A_2} A_2 + \sigma_2 &= 0 \rightarrow 
+	\frac{\partial \sigma_2}{\partial A_2} = -\frac{\sigma_2}{A_2}
+\end{align}
+\end{subequations}
+
+These results agree with the analytical sensitivity results for this problem. The Lagrangian function is defined as shown in Equation \eqref{eq:C4_lagrangianForBarExample}.
+
+\begin{equation}\label{eq:C4_lagrangianForBarExample}
+	\Gamma = h(\sigma) + \mathcal{R}(\sigma, A)
+\end{equation}
+
+where $h(\sigma)$ is the stress in first element, and $\mathcal{R}(\sigma, A)$ is the governing equation. $\mathcal{R}(\sigma, A)$ is equal to zero when the governing equation is satisfied therefore, calculating the sensitivity of $\Gamma$ is same as $h$. This is done in Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}.
+
+\begin{equation}\label{eq:C4_barExampleAdjointSensitivityEquation}
+	\frac{d\Gamma}{d \bar{A}} = 
+	\frac{\partial h}{\partial \bar{A}} + \lambda \frac{\partial \mathcal{R}}{\partial \bar{A}} + 
+	\left[
+	\frac{\partial h}{\partial \bar{\sigma}} + \lambda \frac{\partial \mathcal{R}}{\partial \bar{\sigma}}
+	\right]
+	\frac{\partial \bar{\sigma}}{\partial \bar{A}}
+\end{equation}
+
+where $\bar{\text{ }}$ represents a vector. $\dfrac{\partial h}{\partial \bar{A}}$ is equal to zero since $h = \sigma_1$ and the stress does not explicitly related to the cross-sectional area. $\dfrac{\partial h}{\partial \bar{\sigma}}$ is calculated easily. $\dfrac{\partial \mathcal{R}}{\partial \bar{\sigma}}$ is calculated as shown in Equation \eqref{eq:C4_sensitivityOfGoverningEquationToStressBarExample}.
+
+\begin{subequations}\label{eq:C4_sensitivityOfGoverningEquationToStressBarExample}
+\begin{align}
+	\frac{\partial \mathcal{R}}{\partial \sigma_1} &= 
+	\frac{\partial }{\partial x}
+	\left(
+	\frac{\partial \sigma}{\partial \sigma_1} A + \sigma \frac{\partial A}{\partial \sigma_1}
+	\right) \nonumber \\
+	&\rightarrow
+	\int_0^{L_1}
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma_1}{\partial \sigma_1} A_1
+	\right) dx + 
+	\int_{L_1}^{L_1 + x}
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma_2}{\partial \sigma_1} A_2
+	\right) dx = A_1
+\end{align}
+\begin{align}
+	\frac{\partial \mathcal{R}}{\partial \sigma_1} &= 
+	\frac{\partial }{\partial x}
+	\left(
+	\frac{\partial \sigma}{\partial \sigma_2} A + \sigma \frac{\partial A}{\partial \sigma_2}
+	\right) \nonumber \\
+	&\rightarrow
+	\int_0^{L_1}
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma_1}{\partial \sigma_2} A_1
+	\right) dx + 
+	\int_{L_1}^{L_1 + x}
+	\frac{\partial}{\partial x}
+	\left(
+	\frac{\partial \sigma_2}{\partial \sigma_2} A_2
+	\right) dx = A_2
+\end{align}
+\end{subequations}
+
+Using Equation \eqref{eq:C4_sensitivityOfGoverningEquationToStressBarExample}, it is possible to solve for the ajoint vector $\lambda$ in Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}.
+
+\begin{align}
+	\frac{\partial h}{\partial \bar{\sigma}} + \lambda \frac{\partial \mathcal{R}}{\partial \bar{\sigma}} &= 0 \nonumber \\
+	\begin{bmatrix}
+	1 \\
+	0
+	\end{bmatrix} + 
+	\lambda
+	\begin{bmatrix}
+	A_1 & 0 \\
+	0 & A_2
+	\end{bmatrix}
+	&=
+	\begin{bmatrix}
+	0 \\
+	0
+	\end{bmatrix} \rightarrow
+	\lambda = -
+	\begin{bmatrix}
+	1/A_1 & 0 \\
+	0 & 0
+	\end{bmatrix}
+\end{align}
 
 \section{Shape Sensitivity Analysis for 1D problem}
 
