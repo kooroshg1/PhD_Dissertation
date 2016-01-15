@@ -389,7 +389,7 @@ where $\bar{\text{ }}$ represents a vector. $\dfrac{\partial h}{\partial \bar{A}
 
 Using Equation \eqref{eq:C4_sensitivityOfGoverningEquationToStressBarExample}, it is possible to solve for the ajoint vector $\lambda$ in Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}.
 
-\begin{align}
+\begin{align}\label{eq:C4_adjointVectorForBarExample}
 	\frac{\partial h}{\partial \bar{\sigma}} + \lambda \frac{\partial \mathcal{R}}{\partial \bar{\sigma}} &= 0 \nonumber \\
 	\begin{bmatrix}
 	1 \\
@@ -407,12 +407,42 @@ Using Equation \eqref{eq:C4_sensitivityOfGoverningEquationToStressBarExample}, i
 	\end{bmatrix} \rightarrow
 	\lambda = -
 	\begin{bmatrix}
-	1/A_1 & 0 \\
-	0 & 0
+	1/A_1 \\
+	0
 	\end{bmatrix}
 \end{align}
 
-Finally, to calculate the sensitivities it is required 
+Finally, to calculate the sensitivities it is required to calculate the sensitivity of the governing equation \eqref{eq:C4_governingEquationForAdjointExample} to the design variables. This is easy to calculate since the no solution is needed. This is done in Equation \eqref{eq:C4_sensitivityOfRtoAbarExample}.
+
+\begin{subequations}\label{eq:C4_sensitivityOfRtoAbarExample}
+\begin{equation}
+	\frac{\partial \mathcal{R}}{\partial A_1} = \int_0^{x < L_1} \frac{\partial \sigma}{\partial x} dx = \sigma_1
+\end{equation}
+\begin{equation}
+	\frac{\partial \mathcal{R}}{\partial A_2} = \int_{L_1}^{x < L_2} \frac{\partial \sigma}{\partial x} dx = \sigma_2
+\end{equation}
+\end{subequations}
+
+The sensitivity of stress in first bar is calculate by substituting Equations \eqref{eq:C4_adjointVectorForBarExample} and \eqref{eq:C4_sensitivityOfRtoAbarExample} into Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}. The sensitivity of stress in first bar to design variables using adjoint method is written as
+
+\begin{equation}
+	\frac{d \Gamma}{d \bar{A}} = 
+	-\begin{bmatrix}
+	1/A_1 \\
+	0
+	\end{bmatrix}^T
+	\begin{bmatrix}
+	\sigma_1 & 0 \\
+	0 & \sigma_2
+	\end{bmatrix} =
+	-
+	\begin{bmatrix}
+	\sigma_1 / A_1 \\
+	0
+	\end{bmatrix}
+\end{equation}
+
+This agrees with the analytical results of the sensitivities. 
 
 \section{Shape Sensitivity Analysis for 1D problem}
 
