@@ -75,7 +75,13 @@ As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all the RH functions a
 	\label{fig:C4_heavisideFunctionWithControlParamter}
 \end{figure}
 
-The penalized NS equation using the RH function of Equation \eqref{fig:C4_heavisideFunctionExample} is continuous and can be differentiated to derive the continuum sensitivity equations.
+The penalized NS equation using the RH function of Equation \eqref{fig:C4_heavisideFunctionExample} is continuous and can be differentiated to derive the continuum sensitivity equations. The free parameter is defined based on desired change of RH function within a specific range as shown in Equation \eqref{eq:C4_etaGuideForRHfunction}.
+
+\begin{equation}\label{eq:C4_etaGuideForRHfunction}
+	\eta = \frac{R}{2 \tanh^{-1} (p)}
+\end{equation}
+
+Where $R$ is the distance that the $p$ percentage of the RH function occurs. For example if it is required for the RH function to change 99 percent (p = 0.99) within length of 0.01 ($R = 0.01$), the required $\eta$ is calculated as $0.0018$ using Equation \eqref{eq:C4_etaGuideForRHfunction}.
 
 For IB simulations incorporating the virtual boundary method, the Regularized Delta (RD) function is a substitute used for transferring data between the Lagrangian and Eulerian nodes. In mathematics, the Dirac delta function is defined as the derivative of the unit step function. To be consistant with the mathematical formulation, the RD function is calculated by differentiating the RH functions of Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} as shown in Equation \eqref{eq:C4_regularizedDeltaFunctionFormulas}. These RD functions are plotted in Figure \ref{fig:C4_deltaFunctionExample}.
 
@@ -108,7 +114,13 @@ RD functions $\mathcal{D}_2$ and $\mathcal{D}_3$ exhibits instability issues due
 	\label{fig:C4_deltaFunctionWithControlParamter}
 \end{figure}
 
-As shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}, the RD function has continuous derivatives. This enables the use of virtual boundary method to be used as a part continuum sensitivity analysis for sensitivity calculation through providing differentiable governing equations.
+As shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}, the RD function has continuous derivatives. This enables the use of virtual boundary method to be used as a part continuum sensitivity analysis for sensitivity calculation through providing differentiable governing equations.For the RD function, the free parameter is calculated by selecting how fast the RD function decay when moving further from its symmetry axis. The free parameter for the RD function is defined in Equation \eqref{eq:C4_etaGuideForRDfunction}.
+
+\begin{equation}\label{eq:C4_etaGuideForRDfunction}
+	\eta = \frac{R}{\tanh^{-1} (\sqrt{1 - p})}
+\end{equation}
+
+Where $R$ is the distance from the symmetry axis of the RD function that the value of RD function drop to $p$ percentage of its maximum value. For example, for the RD function value to drop 99 percent ($p = 0.99$) within 0.01 ($R = 0.01$) of the symmetry axis of the RD function, the $\eta$ value is calculated as $0.0033$ based on Equation \eqref{eq:C4_etaGuideForRDfunction}.
 
 % ============================================================================
 \section{Sensitivity Analysis Formulation}
@@ -308,7 +320,7 @@ The sensitivity of the stress in the first element to the design variables, is f
 
 The sensitivity of stress in the first bar is calculated by integrated above equation. This needs to be done for each of the design variables as shown in Equation \eqref{eq:C4_directSensitivityMethodForBarExample}.
 
-\begin{subequations}
+\begin{subequations}\label{eq:C4_directSensitivityMethodForBarExample}
 \begin{align}
 	\int_0^x
 	\frac{\partial}{\partial x}
@@ -444,8 +456,9 @@ The sensitivity of stress in first bar is calculate by substituting Equations \e
 
 This agrees with the analytical results of the sensitivities. 
 
-\section{Shape Sensitivity Analysis for 1D problem}
-
+% ======================================================================
+\input{Chapter_4/Chapter_4_Shape_Sensitivity_Analysis_for_1D_problem.tex}
+% ======================================================================
 \section{Shape Sensitivity of Flow over a Cylinder}
 
 \section{Shape Sensitivity of Flow through a Nozzle}

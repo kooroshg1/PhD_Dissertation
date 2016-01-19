@@ -1,0 +1,36 @@
+\section{Shape Sensitivity Analysis for 1D problem}
+% ================================================
+For the first benchmark case, we looked at the flow between two plates that was defined in Section \ref{sec:C3_benchmark_case}. The governing equation and boundary conditions for this problem is shown in Equation \eqref{eq:C4_1DbenchmarkProblem}. The boundary condition is defined as $u = U$ at $y = L$.
+
+\begin{subequations}\label{eq:C4_1DbenchmarkProblem}
+\begin{equation}\label{eq:C4_1DbenchmarkGoverningEquation}
+    u_t = \mu u_{yy} \quad \text{in } \Omega_f
+\end{equation}
+\begin{equation}\label{eq:C4_1DbenchmarkBoundaryCondition}
+\begin{cases}
+    u = U \quad \text{at } y = L \\
+    u = 0 \quad \text{at } y = 0
+\end{cases}
+\end{equation}
+\end{subequations}
+
+The analytical result for the steady-state velocity profile between the two plates is defined in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSolution}
+
+\begin{equation}\label{eq:C4_1DbenchmarkAnalyticalSolution}
+	u = \frac{Ux}{L}
+\end{equation}
+
+This enables us to treat the moving wall velocity ($U$) and the distance between the two plates ($L$) as design variables. The sensitivity of steady-state velocity profile between the two plate to these design variables are calculated using CSA. The results of the CSA are verified with the analytical sensitivity results in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSensitivityResults}.
+
+\begin{subequations}\label{eq:C4_1DbenchmarkAnalyticalSensitivityResults}
+\begin{equation}\label{eq:C4_1DbenchmarkAnalyticalSAlength}
+	\frac{\partial u}{\partial L} = -\frac{Ux}{L^2}
+\end{equation}
+\begin{equation}\label{eq:C4_1DbenchmarkAnalyticalSAvelocity}
+	\frac{\partial u}{\partial U} = \frac{x}{L}
+\end{equation}
+\end{subequations}
+
+For this benchmark problem, the flow is modeled using two different immersed boundary techniques introduced in the beginning of this chapter, penalization method and the virtual boundary method. This difference between the analysis of flow in this chapter and Chapter \ref{ch:immersedBoundary} is the use of RH and RD functions instead of discontinuous step and delta function. Therefore, first the effect of these modifications are investigated on the simulation results and then the sensitivity analysis is conducted.
+
+
