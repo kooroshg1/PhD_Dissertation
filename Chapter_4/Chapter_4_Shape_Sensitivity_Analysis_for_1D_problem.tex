@@ -33,7 +33,7 @@ This enables us to treat the moving wall velocity ($U$) and the distance between
 
 For this benchmark problem, the flow is modeled using two different immersed boundary techniques introduced in the beginning of this chapter, penalization method and the virtual boundary method. This difference between the analysis of flow from Chapter \ref{ch:immersedBoundary} is the use of RH and RD functions instead of discontinuous step and delta function. Therefore, first the effect of these modifications are investigated on the simulation results.
 
-For the flow simulation using the penalization method of Equation \eqref{eq:C4_NSwithPenalization} we investigated effect of node number and the moving wall velocity of the accuracy of the solution. To have a stable solution, the time step of flow analysis cannot be bigger that $2 / \kappa$ where $\kappa$ is the porosity value that is selected to model the solid domain. For this analysis the $\eta$ value of the RH function is selected based on the criteria that 99 percent change of the RH function occurs within one mesh cell. The result for the simulation based on RH function is compared with the step function in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}.
+For the flow simulation using the penalization method of Equation \eqref{eq:C4_NSwithPenalization} we investigated effect of node number and the moving wall velocity of the accuracy of the solution. To have a stable solution, the time step of flow analysis cannot be bigger that $2 / \kappa$ where $\kappa$ is the porosity value that is selected to model the solid domain. For this analysis the $\eta$ value of the RH function is selected based on the criteria that 99 percent change of the RH function occurs within two mesh cell. The result for the simulation based on RH function is compared with the step function in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}.
 
 \begin{figure}[H]
 	\centering
@@ -78,8 +78,61 @@ For this problem, the $\kappa$ is selected as $2 \time 10^4$ based on the conver
     \includegraphics[width=12.0cm]{Chapter_4/figure/penalizationMethod_SA_1D_problem_xw07583.eps}
     }
     \caption{RSME value for the sensitivity analysis (SA) and governing equation (GE).}
-    \label{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}
+    \label{fig:C4_effectOfNumberOfNodesOnSensitivityResults1Dproblem}
 \end{figure}
 
+The thin lines in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}, represents the curve fit by function $y = ae^{bx}$ through the RSME values. The slope of this line is $-1.75$ for both of these analysis. This means that the rate of convergence is the same for governing equations and sensitivity analysis for this problem. The source of the error between the analytical and the CSA is better investigated by looking at the comparison between the sensitivity of the velocity profile to the distance between the plates as shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}.
 
-The thin lines in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}, represents the curve fit by function $y = ae^{bx}$ through the RSME values. The slope of this line is $-1.75$ for both of these analysis. This means that the rate of convergence is the same for governing equations and sensitivity analysis for this problem.
+\begin{figure}[H]
+    \centering
+    \subfigure[$x_{wall} = 0.4321, n = 120$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw04321.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.7583, n = 120$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw07583.eps}
+    }
+    \\
+    \subfigure[$x_{wall} = 0.2451, n = 30$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw02451.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.5742, n = 60$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw05742.eps}
+    }
+    \caption{Comparison between the velocity sensitivity profile of CSA and analytical results in the domain. $w_{wall}$ is the location of the stationary wall and $n$ is the number of nodes used to discretize the domain.}
+    \label{fig:C4_sensitivityResults1Dproblem}
+\end{figure}
+
+As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA results start to decay near the boundary. It should be noted that this domain corresponds to the region that we chose the RH function value to have its 99 percent change in. Therefore, the size of this region is known before the analysis. As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, did not affect the sensitivity results in regions further away from the boundary. This means that the sensitivities near the boundary can be reconstructed by post-processing the sensitivity data. This is done using function approximation techniques such as linear extrapolation or TANA \cite{wang1995improved}. The reconstructed results of Figure \ref{fig:C4_sensitivityResults1Dproblem} using linear extrapolation are shown in Figure \ref{fig:C4_sensitivityResultsReconstructed1Dproblem}.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[$x_{wall} = 0.4321, n = 120$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw04321.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.7583, n = 120$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw07583.eps}
+    }
+    \\
+    \subfigure[$x_{wall} = 0.2451, n = 30$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw02451.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.5742, n = 60$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw05742.eps}
+    }
+    \caption{Reconstructed sensitivity by post-processing the results.}
+    \label{fig:C4_sensitivityResultsReconstructed1Dproblem}
+\end{figure}
+
+This problem is also solved using the virtual boundary method.

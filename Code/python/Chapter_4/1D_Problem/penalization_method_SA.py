@@ -53,7 +53,7 @@ def genL(nx):
 # print(np.trapz(D(x, eta=eta0, x0=0), x, axis=0))
 
 
-nx = 120
+nx = 30
 x = np.linspace(0, 1, nx).reshape(-1, 1)
 dx = x[2] - x[1]
 dt = 1e-4
@@ -67,7 +67,7 @@ BC[0] = U
 un = np.zeros([nx, 1])
 un[0] = U
 kappa = 2/dt
-Xn = 0.7583
+Xn = 0.2451
 eta0 = dx / (2 * np.arctanh(0.99))
 
 xInd = np.argmax(x > Xn) - 1
@@ -81,7 +81,7 @@ sBC[0] = sU
 sun = np.zeros([nx, 1])
 sun[0] = sU
 
-p = 0.99
+p = 0.999
 eta0 = 4 * dx / (2 * np.arctanh(p))
 print(np.trapz(D(x[1:-1], eta=eta0, x0=Xn), x[1:-1], axis=0))
 
@@ -138,9 +138,14 @@ rmsd = np.linalg.norm(sun[:xInd] - suAnal[:xInd]) / (np.sqrt(len(sun[:xInd])) * 
                                                                                  np.min(np.abs(suAnal))))
 print(rmsd)
 
+np.savetxt('dUdL_n30_xw02451.txt', sun)
+np.savetxt('x_n30_xw02451.txt', x)
+
 plt.figure()
 plt.plot(x, sun, 'k',
          x, U*x/Xn**2, 'wo',
          ms=markersize, lw=linewidth, mew=linewidth)
-plt.xlim([Xn-0.1, Xn])
+plt.xlim([0, Xn])
+plt.xlabel('X')
+plt.ylabel(r'$\frac{\partial u}{\partial b}$')
 plt.show()

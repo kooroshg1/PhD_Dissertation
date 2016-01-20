@@ -10,10 +10,20 @@
 }
 
 @article{arquis1984conditions,
-  title={Sur les conditions hydrodynamiques au voisinage d’une interface milieu fluide-milieu poreux: applicationa la convection naturelle},
+  title={Sur les conditions hydrodynamiques au voisinage d'une interface milieu fluide-milieu poreux: applicationa la convection naturelle},
   author={Arquis, E and Caltagirone, JP},
   journal={CR Acad. Sci. Paris II},
   volume={299},
   pages={1--4},
   year={1984}
+}
+
+@article{wang1995improved,
+  title={Improved two-point function approximations for design optimization},
+  author={Wang, Liping and Grandhi, Ramana V},
+  journal={AIAA journal},
+  volume={33},
+  number={9},
+  pages={1720--1727},
+  year={1995}
 }
