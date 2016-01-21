@@ -21,13 +21,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="virtualBoundaryMethod_SA.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="virtualBoundaryMethod_SA.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.66083914">
-              <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
               <folding>
-                <element signature="e#23#41#0" expanded="true" />
                 <element signature="e#305#439#0" expanded="false" />
                 <element signature="e#457#738#0" expanded="false" />
                 <element signature="e#756#1083#0" expanded="false" />
@@ -37,6 +36,16 @@
                 <element signature="e#2812#2961#0" expanded="false" />
                 <element signature="e#2991#3154#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="virtualBoundary_method_postProcess.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.65384614">
+              <caret line="138" column="5" selection-start-line="135" selection-start-column="5" selection-end-line="138" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,9 +88,9 @@
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py" />
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_postprocess.py" />
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod.py" />
-        <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py" />
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/calc_RD_derivative.py" />
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py" />
+        <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py" />
       </list>
     </option>
   </component>
@@ -90,9 +99,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="1855" />
-    <option name="height" value="1084" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -133,6 +142,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -172,7 +182,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,7 +203,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.virtualBoundaryMethod_SA">
+  <component name="RunManager" selected="Python.virtualBoundary_method_postProcess">
     <configuration default="false" name="penalization_method_postprocess" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -411,9 +420,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod_SA" />
-        <item index="1" class="java.lang.String" itemvalue="Python.calc_RD_derivative" />
-        <item index="2" class="java.lang.String" itemvalue="Python.virtualBoundary_method_postProcess" />
+        <item index="0" class="java.lang.String" itemvalue="Python.virtualBoundary_method_postProcess" />
+        <item index="1" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod_SA" />
+        <item index="2" class="java.lang.String" itemvalue="Python.calc_RD_derivative" />
         <item index="3" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod" />
         <item index="4" class="java.lang.String" itemvalue="Python.penalization_method_postprocess" />
       </list>
@@ -433,14 +442,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16866812" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23908296" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38541666" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37291667" sideWeight="0.4978166" order="2" side_tool="false" content_ui="tabs" />
@@ -479,13 +488,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_discrete_sensitivity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="52" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_continuum_sensitivity.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -696,13 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chap3_Virtual_Boundary_Method.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="136" column="12" selection-start-line="136" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -766,13 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/cacl_eta_for_RD.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="10" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/calc_eta_for_RH.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28321677">
@@ -784,20 +772,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding>
-            <element signature="e#784#1079#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6923077">
-          <caret line="83" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="150" selection-end-column="10" />
-          <folding>
-            <element signature="e#23#41#0" expanded="false" />
-            <element signature="e#811#1106#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -805,15 +779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0384616">
           <caret line="97" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="195" selection-end-column="15" />
-          <folding>
-            <element signature="e#23#41#0" expanded="false" />
-            <element signature="e#305#439#0" expanded="false" />
-            <element signature="e#457#738#0" expanded="false" />
-            <element signature="e#756#1083#0" expanded="false" />
-            <element signature="e#1101#2102#0" expanded="false" />
-            <element signature="e#2143#2467#0" expanded="false" />
-            <element signature="e#2486#2781#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -821,17 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34615386">
           <caret line="46" column="29" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12587413">
-          <caret line="4" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="38" selection-end-column="26" />
-          <folding>
-            <element signature="e#23#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -839,7 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27622378">
           <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,18 +800,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25174826">
           <caret line="27" column="29" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="29" />
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44055945">
+          <caret line="129" column="17" selection-start-line="129" selection-start-column="17" selection-end-line="129" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/cacl_eta_for_RD.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22027972">
+          <caret line="8" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap3_Virtual_Boundary_Method.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33916083">
+          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66083914">
-          <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
           <folding>
-            <element signature="e#23#41#0" expanded="true" />
             <element signature="e#305#439#0" expanded="false" />
             <element signature="e#457#738#0" expanded="false" />
             <element signature="e#756#1083#0" expanded="false" />
@@ -868,6 +841,14 @@
             <element signature="e#2812#2961#0" expanded="false" />
             <element signature="e#2991#3154#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65384614">
+          <caret line="138" column="5" selection-start-line="135" selection-start-column="5" selection-end-line="138" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

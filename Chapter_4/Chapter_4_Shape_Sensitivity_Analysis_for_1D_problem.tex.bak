@@ -187,7 +187,7 @@ where $X$ is the location of the wall. Equation \eqref{eq:C4_SAforVirtualBoundar
 
 \begin{equation}\label{eq:C4_doubletFunction}
 	T(x, \eta) = 
-	\frac{\left[ \tanh^{2}{\left(\dfrac{x}{t} \right)} - 1 \right] \tanh{\left( \dfrac{x}{t} \right)}}{t^2} 
+	\frac{\left[ \tanh^{2}{\left(\dfrac{x}{\eta} \right)} - 1 \right] \tanh{\left( \dfrac{x}{\eta} \right)}}{\eta^2} 
 \end{equation}
 
 \begin{figure}[H]
@@ -208,4 +208,71 @@ The boundary conditions for Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} 
 
 The analytical results of the sensitivity of velocity profile to the length is defined in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSAlength} and used for verifying the sensitivity results.
 
-The convergence results for the sensitivity analysis are shown in Figure \ref{fig:C3_virtualBoundarySAconvergence}.
+The convergence results for the sensitivity analysis are shown in Figure \ref{fig:C4_virtualBoundarySAconvergence}. We looked at two different wall locations and moving wall velocities. The wall location is defined as $x_{wall} = 0.6981 m$ and $x_{wall} = 0.4327 m$ with the velocities $U = 1 m/s$ and $U = 1000 m/s$ respectively. The thick line represents the RSME data value and the thin line represent the line with equation $y = ax^b$ passing through the data points. The slope of this line is reported as $-0.85$ for the sensitivity analysis and $-0.95$ for the governing equations. This slope describes the convergence rate of the method.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[$x_{wall} = 0.4327, U_{wall} = 1000$]
+    {
+    \includegraphics[width=12.0cm]{Chapter_4/figure/virtualBoundaryMethod_SA_1D_problem_xw04327_U1000.eps}
+    }
+    \\
+    \subfigure[$x_{wall} = 0.6981, U_{wall} = 1$]
+    {
+    \includegraphics[width=12.0cm]{Chapter_4/figure/virtualBoundaryMethod_SA_1D_problem_xw06981_U1.eps}
+    }
+    \caption{RSME value for the sensitivity analysis (SA) and governing equation (GE).}
+    \label{fig:C4_virtualBoundarySAconvergence}
+\end{figure}
+
+To better investigate the sensitivity results, we looked at the velocity sensitivity profile between the two plates in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfile}. As seen here, the accuracy of the sensitivity results decay near the perturbed boundary. The accuracy decay near the boundary can be fixed by reconstructing the sensitivities near the boundary like what was done in the penalization method. The reconstructed results are shown in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[$x_{wall} = 0.5321 m, U_{wall} = 1 m/s, n = 95$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw05321_U1.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.6845 m, U_{wall} = 10 m/s, n = 51$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw06845_U10.eps}
+    }
+    \\
+    \subfigure[$x_{wall} = 0.2861 m, U_{wall} = 100 m/s, n = 71$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw02861_U100.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.7412 m, U_{wall} = 1000 m/s, n = 86$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000.eps}
+    }
+    \caption{Velocity sensitivity profile between the two plates.}
+    \label{fig:C4_virtualBoundaryVelocitySensitivityProfile}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfigure[$x_{wall} = 0.5321 m, U_{wall} = 1 m/s, n = 95$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw05321_U1_reconstructed.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.6845 m, U_{wall} = 10 m/s, n = 51$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw06845_U10_reconstructed.eps}
+    }
+    \\
+    \subfigure[$x_{wall} = 0.2861 m, U_{wall} = 100 m/s, n = 71$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw02861_U100_reconstructed.eps}
+    }
+    \quad
+    \subfigure[$x_{wall} = 0.7412 m, U_{wall} = 1000 m/s, n = 86$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000_reconstructed.eps}
+    }
+    \caption{Reconstructed sensitivity by post-processing the results.}
+    \label{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}
+\end{figure}

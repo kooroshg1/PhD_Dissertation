@@ -94,31 +94,38 @@ def T(x, eta=1.0, x0=0):
         y[ix] = (np.tanh(x[ix] / eta)**2 - 1) * np.tanh(x[ix] / eta) / eta**2
     return y
 # ----------------------------
-nx = 60
+write2file = True
+nx = 86
 x = np.linspace(0, 1, nx).reshape(-1, 1)
 dx = x[2] - x[1]
-dt = 1e-5
+dt = 1e-3
 
 L = genL(nx) / dx**2
 
-wallVelocity = 1
+wallVelocity = 1000
 BC = np.zeros([nx - 2, 1])
 BC[0] = wallVelocity
 
 un = np.zeros([nx, 1])
 un[0] = BC[0]
 
-X0 = 0.726
+X0 = 0.7412
 Xn = X0 # Wall location
 
+# p = 0.95
+# eta0 = 6 * dx / (2 * np.arctanh(p))
 p = 0.99
-eta0 = 4 * dx / (2 * np.arctanh(p))
+R = 4 * dx
+eta0 = R / (np.arctanh(np.sqrt(p)))
 delta = D(x[1:-1], eta=eta0, x0=Xn).reshape(-1, 1)
 doublet = T(x[1:-1], eta=eta0, x0=Xn).reshape(-1, 1)
+print(np.trapz(delta, x[1:-1], axis=0))
+print(np.trapz(doublet, x[1:-1], axis=0))
+
 Ft = 0
 f = 0
-alpha = -100
-beta = -100
+alpha = -1e1
+beta = -1
 
 # Sensitivity analysis
 sBC = np.zeros([nx - 2, 1])
@@ -129,7 +136,8 @@ sf1 = 0
 sf2 = 0
 sf5 = 0
 # Governing equations
-for it in range(1, 50000):
+# plt.figure()
+for it in range(1, 5000):
     RHS1 = BC * dt / (2 * dx**2)
     RHS2 = np.eye(nx - 2, nx - 2).dot(un[1:-1])
     RHS3 = L[1:-1, :].dot(un) * dt / 2
@@ -173,27 +181,49 @@ for it in range(1, 50000):
     sf = (alpha * (sf1 + sf2) + beta * (sf3 + sf4)) * delta - \
          (alpha * sf5 + beta * sf6) * doublet
     sf = sf * dt
+    # if it%100 == 0:
+    #     print(Fc)
     # ============== END =============== #
     # ====== Sensitivity Analysis ====== #
     un = np.append(np.append(BC[0], unp1), 0).reshape(-1, 1)
     sun = np.append(np.append(sBC[0], sunp1), 0).reshape(-1, 1)
 
+    if np.max(np.abs(un)) > 10 * wallVelocity:
+        print('Large numbers in un')
+        break
+    if np.max(np.abs(sun)) > 10 * wallVelocity:
+        print('Large number in sun')
+        break
+    # if it%1000 == 0:
+    #     plt.plot(x, sun,
+    #              x, wallVelocity * x / X0**2)
+    #     plt.title(str(it))
+    #     plt.pause(0.0001)
+    #     plt.clf()
+
 xInd = np.argmax(x > Xn) - 1
 uAnal = -BC[0] * x / Xn + BC[0]
 suAnal = wallVelocity * x / Xn**2
 
-rmsd = np.linalg.norm(un[:xInd] - uAnal[:xInd]) / (np.sqrt(len(un[:xInd])) * (np.max(np.abs(uAnal[:xInd])) -
-                                                                              np.min(np.abs(uAnal[:xInd]))))
+rmsd = np.sqrt(np.sum((un[:xInd, 0] - uAnal[:xInd, 0])**2) / len(uAnal[:xInd])) / (np.max(np.abs(uAnal[:xInd])) -
+                                                                                   np.min(np.abs(uAnal[:xInd])))
 print(rmsd)
 
-rmsd = np.linalg.norm(sun[:xInd] - suAnal[:xInd]) / (np.sqrt(len(sun[:xInd])) * (np.max(np.abs(suAnal[:xInd])) -
-                                                                                 np.min(np.abs(suAnal[:xInd]))))
+rmsd = np.sqrt(np.sum((sun[:xInd, 0] - suAnal[:xInd, 0])**2) / len(suAnal[:xInd])) / (np.max(np.abs(suAnal[:xInd])) -
+                                                                                      np.min(np.abs(suAnal[:xInd])))
 print(rmsd)
+
+if write2file:
+    fileName = 'dUdL_VirtualB_0' + str(int(X0 * 1e4)) + '_n' + str(nx) + '.txt'
+    np.savetxt(fileName, sun)
+    fileName = 'x_VirtualB_0' + str(int(X0 * 1e4)) + '_n' + str(nx) + '.txt'
+    np.savetxt(fileName, x)
 
 plt.figure()
-plt.plot(x, sun,
+plt.plot(x, sun, 'k-o',
          x, wallVelocity * x / X0**2)
 plt.xlim([0, X0])
-plt.figure()
-plt.plot(x, un)
+# plt.figure()
+# plt.plot(x, un,
+#          x, uAnal)
 plt.show()
