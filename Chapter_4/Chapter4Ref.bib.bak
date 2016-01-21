@@ -27,3 +27,11 @@
   pages={1720--1727},
   year={1995}
 }
+
+@book{kamaraju2009linear,
+  title={Linear Systems: Analysis And Applications, Second Edition},
+  author={Kamaraju, V. and Narasimham, R.L.},
+  isbn={9789380026718},
+  year={2009},
+  publisher={I.K. International Publishing House Pvt. Limited}
+}

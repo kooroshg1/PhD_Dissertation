@@ -21,27 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="penalization_method_SA.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py">
+      <file leaf-file-name="virtualBoundaryMethod_SA.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="9" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.66083914">
+              <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
               <folding>
                 <element signature="e#23#41#0" expanded="true" />
-                <element signature="e#811#1106#0" expanded="false" />
-                <marker date="1453307108506" expanded="true" signature="3927:4126" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="penalization_method_postprocess.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_postprocess.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4020979">
-              <caret line="148" column="71" selection-start-line="148" selection-start-column="71" selection-end-line="148" selection-end-column="71" />
-              <folding>
-                <element signature="e#23#41#0" expanded="true" />
+                <element signature="e#305#439#0" expanded="false" />
+                <element signature="e#457#738#0" expanded="false" />
+                <element signature="e#756#1083#0" expanded="false" />
+                <element signature="e#1101#2102#0" expanded="false" />
+                <element signature="e#2143#2467#0" expanded="false" />
+                <element signature="e#2486#2781#0" expanded="false" />
+                <element signature="e#2812#2961#0" expanded="false" />
+                <element signature="e#2991#3154#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -84,6 +78,10 @@
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method.py" />
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py" />
         <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_postprocess.py" />
+        <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod.py" />
+        <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py" />
+        <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/calc_RD_derivative.py" />
+        <option value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py" />
       </list>
     </option>
   </component>
@@ -196,58 +194,7 @@
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
   </component>
-  <component name="RunManager" selected="Python.penalization_method_postprocess">
-    <configuration default="false" name="penalization_method" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chapter_4/1D_Problem" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="calc_eta_for_RH" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chapter_4/1D_Problem" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/calc_eta_for_RH.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="cacl_eta_for_RD" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chapter_4/1D_Problem" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/cacl_eta_for_RD.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.virtualBoundaryMethod_SA">
     <configuration default="false" name="penalization_method_postprocess" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -265,7 +212,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="penalization_method_SA" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
+    <configuration default="false" name="virtualBoundaryMethod" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -277,7 +224,58 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="virtualBoundary_method_postProcess" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chapter_4/1D_Problem" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="calc_RD_derivative" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chapter_4/1D_Problem" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/calc_RD_derivative.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="virtualBoundaryMethod_SA" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chapter_4/1D_Problem" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -405,19 +403,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.penalization_method" />
-      <item index="1" class="java.lang.String" itemvalue="Python.calc_eta_for_RH" />
-      <item index="2" class="java.lang.String" itemvalue="Python.cacl_eta_for_RD" />
-      <item index="3" class="java.lang.String" itemvalue="Python.penalization_method_postprocess" />
-      <item index="4" class="java.lang.String" itemvalue="Python.penalization_method_SA" />
+      <item index="0" class="java.lang.String" itemvalue="Python.penalization_method_postprocess" />
+      <item index="1" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod" />
+      <item index="2" class="java.lang.String" itemvalue="Python.virtualBoundary_method_postProcess" />
+      <item index="3" class="java.lang.String" itemvalue="Python.calc_RD_derivative" />
+      <item index="4" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod_SA" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.penalization_method_postprocess" />
-        <item index="1" class="java.lang.String" itemvalue="Python.penalization_method_SA" />
-        <item index="2" class="java.lang.String" itemvalue="Python.penalization_method" />
-        <item index="3" class="java.lang.String" itemvalue="Python.cacl_eta_for_RD" />
-        <item index="4" class="java.lang.String" itemvalue="Python.calc_eta_for_RH" />
+        <item index="0" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod_SA" />
+        <item index="1" class="java.lang.String" itemvalue="Python.calc_RD_derivative" />
+        <item index="2" class="java.lang.String" itemvalue="Python.virtualBoundary_method_postProcess" />
+        <item index="3" class="java.lang.String" itemvalue="Python.virtualBoundaryMethod" />
+        <item index="4" class="java.lang.String" itemvalue="Python.penalization_method_postprocess" />
       </list>
     </recent_temporary>
   </component>
@@ -481,35 +479,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Chap4_heavisideFunctionGraph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chap4_regulariedDeltaFunction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="24" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chap3_Peskin_Method.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="144" column="66" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/symbolic_calculations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chap2_axial_beam_discrete_sensitivity.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -811,20 +780,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chap4_regulariedDeltaFunction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="75" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
           <folding>
-            <element signature="e#23#41#0" expanded="false" />
             <element signature="e#784#1079#0" expanded="false" />
           </folding>
         </state>
@@ -832,22 +792,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_SA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="9" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.6923077">
+          <caret line="83" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="150" selection-end-column="10" />
           <folding>
-            <element signature="e#23#41#0" expanded="true" />
+            <element signature="e#23#41#0" expanded="false" />
             <element signature="e#811#1106#0" expanded="false" />
-            <marker date="1453307108506" expanded="true" signature="3927:4126" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0384616">
+          <caret line="97" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="195" selection-end-column="15" />
+          <folding>
+            <element signature="e#23#41#0" expanded="false" />
+            <element signature="e#305#439#0" expanded="false" />
+            <element signature="e#457#738#0" expanded="false" />
+            <element signature="e#756#1083#0" expanded="false" />
+            <element signature="e#1101#2102#0" expanded="false" />
+            <element signature="e#2143#2467#0" expanded="false" />
+            <element signature="e#2486#2781#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chap4_regulariedDeltaFunction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34615386">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundary_method_postProcess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12587413">
+          <caret line="4" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="38" selection-end-column="26" />
+          <folding>
+            <element signature="e#23#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/calc_RD_derivative.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27622378">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/penalization_method_postprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4020979">
-          <caret line="148" column="71" selection-start-line="148" selection-start-column="71" selection-end-line="148" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.25174826">
+          <caret line="27" column="29" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="29" />
           <folding>
             <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chapter_4/1D_Problem/virtualBoundaryMethod_SA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66083914">
+          <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+            <element signature="e#305#439#0" expanded="false" />
+            <element signature="e#457#738#0" expanded="false" />
+            <element signature="e#756#1083#0" expanded="false" />
+            <element signature="e#1101#2102#0" expanded="false" />
+            <element signature="e#2143#2467#0" expanded="false" />
+            <element signature="e#2486#2781#0" expanded="false" />
+            <element signature="e#2812#2961#0" expanded="false" />
+            <element signature="e#2991#3154#0" expanded="false" />
           </folding>
         </state>
       </provider>

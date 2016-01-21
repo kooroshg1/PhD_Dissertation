@@ -135,4 +135,77 @@ As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA
     \label{fig:C4_sensitivityResultsReconstructed1Dproblem}
 \end{figure}
 
-This problem is also solved using the virtual boundary method.
+This problem is also solved using the virtual boundary method and the results are compared with the penalization method in terms of accuracy of simulation cost. The simulation cost is defined as number of time steps it takes to reach a converged value. The virtual boundary method is based on solving the Navier-Stokes equation \eqref{eq:C4_NS} and modeling the boundaries through the force term defined in Equation \eqref{eq:C3_feedbackForcingFunction}. As mentioned in the Section \ref{sec:C4_RHandRDfunction}, the RD function need to be used in the virtual boundary method to have a differentiable governing equation for CSA. Therefore, the effect of RD function on the accuracy of the solution is first investigated.
+
+The RD function for this simulation is selected as the one in Equation \eqref{eq:C4_deltaFunction}. The $\eta$ parameter is based on Equation \eqref{eq:C4_etaGuideForRDfunction} where $p = 0.99$ and $R = 2dx$. This ensures the stability of the solution. For this analysis $\alpha$ and $\beta$ constants in Equation \eqref{eq:C3_feedbackForcingFunction} are each selected as $-100$. The convergence result is shown in Figure \ref{fig:C4_virtualBoundary_RDvsD}. As shown here, the simulation with RD function has better convergence properties.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12.00cm]{Chapter_4/figure/effect_of_RD_on_simulation_vs_numberOfNodes_1D_problem.eps}
+	\caption{Effect of Regularized Delta (RD) and delta function on the solution accuracy.}
+	\label{fig:C4_virtualBoundary_RDvsD}
+\end{figure}
+
+The effect of wall velocity of the accuracy of the simulation was also investigated. The wall velocity was selected as $1 m/s$, $10 m/s$, $100 m/s$, and $1000 m/s$. However, this did not affect the accuracy of the simulation.
+
+The sensitivity equations are derived by differentiating the Navier-Stokes equations as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. However, for this problem Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity} is simplified as shown in Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D}.
+
+\begin{align}\label{eq:C4_SAforVirtualBoundaryMethod1D}
+    \frac{\partial u'}{\partial t}
+    &= 
+    \nu \nabla^2 u' + \nonumber \\
+    &\left\{
+    \alpha
+    \int_0^t
+    \left[
+        \int u'(x, \tau) \mathcal{D}(x - X) d\mathbf{x} + 
+        \int u(x, \tau) \frac{\partial \mathcal{D}}{\partial X} \frac{\partial X}{\partial b} d\mathbf{x}
+    \right] d\tau \right.
+    + \nonumber \\
+    &
+    \left.
+    \beta
+    \left[
+    \int u'(x, t) \mathcal{D}(x - X) d\mathbf{x} +
+    \int u(x, t) \frac{\partial \mathcal{D}}{\partial X} \frac{\partial X}{\partial b} d\mathbf{x}
+    \right]
+    \right\} \bar{\mathcal{D}}(x - X) + \nonumber \\
+    &\left\{
+    \alpha
+    \int_0^t
+    \left[
+        \int u(x, \tau) \mathcal{D}(x - X) d\mathbf{x}
+    \right] d\tau
+    +
+    \beta
+    \int u(x, t) \mathcal{D}(x - X) d\mathbf{x}
+    \right\}
+    \frac{\partial \bar{\mathcal{D}}}{\partial X} \frac{\partial X}{\partial b}
+\end{align}
+
+where $X$ is the location of the wall. Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} required the calculation of the RD function of Equation \eqref{eq:C4_deltaFunction}. This function is known as the doublet function \cite{kamaraju2009linear} and is written as shown in Equation \eqref{eq:C4_doubletFunction}. The $\eta$ value for this function is the same one chosen for the RD function. The double function of Equation \eqref{eq:C4_doubletFunction} is plotted in Figure \ref{fig:C4_doubletFunction} for different values of $\eta$.
+
+\begin{equation}\label{eq:C4_doubletFunction}
+	T(x, \eta) = 
+	\frac{\left[ \tanh^{2}{\left(\dfrac{x}{t} \right)} - 1 \right] \tanh{\left( \dfrac{x}{t} \right)}}{t^2} 
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12.00cm]{Chapter_4/figure/doubletFunction.eps}
+	\caption{Doublet function of Equation \eqref{eq:C4_doubletFunction}.}
+	\label{fig:C4_doubletFunction}
+\end{figure}
+
+The boundary conditions for Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} is defined by differentiating the boundary conditions in Equation \eqref{eq:C4_1DbenchmarkBoundaryCondition}. Since neither of these boundary conditions depend on the design variable, the boundary conditions for Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} is equal to zero. This is defined in Equation \eqref{eq:C4_SAboundaryConditionforVirtualBoundaryMethod1D}.
+
+\begin{equation}\label{eq:C4_SAboundaryConditionforVirtualBoundaryMethod1D}
+\begin{cases}
+	u' = 0 \qquad \text{at } x = 0 \\
+	u' = 0 \quad \text{at } x = 1
+\end{cases}
+\end{equation}
+
+The analytical results of the sensitivity of velocity profile to the length is defined in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSAlength} and used for verifying the sensitivity results.
+
+The convergence results for the sensitivity analysis are shown in Figure \ref{fig:C3_virtualBoundarySAconvergence}.
