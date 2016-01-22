@@ -276,3 +276,5 @@ To better investigate the sensitivity results, we looked at the velocity sensiti
     \caption{Reconstructed sensitivity by post-processing the results.}
     \label{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}
 \end{figure}
+
+While the results accuracy of the results are the same with the penalization technique and the virtual boundary method throughout the domain, the virtual boundary method has better stability characteristics meaning that bigger time step can be used for the numerical integration. This reduces the cost associated with the simulation. Moreover, the penalization method is only capable of enforcing the zero velocity on the immersed boundary whereas with the virtual boundary method an arbitrary velocity $V(X, t)$ can be defined on the immersed boundary as shown in Equation \eqref{eq:C3_feedbackForcingFunction}. This makes the virtual boundary method a more general method for the treatment of solid boundaries. Therefore, for the rest of the benchmark problems the virtual boundary method is used.
