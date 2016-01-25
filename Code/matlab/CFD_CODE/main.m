@@ -10,12 +10,12 @@ markersize = 20;
 Re = 1e2;     % Reynolds number
 dt = 1e-2;    % time step
 tf = 5;    % final time
-xStart = -1.0;
-xEnd = 2.0;
-yStart = -1;
-yEnd = 1;
-nx = 200;      % number of x-gridpoints
-ny = 200;      % number of y-gridpoints
+xStart = 0.0;
+xEnd = 4.0;
+yStart = -1.5;
+yEnd = 1.5;
+nx = 400;      % number of x-gridpoints
+ny = 300;      % number of y-gridpoints
 nsteps = 10;  % number of steps with graphic output
 %-----------------------------------------------------------------------
 nt = ceil(tf/dt); dt = tf/nt;
@@ -405,14 +405,20 @@ set(gca,'fontsize',fontsize)
 % figure,
 % contourf(sqrt(Uavg.^2 + Vavg.^2))
 
-% dlmwrite('cylinder/xImm', xImm)
-% dlmwrite('cylinder/yImm', yImm)
-% dlmwrite('cylinder/Xu.txt', Xu)
-% dlmwrite('cylinder/Yu.txt', Yu)
-% dlmwrite('cylinder/Xv.txt', Xv)
-% dlmwrite('cylinder/Yv.txt', Yv)
-% dlmwrite('cylinder/Xp.txt', Xp)
-% dlmwrite('cylinder/Yp.txt', Yp)
+dlmwrite('cylinder/xImm', xImm)
+dlmwrite('cylinder/yImm', yImm)
+dlmwrite('cylinder/Xu.txt', Xu)
+dlmwrite('cylinder/Yu.txt', Yu)
+dlmwrite('cylinder/Xv.txt', Xv)
+dlmwrite('cylinder/Yv.txt', Yv)
+dlmwrite('cylinder/Xp.txt', Xp)
+dlmwrite('cylinder/Yp.txt', Yp)
+dlmwrite('cylinder/U.txt', U)
+dlmwrite('cylinder/V.txt', V)
+dlmwrite('cylinder/P.txt', P)
+dlmwrite('cylinder/pBoundary.txt', pBoundary)
+dlmwrite('cylinder/uBoundary.txt', uBoundary)
+dlmwrite('cylinder/vBoundary.txt', vBoundary)
 % dlmwrite('cylinder/U0.txt', U)
 % dlmwrite('cylinder/V0.txt', V)
 % dlmwrite('cylinder/P0.txt', P)
@@ -427,3 +433,4 @@ set(gca,'fontsize',fontsize)
 % dlmwrite('cylinder/V_CS.txt', imag(V) / -0.0001)
 % dlmwrite('cylinder/P_CS.txt', imag(P) / -0.0001)
 % dlmwrite('cylinder/pBoundary_CS.txt', imag(pBoundary) / -0.0001)
+
