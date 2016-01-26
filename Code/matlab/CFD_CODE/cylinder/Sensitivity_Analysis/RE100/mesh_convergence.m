@@ -199,22 +199,23 @@ end
 % ============================ U - Velocity ============================= %
 % ======================================================================= %
 %% Complex step validation
-fontsize = 22;
-linewidth = 3.0;
-figure,
+% y = 0.5;
+% [a, b] = min(abs(Yu5(1, :) - y));
+% 
+% figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-plot(Xu5(:, 187), Up5(:, 187), ...
-     Xu5(:, 187), dUdB5(:, 187), ...
-     'linewidth', linewidth)
-xlabel('\theta', 'fontsize', fontsize)
-ylabel('u-velocity (m/s)', 'fontsize', fontsize)
-set(gca, 'fontsize', fontsize)
-set(gcf,'renderer','painters')
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-grid('on')
-grid minor
-set(gca,'LooseInset',get(gca,'TightInset'))
-break
+% plot(Xu5(:, b), Up5(:, b), ...
+%      Xu5(:, b), dUdB5(:, b), ...
+%      'linewidth', linewidth)
+% xlabel('\theta', 'fontsize', fontsize)
+% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+% set(gca, 'fontsize', fontsize)
+% set(gcf,'renderer','painters')
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% grid('on')
+% grid minor
+% set(gca,'LooseInset',get(gca,'TightInset'))
+
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
@@ -276,6 +277,24 @@ break
 % ======================================================================= %
 % ============================ V - Velocity ============================= %
 % ======================================================================= %
+%% Complex step validation
+% x = 1.5;
+% [a, b] = min(abs(Xv5(:, 1) - x));
+% 
+% figure,
+% set(gcf, 'Position', get(0,'Screensize'));
+% plot(Yv5(b, :), Vp5(b, :), ...
+%      Yv5(b, :), dVdB5(b, :), ...
+%      'linewidth', linewidth)
+% xlabel('\theta', 'fontsize', fontsize)
+% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+% set(gca, 'fontsize', fontsize)
+% set(gcf,'renderer','painters')
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% grid('on')
+% grid minor
+% set(gca,'LooseInset',get(gca,'TightInset'))
+
 %% Velocity on the boundary
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
@@ -373,13 +392,17 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 % ======================================================================= %
 % ============================== Pressure =============================== %
 % ======================================================================= %
-%% Velocity on the boundary
+%% Complex step validation
+% y = 0.5;
+% [a, b] = min(abs(Yu5(1, :) - y));
+% 
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(theta, pB4, 'k', ...
+% plot(Xu5(:, b), Up5(:, b), ...
+%      Xu5(:, b), dUdB5(:, b), ...
 %      'linewidth', linewidth)
 % xlabel('\theta', 'fontsize', fontsize)
-% ylabel('Pressure (Pa)', 'fontsize', fontsize)
+% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
