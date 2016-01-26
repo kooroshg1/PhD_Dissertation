@@ -100,7 +100,7 @@ Finally, the pressure profile on the surface of the cylinder is calculated as sh
     \centering
     \includegraphics[width=12.00cm]{Chapter_4/figure/flow_over_cylinder/p_on_boundary_RE100.eps}
     \caption{Physical domain with dimensions for flow over cylinder.}
-    \label{fig:C4_cylinderPhysicalDomain}
+    \label{fig:C4_pressureOnSurfaceCylinder}
 \end{figure}
 
 The continuum sensitivity equation are derived by differentiating the governing NS equations of \eqref{eq:C4_NSwithvirtualBoundaryIB} with respect to the shape design variable, $b$, as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. For this problem, the boundary on the cylinder is defined using the following analytical level-set function. For the points on the surface of the cylinder, Equation \eqref{eq:C4_levelSetFunctionForCylinder} is equal to zero.
@@ -120,4 +120,6 @@ For the sensitivity analysis, $\partial D/\partial X$ is calculated easily since
 
 For this analysis, the design variable $b$ is selected as the radius of the cylinder. Therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
 
-The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions does not depend on the design variables and therefore, have zero values. Having the governing equations and boundary conditions, it is possible to solve the sensitivity equations. The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not have the accuracy issues of the finite different method and provides the accurate sensitivities upto machine precision. However, the analysis code requires to handle complex arithmetic. The analysis code is developed in MATLAB using the guidlines of The complex step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}.
+The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions does not depend on the design variables and therefore, have zero values. Having the governing equations and boundary conditions, it is possible to solve the sensitivity equations.
+
+The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not have the accuracy issues of the finite different method and provides the accurate sensitivities upto machine precision. However, the analysis code requires to handle complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculating the sensitivities. The complex step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}.

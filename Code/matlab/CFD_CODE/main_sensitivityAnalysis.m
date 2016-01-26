@@ -5,13 +5,13 @@ clc;
 %-----------------------------------------------------------------------
 Re = 1e2;     % Reynolds number
 dt = 1e-2;    % time step
-tf = 5.0;    % final time
+tf = 5;    % final time
 xStart = 0.0;
-xEnd = 1.0;
-yStart = 0.0;
-yEnd = 1.0;
-nx = 400;      % number of x-gridpoints
-ny = 400;      % number of y-gridpoints
+xEnd = 4.0;
+yStart = -1.5;
+yEnd = 1.5;
+nx = 800;      % number of x-gridpoints
+ny = 600;      % number of y-gridpoints
 nsteps = 10;  % number of steps with graphic output
 %-----------------------------------------------------------------------
 nt = ceil(tf/dt); dt = tf/nt;
@@ -305,10 +305,9 @@ for k = 1:nt
     UpS(2:end-1) = Up(:,1);
 
     % Zero gradient for velocity on east wall
-%     UpE = (mean(UpW) ./ mean(Up(end,:))) .* Up(end,:);
-%     VpE(2:end-1) = (mean(VpW) ./ mean(Vp(end,:))) .* Vp(end,:);
-    UpE = 1 .* Up(end,:);
-    VpE(2:end-1) = 1 .* Vp(end,:);
+    UpE = (mean(UpW) ./ mean(Up(end,:))) .* Up(end,:);
+    VpE(2:end-1) = (mean(VpW) ./ mean(Vp(end,:))) .* Vp(end,:);
+
     % ----------------------------------------------------------------- %
    Upe = [UpW;Up;UpE]; Upe = [2*UpS'-Upe(:,1) Upe 2*UpN'-Upe(:,end)];
    Vpe = [VpS' Vp VpN']; Vpe = [2*VpW-Vpe(1,:);Vpe;2*VpE-Vpe(end,:)];
@@ -467,10 +466,10 @@ plot(xImm,ppBoundary)
 title('pressure')
 trapz(xImm,pBoundary)
 
-dlmwrite('mesh_convergence/ppBoundary.txt', ppBoundary)
-dlmwrite('mesh_convergence/Up.txt', Up)
-dlmwrite('mesh_convergence/Vp.txt', Vp)
-dlmwrite('mesh_convergence/Pp.txt', Pp)
+dlmwrite('cylinder/ppB.txt', ppBoundary)
+dlmwrite('cylinder/Up.txt', Up)
+dlmwrite('cylinder/Vp.txt', Vp)
+dlmwrite('cylinder/Pp.txt', Pp)
 
 % Save data
 % save('current_simulation_results/U_0','U')

@@ -14,9 +14,9 @@ xStart = 0.0;
 xEnd = 4.0;
 yStart = -1.5;
 yEnd = 1.5;
-nx = 400;      % number of x-gridpoints
-ny = 300;      % number of y-gridpoints
-nsteps = 10;  % number of steps with graphic output
+nx = 800;      % number of x-gridpoints
+ny = 600;      % number of y-gridpoints
+nsteps = 10;   % number of steps with graphic output
 %-----------------------------------------------------------------------
 nt = ceil(tf/dt); dt = tf/nt;
 x = linspace(xStart,xEnd,nx+1); hx = (xEnd - xStart)/nx;
@@ -390,47 +390,44 @@ ylabel('V-velocity','fontsize',fontsize)
 set(gca,'fontsize',fontsize)
 
 
-% Save data
-% save('current_simulation_results/U_0000001','U')
-% save('current_simulation_results/V_0000001','V')
-% save('current_simulation_results/P_0000001','P')
-% save('current_simulation_results/uBoundary_0000001','uBoundary')
-% save('current_simulation_results/vBoundary_0000001','vBoundary')
-% save('current_simulation_results/pBoundary_0000001','pBoundary')
-% save('current_simulation_results/fyHist_0000001','fyHist')
-% save('current_simulation_results/fxHist_0000001','fxHist')
-% save P
-% Uavg = avg(U')';
-% Vavg = avg(V);
-% figure,
-% contourf(sqrt(Uavg.^2 + Vavg.^2))
+%% Saving analysis data
+% dlmwrite('cylinder/xImm.txt', xImm)
+% dlmwrite('cylinder/yImm.txt', yImm)
+% dlmwrite('cylinder/Xu.txt', Xu)
+% dlmwrite('cylinder/Yu.txt', Yu)
+% dlmwrite('cylinder/Xv.txt', Xv)
+% dlmwrite('cylinder/Yv.txt', Yv)
+% dlmwrite('cylinder/Xp.txt', Xp)
+% dlmwrite('cylinder/Yp.txt', Yp)
+% dlmwrite('cylinder/U.txt', U)
+% dlmwrite('cylinder/V.txt', V)
+% dlmwrite('cylinder/P.txt', P)
+% dlmwrite('cylinder/pBoundary.txt', pBoundary)
+% dlmwrite('cylinder/uBoundary.txt', uBoundary)
+% dlmwrite('cylinder/vBoundary.txt', vBoundary)
 
-dlmwrite('cylinder/xImm', xImm)
-dlmwrite('cylinder/yImm', yImm)
+%% Saving sensitvity data
+dh = 0.00001;
+dlmwrite('cylinder/xImm.txt', xImm)
+dlmwrite('cylinder/yImm.txt', yImm)
 dlmwrite('cylinder/Xu.txt', Xu)
 dlmwrite('cylinder/Yu.txt', Yu)
 dlmwrite('cylinder/Xv.txt', Xv)
 dlmwrite('cylinder/Yv.txt', Yv)
 dlmwrite('cylinder/Xp.txt', Xp)
 dlmwrite('cylinder/Yp.txt', Yp)
-dlmwrite('cylinder/U.txt', U)
-dlmwrite('cylinder/V.txt', V)
-dlmwrite('cylinder/P.txt', P)
-dlmwrite('cylinder/pBoundary.txt', pBoundary)
-dlmwrite('cylinder/uBoundary.txt', uBoundary)
-dlmwrite('cylinder/vBoundary.txt', vBoundary)
-% dlmwrite('cylinder/U0.txt', U)
-% dlmwrite('cylinder/V0.txt', V)
-% dlmwrite('cylinder/P0.txt', P)
-% dlmwrite('cylinder/p0Boundary.txt', pBoundary)
+dlmwrite('cylinder/dUdB.txt', imag(U) / dh)
+dlmwrite('cylinder/dVdB.txt', imag(V) / dh)
+dlmwrite('cylinder/dPdB.txt', imag(P) / dh)
+dlmwrite('cylinder/dudB.txt', imag(uBoundary) / dh)
+dlmwrite('cylinder/dvdB.txt', imag(vBoundary) / dh)
+dlmwrite('cylinder/dpdB.txt', imag(pBoundary) / dh)
 
-% dlmwrite('cylinder/U1.txt', U)
-% dlmwrite('cylinder/V1.txt', V)
-% dlmwrite('cylinder/P1.txt', P)
-% dlmwrite('cylinder/p1Boundary.txt', pBoundary)
-
-% dlmwrite('cylinder/U_CS.txt', imag(U) / -0.0001)
-% dlmwrite('cylinder/V_CS.txt', imag(V) / -0.0001)
-% dlmwrite('cylinder/P_CS.txt', imag(P) / -0.0001)
-% dlmwrite('cylinder/pBoundary_CS.txt', imag(pBoundary) / -0.0001)
+figure,
+contourf(Xu,Yu,imag(U) / dh, 50, 'linestyle','none')
+hold all
+plot(xImm,yImm,'w.','linewidth',2)
+set(gca,'XTickLabel','','YTickLabel','')
+axis equal
+title('u-velocity')
 
