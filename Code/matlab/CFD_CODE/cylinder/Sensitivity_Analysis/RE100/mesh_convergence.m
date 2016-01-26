@@ -198,20 +198,23 @@ end
 % ======================================================================= %
 % ============================ U - Velocity ============================= %
 % ======================================================================= %
-%% Velocity on the boundary
-% figure,
+%% Complex step validation
+fontsize = 22;
+linewidth = 3.0;
+figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(theta, uB4, 'k', ...
-%      'linewidth', linewidth)
-% xlabel('\theta', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gcf,'renderer','painters')
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-% grid('on')
-% grid minor
-% set(gca,'LooseInset',get(gca,'TightInset'))
-
+plot(Xu5(:, 187), Up5(:, 187), ...
+     Xu5(:, 187), dUdB5(:, 187), ...
+     'linewidth', linewidth)
+xlabel('\theta', 'fontsize', fontsize)
+ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gcf,'renderer','painters')
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+grid('on')
+grid minor
+set(gca,'LooseInset',get(gca,'TightInset'))
+break
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
@@ -226,79 +229,36 @@ end
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence plot
-fontsize = 12;
-linewidth = 3;
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-plot(Xu2(:, 75), dUdB2(:, 75), 'g--',...
-     Xu3(:, 112), dUdB3(:, 112), 'y--',...
-     Xu4(:, 150), dUdB4(:, 150), 'b--',...
-     Xu5(:, 187), dUdB5(:, 187), 'c--',...
-     Xu6(:, 225), dUdB6(:, 225), 'k--',...
-     Xu7(:, 262), dUdB7(:, 262), 'm--',...
-     Xu8(:, 300), dUdB8(:, 300), 'r--',...
-     Xu2(:, 75), Up2(:, 75), 'g',...
-     Xu3(:, 112), Up3(:, 112), 'y',...
-     Xu4(:, 150), Up4(:, 150), 'b',...
-     Xu5(:, 187), Up5(:, 187), 'c',...
-     Xu6(:, 225), Up6(:, 225), 'k',...
-     Xu7(:, 262), Up7(:, 262), 'm',...
-     Xu8(:, 300), Up8(:, 300), 'r',...
-     'linewidth', linewidth)
-legend('CS2', 'CS3', 'CS4', 'CS5', 'CS6', 'CS7', 'CS8', ...
-       'CSA2', 'CSA3', 'CSA4', 'CSA5', 'CSA6', 'CSA7', 'CSA8')
-
 % figure,
-% plot(Xu1(:, 38), dUdB1(:, 38), ...
-%      Xu2(:, 75), dUdB2(:, 75), ...
-%      Xu3(:, 112), dUdB3(:, 112), ...
-%      Xu4(:, 150), dUdB4(:, 150), ...
-%      Xu5(:, 187), dUdB5(:, 187), ...
-%      Xu6(:, 225), dUdB6(:, 225), ...
-%      Xu7(:, 262), dUdB7(:, 262), ...
-%      Xu8(:, 300), dUdB8(:, 300), ...
-%      'linewidth', linewidth)
-% legend('CS1', 'CS2', 'CS3', 'CS4', 'CS5', 'CS6', 'CS7', 'CS8')
-% xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('U (m/s)', 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% % legend('100X75', '200X150', '300X225', '400X300', 'CSA', 'location', 'best')
-% set(gca,'LooseInset',get(gca,'TightInset'))
-% set(gcf,'renderer','painters')
-% grid('on')
-% grid minor
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-
-% figure,
-% plot(Xu2(:, 75), Up2(:, 75), ...
-%      Xu3(:, 112), Up3(:, 112), ...
+% set(gcf, 'Position', get(0,'Screensize'));
+% plot(Xu3(:, 112), Up3(:, 112), ...
 %      Xu4(:, 150), Up4(:, 150), ...
 %      Xu5(:, 187), Up5(:, 187), ...
 %      Xu6(:, 225), Up6(:, 225), ...
-%      Xu7(:, 262), Up7(:, 262), ...
-%      Xu8(:, 300), Up8(:, 300), ...
 %      'linewidth', linewidth)
-% legend('CSA2', 'CSA3', 'CSA4', 'CSA5', 'CSA6', 'CSA7', 'CSA8')
+% legend('300X225', '400X300', '500X375', '600X450', ...
+%        'location', 'southeast')
 % xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('U (m/s)', 'fontsize', fontsize)
+% ylabel('dU/dr (1/s)', 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
-% % legend('100X75', '200X150', '300X225', '400X300', 'CSA', 'location', 'best')
 % set(gca,'LooseInset',get(gca,'TightInset'))
 % set(gcf,'renderer','painters')
 % grid('on')
 % grid minor
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-break
+
 %% Convergence order
-% x = 2;
-% [a, b] = find(Xu1(:, 38) < x); U1ind = U1(a(end) + 1, 38);
-% [a, b] = find(Xu2(:, 75) < x); U2ind = U2(a(end) + 1, 75);
-% [a, b] = find(Xu3(:, 112) < x); U3ind = U3(a(end) + 1, 112);
-% [a, b] = find(Xu4(:, 150) < x); U4ind = U4(a(end) + 1, 150);
+% x = 1.5;
+% [a, b] = find(Xu3(:, 112) < x); Up3ind = Up3(a(end) + 1, 112);
+% [a, b] = find(Xu4(:, 150) < x); Up4ind = Up4(a(end) + 1, 150);
+% [a, b] = find(Xu5(:, 187) < x); Up5ind = Up5(a(end) + 1, 187);
+% [a, b] = find(Xu6(:, 225) < x); Up6ind = Up6(a(end) + 1, 225);
 % 
-% err = abs([U1ind, U2ind, U3ind, U4ind] - U4ind) ./ U4ind;
-% meshSize = [100, 200, 300, 400];
+% err = abs([Up3ind, Up4ind, Up5ind, Up6ind] - Up6ind) ./ abs(Up6ind);
+% err = sort(err, 'descend');
+% meshSize = [300, 400, 500, 600];
 % f = fit(meshSize',err','power1')
+% 
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
 % loglog(meshSize, err, 'k', ...
@@ -343,23 +303,24 @@ break
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence plot
-% x = 0.5;
-% [a, b] = find(Xv1(:, 1) < 0.5); y1ind = a(end) + 1;
-% [a, b] = find(Xv2(:, 1) < 0.5); y2ind = a(end) + 1;
-% [a, b] = find(Xv3(:, 1) < 0.5); y3ind = a(end) + 1;
-% [a, b] = find(Xv4(:, 1) < 0.5); y4ind = a(end) + 1;
+% x = 0.75;
+% [a, b] = find(Xv3(:, 1) < x); y3ind = a(end) + 1;
+% [a, b] = find(Xv4(:, 1) < x); y4ind = a(end) + 1;
+% [a, b] = find(Xv5(:, 1) < x); y5ind = a(end) + 1;
+% [a, b] = find(Xv6(:, 1) < x); y6ind = a(end) + 1;
+% [a, b] = find(Xv7(:, 1) < x); y7ind = a(end) + 1;
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(Yv1(y1ind, :), V1(y1ind, :), ...
-%      Yv2(y2ind, :), V2(y2ind, :), ...
-%      Yv3(y3ind, :), V3(y3ind, :), ...
-%      Yv4(y4ind, :), V4(y4ind, :), ...
+% plot(Yv3(y3ind, :), Vp3(y3ind, :), ...
+%      Yv4(y4ind, :), Vp4(y4ind, :), ...
+%      Yv5(y5ind, :), Vp5(y5ind, :), ...
+%      Yv6(y6ind, :), Vp6(y6ind, :), ...
 %      'linewidth', linewidth)
+% legend('300X225', '400X300', '500X375', '600X450', ...
+%        'location', 'southeast')
 % xlabel('Y (m)', 'fontsize', fontsize)
-% ylabel('V (m/s)', 'fontsize', fontsize)
+% ylabel('dV/dr (1/s)', 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
-% legend('100X75', '200X150', '300X225', '400X300')
-% set(gca,'LooseInset',get(gca,'TightInset'))
 % set(gca,'LooseInset',get(gca,'TightInset'))
 % set(gcf,'renderer','painters')
 % grid('on')
@@ -367,45 +328,47 @@ break
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence order
-% x = 0.5;
-% y = 0.75;
-% 
-% [a, b] = find(Xv1(:, 1) < x); x1ind = a(end) + 1;
-% [a, b] = find(abs(Yv1(1, :)) < y); y1ind = b(end) + 1;
-% [Xv1(x1ind, y1ind) Yv1(x1ind, y1ind)];
-% V1ind = V1(x1ind, y1ind);
-% 
-% [a, b] = find(Xv2(:, 1) < x); x2ind = a(end) + 1;
-% [a, b] = find(abs(Yv2(1, :)) < y); y2ind = b(end) + 1;
-% [Xv2(x2ind, y2ind) Yv2(x2ind, y2ind)];
-% V2ind = V2(x2ind, y2ind);
-% 
-% [a, b] = find(Xv3(:, 1) < x); x3ind = a(end) + 1;
-% [a, b] = find(abs(Yv3(1, :)) < y); y3ind = b(end) + 1;
-% [Xv3(x3ind, y3ind) Yv3(x3ind, y3ind)];
-% V3ind = V3(x3ind, y3ind);
-% 
-% [a, b] = find(Xv4(:, 1) < x); x4ind = a(end) + 1;
-% [a, b] = find(abs(Yv4(1, :)) < y); y4ind = b(end) + 1;
-% [Xv4(x4ind, y4ind) Yv4(x4ind, y4ind)];
-% V4ind = V4(x4ind, y4ind);
-% 
-% err = abs([V1ind, V2ind, V3ind, V4ind] - V4ind) ./ V4ind;
-% meshSize = [100, 200, 300, 400];
-% f = fit(meshSize',err','power1')
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% loglog(meshSize, err, 'k', ...
-%     meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
-%     'linewidth', linewidth)
-% xlabel('Number of nodes in X direction', 'fontsize', fontsize)
-% ylabel('Absolute error', 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gca,'LooseInset',get(gca,'TightInset'))
-% set(gcf,'renderer','painters')
-% grid('on')
-% grid minor
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+x = 0.5;
+y = 0.75;
+
+[a, b] = find(Xv3(:, 1) < x); x3ind = a(end) + 1;
+[a, b] = find(abs(Yv3(1, :)) < y); y3ind = b(end) + 1;
+[Xv3(x3ind, y3ind) Yv3(x3ind, y3ind)];
+Vp3ind = Vp3(x3ind, y3ind);
+
+[a, b] = find(Xv4(:, 1) < x); x4ind = a(end) + 1;
+[a, b] = find(abs(Yv4(1, :)) < y); y4ind = b(end) + 1;
+[Xv4(x4ind, y4ind) Yv4(x4ind, y4ind)];
+Vp4ind = Vp4(x4ind, y4ind);
+
+[a, b] = find(Xv5(:, 1) < x); x5ind = a(end) + 1;
+[a, b] = find(abs(Yv5(1, :)) < y); y5ind = b(end) + 1;
+[Xv5(x5ind, y5ind) Yv5(x5ind, y5ind)];
+Vp5ind = Vp5(x5ind, y5ind);
+
+[a, b] = find(Xv6(:, 1) < x); x6ind = a(end) + 1;
+[a, b] = find(abs(Yv6(1, :)) < y); y6ind = b(end) + 1;
+[Xv6(x6ind, y6ind) Yv6(x6ind, y6ind)];
+Vp6ind = Vp6(x6ind, y6ind);
+
+err = abs([Vp3ind, Vp4ind, Vp5ind, Vp6ind] - Vp6ind) ./ Vp6ind;
+err = sort(err, 'descend')
+meshSize = [300, 400, 500, 600];
+f = fit(meshSize',err','power1')
+
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+loglog(meshSize, err, 'k', ...
+    meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
+    'linewidth', linewidth)
+xlabel('Number of nodes in X direction', 'fontsize', fontsize)
+ylabel('Absolute error', 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gca,'LooseInset',get(gca,'TightInset'))
+set(gcf,'renderer','painters')
+grid('on')
+grid minor
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 % ======================================================================= %
 % ============================== Pressure =============================== %
@@ -439,16 +402,16 @@ break
 %% Convergence plot
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(Xp1(:, 38), P1(:, 38), ...
-%      Xp2(:, 75), P2(:, 75), ...
-%      Xp3(:, 112), P3(:, 112), ...
-%      Xp4(:, 150), P4(:, 150), ...
+% plot(Xp3(:, 112), Pp3(:, 112), ...
+%      Xp4(:, 150), Pp4(:, 150), ...
+%      Xp5(:, 187), Pp5(:, 187), ...
+%      Xp6(:, 225), Pp6(:, 225), ...
 %      'linewidth', linewidth)
+% legend('300X225', '400X300', '500X375', '600X450', ...
+%        'location', 'southeast')
 % xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('P (Pa)', 'fontsize', fontsize)
+% ylabel('dP/dr (Pa/m)', 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
-% legend('100X75', '200X150', '300X225', '400X300')
-% set(gca,'LooseInset',get(gca,'TightInset'))
 % set(gca,'LooseInset',get(gca,'TightInset'))
 % set(gcf,'renderer','painters')
 % grid('on')
@@ -456,14 +419,15 @@ break
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence order
-% x = 2;
-% [a, b] = find(Xp1(:, 38) < x); P1ind = P1(a(end) + 1, 38);
-% [a, b] = find(Xp2(:, 75) < x); P2ind = P2(a(end) + 1, 75);
-% [a, b] = find(Xp3(:, 112) < x); P3ind = P3(a(end) + 1, 112);
-% [a, b] = find(Xp4(:, 150) < x); P4ind = P4(a(end) + 1, 150);
+% x = 1.0;
+% [a, b] = find(Xp3(:, 112) < x); Pp3ind = Pp3(a(end) + 1, 112);
+% [a, b] = find(Xp4(:, 150) < x); Pp4ind = Pp4(a(end) + 1, 150);
+% [a, b] = find(Xp5(:, 187) < x); Pp5ind = Pp5(a(end) + 1, 187);
+% [a, b] = find(Xp6(:, 225) < x); Pp6ind = Pp6(a(end) + 1, 225);
 % 
-% err = abs([P1ind, P2ind, P3ind, P4ind] - P4ind) ./ abs(P4ind);
-% meshSize = [100, 200, 300, 400];
+% err = abs([Pp3ind, Pp4ind, Pp5ind, Pp6ind] - Pp6ind) ./ abs(Pp6ind);
+% err = sort(err, 'descend')
+% meshSize = [300*225, 400*300, 500*375, 600*450];
 % f = fit(meshSize',err','power1')
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));

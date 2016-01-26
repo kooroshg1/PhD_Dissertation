@@ -382,7 +382,7 @@ We solved the same problem by fixing the number of nodes at $41$ and changing th
 \label{table:C3_ghostCell_wallLocation_RMSE}
 \end{table}
 
-In the final investigation, we looked at the effect of wall velocity of the solution accuracy. For this case, the number of nodes is fixed as $41$ and the stationary wall is located at $x_{wall} = 0.479$. The moving wall velocity is selected as $100$, $1000$, $10000$, and $100000$. As shown in Figure \ref{fig:C3_ghostCell_wallVelocity} and Table \ref{table:C3_ghostCell_wallVelocity_RMSE}, the wall velocity does not affect the accuracy of the solution.
+In the final investigation we looked at the effect of wall velocity of the solution accuracy. For this case, the number of nodes is fixed at $41$ and the stationary wall is located at $x_{wall} = 0.479$. The moving wall velocity is selected as $100$, $1000$, $10000$, and $100000$. As shown in Figure \ref{fig:C3_ghostCell_wallVelocity} and Table \ref{table:C3_ghostCell_wallVelocity_RMSE}, the wall velocity does not affect the accuracy of the solution.
 
 \begin{figure}[H]
     \centering

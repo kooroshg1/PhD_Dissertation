@@ -6,7 +6,7 @@ format short g;
 xc = 0.5;
 yc = 0.0;
 dR = 0.0000;
-dR = 0.00001i;
+% dR = 0.00001i;
 R = 0.10 + dR;
 N = 100;
 

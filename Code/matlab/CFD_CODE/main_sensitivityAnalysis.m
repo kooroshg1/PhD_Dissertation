@@ -305,8 +305,10 @@ for k = 1:nt
     UpS(2:end-1) = Up(:,1);
 
     % Zero gradient for velocity on east wall
-    UpE = (mean(UpW) ./ mean(Up(end,:))) .* Up(end,:);
-    VpE(2:end-1) = (mean(VpW) ./ mean(Vp(end,:))) .* Vp(end,:);
+%     UpE = (mean(UpW) ./ mean(Up(end,:))) .* Up(end,:);
+%     VpE(2:end-1) = (mean(VpW) ./ mean(Vp(end,:))) .* Vp(end,:);
+    UpE = 1 .* Up(end,:);
+    VpE(2:end-1) = 1 .* Vp(end,:);
 
     % ----------------------------------------------------------------- %
    Upe = [UpW;Up;UpE]; Upe = [2*UpS'-Upe(:,1) Upe 2*UpN'-Upe(:,end)];

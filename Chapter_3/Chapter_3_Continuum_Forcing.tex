@@ -1,17 +1,17 @@
 \section{Continuum Forcing Method}
-In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers that their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$ is governed by the following equation
+In this implementation of the immersed boundary, a forcing equation is added to the continuous governing equation \eqref{eq:C3_momentum} to represent the effect of the boundary. The continuous IB technique is the original method developed by Peskin \cite{peskin1972flow} for coupled simulation of blood flow due to the contraction of heart muscle. In this approach, the immersed boundary is represented by a set of elastic fibers; their locations are tracked in a Lagrangian fashion by a collection of massless points. These points move with the local fluid velocity. Therefore, the location of the $k$-th Lagrangian point, $X_k$, is governed by the following equation
 
 \begin{equation}
     \frac{\partial X_k}{\partial t} = u(X_k, t)
 \end{equation}
 
-Where $u$ is the velocity of the fluid at location $X_k$. The location of fluid nodes, $x$, does not necessarily coincide with the location of the Lagrangian points. Thus, it is required to map the velocities from the Eulerian domain, where the fluid's equations of motion are solved, to Lagrangian nodes. In a pure continuum problem, this can be done using the Dirac delta functions. The property of the Dirac delta function that enables the mapping between the Euler and Lagrangian domains is shown in the following equation
+Where $u$ is the velocity of the fluid at location $X_k$. The location of fluid nodes, $x$, does not necessarily coincide with the location of the Lagrangian points. Thus, it is required to map the velocities from the Eulerian domain, where the fluid's equations of motion are solved, to Lagrangian nodes. In a pure continuum problem, this can be done using the Dirac delta functions. The property of the Dirac delta function that enables the mapping between the Euler and Lagrangian domains is shown in the following equation.
 
 \begin{equation}
     \int_{\Omega_f} f(x) \delta(x - X_k) = f(X_k)
 \end{equation}
 
-As can be seen here, by convoluting the function of interest and the delta function, we can evaluate our function of interest at any location where the delta function is defined. Although this is the central idea of mapping data to the Lagrangian domain, this approach becomes unstable in practice \cite{lee2003stability}. In the practical implementation of immersed boundary method, the effect of delta function need to be expanded to a couple of nodes around $X_k$. This is achieved by relaxing the delta function. The relaxed delta function is referred to as regularized delta function \cite{shin2008assessment}. The regularized delta function is defined using Equation \eqref{eq:C3_regularizedDeltaFunction} in three dimensions.
+As can be seen here, by convoluting the function of interest and the delta function, we can evaluate our function of interest at any location where the delta function is defined. Although this is the central idea of mapping data to the Lagrangian domain, this approach becomes unstable in practice \cite{lee2003stability}. In the practical implementation of immersed boundary method, the effect of the delta function needs to be expanded to a couple of nodes around $X_k$. This is achieved by relaxing the delta function. The relaxed delta function is referred to as regularized delta function \cite{shin2008assessment}. The regularized delta function is defined using Equation \eqref{eq:C3_regularizedDeltaFunction} in three dimensions.
 
 \begin{equation}\label{eq:C3_regularizedDeltaFunction}
     \delta_h(x_1, x_2, x_3) = \frac{1}{dx_1 \cdot dx_2 \cdot dx_3}
@@ -20,7 +20,7 @@ As can be seen here, by convoluting the function of interest and the delta funct
                                \phi \left( \frac{x_2 - \eta_3}{dx_3} \right)
 \end{equation}
 
-where $x_i$ is the spatial coordinate in each direction, $\eta_i$ is the location where the delta function is defined, and $dx_i$ is the grid size in each direction. In above equation $i$ can be $1$, $2$, or $3$. The $\phi$ function is defined in Equation \eqref{eq:C3_phiFunction}. As shown here there are different ways of defining this function. The input of $\phi$ function is $r$ which is defined as $(x_i - \eta_i) / dx_i$.
+where $x_i$ is the spatial coordinate in each direction, $\eta_i$ is the location where the delta function is defined, and $dx_i$ is the grid size in each direction. In the above equation $i$ can be $1$, $2$, or $3$. The $\phi$ function is defined in Equation \eqref{eq:C3_phiFunction}. As shown here, there are different ways of defining this function. The input of $\phi$ function is $r$ which is defined as $(x_i - \eta_i) / dx_i$.
 
 \begin{subequations}\label{eq:C3_phiFunction}
 \begin{equation}\label{eq:C3_phiFunction_2point}
@@ -76,7 +76,7 @@ where $x_i$ is the spatial coordinate in each direction, $\eta_i$ is the locatio
 \end{equation}
 \end{subequations}
 
-Equation \eqref{eq:C3_phiFunction_2point} is the 2-point delta function that does the linear interpolation between the points \cite{saiki1996numerical}. Equation \eqref{eq:C3_phiFunction_3point} shows the 3-point delta function used by Roma et al. \cite{roma1999adaptive}, and Equations \eqref{eq:C3_phiFunction_4point} and \eqref{eq:C3_phiFunction_6point} are 4-point and 6-point delta functions, respectfully used by Peskin \cite{peskin2002immersed}. The comparison between the shape of different $\phi(r)$ functions are shown in Figure \ref{fig:C3_phi_function}.
+Equation \eqref{eq:C3_phiFunction_2point} is the 2-point delta function that calculates the linear interpolation between the points \cite{saiki1996numerical}. Equation \eqref{eq:C3_phiFunction_3point} shows the 3-point delta function used by Roma et al. \cite{roma1999adaptive} and Equations \eqref{eq:C3_phiFunction_4point} and \eqref{eq:C3_phiFunction_6point}, used by Peskin \cite{peskin2002immersed} are 4-point and 6-point delta functions, respectfully. The comparison between the shape of different $\phi(r)$ functions are shown in Figure \ref{fig:C3_phi_function}.
 
 \begin{figure}[H]
     \centering
@@ -91,46 +91,46 @@ Now we can write the mapping from the Eulerian nodes of the fluid solver to Lagr
     u(X_k) = \int_\Omega u(x) \delta(x - X_k) dx
 \end{equation}
 
-Where $\Omega$ is the computational domain, $u(x)$ is the velocity at the Eulerian nodes, $x$ is the Eulerian nodes coordinate, $u(X_k)$ is the velocity at the desired Lagrangian node, and $X_k$ is the coordinate of the Lagrangian node. Most of the continuum forcing approaches are the same up to this point. They differ depending on the way they calculate the forcing terms.
+Where $\Omega$ is the computational domain, $u(x)$ is the velocity at the Eulerian nodes, $x$ is the Eulerian nodes coordinate, $u(X_k)$ is the velocity at the desired Lagrangian node, and $X_k$ is the coordinate of the Lagrangian node. Most continuum forcing approaches are the same up to this point. They differ depending on the way they calculate the forcing terms.
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-Classical IB method
-\subsection{Classical IB method}
+\subsection{Classical IB Method}
 In the classical IB method, the forces at the immersed boundaries are calculated using appropriate constitutive laws, i.e. Hooks law. This can be expressed as follows.
 
 \begin{equation}
     f(X_k) = \mathcal{M}(X_k)
 \end{equation}
 
-Where $\mathcal{M}$ is an operator that describes the properties of the boundaries. This force is calculated at the Lagrangian points and needs to be transferred back to the Eulerian nodes. This is done using the same delta functions used previously to map the Eulerian results to Lagrangian. This method is well suited for a case of elastic bodies but will break for the cases of rigid boundaries or when the rigidity of boundaries is much more than the fluid. The origin of this problem is due to the high cycle oscillations that occur near the boundaries.
+Where $\mathcal{M}$ is an operator that describes the properties of the boundaries. This force is calculated at the Lagrangian points and needs to be transferred back to the Eulerian nodes. This is done using the same delta functions mentioned previously to map the Eulerian results to Lagrangian. This method is well suited for a case of elastic bodies; but, it will break for the cases of rigid boundaries or when the rigidity of boundaries is much more than the fluid. The origin of this problem is due to the high cycle oscillations that occur near the boundaries.
 
-This approach is applied to the demonstration problem defined in Section \ref{sec:C3_benchmark_case}. We modelled the location of the fixed boundary using the classical IB method and verified the results using analytical formulas for this problem. The forcing function is added to the right-hand-side of the governing equation as follows
+This approach is applied to the demonstration problem defined in Section \ref{sec:C3_benchmark_case}. We modelled the location of the fixed boundary using the classical IB method and verified the results using analytical formulas for this problem. The forcing function is added to the right-hand-side of the governing equation as follows.
 
 \begin{equation}
     \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial y^2} - f(t)
 \end{equation}
 
-Where $f(t)$ is the forcing function using to model the boundary. This equation is discretized using the Crank-Nicholson method as follows
+Where $f(t)$ is the forcing function using to model the boundary. This equation is discretized using the Crank-Nicholson method as:
 
 \begin{equation}\label{eq:C3_discretizedEquationPeskinIB}
     u^{n+1} = u^{n} + \frac{\Delta t}{2} \left( \frac{\partial^2 u^{n+1}}{\partial x^2} + 
                                                 \frac{\partial^2 u^n}{\partial x^2}\right) - \Delta t f^n 
 \end{equation}
 
-The steps to solve this equation and model the stationary wall using the IB method are as follows
+The steps to solve this equation and model the stationary wall using the IB method are as follows:
 
 \begin{enumerate}
-    \item Define the initial condition as $u^0$ and set $f^0$ equal to zero.
+    \item Define the initial condition as $u^0$ and set $f^0$ equal to zero
     \item Calculate the velocity at the following time step, $u^1$, using Equation \eqref{eq:C3_discretizedEquationPeskinIB}
-    \item Based on the new velocity at $t=1$, calculate the velocity at the location where the stationary wall is supposed to be, $X$, using $\delta$ function ($U$).
+    \item Based on the new velocity at $t=1$, calculate the velocity at the location where the stationary wall is supposed to be, $X$, using $\delta$ function ($U$)
     \item Calculate the distance that this node will move in the current time step: $X^{n+1} = X^n + U \Delta t$
-    \item Based on the new location of the node, calculate the forces as: $F = K \left( X^{n+1} - X^0 \right)$, where $X^0$ is the desired location of the wall and $K$ is the stiffness of wall. 
-    \item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function.
-    \item Reiterate until the convergence is satisfied.
+    \item Based on the new location of the node, calculate the forces as: $F = K \left( X^{n+1} - X^0 \right)$, where $X^0$ is the desired location of the wall and $K$ is the stiffness of wall.
+    \item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function
+    \item Reiterate until the convergence is satisfied
 \end{enumerate}
 
-For the classical IB method, we investigated the accuracy of the results to the number of nodes, wall velocity, and the stiffness used to model the wall. The immersed boundary simulation is compared with the analytical solution of this problem. We chose the normalized root mean square error to compared the analytical and IB results.
+For the classical IB method, we investigated the accuracy of the results to the number of nodes, wall velocity, and stiffness used to model the wall. The immersed boundary simulation is compared with the analytical solution of this problem. We chose the normalized root mean square error to compare the analytical and IB results.
 
-For the first investigation, we selected the wall stiffness as $10^2$ and its location is selected as $x_{wall} = 0.51885$. We chose this location so that it does not coincide with the location of computational nodes. The time step is chosen as $10^{-5}$ and the wall velocity is fixed at $1 m/s$. For this simulation, we used both 2-point and 4-point delta functions to transfer results between Lagrangian and Eulerian nodes. The computation domain is discretized using $11$, $41$, $81$, and $161$ nodes. The results of IB method is verified with analytical results.
+For the first investigation, we selected the wall stiffness as $10^2$ and its location selected as $x_{wall} = 0.51885$. We chose this location so that it does not coincide with the location of computational nodes. The time step is chosen as $10^{-5}$ and the wall velocity is fixed at $1 m/s$. For this simulation, we used both 2-point and 4-point delta functions to transfer results between Lagrangian and Eulerian nodes. The computation domain is discretized using $11$, $41$, $81$, and $161$ nodes. The results of IB method is verified with analytical results.
 
 \begin{figure}[H]
     \centering
@@ -191,9 +191,9 @@ For the first investigation, we selected the wall stiffness as $10^2$ and its lo
 \label{table:C3_classicalIBResultNodeNumberRMSE}
 \end{table}
 
-As shown in Figure \ref{fig:C3_classicalIBResultNodeNumber} and Table \ref{table:C3_classicalIBResultNodeNumberRMSE}, by increasing the number of nodes, the error in IB result decreases. However, changing the delta function from 2-point to 4-point does not affect the accuracy of the solution significantly. The higher order delta function can also reduce the accuracy of the solution for a very low number of nodes (here 11). 
+As shown in Figure \ref{fig:C3_classicalIBResultNodeNumber} and Table \ref{table:C3_classicalIBResultNodeNumberRMSE}, by increasing the number of nodes, the error in IB result decreases. However, changing the delta function from 2-point to 4-point does not significantly affect the accuracy of the solution. The higher order delta function can also reduce the accuracy of the solution for a very low number of nodes (here 11). 
 
-For the second investigation, we looked at the effect of changing the moving wall velocity on the solution accuracy. For this simulation, we fixed the number of nodes to 81 and set the stiffness value to $10^2$. The wall location is set at $0.51885$. The time step is also chosen as $10^{-5}$. For this problem, we only focused on 2-point delta function. We chose the wall velocity as $10 m/s$, $10^2 m/s$, $10^3 m/s$, and $10^4 m/s$. As shown in Figure \ref{fig:C3_classicalIBResultWallVelocity} and Table \ref{table:C3_classicalIBResultWallVelocityRMSE}, the method is capable of handling flow with different velocity without a loss in accuracy of the results. However, the simulation time increases with increase in wall velocity.
+For the second investigation we looked at the effect of changing the moving wall velocity on the solution accuracy. For this simulation we fixed the number of nodes to 81, set the stiffness value to $10^2$, the wall location at $0.51885$, and the time step as $10^{-5}$. For this problem we only focused on 2-point delta function. We chose the wall velocity as $10 m/s$, $10^2 m/s$, $10^3 m/s$, and $10^4 m/s$. As shown in Figure \ref{fig:C3_classicalIBResultWallVelocity} and Table \ref{table:C3_classicalIBResultWallVelocityRMSE}, the method is capable of handling flow with different velocities without a loss in accuracy of the results. However, the simulation time grows with increases in wall velocity.
 
 \begin{figure}[H]
     \centering
@@ -274,8 +274,8 @@ For the last case study of classical IB method, we looked at the effect of the w
 \end{table}
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-\subsection{Virtual boundary method}
-The virtual boundary method is a different approach to imposing the effect of immersed boundary through force terms. This method is well suited for both the rigid and elastic boundaries. The difference between this approach and the classical IB method is that it does not require the solution of the constitutive equations to calculate the force terms. This method is based on the works of the works of Goldstein et al. \cite{goldstein1993modeling} to simulate the flow around the rigid bodies. The forcing term in the virtual boundary method is defined as
+\subsection{Virtual Boundary Method}
+The virtual boundary method is a different approach to imposing the effect of immersed boundary through force terms. This method is well suited for both the rigid and elastic boundaries. The difference between this approach and the classical IB method is that it does not require the solution of the constitutive equations to calculate the force terms. This method is based on the works of Goldstein et al. \cite{goldstein1993modeling} to simulate the flow around the rigid bodies. The forcing term in the virtual boundary method is defined as
 
 \begin{equation}\label{eq:C3_virtualBoundaryMethod}
     F(X_k, t) = 
@@ -283,9 +283,9 @@ The virtual boundary method is a different approach to imposing the effect of im
     \beta \left[ u(X_k, t) - U(X_k, t) \right]
 \end{equation}
 
-Where $F$ is the required force at the $k$-th Lagrangian point, $u(X_k, t)$ is the velocity calculated from the Eulerian nodes using the $\delta$ function, and $U(X_k)$ is the desired velocity at the Lagrangian point $X_k$. The coefficient $\alpha$ and $\beta$ are selected to best enforce the boundary condition at the immersed solid boundary. Equation \eqref{eq:C3_virtualBoundaryMethod} is essentially a way to provide a feedback control to the system to make sure that the desired velocity ($U(X_k, t)$) is achieved at the immersed boundary. From a physical standpoint, this equation represents a damped oscillator \cite{iaccarino2003immersed}.
+where $F$ is the required force at the $k$-th Lagrangian point, $u(X_k, t)$ is the velocity calculated from the Eulerian nodes using the $\delta$ function, and $U(X_k)$ is the desired velocity at the Lagrangian point $X_k$. The coefficient $\alpha$ and $\beta$ are selected to best enforce the boundary condition at the immersed solid boundary. Equation \eqref{eq:C3_virtualBoundaryMethod} is essentially a way to provide feedback control to the system to make sure that the desired velocity ($U(X_k, t)$) is achieved at the immersed boundary. From a physical standpoint, this equation represents a damped oscillator \cite{iaccarino2003immersed}.
 
-As before, we apply this technique to the demonstration problem defined in Section \ref{sec:C3_benchmark_case}. We use the Crank-Nicholson method to discretize the equations as shown in the following equation. 
+As before, we apply this technique to the demonstration problem defined in Section \ref{sec:C3_benchmark_case}. We use the Crank-Nicholson method to discretize the equations as shown in the following equation:
 
 \begin{equation}\label{eq:C3_virtualBoundaryDiscretization}
     \frac{u^{n+1} - u^n}{\Delta t} = 
@@ -299,19 +299,19 @@ As before, we apply this technique to the demonstration problem defined in Secti
 Where $n$ is the current time step. The steps to solve this problem using the virtual boundary method can be defined as follows
 
 \begin{enumerate}
-    \item Define the initial condition as $u^0$ and set $f^0$ equal to zero.
+    \item Define the initial condition as $u^0$ and set $f^0$ equal to zero
     \item Calculate the velocity at the next time step, $u^1$, using Equation \eqref{eq:C3_discretizedEquationPeskinIB}
     \item Map the velocity results to the Lagrangian nodes using the $\delta$ function
-    \item Based on the new velocity at $t=1$ evaluate Equation \eqref{eq:C3_virtualBoundaryMethod}.
-    \item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function.
-    \item Reiterate until the convergence is satisfied.
+    \item Based on the new velocity at $t=1$ evaluate Equation \eqref{eq:C3_virtualBoundaryMethod}
+    \item Map the force at the Lagrangian location $X$ to its neighbouring Eulerian points using $\delta$ function
+    \item Reiterate until the convergence is satisfied
 \end{enumerate}
 
 Comparing the virtual boundary method to the classical IB method, we can see that fewer steps are required for this formulation. Moreover, there is no need to solve the constitutive equation for the solid domain that reduces the total computational cost.
 
 Like the classical IB method, we investigate the effect of mesh size, moving wall velocity, and values for $\alpha$ and $\beta$ constants of the solution accuracy. The numerical results are verified with the analytical solution of this problem. We use the RMSE value as a metric to compare the results.
 
-We looked at the effect of mesh size on the solution accuracy of the virtual boundary method. For this case, the moving wall velocity is fixed at $10 m/s$ with the location of fixed wall at $x_{wall} = 0.726$. The time step for this simulation is chosen as $10^{-5}$ with $\alpha = -1000$ and $\beta = -10$. We chose the number of nodes as $11$, $41$, $81$, and $161$. The total length of the domain is selected as $1 m$. As shown in Figure \ref{fig:C3_virtualBoundaryResultNodeNumber} and Table \ref{table:C3_virtualBoundaryResultNodeNumberRMSE}, by increasing the nodes number the simulation results become more accurate. However, the convergence is reached earlier compared to the classical IB method of the last section. This means that the computational effort to get the same accuracy compared to classical IB method is much less when using the virtual boundary method. 
+We looked at the effect of mesh size on the solution accuracy of the virtual boundary method. For this case, the moving wall velocity is fixed at $10 m/s$ with the location of the fixed wall at $x_{wall} = 0.726$. The time step for this simulation is chosen as $10^{-5}$ with $\alpha = -1000$ and $\beta = -10$. We chose the number of nodes as $11$, $41$, $81$, and $161$. The total length of the domain is selected as $1 m$. As shown in Figure \ref{fig:C3_virtualBoundaryResultNodeNumber} and Table \ref{table:C3_virtualBoundaryResultNodeNumberRMSE}, by increasing the number of nodes. the simulation results become more accurate. However, the convergence is reached earlier compared to the classical IB method of the last section. This means that the computational effort to get the same accuracy compared to classical IB method is much less when using the virtual boundary method. 
 
 \begin{figure}[H]
     \centering
