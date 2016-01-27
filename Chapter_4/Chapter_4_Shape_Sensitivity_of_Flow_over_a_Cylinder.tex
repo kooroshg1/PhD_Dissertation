@@ -120,6 +120,83 @@ For the sensitivity analysis, $\partial D/\partial X$ is calculated easily since
 
 For this analysis, the design variable $b$ is selected as the radius of the cylinder. Therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
 
-The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions does not depend on the design variables and therefore, have zero values. Having the governing equations and boundary conditions, it is possible to solve the sensitivity equations.
+The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions does not depend on the design variables and therefore, have zero values. Having the governing equations and boundary conditions, it is possible to solve the sensitivity equations. The convergence analysis for the sensitivity results are shown in Figure \ref{fig:C4_flowOverCylinderSAmeshConvergence}. As can be seen in these plots, the mesh size of $500 \time 375$ is selected for the rest of sensitivity analysis.
 
-The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not have the accuracy issues of the finite different method and provides the accurate sensitivities upto machine precision. However, the analysis code requires to handle complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculating the sensitivities. The complex step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}.
+\begin{figure}[H]
+    \centering
+    \subfigure[U-velocity sensitivity on $y = 0.0$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/convergence_dUdR_Y000_RE100.eps}
+    }
+    \quad
+    \subfigure[V-velocity sensitivity on $x = 0.75$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/convergence_dVdR_X075_RE100.eps}
+    }
+    \\
+    \subfigure[Pressure sensitivity on $y = 0.0$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/convergence_dPdR_Y000_RE100.eps}
+    }
+    \caption{Flow variable sensitivities with respect to change in the cylinder radius for different mesh sizes (Re = 100).}
+    \label{fig:C4_flowOverCylinderSAmeshConvergence}
+\end{figure}
+
+The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not have the accuracy issues of the finite different method and provides the accurate sensitivities upto machine precision. However, the analysis code requires to handle complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculating the sensitivities. The complex step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities for different location in the domain are shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}, shows a good comparison between the CSA and CS results.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[U-velocity sensitivity on $y = 0.0$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_Y000_RE100.eps}
+    }
+    \quad
+    \subfigure[U-velocity sensitivity on $y = 0.20$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_Y020_RE100.eps}
+    }
+    \\
+	\subfigure[V-velocity sensitivity on $x = 0.5$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_X050_RE100.eps}
+    }
+    \quad
+    \subfigure[V-velocity sensitivity on $x = 0.75$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_X075_RE100.eps}
+    }
+    \\
+	\subfigure[Pressure sensitivity on $y = 0.0$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/validation_dPdR_Y000_RE100.eps}
+    }
+    \quad
+    \subfigure[Pressure sensitivity on $y = 0.20$]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/validation_dPdR_Y020_RE100.eps}
+    }
+    \caption{Verification of the flow variable sensitivities with respect to change in the cylinder radius for different location in the domain.}
+    \label{fig:C4_flowOverCylinderSensitivityValidation}
+\end{figure}
+
+The rate of convergence of the sensitivity results are investigated in Figure \ref{fig:C4_flowOverCylinderSArateOfConvergence}. The slope of the fitted line (dashed line) for $u$-velocity, $v$-velocity, and pressure sensitivity is reported as $-2.2$, $-1.94$, and $-2.31$. The $v$-velocity has lower convergence rate since the sampling location is near the wall when the spatial approximations are first order.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[U-velocity sensitivity convergence rate (at $(0.0, 1.5)$)]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/convergenceRate_dUdR_RE100.eps}
+    }
+    \quad
+    \subfigure[V-velocity sensitivity convergence rate (at $(0.5, 0.75)$)]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/convergenceRate_dVdR_RE100.eps}
+    }
+    \\
+    \subfigure[Pressure sensitivity convergence rate (at $(0.0, 1.0)$)]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_over_cylinder/convergenceRate_dPdR_RE100.eps}
+    }
+    \caption{Convergence rate for the sensitivities (Re = 100).}
+    \label{fig:C4_flowOverCylinderSAmeshConvergence}
+\end{figure}

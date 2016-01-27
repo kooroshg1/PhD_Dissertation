@@ -5,6 +5,8 @@ format short g;
 % ----------------------------------------------------------------------- %
 fontsize = 52;
 linewidth = 5.0;
+markersize = 15.0;
+skip = 10;
 % ----------------------------------------------------------------------- %
 %% Load data
 loadData = false;
@@ -199,16 +201,18 @@ end
 % ============================ U - Velocity ============================= %
 % ======================================================================= %
 %% Complex step validation
-% y = 0.5;
+% y = 0.0;
 % [a, b] = min(abs(Yu5(1, :) - y));
 % 
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(Xu5(:, b), Up5(:, b), ...
-%      Xu5(:, b), dUdB5(:, b), ...
-%      'linewidth', linewidth)
-% xlabel('\theta', 'fontsize', fontsize)
+% plot(Xu5(:, b), Up5(:, b), 'k',...
+%      Xu5(:, b), dUdB5(:, b), 'r--',...
+%      'linewidth', linewidth, 'markersize', markersize)
+% xlabel('X (m)', 'fontsize', fontsize)
 % ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+% legend('CSA', 'CS', 'fontsize', fontsize)
+% title(['RMSE = ' num2str(calcRMSE(dUdB5(:, b), Up5(:, b)))], 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
@@ -249,59 +253,47 @@ end
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence order
-% x = 1.5;
-% [a, b] = find(Xu3(:, 112) < x); Up3ind = Up3(a(end) + 1, 112);
-% [a, b] = find(Xu4(:, 150) < x); Up4ind = Up4(a(end) + 1, 150);
-% [a, b] = find(Xu5(:, 187) < x); Up5ind = Up5(a(end) + 1, 187);
-% [a, b] = find(Xu6(:, 225) < x); Up6ind = Up6(a(end) + 1, 225);
-% 
-% err = abs([Up3ind, Up4ind, Up5ind, Up6ind] - Up6ind) ./ abs(Up6ind);
-% err = sort(err, 'descend');
-% meshSize = [300, 400, 500, 600];
-% f = fit(meshSize',err','power1')
-% 
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% loglog(meshSize, err, 'k', ...
-%     meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
-%     'linewidth', linewidth)
-% xlabel('Number of nodes in X direction', 'fontsize', fontsize)
-% ylabel('Absolute error', 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gca,'LooseInset',get(gca,'TightInset'))
-% set(gcf,'renderer','painters')
-% grid('on')
-% grid minor
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+x = 1.5;
+[a, b] = find(Xu3(:, 112) < x); Up3ind = Up3(a(end) + 1, 112);
+[a, b] = find(Xu4(:, 150) < x); Up4ind = Up4(a(end) + 1, 150);
+[a, b] = find(Xu5(:, 187) < x); Up5ind = Up5(a(end) + 1, 187);
+[a, b] = find(Xu6(:, 225) < x); Up6ind = Up6(a(end) + 1, 225);
+
+err = abs([Up3ind, Up4ind, Up5ind, Up6ind] - Up6ind) ./ abs(Up6ind);
+err = sort(err, 'descend');
+meshSize = [300*225, 400*300, 500*375, 600*450];
+f = fit(meshSize',err','power1')
+
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+loglog(meshSize, err, 'k', ...
+    meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
+    'linewidth', linewidth)
+xlabel('Number of nodes', 'fontsize', fontsize)
+ylabel('Absolute error', 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gca,'LooseInset',get(gca,'TightInset'))
+set(gcf,'renderer','painters')
+grid('on')
+grid minor
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 % ======================================================================= %
 % ============================ V - Velocity ============================= %
 % ======================================================================= %
 %% Complex step validation
-% x = 1.5;
+% x = 0.75;
 % [a, b] = min(abs(Xv5(:, 1) - x));
 % 
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(Yv5(b, :), Vp5(b, :), ...
-%      Yv5(b, :), dVdB5(b, :), ...
+% plot(Yv5(b, :), Vp5(b, :), 'k',...
+%      Yv5(b, :), dVdB5(b, :), 'r--',...
 %      'linewidth', linewidth)
-% xlabel('\theta', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gcf,'renderer','painters')
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-% grid('on')
-% grid minor
-% set(gca,'LooseInset',get(gca,'TightInset'))
-
-%% Velocity on the boundary
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% plot(theta, vB4, 'k', ...
-%      'linewidth', linewidth)
-% xlabel('\theta', 'fontsize', fontsize)
-% ylabel('v-velocity (m/s)', 'fontsize', fontsize)
+% xlabel('Y (m)', 'fontsize', fontsize)
+% ylabel('dV/dr (1/s)', 'fontsize', fontsize)
+% legend('CSA', 'CS')
+% title(['RMSE = ' num2str(calcRMSE(dVdB5(b, :), Vp5(b, :)))], 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
@@ -312,8 +304,9 @@ end
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xv4, Yv4, V4, 50, 'linestyle', 'none')
+% contourf(Xv5, Yv5, Vp5, 40, 'linestyle', 'none')
 % colorbar('eastoutside')
+% caxis([-5, 5])
 % hold on
 % plot(xImm, yImm, 'k', ...
 %      'linewidth', linewidth)
@@ -372,7 +365,7 @@ Vp6ind = Vp6(x6ind, y6ind);
 
 err = abs([Vp3ind, Vp4ind, Vp5ind, Vp6ind] - Vp6ind) ./ Vp6ind;
 err = sort(err, 'descend')
-meshSize = [300, 400, 500, 600];
+meshSize = [300*225, 400*300, 500*375, 600*450];
 f = fit(meshSize',err','power1')
 
 figure,
@@ -380,7 +373,7 @@ set(gcf, 'Position', get(0,'Screensize'));
 loglog(meshSize, err, 'k', ...
     meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
     'linewidth', linewidth)
-xlabel('Number of nodes in X direction', 'fontsize', fontsize)
+xlabel('Number of nodes', 'fontsize', fontsize)
 ylabel('Absolute error', 'fontsize', fontsize)
 set(gca, 'fontsize', fontsize)
 set(gca,'LooseInset',get(gca,'TightInset'))
@@ -393,16 +386,18 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 % ============================== Pressure =============================== %
 % ======================================================================= %
 %% Complex step validation
-% y = 0.5;
+% y = 0.2;
 % [a, b] = min(abs(Yu5(1, :) - y));
 % 
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(Xu5(:, b), Up5(:, b), ...
-%      Xu5(:, b), dUdB5(:, b), ...
+% plot(Xp5(:, b), Pp5(:, b), 'k',...
+%      Xp5(:, b), dPdB5(:, b), 'r--',...
 %      'linewidth', linewidth)
-% xlabel('\theta', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+% xlabel('X (m)', 'fontsize', fontsize)
+% ylabel('dP/dr (Pa/m)', 'fontsize', fontsize)
+% legend('CSA', 'CS')
+% title(['RMSE = ' num2str(calcRMSE(dPdB5(:, b), Pp5(:, b)))], 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
@@ -413,7 +408,7 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xp4, Yp4, P4, 50, 'linestyle', 'none')
+% contourf(Xp5, Yp5, Pp5, 50, 'linestyle', 'none')
 % colorbar('eastoutside')
 % hold on
 % plot(xImm, yImm, 'k', ...
@@ -442,28 +437,28 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence order
-% x = 1.0;
-% [a, b] = find(Xp3(:, 112) < x); Pp3ind = Pp3(a(end) + 1, 112);
-% [a, b] = find(Xp4(:, 150) < x); Pp4ind = Pp4(a(end) + 1, 150);
-% [a, b] = find(Xp5(:, 187) < x); Pp5ind = Pp5(a(end) + 1, 187);
-% [a, b] = find(Xp6(:, 225) < x); Pp6ind = Pp6(a(end) + 1, 225);
-% 
-% err = abs([Pp3ind, Pp4ind, Pp5ind, Pp6ind] - Pp6ind) ./ abs(Pp6ind);
-% err = sort(err, 'descend')
-% meshSize = [300*225, 400*300, 500*375, 600*450];
-% f = fit(meshSize',err','power1')
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% loglog(meshSize, err, 'k', ...
-%     meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
-%     'linewidth', linewidth)
-% xlabel('Number of nodes in X direction', 'fontsize', fontsize)
-% ylabel('Absolute error', 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gca,'LooseInset',get(gca,'TightInset'))
-% set(gcf,'renderer','painters')
-% set(gca,'YMinorTick','on')
-% set(gca,'XMinorTick','on')
-% grid('on')
-% grid minor
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+x = 1.0;
+[a, b] = find(Xp3(:, 112) < x); Pp3ind = Pp3(a(end) + 1, 112);
+[a, b] = find(Xp4(:, 150) < x); Pp4ind = Pp4(a(end) + 1, 150);
+[a, b] = find(Xp5(:, 187) < x); Pp5ind = Pp5(a(end) + 1, 187);
+[a, b] = find(Xp6(:, 225) < x); Pp6ind = Pp6(a(end) + 1, 225);
+
+err = abs([Pp3ind, Pp4ind, Pp5ind, Pp6ind] - Pp6ind) ./ abs(Pp6ind);
+err = sort(err, 'descend')
+meshSize = [300*225, 400*300, 500*375, 600*450];
+f = fit(meshSize',err','power1')
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+loglog(meshSize, err, 'k', ...
+    meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
+    'linewidth', linewidth)
+xlabel('Number of nodes', 'fontsize', fontsize)
+ylabel('Absolute error', 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gca,'LooseInset',get(gca,'TightInset'))
+set(gcf,'renderer','painters')
+set(gca,'YMinorTick','on')
+set(gca,'XMinorTick','on')
+grid('on')
+grid minor
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
