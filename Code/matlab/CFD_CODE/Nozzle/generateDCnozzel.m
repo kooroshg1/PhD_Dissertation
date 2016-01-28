@@ -3,6 +3,10 @@ clear all;
 close all;
 format short g;
 % ----------------------------------------------------------------------- %
+fontsize = 52;
+linewidth = 10.0;
+markersize = 15.0;
+% ----------------------------------------------------------------------- %
 multiplier = 2;
 N1 = 10 * multiplier;
 N2 = 50 * multiplier;
@@ -15,7 +19,7 @@ xi = 0.0;
 yo = 0.3;
 xo = 1.0-xi;
 xt = 0.3;
-yt = 0.1 + 0.0000075;
+yt = 0.1 + 0.00000i;
 
 A1 = [xt^2,xt,1;2*xt,1,0;xi^2,xi,1];
 coef = A1 \ [yt;0;yi];
@@ -66,7 +70,7 @@ pointCloud = [pointCloud1;pointCloud2];
 
 % Calculate point cloud perturbation
 dyt = 0.02;
-yt = 0.1 + dyt;
+yt = yt + dyt;
 
 
 A1 = [xt^2,xt,1;2*xt,1,0;xi^2,xi,1];
@@ -111,8 +115,23 @@ pointCloudPerturb2(findSame,:) = [];
 
 
 figure,
-plot(pointCloud1(:,1),pointCloud1(:,2),'o',...
-     pointCloud2(:,1),pointCloud2(:,2),'o')
+set(gcf, 'Position', get(0,'Screensize'));
+plot(pointCloud1(:,1),pointCloud1(:,2),'k', ...
+     pointCloud2(:,1),pointCloud2(:,2),'k', ...
+     xi, 0.5 + yi, 'ro', ...
+     xo, 0.5 + yo, 'ro', ...
+     xt, 0.5 + yt - dyt, 'r+', ...
+     'markersize', markersize + 15, 'linewidth', linewidth)
+xlabel('X', 'fontsize', fontsize)
+ylabel('Y', 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gca,'LooseInset',get(gca,'TightInset'))
+set(gcf,'renderer','painters')
+set(gca,'YMinorTick','on')
+set(gca,'XMinorTick','on')
+grid('on')
+grid minor
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 axis([0 1 0 1])
 
 pointCloudPerturb = [pointCloudPerturb1;pointCloudPerturb2];
@@ -120,4 +139,3 @@ pointCloudSensitivity = (pointCloudPerturb - pointCloud) / dyt;
 
 dlmwrite('point_cloud.txt',pointCloud);
 dlmwrite('point_cloud_sensitivity.txt',pointCloudSensitivity);
-

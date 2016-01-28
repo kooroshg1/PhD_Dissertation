@@ -12,213 +12,124 @@ skip = 10;
 loadData = false;
 if loadData
 clear all;
-xImm = dlmread('100X75/xImm');
-yImm = dlmread('100X75/yImm');
+xImm = dlmread('200X50/xImm.txt');
+yImm = dlmread('200X50/yImm.txt');
 
-% -------------------------------- 100X75 ------------------------------- %
-dUdB1 = dlmread('100X75/dUdB.txt');
-dVdB1 = dlmread('100X75/dVdB.txt');
-dPdB1 = dlmread('100X75/dPdB.txt');
-Xu1 = dlmread('100X75/Xu.txt');
-Yu1 = dlmread('100X75/Yu.txt');
-Xv1 = dlmread('100X75/Xv.txt');
-Yv1 = dlmread('100X75/Yv.txt');
-Xp1 = dlmread('100X75/Xp.txt');
-Yp1 = dlmread('100X75/Yp.txt');
-dudB1 = dlmread('100X75/dudB.txt');
-dvdB1 = dlmread('100X75/dvdB.txt');
-dpdB1 = dlmread('100X75/dpdB.txt');
+% ------------------------------- 200X50 -------------------------------- %
+dUdB1 = dlmread('200X50/dUdB.txt');
+dVdB1 = dlmread('200X50/dVdB.txt');
+dPdB1 = dlmread('200X50/dPdB.txt');
+Xu1 = dlmread('200X50/Xu.txt');
+Yu1 = dlmread('200X50/Yu.txt');
+Xv1 = dlmread('200X50/Xv.txt');
+Yv1 = dlmread('200X50/Yv.txt');
+Xp1 = dlmread('200X50/Xp.txt');
+Yp1 = dlmread('200X50/Yp.txt');
+dudB1 = dlmread('200X50/dudB.txt');
+dvdB1 = dlmread('200X50/dvdB.txt');
+dpdB1 = dlmread('200X50/dpdB.txt');
 
-[in, on] = inpolygon(Xu1, Yu1, xImm, yImm); dUdB1(in) = nan;
-[in, on] = inpolygon(Xv1, Yv1, xImm, yImm); dVdB1(in) = nan;
-[in, on] = inpolygon(Xp1, Yp1, xImm, yImm); dPdB1(in) = nan;
+Up1 = dlmread('200X50_CSA/Up.txt');
+Vp1 = dlmread('200X50_CSA/Vp.txt');
+Pp1 = dlmread('200X50_CSA/Pp.txt');
+pp1 = dlmread('200X50_CSA/ppB.txt');
 
-% ------------------------------- 200X150 ------------------------------- %
-dUdB2 = dlmread('200X150/dUdB.txt');
-dVdB2 = dlmread('200X150/dVdB.txt');
-dPdB2 = dlmread('200X150/dPdB.txt');
-Xu2 = dlmread('200X150/Xu.txt');
-Yu2 = dlmread('200X150/Yu.txt');
-Xv2 = dlmread('200X150/Xv.txt');
-Yv2 = dlmread('200X150/Yv.txt');
-Xp2 = dlmread('200X150/Xp.txt');
-Yp2 = dlmread('200X150/Yp.txt');
-dudB2 = dlmread('200X150/dudB.txt');
-dvdB2 = dlmread('200X150/dvdB.txt');
-dpdB2 = dlmread('200X150/dpdB.txt');
+[in, on] = inpolygon(Xu1, Yu1, xImm, yImm); dUdB1(in) = nan; Up1(in) = nan;
+[in, on] = inpolygon(Xv1, Yv1, xImm, yImm); dVdB1(in) = nan; Vp1(in) = nan;
+[in, on] = inpolygon(Xp1, Yp1, xImm, yImm); dPdB1(in) = nan; Pp1(in) = nan;
 
-Up2 = dlmread('200X150_CSA/Up.txt');
-Vp2 = dlmread('200X150_CSA/Vp.txt');
-Pp2 = dlmread('200X150_CSA/Pp.txt');
-pp2 = dlmread('200X150_CSA/ppB.txt');
+% ------------------------------- 300X75 -------------------------------- %
+dUdB2 = dlmread('300X75/dUdB.txt');
+dVdB2 = dlmread('300X75/dVdB.txt');
+dPdB2 = dlmread('300X75/dPdB.txt');
+Xu2 = dlmread('300X75/Xu.txt');
+Yu2 = dlmread('300X75/Yu.txt');
+Xv2 = dlmread('300X75/Xv.txt');
+Yv2 = dlmread('300X75/Yv.txt');
+Xp2 = dlmread('300X75/Xp.txt');
+Yp2 = dlmread('300X75/Yp.txt');
+dudB2 = dlmread('300X75/dudB.txt');
+dvdB2 = dlmread('300X75/dvdB.txt');
+dpdB2 = dlmread('300X75/dpdB.txt');
+
+Up2 = dlmread('300X75_CSA/Up.txt');
+Vp2 = dlmread('300X75_CSA/Vp.txt');
+Pp2 = dlmread('300X75_CSA/Pp.txt');
+pp2 = dlmread('300X75_CSA/ppB.txt');
 
 [in, on] = inpolygon(Xu2, Yu2, xImm, yImm); dUdB2(in) = nan; Up2(in) = nan;
 [in, on] = inpolygon(Xv2, Yv2, xImm, yImm); dVdB2(in) = nan; Vp2(in) = nan;
 [in, on] = inpolygon(Xp2, Yp2, xImm, yImm); dPdB2(in) = nan; Pp2(in) = nan;
 
-% ------------------------------- 300X225 ------------------------------- %
-dUdB3 = dlmread('300X225/dUdB.txt');
-dVdB3 = dlmread('300X225/dVdB.txt');
-dPdB3 = dlmread('300X225/dPdB.txt');
-Xu3 = dlmread('300X225/Xu.txt');
-Yu3 = dlmread('300X225/Yu.txt');
-Xv3 = dlmread('300X225/Xv.txt');
-Yv3 = dlmread('300X225/Yv.txt');
-Xp3 = dlmread('300X225/Xp.txt');
-Yp3 = dlmread('300X225/Yp.txt');
-dudB3 = dlmread('300X225/dudB.txt');
-dvdB3 = dlmread('300X225/dvdB.txt');
-dpdB3 = dlmread('300X225/dpdB.txt');
+% ------------------------------- 400X100 ------------------------------- %
+dUdB3 = dlmread('400X100/dUdB.txt');
+dVdB3 = dlmread('400X100/dVdB.txt');
+dPdB3 = dlmread('400X100/dPdB.txt');
+Xu3 = dlmread('400X100/Xu.txt');
+Yu3 = dlmread('400X100/Yu.txt');
+Xv3 = dlmread('400X100/Xv.txt');
+Yv3 = dlmread('400X100/Yv.txt');
+Xp3 = dlmread('400X100/Xp.txt');
+Yp3 = dlmread('400X100/Yp.txt');
+dudB3 = dlmread('400X100/dudB.txt');
+dvdB3 = dlmread('400X100/dvdB.txt');
+dpdB3 = dlmread('400X100/dpdB.txt');
 
-Up3 = dlmread('300X225_CSA/Up.txt');
-Vp3 = dlmread('300X225_CSA/Vp.txt');
-Pp3 = dlmread('300X225_CSA/Pp.txt');
-pp3 = dlmread('300X225_CSA/ppB.txt');
+Up3 = dlmread('400X100_CSA/Up.txt');
+Vp3 = dlmread('400X100_CSA/Vp.txt');
+Pp3 = dlmread('400X100_CSA/Pp.txt');
+pp3 = dlmread('400X100_CSA/ppB.txt');
 
 [in, on] = inpolygon(Xu3, Yu3, xImm, yImm); dUdB3(in) = nan; Up3(in) = nan;
 [in, on] = inpolygon(Xv3, Yv3, xImm, yImm); dVdB3(in) = nan; Vp3(in) = nan;
 [in, on] = inpolygon(Xp3, Yp3, xImm, yImm); dPdB3(in) = nan; Pp3(in) = nan;
 
-% ------------------------------- 400X300 ------------------------------- %
-dUdB4 = dlmread('400X300/dUdB.txt');
-dVdB4 = dlmread('400X300/dVdB.txt');
-dPdB4 = dlmread('400X300/dPdB.txt');
-Xu4 = dlmread('400X300/Xu.txt');
-Yu4 = dlmread('400X300/Yu.txt');
-Xv4 = dlmread('400X300/Xv.txt');
-Yv4 = dlmread('400X300/Yv.txt');
-Xp4 = dlmread('400X300/Xp.txt');
-Yp4 = dlmread('400X300/Yp.txt');
-dudB4 = dlmread('400X300/dudB.txt');
-dvdB4 = dlmread('400X300/dvdB.txt');
-dpdB4 = dlmread('400X300/dpdB.txt');
+% ------------------------------- 450X112 ------------------------------- %
+dUdB4 = dlmread('450X112/dUdB.txt');
+dVdB4 = dlmread('450X112/dVdB.txt');
+dPdB4 = dlmread('450X112/dPdB.txt');
+Xu4 = dlmread('450X112/Xu.txt');
+Yu4 = dlmread('450X112/Yu.txt');
+Xv4 = dlmread('450X112/Xv.txt');
+Yv4 = dlmread('450X112/Yv.txt');
+Xp4 = dlmread('450X112/Xp.txt');
+Yp4 = dlmread('450X112/Yp.txt');
+dudB4 = dlmread('450X112/dudB.txt');
+dvdB4 = dlmread('450X112/dvdB.txt');
+dpdB4 = dlmread('450X112/dpdB.txt');
 
-Up4 = dlmread('400X300_CSA/Up.txt');
-Vp4 = dlmread('400X300_CSA/Vp.txt');
-Pp4 = dlmread('400X300_CSA/Pp.txt');
-pp4 = dlmread('400X300_CSA/ppB.txt');
+Up4 = dlmread('450X112_CSA/Up.txt');
+Vp4 = dlmread('450X112_CSA/Vp.txt');
+Pp4 = dlmread('450X112_CSA/Pp.txt');
+pp4 = dlmread('450X112_CSA/ppB.txt');
 
 [in, on] = inpolygon(Xu4, Yu4, xImm, yImm); dUdB4(in) = nan; Up4(in) = nan;
 [in, on] = inpolygon(Xv4, Yv4, xImm, yImm); dVdB4(in) = nan; Vp4(in) = nan;
 [in, on] = inpolygon(Xp4, Yp4, xImm, yImm); dPdB4(in) = nan; Pp4(in) = nan;
 
-% ------------------------------- 500x375 ------------------------------- %
-dUdB5 = dlmread('500X375/dUdB.txt');
-dVdB5 = dlmread('500X375/dVdB.txt');
-dPdB5 = dlmread('500X375/dPdB.txt');
-Xu5 = dlmread('500X375/Xu.txt');
-Yu5 = dlmread('500X375/Yu.txt');
-Xv5 = dlmread('500X375/Xv.txt');
-Yv5 = dlmread('500X375/Yv.txt');
-Xp5 = dlmread('500X375/Xp.txt');
-Yp5 = dlmread('500X375/Yp.txt');
-dudB5 = dlmread('500X375/dudB.txt');
-dvdB5 = dlmread('500X375/dvdB.txt');
-dpdB5 = dlmread('500X375/dpdB.txt');
-
-Up5 = dlmread('500X375_CSA/Up.txt');
-Vp5 = dlmread('500X375_CSA/Vp.txt');
-Pp5 = dlmread('500X375_CSA/Pp.txt');
-pp5 = dlmread('500X375_CSA/ppB.txt');
-
-[in, on] = inpolygon(Xu5, Yu5, xImm, yImm); dUdB5(in) = nan; Up5(in) = nan;
-[in, on] = inpolygon(Xv5, Yv5, xImm, yImm); dVdB5(in) = nan; Vp5(in) = nan;
-[in, on] = inpolygon(Xp5, Yp5, xImm, yImm); dPdB5(in) = nan; Pp5(in) = nan;
-
-% ------------------------------- 600X450 ------------------------------- %
-dUdB6 = dlmread('600X450/dUdB.txt');
-dVdB6 = dlmread('600X450/dVdB.txt');
-dPdB6 = dlmread('600X450/dPdB.txt');
-Xu6 = dlmread('600X450/Xu.txt');
-Yu6 = dlmread('600X450/Yu.txt');
-Xv6 = dlmread('600X450/Xv.txt');
-Yv6 = dlmread('600X450/Yv.txt');
-Xp6 = dlmread('600X450/Xp.txt');
-Yp6 = dlmread('600X450/Yp.txt');
-dudB6 = dlmread('600X450/dudB.txt');
-dvdB6 = dlmread('600X450/dvdB.txt');
-dpdB6 = dlmread('600X450/dpdB.txt');
-
-Up6 = dlmread('600X450_CSA/Up.txt');
-Vp6 = dlmread('600X450_CSA/Vp.txt');
-Pp6 = dlmread('600X450_CSA/Pp.txt');
-pp6 = dlmread('600X450_CSA/ppB.txt');
-
-[in, on] = inpolygon(Xu6, Yu6, xImm, yImm); dUdB6(in) = nan; Up6(in) = nan;
-[in, on] = inpolygon(Xv6, Yv6, xImm, yImm); dVdB6(in) = nan; Vp6(in) = nan;
-[in, on] = inpolygon(Xp6, Yp6, xImm, yImm); dPdB6(in) = nan; Pp6(in) = nan;
-
-% ------------------------------- 700X525 ------------------------------- %
-dUdB7 = dlmread('700X525/dUdB.txt');
-dVdB7 = dlmread('700X525/dVdB.txt');
-dPdB7 = dlmread('700X525/dPdB.txt');
-Xu7 = dlmread('700X525/Xu.txt');
-Yu7 = dlmread('700X525/Yu.txt');
-Xv7 = dlmread('700X525/Xv.txt');
-Yv7 = dlmread('700X525/Yv.txt');
-Xp7 = dlmread('700X525/Xp.txt');
-Yp7 = dlmread('700X525/Yp.txt');
-dudB7 = dlmread('700X525/dudB.txt');
-dvdB7 = dlmread('700X525/dvdB.txt');
-dpdB7 = dlmread('700X525/dpdB.txt');
-
-Up7 = dlmread('700X525_CSA/Up.txt');
-Vp7 = dlmread('700X525_CSA/Vp.txt');
-Pp7 = dlmread('700X525_CSA/Pp.txt');
-pp7 = dlmread('700X525_CSA/ppB.txt');
-
-[in, on] = inpolygon(Xu7, Yu7, xImm, yImm); dUdB7(in) = nan; Up7(in) = nan;
-[in, on] = inpolygon(Xv7, Yv7, xImm, yImm); dVdB7(in) = nan; Vp7(in) = nan;
-[in, on] = inpolygon(Xp7, Yp7, xImm, yImm); dPdB7(in) = nan; Pp7(in) = nan;
-
-% ------------------------------- 800X600 ------------------------------- %
-dUdB8 = dlmread('800X600/dUdB.txt');
-dVdB8 = dlmread('800X600/dVdB.txt');
-dPdB8 = dlmread('800X600/dPdB.txt');
-Xu8 = dlmread('800X600/Xu.txt');
-Yu8 = dlmread('800X600/Yu.txt');
-Xv8 = dlmread('800X600/Xv.txt');
-Yv8 = dlmread('800X600/Yv.txt');
-Xp8 = dlmread('800X600/Xp.txt');
-Yp8 = dlmread('800X600/Yp.txt');
-dudB8 = dlmread('800X600/dudB.txt');
-dvdB8 = dlmread('800X600/dvdB.txt');
-dpdB8 = dlmread('800X600/dpdB.txt');
-
-Up8 = dlmread('800X600_CSA/Up.txt');
-Vp8 = dlmread('800X600_CSA/Vp.txt');
-Pp8 = dlmread('800X600_CSA/Pp.txt');
-pp8 = dlmread('800X600_CSA/ppB.txt');
-
-[in, on] = inpolygon(Xu8, Yu8, xImm, yImm); dUdB8(in) = nan; Up8(in) = nan;
-[in, on] = inpolygon(Xv8, Yv8, xImm, yImm); dVdB8(in) = nan; Vp8(in) = nan;
-[in, on] = inpolygon(Xp8, Yp8, xImm, yImm); dPdB8(in) = nan; Pp8(in) = nan;
-
-theta = [linspace(90, -90, length(xImm) / 2), ...
-         linspace(-90, 90, length(xImm) / 2)];
 end
 % ======================================================================= %
 % ============================ U - Velocity ============================= %
 % ======================================================================= %
 %% Complex step validation
-% y = 0.0;
-% [a, b] = min(abs(Yu5(1, :) - y));
-% 
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% plot(Xu5(:, b), Up5(:, b), 'k',...
-%      Xu5(:, b), dUdB5(:, b), 'r--',...
-%      'linewidth', linewidth, 'markersize', markersize)
-% xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
-% legend('CSA', 'CS', 'fontsize', fontsize)
-% title(['RMSE = ' num2str(calcRMSE(dUdB5(:, b), Up5(:, b)))], 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gcf,'renderer','painters')
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-% grid('on')
-% grid minor
-% set(gca,'LooseInset',get(gca,'TightInset'))
+y = 0.5;
+[a, b] = min(abs(Yu3(1, :) - y));
+
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+plot(Xu3(:, b), Up3(:, b), 'k',...
+     Xu3(:, b), dUdB3(:, b), 'r--',...
+     'linewidth', linewidth, 'markersize', markersize)
+xlabel('X (m)', 'fontsize', fontsize)
+ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+legend('CSA', 'CS', 'fontsize', fontsize)
+title(['RMSE = ' num2str(calcRMSE(dUdB3(:, b), Up3(:, b)))], 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gcf,'renderer','painters')
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+grid('on')
+grid minor
+set(gca,'LooseInset',get(gca,'TightInset'))
 
 %% Contour plots
 % figure,
@@ -235,10 +146,10 @@ end
 %% Convergence plot
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% plot(Xu3(:, 112), Up3(:, 112), ...
-%      Xu4(:, 150), Up4(:, 150), ...
-%      Xu5(:, 187), Up5(:, 187), ...
-%      Xu6(:, 225), Up6(:, 225), ...
+% plot(Xu1(:, 25), Up1(:, 25), ...
+%      Xu2(:, 37), Up2(:, 37), ...
+%      Xu3(:, 50), Up3(:, 50), ...
+%      Xu4(:, 56), Up4(:, 56), ...
 %      'linewidth', linewidth)
 % legend('300X225', '400X300', '500X375', '600X450', ...
 %        'location', 'southeast')
@@ -462,20 +373,19 @@ end
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Pressure sensitivity on surface
-% 
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-plot(theta, sgolayfilt(pp5, 1, 15), 'k', ...
-     theta, sgolayfilt(pp6, 1, 15) - 41, 'r', ...
-     'linewidth', linewidth)
-legend('CSA', 'CS')
-xlabel('\theta', 'fontsize', fontsize)
-ylabel('dP/dr (Pa/m)', 'fontsize', fontsize)
-set(gca, 'fontsize', fontsize)
-set(gca,'LooseInset',get(gca,'TightInset'))
-set(gcf,'renderer','painters')
-set(gca,'YMinorTick','on')
-set(gca,'XMinorTick','on')
-grid('on')
-grid minor
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% figure,
+% set(gcf, 'Position', get(0,'Screensize'));
+% plot(theta, sgolayfilt(pp5, 1, 15), 'k', ...
+%      theta, sgolayfilt(pp6, 1, 15) - 41, 'r', ...
+%      'linewidth', linewidth)
+% legend('CSA', 'CS')
+% xlabel('\theta', 'fontsize', fontsize)
+% ylabel('dP/dr (Pa/m)', 'fontsize', fontsize)
+% set(gca, 'fontsize', fontsize)
+% set(gca,'LooseInset',get(gca,'TightInset'))
+% set(gcf,'renderer','painters')
+% set(gca,'YMinorTick','on')
+% set(gca,'XMinorTick','on')
+% grid('on')
+% grid minor
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.

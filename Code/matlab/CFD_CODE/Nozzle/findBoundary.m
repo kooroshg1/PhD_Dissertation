@@ -77,6 +77,7 @@ leftBoundaryIndex = 1:nx:nx*ny;
 rightBoundaryIndex = nx:nx:nx*ny;
 topBoundaryIndex = leftBoundaryIndex(end):rightBoundaryIndex(end);
 bottomBoundaryIndex = leftBoundaryIndex(1):rightBoundaryIndex(1);
+
 for iImm = 1:length(xStar)
     L2Edist = sortrows([sqrt((xVec - xStar(iImm)).^2 + (yVec - yStar(iImm)).^2), (1:nx*ny)'],1);
     temp = L2Edist(1:2,2);
@@ -91,6 +92,7 @@ for iImm = 1:length(xStar)
         temp = [temp;temp + nx];
     end
     temp = sort(temp);
+
     if mod(temp(1),nx) == 0
         temp(2) = temp(1) - 1;
         temp(4) = temp(3) - 1;

@@ -1,4 +1,4 @@
-\chapter{Shape Sensitivity Analysis using Immersed Boundary Method}
+\chapter{Shape Sensitivity Analysis using Immersed Boundary Method}\label{ch:shapeSenwithIB}
 In this chapter, we apply the continuum sensitivity analysis to the CFD simulations conducted using the Immersed Boundary (IB) method. In this chapter, the focus is on calculating the sensitivity of flow variables such as pressure and velocity to the design variable that controls the shape of the boundary, i.e. radius of a cylinder, camber of an airfoil. The boundary of the solid domain is represented using an analytical function. However, as will be shown in the following chapters, this is not a required for this method. In this chapter, the modifications of the IB approach for making it suitable for continuum sensitivity formulation is discussed. To the best of the author's knowledge, this is the first time that sensitivity analysis is done for CFD simulations based the continuum IB formulation.
 
 In contrast to traditional body conformal methods, in IB approach, the solid boundaries are represented by modifying the governing equation near the boundaries. In the case of continuum IB method, this is done by adding the appropriate force term to the cells adjacent to the immersed boundary. The value of these forces are calculated either using a feedback forcing \cite{goldstein1993modeling} or a penalization function \cite{arquis1984conditions}. The Navier-Stokes (NS) equations are written as shown in Equation \eqref{eq:C4_NS}.
@@ -461,6 +461,7 @@ This agrees with the analytical results of the sensitivities.
 % ======================================================================
 \input{Chapter_4/Chapter_4_Shape_Sensitivity_of_Flow_over_a_Cylinder.tex}
 % ======================================================================
-\section{Shape Sensitivity of Flow through a Nozzle}
+\input{Chapter_4/Chapter_4_Shape_Sensitivity_of_Flow_through_a_Nozzle.tex}
+
 
 \section{Summary}

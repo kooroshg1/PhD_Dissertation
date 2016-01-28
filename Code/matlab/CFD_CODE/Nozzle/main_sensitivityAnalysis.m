@@ -4,15 +4,15 @@ format short g;
 clc;
 %-----------------------------------------------------------------------
 Re = 1e2;     % Reynolds number
-dt = 1e-2;    % time step
-tf = 5;    % final time
-xStart = 0.0;
-xEnd = 4.0;
-yStart = -1.5;
-yEnd = 1.5;
-nx = 800;      % number of x-gridpoints
-ny = 600;      % number of y-gridpoints
-nsteps = 10;  % number of steps with graphic output
+dt = 1e-3;    % time step
+tf = 2;    % final time
+xStart = -1.0;
+xEnd = 3.0;
+yStart = 0.0;
+yEnd = 1.0;
+nx = 410;      % number of x-gridpoints
+ny = 102;      % number of y-gridpoints
+nsteps = 10;   % number of steps with graphic output
 %-----------------------------------------------------------------------
 nt = ceil(tf/dt); dt = tf/nt;
 x = linspace(xStart,xEnd,nx+1); hx = (xEnd - xStart)/nx;
@@ -94,7 +94,7 @@ deltaMatP = sparse(deltaMatP);
 deltaMatPSensitivity = sparse(deltaMatPSensitivity);
 
 alpha = -1e4;
-beta = -5e1;
+beta = -5e2;
 % break
 T = linspace(0,tf,nt);
 
@@ -468,10 +468,10 @@ plot(xImm,ppBoundary)
 title('pressure')
 trapz(xImm,pBoundary)
 
-dlmwrite('cylinder/ppB.txt', ppBoundary)
-dlmwrite('cylinder/Up.txt', Up)
-dlmwrite('cylinder/Vp.txt', Vp)
-dlmwrite('cylinder/Pp.txt', Pp)
+dlmwrite('results/ppB.txt', ppBoundary)
+dlmwrite('results/Up.txt', Up)
+dlmwrite('results/Vp.txt', Vp)
+dlmwrite('results/Pp.txt', Pp)
 
 % Save data
 % save('current_simulation_results/U_0','U')

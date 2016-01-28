@@ -7,15 +7,15 @@ fontsize = 40;
 linewidth = 5;
 markersize = 20;
 %-----------------------------------------------------------------------
-Re = 1e4;     % Reynolds number
-dt = 1e-4;    % time step
+Re = 1e2;     % Reynolds number
+dt = 1e-3;    % time step
 tf = 2;    % final time
-xStart = 0.0;
-xEnd = 4.0;
-yStart = -1.5;
-yEnd = 1.5;
-nx = 300;      % number of x-gridpoints
-ny = 225;      % number of y-gridpoints
+xStart = -1.0;
+xEnd = 3.0;
+yStart = 0.0;
+yEnd = 1.0;
+nx = 410;      % number of x-gridpoints
+ny = 102;      % number of y-gridpoints
 nsteps = 10;   % number of steps with graphic output
 %-----------------------------------------------------------------------
 nt = ceil(tf/dt); dt = tf/nt;
@@ -101,7 +101,7 @@ dlmwrite('point_cloud_velocity.txt',zeros(size(pointCloud,1),size(pointCloud,2))
 maxSubIteration = 50;
 
 alpha = -1e4;
-beta = -5e1;
+beta = -5e2;
 % break
 % T = linspace(0,tf,nt);
 % fx = 0;
@@ -391,37 +391,37 @@ set(gca,'fontsize',fontsize)
 
 
 %% Saving analysis data
-% dlmwrite('cylinder/xImm.txt', xImm)
-% dlmwrite('cylinder/yImm.txt', yImm)
-% dlmwrite('cylinder/Xu.txt', Xu)
-% dlmwrite('cylinder/Yu.txt', Yu)
-% dlmwrite('cylinder/Xv.txt', Xv)
-% dlmwrite('cylinder/Yv.txt', Yv)
-% dlmwrite('cylinder/Xp.txt', Xp)
-% dlmwrite('cylinder/Yp.txt', Yp)
-% dlmwrite('cylinder/U.txt', U)
-% dlmwrite('cylinder/V.txt', V)
-% dlmwrite('cylinder/P.txt', P)
-% dlmwrite('cylinder/pBoundary.txt', pBoundary)
-% dlmwrite('cylinder/uBoundary.txt', uBoundary)
-% dlmwrite('cylinder/vBoundary.txt', vBoundary)
+% dlmwrite('results/xImm.txt', xImm)
+% dlmwrite('results/yImm.txt', yImm)
+% dlmwrite('results/Xu.txt', Xu)
+% dlmwrite('results/Yu.txt', Yu)
+% dlmwrite('results/Xv.txt', Xv)
+% dlmwrite('results/Yv.txt', Yv)
+% dlmwrite('results/Xp.txt', Xp)
+% dlmwrite('results/Yp.txt', Yp)
+% dlmwrite('results/U.txt', U)
+% dlmwrite('results/V.txt', V)
+% dlmwrite('results/P.txt', P)
+% dlmwrite('results/pBoundary.txt', pBoundary)
+% dlmwrite('results/uBoundary.txt', uBoundary)
+% dlmwrite('results/vBoundary.txt', vBoundary)
 
 %% Saving sensitvity data
 dh = 0.00001;
-dlmwrite('cylinder/xImm.txt', xImm)
-dlmwrite('cylinder/yImm.txt', yImm)
-dlmwrite('cylinder/Xu.txt', Xu)
-dlmwrite('cylinder/Yu.txt', Yu)
-dlmwrite('cylinder/Xv.txt', Xv)
-dlmwrite('cylinder/Yv.txt', Yv)
-dlmwrite('cylinder/Xp.txt', Xp)
-dlmwrite('cylinder/Yp.txt', Yp)
-dlmwrite('cylinder/dUdB.txt', imag(U) / dh)
-dlmwrite('cylinder/dVdB.txt', imag(V) / dh)
-dlmwrite('cylinder/dPdB.txt', imag(P) / dh)
-dlmwrite('cylinder/dudB.txt', imag(uBoundary) / dh)
-dlmwrite('cylinder/dvdB.txt', imag(vBoundary) / dh)
-dlmwrite('cylinder/dpdB.txt', imag(pBoundary) / dh)
+dlmwrite('results/xImm.txt', xImm)
+dlmwrite('results/yImm.txt', yImm)
+dlmwrite('results/Xu.txt', Xu)
+dlmwrite('results/Yu.txt', Yu)
+dlmwrite('results/Xv.txt', Xv)
+dlmwrite('results/Yv.txt', Yv)
+dlmwrite('results/Xp.txt', Xp)
+dlmwrite('results/Yp.txt', Yp)
+dlmwrite('results/dUdB.txt', imag(U) / dh)
+dlmwrite('results/dVdB.txt', imag(V) / dh)
+dlmwrite('results/dPdB.txt', imag(P) / dh)
+dlmwrite('results/dudB.txt', imag(uBoundary) / dh)
+dlmwrite('results/dvdB.txt', imag(vBoundary) / dh)
+dlmwrite('results/dpdB.txt', imag(pBoundary) / dh)
 
 figure,
 contourf(Xu,Yu,imag(U) / dh, 50, 'linestyle','none')
