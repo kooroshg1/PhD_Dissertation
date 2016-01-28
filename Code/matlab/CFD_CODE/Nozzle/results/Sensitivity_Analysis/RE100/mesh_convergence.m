@@ -162,11 +162,11 @@ end
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xu3, Yu3, Up3, 50, 'linestyle', 'none')
+% contourf(Xu3, Yu3, Up3, 100, 'linestyle', 'none')
 % axis equal
 % colorbar('eastoutside')
 % hold on
-% plot(xImm, yImm, 'ko', ...
+% plot(xImm, yImm, 'k.', ...
 %      'linewidth', linewidth)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
@@ -246,11 +246,17 @@ end
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xv4, Yv4, Vp4, 20, 'linestyle', 'none')
+% % F = [.05 .1 .05; .1 .4 .1; .05 .1 .05];
+% % F = [1,2,1;2,4,2;1,2,1] / 16;
+% % F = [1,4,6,4,1;4,16,24,16,4;6,24,-476,24,6;4,16,24,16,4;1,4,6,4,1] / -256;
+% F = [0, -1, 0;-1, 5, -1;0, -1, 0];
+% % contourf(Xv5, Yv5, Vp5, 100, 'linestyle', 'none')
+% contourf(Xv5, Yv5, conv2(Vp5,F,'same'), 100, 'linestyle', 'none')
+% % contourf(Xv5, Yv5, conv2(conv2(Vp5,F,'same'),F,'same'), 100, 'linestyle', 'none')
 % colorbar('eastoutside')
 % axis equal
 % hold on
-% plot(xImm, yImm, 'k', ...
+% plot(xImm, yImm, 'k.', ...
 %      'linewidth', linewidth)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
@@ -328,37 +334,37 @@ end
 % ============================== Pressure =============================== %
 % ======================================================================= %
 %% Complex step validation
-y = 0.5;
-[a, b] = min(abs(Yu5(1, :) - y));
-
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-plot(Xp3(:, b), Pp3(:, b), 'k',...
-     Xp3(:, b), dPdB3(:, b), 'r--',...
-     'linewidth', linewidth)
-xlabel('X (m)', 'fontsize', fontsize)
-ylabel('dP/dr (Pa/m)', 'fontsize', fontsize)
-legend('CSA', 'CS')
-title(['RMSE = ' num2str(calcRMSE(dPdB3(:, b), Pp3(:, b)) / 100)], 'fontsize', fontsize)
-set(gca, 'fontsize', fontsize)
-set(gcf,'renderer','painters')
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-grid('on')
-grid minor
-set(gca,'LooseInset',get(gca,'TightInset'))
-
-%% Contour plots
+% y = 0.5;
+% [a, b] = min(abs(Yu5(1, :) - y));
+% 
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xp4, Yp4, Pp4, 35, 'linestyle', 'none')
-% axis equal
-% colorbar('eastoutside')
-% hold on
-% plot(xImm, yImm, 'k', ...
+% plot(Xp3(:, b), Pp3(:, b), 'k',...
+%      Xp3(:, b), dPdB3(:, b), 'r--',...
 %      'linewidth', linewidth)
+% xlabel('X (m)', 'fontsize', fontsize)
+% ylabel('dP/dr (Pa/m)', 'fontsize', fontsize)
+% legend('CSA', 'CS')
+% title(['RMSE = ' num2str(calcRMSE(dPdB3(:, b), Pp3(:, b)) / 100)], 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% grid('on')
+% grid minor
+% set(gca,'LooseInset',get(gca,'TightInset'))
+
+%% Contour plots
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+contourf(Xp5, Yp5, Pp5, 100, 'linestyle', 'none')
+axis equal
+colorbar('eastoutside')
+hold on
+plot(xImm, yImm, 'k.', ...
+     'linewidth', linewidth)
+set(gca, 'fontsize', fontsize)
+set(gcf,'renderer','painters')
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence plot
 % figure,
