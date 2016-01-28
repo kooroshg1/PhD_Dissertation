@@ -151,13 +151,14 @@ end
 % grid minor
 % set(gca,'LooseInset',get(gca,'TightInset'))
 
-%% Contour plots
+% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xu8, Yu8, Up8, 50, 'linestyle', 'none')
+% contourf(Xu4, Yu4, U4, 50, 'linestyle', 'none')
 % colorbar('eastoutside')
+% axis equal
 % hold on
-% plot(xImm, yImm, 'k', ...
+% plot(xImm, yImm, 'k.', ...
 %      'linewidth', linewidth)
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
@@ -184,31 +185,31 @@ end
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence order
-x = 0.3;
-[a, b] = find(Xu1(:, 25) < x); U1ind = U1(a(end) + 1, 25);
-[a, b] = find(Xu2(:, 37) < x); U2ind = U2(a(end) + 1, 37);
-[a, b] = find(Xu3(:, 50) < x); U3ind = U3(a(end) + 1, 50);
-[a, b] = find(Xu31(:, 56) < x); U31ind = U31(a(end) + 1, 56);
-[a, b] = find(Xu4(:, 62) < x); U4ind = U4(a(end) + 1, 62);
-
-err = abs([U1ind, U2ind, U3ind, U31ind, U4ind] - U4ind) ./ abs(U4ind);
-
-meshSize = [200*50, 300*75, 400*100, 500*125, 600*150];
-f = fit(meshSize',err','power1')
-
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-loglog(meshSize, err, 'k', ...
-       meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
-       'linewidth', linewidth)
-xlabel('Number of nodes', 'fontsize', fontsize)
-ylabel('Absolute error', 'fontsize', fontsize)
-set(gca, 'fontsize', fontsize)
-set(gca,'LooseInset',get(gca,'TightInset'))
-set(gcf,'renderer','painters')
-grid('on')
-grid minor
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% x = 0.3;
+% [a, b] = find(Xu1(:, 25) < x); U1ind = U1(a(end) + 1, 25);
+% [a, b] = find(Xu2(:, 37) < x); U2ind = U2(a(end) + 1, 37);
+% [a, b] = find(Xu3(:, 50) < x); U3ind = U3(a(end) + 1, 50);
+% [a, b] = find(Xu31(:, 56) < x); U31ind = U31(a(end) + 1, 56);
+% [a, b] = find(Xu4(:, 62) < x); U4ind = U4(a(end) + 1, 62);
+% 
+% err = abs([U1ind, U2ind, U3ind, U31ind, U4ind] - U4ind) ./ abs(U4ind);
+% 
+% meshSize = [200*50, 300*75, 400*100, 500*125, 600*150];
+% f = fit(meshSize',err','power1')
+% 
+% figure,
+% set(gcf, 'Position', get(0,'Screensize'));
+% loglog(meshSize, err, 'k', ...
+%        meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
+%        'linewidth', linewidth)
+% xlabel('Number of nodes', 'fontsize', fontsize)
+% ylabel('Absolute error', 'fontsize', fontsize)
+% set(gca, 'fontsize', fontsize)
+% set(gca,'LooseInset',get(gca,'TightInset'))
+% set(gcf,'renderer','painters')
+% grid('on')
+% grid minor
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 % ======================================================================= %
 % ============================ V - Velocity ============================= %
@@ -236,11 +237,12 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 %% Contour plots
 % figure,
 % set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xv8, Yv8, Vp8, 20, 'linestyle', 'none')
+% contourf(Xv5, Yv5, V5, 20, 'linestyle', 'none')
 % colorbar('eastoutside')
 % hold on
-% plot(xImm, yImm, 'k', ...
+% plot(xImm, yImm, 'k.', ...
 %      'linewidth', linewidth)
+% axis equal
 % set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
@@ -274,52 +276,52 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 
 %% Convergence order
-x = 0.3;
-y = 0.55;
-
-[a, b] = find(Xv1(:, 1) < x); x1ind = a(end) + 1;
-[a, b] = find(abs(Yv1(1, :)) < y); y1ind = b(end) + 1;
-[Xv1(x1ind, y1ind) Yv1(x1ind, y1ind)];
-V1ind = V1(x1ind, y1ind);
-
-[a, b] = find(Xv2(:, 1) < x); x2ind = a(end) + 1;
-[a, b] = find(abs(Yv2(1, :)) < y); y2ind = b(end) + 1;
-[Xv2(x2ind, y2ind) Yv2(x2ind, y2ind)];
-V2ind = V2(x2ind, y2ind);
-
-[a, b] = find(Xv3(:, 1) < x); x3ind = a(end) + 1;
-[a, b] = find(abs(Yv3(1, :)) < y); y3ind = b(end) + 1;
-[Xv3(x3ind, y3ind) Yv3(x3ind, y3ind)];
-V3ind = V3(x3ind, y3ind);
-
-[a, b] = find(Xv31(:, 1) < x); x31ind = a(end) + 1;
-[a, b] = find(abs(Yv31(1, :)) < y); y31ind = b(end) + 1;
-[Xv31(x31ind, y31ind) Yv31(x31ind, y31ind)]
-V31ind = V31(x31ind, y31ind);
-
-[a, b] = find(Xv4(:, 1) < x); x4ind = a(end) + 1;
-[a, b] = find(abs(Yv4(1, :)) < y); y4ind = b(end) + 1;
-[Xv4(x4ind, y4ind) Yv4(x4ind, y4ind)];
-V4ind = V4(x4ind, y4ind);
-
-err = abs([V1ind, V2ind, V3ind, V31ind, V4ind] - V4ind) ./ abs(V4ind);
-err = sort(err, 'descend');
-meshSize = [200*50, 300*75, 400*100, 500*125, 600*150];
-f = fit(meshSize',err','power1')
-
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-loglog(meshSize, err, 'k', ...
-    meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
-    'linewidth', linewidth)
-xlabel('Number of nodes', 'fontsize', fontsize)
-ylabel('Absolute error', 'fontsize', fontsize)
-set(gca, 'fontsize', fontsize)
-set(gca,'LooseInset',get(gca,'TightInset'))
-set(gcf,'renderer','painters')
-grid('on')
-grid minor
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% x = 0.3;
+% y = 0.55;
+% 
+% [a, b] = find(Xv1(:, 1) < x); x1ind = a(end) + 1;
+% [a, b] = find(abs(Yv1(1, :)) < y); y1ind = b(end) + 1;
+% [Xv1(x1ind, y1ind) Yv1(x1ind, y1ind)];
+% V1ind = V1(x1ind, y1ind);
+% 
+% [a, b] = find(Xv2(:, 1) < x); x2ind = a(end) + 1;
+% [a, b] = find(abs(Yv2(1, :)) < y); y2ind = b(end) + 1;
+% [Xv2(x2ind, y2ind) Yv2(x2ind, y2ind)];
+% V2ind = V2(x2ind, y2ind);
+% 
+% [a, b] = find(Xv3(:, 1) < x); x3ind = a(end) + 1;
+% [a, b] = find(abs(Yv3(1, :)) < y); y3ind = b(end) + 1;
+% [Xv3(x3ind, y3ind) Yv3(x3ind, y3ind)];
+% V3ind = V3(x3ind, y3ind);
+% 
+% [a, b] = find(Xv31(:, 1) < x); x31ind = a(end) + 1;
+% [a, b] = find(abs(Yv31(1, :)) < y); y31ind = b(end) + 1;
+% [Xv31(x31ind, y31ind) Yv31(x31ind, y31ind)]
+% V31ind = V31(x31ind, y31ind);
+% 
+% [a, b] = find(Xv4(:, 1) < x); x4ind = a(end) + 1;
+% [a, b] = find(abs(Yv4(1, :)) < y); y4ind = b(end) + 1;
+% [Xv4(x4ind, y4ind) Yv4(x4ind, y4ind)];
+% V4ind = V4(x4ind, y4ind);
+% 
+% err = abs([V1ind, V2ind, V3ind, V31ind, V4ind] - V4ind) ./ abs(V4ind);
+% err = sort(err, 'descend');
+% meshSize = [200*50, 300*75, 400*100, 500*125, 600*150];
+% f = fit(meshSize',err','power1')
+% 
+% figure,
+% set(gcf, 'Position', get(0,'Screensize'));
+% loglog(meshSize, err, 'k', ...
+%     meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
+%     'linewidth', linewidth)
+% xlabel('Number of nodes', 'fontsize', fontsize)
+% ylabel('Absolute error', 'fontsize', fontsize)
+% set(gca, 'fontsize', fontsize)
+% set(gca,'LooseInset',get(gca,'TightInset'))
+% set(gcf,'renderer','painters')
+% grid('on')
+% grid minor
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 % ======================================================================= %
 % ============================== Pressure =============================== %
@@ -345,16 +347,17 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 % set(gca,'LooseInset',get(gca,'TightInset'))
 
 %% Contour plots
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% contourf(Xp8, Yp8, Pp8 / 10, 35, 'linestyle', 'none')
-% colorbar('eastoutside')
-% hold on
-% plot(xImm, yImm, 'k', ...
-%      'linewidth', linewidth)
-% set(gca, 'fontsize', fontsize)
-% set(gcf,'renderer','painters')
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+contourf(Xp5, Yp5, P5, 50, 'linestyle', 'none')
+colorbar('eastoutside')
+hold on
+plot(xImm, yImm, 'k.', ...
+     'linewidth', linewidth)
+axis equal
+set(gca, 'fontsize', fontsize)
+set(gcf,'renderer','painters')
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence plot
 % figure,
@@ -377,33 +380,33 @@ set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 % set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence order
-x = 0.3;
-[a, b] = find(Xp1(:, 25) < x); P1ind = P1(a(end) + 1, 25);
-[a, b] = find(Xp2(:, 37) < x); P2ind = P2(a(end) + 1, 37);
-[a, b] = find(Xp3(:, 50) < x); P3ind = P2(a(end) + 1, 50);
-[a, b] = find(Xp31(:, 56) < x); P31ind = P31(a(end) + 1, 56);
-[a, b] = find(Xp4(:, 62) < x); P4ind = P4(a(end) + 1, 62);
-
-
-err = abs([P1ind, P2ind, P3ind, P31ind, P4ind] - P4ind) ./ abs(P4ind);
-err = sort(err, 'descend');
-meshSize = [200*50, 300*75, 400*100, 500*125, 600*150];
-f = fit(meshSize',err','power1')
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-loglog(meshSize, err, 'k', ...
-    meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
-    'linewidth', linewidth)
-xlabel('Number of nodes', 'fontsize', fontsize)
-ylabel('Absolute error', 'fontsize', fontsize)
-set(gca, 'fontsize', fontsize)
-set(gca,'LooseInset',get(gca,'TightInset'))
-set(gcf,'renderer','painters')
-set(gca,'YMinorTick','on')
-set(gca,'XMinorTick','on')
-grid('on')
-grid minor
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% x = 0.3;
+% [a, b] = find(Xp1(:, 25) < x); P1ind = P1(a(end) + 1, 25);
+% [a, b] = find(Xp2(:, 37) < x); P2ind = P2(a(end) + 1, 37);
+% [a, b] = find(Xp3(:, 50) < x); P3ind = P2(a(end) + 1, 50);
+% [a, b] = find(Xp31(:, 56) < x); P31ind = P31(a(end) + 1, 56);
+% [a, b] = find(Xp4(:, 62) < x); P4ind = P4(a(end) + 1, 62);
+% 
+% 
+% err = abs([P1ind, P2ind, P3ind, P31ind, P4ind] - P4ind) ./ abs(P4ind);
+% err = sort(err, 'descend');
+% meshSize = [200*50, 300*75, 400*100, 500*125, 600*150];
+% f = fit(meshSize',err','power1')
+% figure,
+% set(gcf, 'Position', get(0,'Screensize'));
+% loglog(meshSize, err, 'k', ...
+%     meshSize(1:end-1), f.a .* meshSize(1:end-1) .^ f.b, 'k--', ...
+%     'linewidth', linewidth)
+% xlabel('Number of nodes', 'fontsize', fontsize)
+% ylabel('Absolute error', 'fontsize', fontsize)
+% set(gca, 'fontsize', fontsize)
+% set(gca,'LooseInset',get(gca,'TightInset'))
+% set(gcf,'renderer','painters')
+% set(gca,'YMinorTick','on')
+% set(gca,'XMinorTick','on')
+% grid('on')
+% grid minor
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Pressure sensitivity on surface
 % figure,
