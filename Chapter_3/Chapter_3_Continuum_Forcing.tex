@@ -351,7 +351,7 @@ We looked at the effect of mesh size on the solution accuracy of the virtual bou
 \label{table:C3_virtualBoundaryResultNodeNumberRMSE}
 \end{table}
 
-We looked at the effect of wall velocity of the solution accuracy. As before the length of the domain is fixed at $1 m$ with wall defined at $x_{wall} = 0.726$, the time step is chosen as $10^{-5}$. We chose the $\alpha$ and $\beta$ constants as $-1000$ and $-10$ respectively. We simulated the flow selecting the wall velocity as $10 m/s$, $100 m/s$, $1000 m/s$, and $10000 m/s$. The results are compared with the analytical results. As shown in Figure \ref{fig:C3_virtualBoundaryResultWallVelocity} and Table \ref{table:C3_virtualBoundaryResultWallVelocityRMSE}, the wall velocity does not affect the accuracy of the solution. When compared with the results of the classical IB method in the previous section, we can see that the virtual boundary method produces more accurate results. Moreover, the simulation time is much less than the classical IB method.
+We looked at the effect of wall velocity on the solution accuracy. As before, the length of the domain is fixed at $1 m$ with the wall defined at $x_{wall} = 0.726$ and the time step is chosen as $10^{-5}$. We chose the $\alpha$ and $\beta$ constants as $-1000$ and $-10$, respectively. We simulated the flow selecting the wall velocity as $10 m/s$, $100 m/s$, $1000 m/s$, and $10000 m/s$. The results are compared with the analytical results. As shown in Figure \ref{fig:C3_virtualBoundaryResultWallVelocity} and Table \ref{table:C3_virtualBoundaryResultWallVelocityRMSE}, the wall velocity does not affect the accuracy of the solution. When compared with the results of the classical IB method in the previous section, we can see that the virtual boundary method produces more accurate results. Moreover, the simulation time is much less than the classical IB method.
 
 \begin{figure}[H]
     \centering
@@ -391,7 +391,7 @@ We looked at the effect of wall velocity of the solution accuracy. As before the
 \label{table:C3_virtualBoundaryResultWallVelocityRMSE}
 \end{table}
 
-Finally, we looked at the effect of constants $\alpha$ and $\beta$ on the accuracy of the solution. We discretized the domain using $81$ nodes with wall velocity equal to $100 m/s$ with time step equal to $10^{-5}$. The location of the fixed wall is chosen as $x_{wall} = 0.726$. The flow between the plates is modelled using different coefficients for $\alpha$ and $\beta$ as shown in Table \ref{table:C3_alphaBetaValues}.
+Finally, we looked at the effect of constants $\alpha$ and $\beta$ on the accuracy of the solution. We discretized the domain using $81$ nodes with wall velocity equal to $100 m/s$ and time step equal to $10^{-5}$. The location of the fixed wall is chosen as $x_{wall} = 0.726$. The flow between the plates is modelled using different coefficients for $\alpha$ and $\beta$ as shown in Table \ref{table:C3_alphaBetaValues}.
 
 \begin{table}[H]
 \centering
@@ -406,7 +406,7 @@ Finally, we looked at the effect of constants $\alpha$ and $\beta$ on the accura
 \label{table:C3_alphaBetaValues}
 \end{table}
 
-As can be seen in Figure \ref{fig:C3_virtualBoundaryResultConstant} and Table \ref{table:C3_virtualBoundaryResultConstantRSME}, $\alpha$ value has a considerable effect of the accuracy of the results. Increasing the $\alpha$ value with an order of magnitude results in a considerable improvement in the accuracy of the solution. However, $\beta$ value does not contribute to the accuracy but improves the stability of the solution. The solutions with larger $\beta$ values converged in less number of iterations.
+As can be seen in Figure \ref{fig:C3_virtualBoundaryResultConstant} and Table \ref{table:C3_virtualBoundaryResultConstantRSME}, $\alpha$ value has a considerable effect on the accuracy of the results. Increasing the $\alpha$ value with an order of magnitude results in a considerable improvement in the accuracy of the solution. However, $\beta$ value does not contribute to the accuracy but improves the stability of the solution. The solutions with larger $\beta$ values converged in less number of iterations.
 
 \begin{figure}[H]
     \centering
@@ -446,8 +446,8 @@ As can be seen in Figure \ref{fig:C3_virtualBoundaryResultConstant} and Table \r
 \label{table:C3_virtualBoundaryResultConstantRSME}
 \end{table}
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-\subsection{Penalization method}
-The third class of continuum immersed boundary techniques are known as penalization method that was first introduced by Arquis and Caltagirone \cite{ arquis1984conditions}. In this method, the solid boundaries are modeled as porous media. Porosity or void fraction is a measure of the void spaces in a material and varies between 0 and 1. For the solid domain, the porosity value is near zero whereas its value is close to one in the fluid domain. Flow through a porous domain is described using the Darcy's law. This is a simple proportional relationship between the instantaneous discharge rate through a porous medium, the viscosity of the fluid and the pressure drop.
+\subsection{Penalization Method}
+The third class of continuum immersed boundary techniques are known as penalization method first introduced by Arquis and Caltagirone \cite{ arquis1984conditions}. In this method, the solid boundaries are modeled as porous media. Porosity, or void fraction, is a measure of the void spaces in a material and varies between 0 and 1. For the solid domain, the porosity value is near zero whereas its value is close to one in the fluid domain. Flow through a porous domain is described using the Darcy's law. This is a simple proportional relationship between the instantaneous discharge rate through a porous medium, the viscosity of the fluid, and the pressure drop.
 
 \begin{figure}[H]
     \centering
@@ -462,27 +462,27 @@ For flow through a porous domain in a pipe shown in Figure \ref{fig:C3_darcyEqua
     Q = \frac{\kappa A \Delta p}{\mu L}
 \end{equation}
 
-Where $Q$ is the total flow discharge, $\kappa$ is the permeability of the domain, $\Delta p$ is the pressure drop due to the porosity between two ends of the pipe, $\mu$ is the fluid's viscosity, and $L$ is the length of the domain. Darcy's law can be considered as a relation between the flow velocity and pressure drop. This pressure drop is used in the penalization method to represent the solid boundaries by modelling the force term using Equation \eqref{eq:C3_DarcysLaw}. The force term is defined as follows
+where $Q$ is the total flow discharge, $\kappa$ is the permeability of the domain, $\Delta p$ is the pressure drop due to the porosity between two ends of the pipe, $\mu$ is the fluid's viscosity, and $L$ is the length of the domain. Darcy's law can be considered as a relation between the flow velocity and pressure drop. This pressure drop is used in the penalization method to represent the solid boundaries by modelling the force term using Equation \eqref{eq:C3_DarcysLaw}. The force term is defined as follows:
 
 \begin{equation}\label{eq:C3_forceTermIBpenelization}
     f = - \mathcal{H}(\mathcal{X}) \frac{\mu}{\kappa} v
 \end{equation}
 
-Where $v$ is is the velocity of the flow. To apply the force term only to the region inside the solid boundary, the penalization force is multiplied by a Heaviside function, $\mathcal{H}(\mathcal{X})$, that is a function of the relative distance of the points in the domain to the boundary of the solid region. The Heaviside function $\mathcal{H}$ has the value of \emph{one} for all points inside the solid boundary and is \emph{zero} for points outside the boundary. This will give us a zero forcing term for points outside the solid boundary and non-zero for points inside. Therefore, the pressure drop is only applied to the points inside the solid domain. This is explained in more details in the following example.
+Where $v$ is is the velocity of the flow. To apply the force term to only the region inside the solid boundary, the penalization force is multiplied by a Heaviside function, $\mathcal{H}(\mathcal{X})$, that is a function of the relative distance of the points in the domain to the boundary of the solid region. The Heaviside function $\mathcal{H}$ has the value of \emph{one} for all points inside the solid boundary and is \emph{zero} for points outside the boundary. This will give us a zero forcing term for points outside the solid boundary and non-zero for points inside. Therefore, the pressure drop is only applied to the points inside the solid domain. This is explained in more detail in the following example.
 
-Assume that the solid boundary is a circle, located at $(1,2)$ with a radius of $2$. This curve is defined using the following equation.
+Assume that the solid boundary is a circle located at $(1,2)$ with a radius of $2$. This curve is defined using Equation \eqref{eq:C3_circle}.
 
-\begin{equation}
+\begin{equation}\label{eq:C3_circle}
     (x - 1)^2 + (y - 2)^2 = 4
 \end{equation}
 
-The relative location of an arbitrary point $x_0 = (\eta, \rho)$ to this boundary is determined using the following equation
+The relative location of an arbitrary point $x_0 = (\eta, \rho)$ to this boundary is determined using the following equation,
 
 \begin{equation}
     \mathcal{X}(\eta, \rho) = 4 - (\eta - 1)^2 - (\rho - 2)^2
 \end{equation}
 
-Depending on the sign of $\mathcal{X}$, we can make the following conclusions
+Depending on the sign of $\mathcal{X}$, we can make the following conclusions:
 
 \begin{equation}
 \begin{cases}
@@ -501,9 +501,9 @@ Sign of $\mathcal{X}$ divides the physical domain into three regions. To use thi
     \label{fig:C3_heavisideFunction}
 \end{figure}
 
-By feeding the function $\mathcal{X}$ into the Heaviside function, we get the value of one for nodes inside the solid boundary and zero for outside. These are then multiplied to the force terms calculated using Equation \eqref{eq:C3_forceTermIBpenelization}. This enables us to apply the force term only within the solid domain. This method is applied to the demonstration problem of section \ref{sec:C3_benchmark_case}. For this problem, we looked at the effect of the number of mesh cells, wall velocity, and the permeability value on the accuracy of the method. The results are compared with analytical results for this problem like the previous sections.
+By feeding the function $\mathcal{X}$ into the Heaviside function, we get the value of one for nodes inside the solid boundary and zero for outside nodes. These are then multiplied to the force terms calculated using Equation \eqref{eq:C3_forceTermIBpenelization}. This enables us to apply the force term only within the solid domain. This method is applied to the demonstration problem of Section \ref{sec:C3_benchmark_case}. For this problem, we looked at the effect of the number of mesh cells, wall velocity, and the permeability value on the accuracy of the method. The results are compared with analytical results for this problem like the previous sections.
 
-For the first set of results, we looked at the effect of mesh size on the accuracy of the solution. The domain length is chosen as $1.0 m$ where the position of the fixed wall is selected as $0.6125$. We chose this so that the computational nodes won't coincide the with the wall location. This better represents the application of the IB method. We chose the number of nodes as 11, 41, 81, and 161. As shown in Figure \ref{fig:C3_penalizationResultNodeNumber}, as we increase the number of the total error between the numerical and analytical results decreases. For the Case where there is computational node exactly on top the location for the stationary wall ($n=161$), the two results match perfectly. The IB results are shown using the solid line, and the analytical results are represented using white circles.
+For the first set of results, we looked at the effect of mesh size on the accuracy of the solution. The domain length is chosen as $1.0 m$ where the position of the fixed wall is selected as $0.6125$. We chose this so that the computational nodes won't coincide the with the wall location. This better represents the application of the IB method. We chose the number of nodes as 11, 41, 81, and 161. As shown in Figure \ref{fig:C3_penalizationResultNodeNumber}, as we increase the number of nodes, the total error between the numerical and analytical results decreases. For the Case where there is a computational node exactly on top of the location for the stationary wall ($n=161$), the two results match perfectly. The IB results are shown using the solid line and the analytical results are represented using white circles.
 
 \begin{figure}[H]
     \centering
@@ -627,4 +627,4 @@ Finally, we looked at the effect of porosity values on the accuracy of the simul
 \label{table:C3_penalizationResultPorosityRMSE}
 \end{table}
 
-The penalization method is probably the easiest one in the continuous IB methods to implement, however, its accuracy is very dependent on the number of nodes used. This is because there are no mechanisms to define exactly the location of solid boundaries in the penalization method. This can lead to loss of accuracy and oscillations near the boundaries. The porosity value, $\kappa$, needs to be selected by running multiple simulations are compare the results for convergence. Although even with low values of porosities, there is a leakage in the solid domain that reduces the accuracy of the simulations.
+The penalization method is probably the easiest one in the continuous IB methods to implement; however, its accuracy is very dependent on the number of nodes used. This is because there are no mechanisms to define the exact location of solid boundaries in the penalization method. This can lead to loss of accuracy and oscillations near the boundaries. The porosity value, $\kappa$, needs to be selected by running multiple simulations and compare the results for convergence. Although, even with low values of porosities, there is a leakage in the solid domain that reduces the accuracy of the simulations.

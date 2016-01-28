@@ -144,7 +144,7 @@ The first step in solving the sensitivity equations is to find the solution of t
 In the above equations, $\bar{\mathcal{C}}$ in the convective operator is evaluated using $\bar{u}$. It should be noted that to generate the operator we do not need to know the details of how it has been put together. We only supply the required material for generating the convective operator; the black-box solver will generate it for us. This input is the response variable when solving the governing equation and is the sensitivity of response variable for sensitivity analysis. Therefore, the solver can still be considered as a black box that we do not modify.
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-\subsection{Implementation for heat transfer problem}
+\subsection{Implementation on heat transfer problem}
 In this section, the continuum sensitivity formulation is used for calculating the sensitivity of temperature with respect to the length of a 1D domain. The domain is defined in Figure \ref{fig:C2_benchmarkCase} with the temperature in the domain governed by Equation \eqref{eq:C2_laplaceEquation}. The boundary conditions are defined as $T_0$ at $x=0$ and $T_L$ at $x=L$.
 
 To get the sensitivity equations, governing equations are differentiated in the local form and boundary conditions are differentiated in total form as shown in Equation \eqref{eq:C2_differentiatedLaplaceEquation}.
@@ -287,7 +287,7 @@ It should be noted that the sensitivity equations are derived and solved in the 
 This will add an extra cost to the simulation due to the additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes as the results of a change in shape. Therefore, if the computational nodes can be fixed, the $\partial x/\partial b$ term will be equal to zero. We are proposing to achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more detail.
 
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-\subsection{Implementation for solid mechanics problem}
+\subsection{Implementation on solid mechanics problem}
 To derive the continuum sensitivity equations, the governing equation of \eqref{eq:C2_axialBarGE} is differentiated with respect to the design variable, $L$, as shown in Equation \eqref{eq:C2_axialBarContinuumSensitivityEquation}.
 
 \begin{equation}\label{eq:C2_axialBarContinuumSensitivityEquation}

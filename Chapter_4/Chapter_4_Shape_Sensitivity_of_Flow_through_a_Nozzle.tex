@@ -1,5 +1,5 @@
 \section{Shape Sensitivity of Flow through a Nozzle}
-In this section, the flow in a convergent-divergent nozzle is modeled using the virtual boundary method and the sensitivity of flow with respect to the change of the shape of the nozzle is calculated.  The shape of the nozzle is defined using three points: inlet, throat, and outlet. The inlet and outlet points are represented as red circles, and the throat point is represented by red cross in Figure \ref{fig:C4_nozzleShape}. The shape of the nozzle is approximated as a second order polynomial passing through the point at inlet and the throat node and separate second order polinomial connecting throat and the outlet node. To ensure a smooth shape for the nozzle, the polynomials are forced to have zero derivative at the throat. The throat area is controlled by the relative distance of the throat node from the symmetry line of the nozzle, $y_t$,. This is selected as the design variable for the sensitivity analysis. The shape of the nozzle for different design variables is shown in Figure \ref{fig:C4_nozzleShape}
+In this section, the flow in a convergent-divergent nozzle is modeled using the virtual boundary method and the sensitivity of flow with respect to the change of the shape of the nozzle is calculated.  The shape of the nozzle is defined using three points: inlet, throat, and outlet. The inlet and outlet points are represented as red circles, and red cross represents the throat point in Figure \ref{fig:C4_nozzleShape}. The shape of the nozzle is approximated as a second order polynomial passing through the point at the inlet and the throat node and separate second order polynomial connecting throat and the outlet node. To ensure a smooth shape for the nozzle, the polynomials are forced to have zero derivatives at the throat. The throat area is controlled by the relative distance of the throat node from the symmetry line of the nozzle, $y_t$,. This is selected as the design variable for the sensitivity analysis. The shape of the nozzle for different design variables is shown in Figure \ref{fig:C4_nozzleShape}
 
 \begin{figure}[H]
     \centering
@@ -39,7 +39,7 @@ The mesh convergence plots for the governing equations is shown in Figure \ref{f
 \end{figure}
 
 The convergence rate is shown in Figure \ref{fig:C4_nozzleFlow_meshConvergenceRate}. A mesh node at the throat area on the symmetry line is selected for this study for u-velocity and pressure. Since the v-velocity is zero for this point, a node at $(0.3, 0
-.55)$ is selected for the convergence study of the v-velocity. The slope of dotted line for Figure \ref{fig:C4_nozzleFlow_meshConvergenceRate} is calculated as $-0.96$, $-0.86$, and $-0.73$ for u-velocity, v-velocity and pressure error respectfully. The convergence is close to first order due to relative location of the points to the solid walls where the approximation is first order.
+.55)$ is selected for the convergence study of the v-velocity. The slope of dotted line for Figure \ref{fig:C4_nozzleFlow_meshConvergenceRate} is calculated as $-0.96$, $-0.86$, and $-0.73$ for u-velocity, v-velocity and pressure error respectfully. The convergence is close to first order due to the relative location of the points to the solid walls where the approximation is first order.
 
 \begin{figure}[H]
     \centering
@@ -63,7 +63,7 @@ The convergence rate is shown in Figure \ref{fig:C4_nozzleFlow_meshConvergenceRa
 
 The sensitivity of the flow variables with respect to the throat area is calculated by differentiating the governing equations with respect to the design variable. The boundary conditions do not depend on the shape design variable; therefore, their derivative is equal to zero. This results in zero boundary conditions for the sensitivity equations.
 
-The sensitivity of the flow with respect to the throat area is calculated using the CSA. The u-velocity and pressure sensitivities are plotted on the symmetry line of the nozzle whereas the v-velocity sensitivity is plotted at the throat area. These values are verified with the complex step results where they showed a good comparison. This is shown in Figure \ref{fig:C4_nozzleFlow_sensitivityPlots}
+The sensitivity of the flow with respect to the throat area is calculated using the CSA. The u-velocity and pressure sensitivities are plotted on the symmetry line of the nozzle whereas the v-velocity sensitivity is plotted at the throat area. These values are verified with the complex step results where they showed a good comparison. This is shown in Figure \ref{fig:C4_nozzleFlow_sensitivityPlots}.
 
 \begin{figure}[H]
     \centering
