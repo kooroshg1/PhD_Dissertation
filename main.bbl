@@ -306,6 +306,11 @@ Pingen, G., Evgrafov, A., and Maute, K., \enquote{Topology optimization of flow
   domains using the lattice Boltzmann method,} {\em Structural and
   Multidisciplinary Optimization\/}, Vol.~34, No.~6, 2007, pp.~507--524.
 
+\bibitem{gobal2014continuum}
+Gobal, K., Grandhi, R.~V., and Kolonay, R.~M., \enquote{Continuum Sensitivity
+  Analysis for Structural Shape Design Variables Using Finite-Volume Method,}
+  {\em AIAA Journal\/}, Vol.~53, No.~2, 2014, pp.~347--355.
+
 \bibitem{mase2009continuum}
 Mase, G.~T., Smelser, R.~E., and Mase, G.~E., {\em Continuum mechanics for
   engineers\/}, CRC press, 2009.
@@ -314,11 +319,6 @@ Mase, G.~T., Smelser, R.~E., and Mase, G.~E., {\em Continuum mechanics for
 Haftka, R.~T. and Grandhi, R.~V., \enquote{Structural shape optimization—a
   survey,} {\em Computer Methods in Applied Mechanics and Engineering\/},
   Vol.~57, No.~1, 1986, pp.~91--106.
-
-\bibitem{gobal2014continuum}
-Gobal, K., Grandhi, R.~V., and Kolonay, R.~M., \enquote{Continuum Sensitivity
-  Analysis for Structural Shape Design Variables Using Finite-Volume Method,}
-  {\em AIAA Journal\/}, Vol.~53, No.~2, 2014, pp.~347--355.
 
 \bibitem{dowding2001sensitivity}
 Dowding, K.~J. and Blackwell, B.~F., \enquote{Sensitivity analysis for
