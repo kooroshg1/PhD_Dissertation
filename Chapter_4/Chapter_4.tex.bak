@@ -1,19 +1,19 @@
-\chapter{Shape Sensitivity Analysis using Immersed Boundary Method}\label{ch:shapeSenwithIB}
-In this chapter, we apply the continuum sensitivity analysis to the CFD simulations conducted using the Immersed Boundary (IB) method. In this chapter, the focus is on calculating the sensitivity of flow variables such as pressure and velocity to the design variable that controls the shape of the boundary, i.e. radius of a cylinder, camber of an airfoil. The boundary of the solid domain is represented using an analytical function. However, as will be shown in the following chapters, this is not a required for this method. In this chapter, the modifications of the IB approach for making it suitable for continuum sensitivity formulation is discussed. To the best of the author's knowledge, this is the first time that sensitivity analysis is done for CFD simulations based the continuum IB formulation.
+\chapter{Shape Sensitivity Analysis Using Immersed Boundary Method}\label{ch:shapeSenwithIB}
+In this chapter we apply the continuum sensitivity analysis to the CFD simulations conducted using the Immersed Boundary (IB) method focusing on calculating the sensitivity of flow descriptors, such as pressure and velocity to the design variables that control the shape of the boundary, i.e. radius of a cylinder, airfoil camber. The solid domain boundary is represented by using an analytical function. However, as will be shown in the following chapters, this is not required for applying this method. In this chapter, the modifications of the IB approach for making it suitable for continuum sensitivity formulation are discussed. To the best of the author's knowledge, this is the first time that sensitivity analysis has been done for CFD simulations based on the continuum IB formulation.
 
-In contrast to traditional body conformal methods, in IB approach, the solid boundaries are represented by modifying the governing equation near the boundaries. In the case of continuum IB method, this is done by adding the appropriate force term to the cells adjacent to the immersed boundary. The value of these forces are calculated either using a feedback forcing \cite{goldstein1993modeling} or a penalization function \cite{arquis1984conditions}. The Navier-Stokes (NS) equations are written as shown in Equation \eqref{eq:C4_NS}.
+In contrast to traditional body conformal methods, in IB approach, the solid boundaries are represented by modifying the governing equation near the boundaries. In the case of continuum IB method, this is done by adding the appropriate force term to the cells adjacent to the immersed boundary. The value of these forces are calculated by using either a feedback forcing \cite{goldstein1993modeling} or a penalization function \cite{arquis1984conditions}. The Navier-Stokes (NS) equations are written as shown in Equation \eqref{eq:C4_NS}.
 
 \begin{equation}\label{eq:C4_NS}
     \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} = 
     -\frac{\nabla P}{\rho} + \mu \nabla^2 \mathbf{u} + \mathbf{f}
 \end{equation}
 
-Where $\mathbf{u}$ is the velocity vector, $P$ is pressure, $\mu$ is the kinematic viscosity ($\mu / \rho$), $\rho$ is density, and $\mathbf{f}$ is the forcing term. The NS equations are solved on a Eulerian grid that is fixed in space, and the IB is defined on a separate Lagrangian grid that can move. This is shown Figure \ref{fig:C4_lagrangianAndEulerianDomain}.
+Where $\mathbf{u}$ is the velocity vector, $P$ is pressure, $\mu$ is kinematic viscosity ($\mu / \rho$), $\rho$ is density, and $\mathbf{f}$ is the forcing term. The NS equations are solved on a Eulerian grid that is fixed in space and the IB is defined on a separate movable Lagrangian grid. This is shown Figure \ref{fig:C4_lagrangianAndEulerianDomain}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=7.00cm]{Chapter_4/figure/lagrangian_and_eulerian_nodes.jpg}
-    \caption{Eulerian and Lagrangian nodes for representing the fluid and solid domain. The Eulerian and Lagrangian nodes are represented by black squares and red circles.}
+    \caption{Eulerian and Lagrangian nodes for representing the fluid and solid domains. The Eulerian and Lagrangian nodes are represented by black squares and red circles, respectively.}
     \label{fig:C4_lagrangianAndEulerianDomain}
 \end{figure}
 
@@ -23,14 +23,14 @@ The forcing function in the penalization method is calculated at the \emph{Euler
     \mathbf{f} = -\mathcal{S}(\mathcal{X}(b)) \kappa \mathbf{u}
 \end{equation}
 
-Where $\mathcal{S}$ is the step function, $\mathcal{X}$ defines the relative location of the computational nodes inside the domain to the IB boundary, $\kappa$ is the penalization parameter, and $\mathbf{u}$ is the fluid velocity. Using this forcing function, the governing equation \eqref{eq:C4_NS} is rewritten as shown in Equation \eqref{eq:C4_NSwithPenalization}
+Where $\mathcal{S}$ is the step function, $\mathcal{X}$ defines the relative location of the computational nodes inside the domain to the IB boundary, $\kappa$ is the penalization parameter, and $\mathbf{u}$ is the fluid velocity. Using this forcing function, the governing equation \eqref{eq:C4_NS} is rewritten as shown in Equation \eqref{eq:C4_NSwithPenalization}.
 
 \begin{equation}\label{eq:C4_NSwithPenalization}
     \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} = 
     -\frac{\nabla P}{\rho} + \mu \nabla^2 \mathbf{u} -\mathcal{S}(\mathcal{X}(b)) \kappa \mathbf{u}
 \end{equation}
 
-As mentioned in Chapter \ref{ch:sensitivityAnalysis}, to derive the continuum sensitivity formulation the governing equation of \eqref{eq:C4_NSwithPenalization} is differentiated with respect to the design variable, $b$. The step function $\mathcal{S}$ derivative is Dirac delta function with is singular and cannot be used to solving the governing equations in a numerical framework. Therefore, a regularized Heaviside function, $\mathcal{H}$ will be employed instead of the step function for penalizing the governing equation. The effect of this function on the simulation results and sensitivity formulation will be discussed in the following sections.
+As mentioned in Chapter \ref{ch:sensitivityAnalysis}, to derive the continuum sensitivity formulation, the governing equation of \eqref{eq:C4_NSwithPenalization} is differentiated with respect to the design variable, $b$. The step function $\mathcal{S}$'s derivative is Dirac delta function which is singular and cannot be used to solve the governing equations in a numerical framework. Therefore, a regularized Heaviside function, $\mathcal{H}$, will be employed instead of the step function for penalizing the governing equation. The effect of this function on the simulation results and sensitivity formulation will be discussed in the following sections.
 
 In the virtual boundary method, the forcing function is calculated at the \emph{Lagrangian} nodes using Equation \eqref{eq:C3_feedbackForcingFunction}.
 
@@ -40,11 +40,11 @@ In the virtual boundary method, the forcing function is calculated at the \emph{
     \beta \left[ \mathbf{u}(\mathbf{X}, \tau) - \mathbf{V}(\mathbf{X}, \tau) \right]
 \end{equation}
 
-Where $\mathbf{u}(\mathbf{X}, t)$ is the fluid's velocity at the Lagrangian points $\mathbf{X}$ and $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point. For the no-slip boundary condition at the solid boundary, the desired velocity $\mathbf{V}(\mathbf{X}, t)$ is zero at each of the Lagrangian points. The Eulerian nodes where the fluid's governing equation is solved does not necessary coincide with the Lagrangian points. Moreover, the forcing functions that are evaluated at the Lagrangian nodes need to be transferred to the Eulerian nodes where the governing equations for the fluid are solved. As mentioned in Chapter \ref{ch:immersedBoundary}, different mapping functions are used for transferring data between the Lagrangian and Eulerian nodes. However, none of these functions are continuously differentiable as required for the continuum sensitivity analysis. To address this issue, a regularized delta function is introduced.
+Where $\mathbf{u}(\mathbf{X}, t)$ is the fluid's velocity at the Lagrangian points $\mathbf{X}$ and $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point. For the no-slip boundary condition at the solid boundary, the desired velocity $\mathbf{V}(\mathbf{X}, t)$ is zero at each of the Lagrangian points. The Eulerian nodes, where the fluid's governing equation is solved, does not necessarily coincide with the Lagrangian points. Moreover, the forcing functions that are evaluated at the Lagrangian nodes need to be mapped to the Eulerian nodes where the governing equations for the fluid are solved. As mentioned in Chapter \ref{ch:immersedBoundary}, different mapping functions are used for transferring data between the Lagrangian and Eulerian nodes. However, none of these functions are continuously differentiable as required for the continuum sensitivity analysis. To address this issue, a regularized delta function is introduced.
 
 % ============================================================================
 \section{Regularized Heaviside/Delta Function}\label{sec:C4_RHandRDfunction}
-The Regularized Heaviside (RH) function is a step function that is smoothed so that its derivative can be calculated numerically. The RH function is also known as sigmoid function in mathematics and is characterized as a real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. The RH function is used instead of the step function to penalized the governing equation.  Several different RH functions defined in Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} are shown in Figure \ref{fig:C4_heavisideFunctionExample}.
+The Regularized Heaviside (RH) function is a step function that is smoothened so that its derivative can be calculated numerically. The RH function is also known as sigmoid function in mathematics and is characterized as real-valued and differentiable, having either a non-negative or non-positive first derivative. There are a pair of horizontal asymptotes as $x \rightarrow \pm \infty$. The RH function is used instead of the step function to penalize the governing equation.  Several different RH functions defined in Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} are shown in Figure \ref{fig:C4_heavisideFunctionExample}.
 
 \begin{subequations}\label{eq:C4_regularizedHeavisideFunctionFormulas}
 \begin{align}
@@ -58,11 +58,11 @@ The Regularized Heaviside (RH) function is a step function that is smoothed so t
 \begin{figure}[H]
     \centering
     \includegraphics[width=12.00cm]{Chapter_4/figure/heaviside_function_example.eps}
-    \caption{Comparison between different regularized Heaviside functions ($\mathcal{H}_i$) and step function ($\mathcal{S}$).}
+    \caption{Comparison of different regularized Heaviside functions ($\mathcal{H}_i$) and step function ($\mathcal{S}$).}
     \label{fig:C4_heavisideFunctionExample}
 \end{figure}
 
-As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all the RH functions are symmetric around $x = 0$ other than $\mathcal{H}_3$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain and NS equations are penalized based on the location of this boundary. In this work, the RH function is selected as $\mathcal{H}_4 = \frac{1 + \tanh(x)}{2}$ since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter} the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
+As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all RH functions, other than $\mathcal{H}_3$, are symmetric around $x = 0$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain, and NS equations are penalized based on boundary location. In this work, the RH function selected is $\mathcal{H}_4 = \dfrac{1 + \tanh(x)}{2}$ since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}, the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
 
 \begin{equation}\label{eq:C4_heavisideFunction}
     \mathcal{H} = \frac{1 + \tanh(x / \eta)}{2}
@@ -75,13 +75,13 @@ As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all the RH functions a
     \label{fig:C4_heavisideFunctionWithControlParamter}
 \end{figure}
 
-The penalized NS equation using the RH function of Equation \eqref{fig:C4_heavisideFunctionExample} is continuous and can be differentiated to derive the continuum sensitivity equations. The free parameter is defined based on desired change of RH function within a particular range as shown in Equation \eqref{eq:C4_etaGuideForRHfunction}.
+The penalized NS equation using the RH function of Equation \eqref{fig:C4_heavisideFunctionExample} is continuous and can be differentiated to derive the continuum sensitivity equations. The free parameter is defined based on the desired change of the RH function within a particular range as shown in Equation \eqref{eq:C4_etaGuideForRHfunction}.
 
 \begin{equation}\label{eq:C4_etaGuideForRHfunction}
     \eta = \frac{R}{2 \tanh^{-1} (p)}
 \end{equation}
 
-Where $R$ is the distance that the $p$ percentage of the RH function occurs. For example if it is required for the RH function to change 99 percent (p = 0.99) within length of 0.01 ($R = 0.01$), the required $\eta$ is calculated as $0.0018$ using Equation \eqref{eq:C4_etaGuideForRHfunction}.
+Where $R$ is the distance that the $p$ percentage of the RH function occurs. For example, if it is required for the RH function to change 99 percent (p = 0.99) within length of 0.01 ($R = 0.01$), the required $\eta$ is calculated as $0.0018$ using Equation \eqref{eq:C4_etaGuideForRHfunction}.
 
 For IB simulations incorporating the virtual boundary method, the Regularized Delta (RD) function is a substitute used for transferring data between the Lagrangian and Eulerian nodes. In mathematics, the Dirac delta function is defined as the derivative of the unit step function. To be consistent with the mathematical formulation, the RD function is calculated by differentiating the RH functions of Equation \eqref{eq:C4_regularizedHeavisideFunctionFormulas} as shown in Equation \eqref{eq:C4_regularizedDeltaFunctionFormulas}. These RD functions are plotted in Figure \ref{fig:C4_deltaFunctionExample}.
 
@@ -101,7 +101,7 @@ For IB simulations incorporating the virtual boundary method, the Regularized De
     \label{fig:C4_deltaFunctionExample}
 \end{figure}
 
-RD functions $\mathcal{D}_2$ and $\mathcal{D}_3$ exhibits instability issues due to different powers of the exponential in the numerator and denominator and $\mathcal{D}_1$ does not have a required sharpness expected from an RD function. Therefore, in this work, the RD function $\mathcal{D}_4$ is selected for implementation in the virtual boundary method. The sharpness of this RD function is further controlled by using the $\eta$ function as used in the definition of the corresponding RH function. This is defined in Equation \eqref{eq:C4_deltaFunction}. The RD function for different value for $\eta$ is shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}.
+RD functions $\mathcal{D}_2$ and $\mathcal{D}_3$ exhibit, instability issues due to different powers of the exponential in the numerator and denominator and $\mathcal{D}_1$ does not have a required sharpness expected from an RD function. Therefore, in this work, the RD function $\mathcal{D}_4$ is selected for implementation in the virtual boundary method. The sharpness of this RD function is further controlled by using the $\eta$ function as used in the definition of the corresponding RH function. This is defined in Equation \eqref{eq:C4_deltaFunction}. The RD function for different values of $\eta$ are shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}.
 
 \begin{equation}\label{eq:C4_deltaFunction}
     \mathcal{D} = \dfrac{1}{\eta} \left( \dfrac{-\tanh^{2}{\left (\dfrac{x}{\eta} \right )} + 1}{2} \right)
@@ -114,29 +114,29 @@ RD functions $\mathcal{D}_2$ and $\mathcal{D}_3$ exhibits instability issues due
     \label{fig:C4_deltaFunctionWithControlParamter}
 \end{figure}
 
-As shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}, the RD function has continuous derivatives. This enables the use of virtual boundary method to be used as a part continuum sensitivity analysis for sensitivity calculation through providing differentiable governing equations.For the RD function, the free parameter is calculated by selecting how fast the RD function decay when moving further from its symmetry axis. The free parameter for the RD function is defined in Equation \eqref{eq:C4_etaGuideForRDfunction}.
+As shown in Figure \ref{fig:C4_deltaFunctionWithControlParamter}, the RD function has continuous derivatives. This enables the use of virtual boundary method to be used for sensitivity calculation through providing differentiable governing equations. For the RD function, the free parameter is calculated by selecting how fast the RD function decays when moving further from its symmetry axis. The free parameter for the RD function is defined in Equation \eqref{eq:C4_etaGuideForRDfunction}.
 
 \begin{equation}\label{eq:C4_etaGuideForRDfunction}
     \eta = \frac{R}{\tanh^{-1} (\sqrt{1 - p})}
 \end{equation}
 
-Where $R$ is the distance from the symmetry axis of the RD function that the value of RD function drop to $p$ percentage of its maximum value. For example, for the RD function value to drop 99 percent ($p = 0.99$) within 0.01 ($R = 0.01$) of the symmetry axis of the RD function, the $\eta$ value is calculated as $0.0033$ based on Equation \eqref{eq:C4_etaGuideForRDfunction}.
+RD function drops to $p$ percentage of its value at the symmetry axis at distance $R$. For example, for the RD function value to drop 99 percent ($p = 0.99$) within 0.01 ($R = 0.01$) of the symmetry axis of the RD function, the $\eta$ value is calculated as $0.0033$ based on Equation \eqref{eq:C4_etaGuideForRDfunction}.
 
 % ============================================================================
 \section{Sensitivity Analysis Formulation}
-In this section, the sensitivity equations are derived for IB representation of solid boundaries. Two separate IB method are selected for the sensitivity analysis, the penalization method and the virtual boundaries method. The direct and adjoint sensitivity equations for design variables that control the shape of the IB are derived for these analysis and later applied two different demonstration problems. 
+In this section, the sensitivity equations are derived for IB representation of solid boundaries. Two separate IB methods are selected for the sensitivity analysis, the penalization method, and the virtual boundaries method. The direct and adjoint sensitivity equations for design variables that control the shape of the IB are derived for these analysis and later applied on two different demonstration problems. 
 
 \subsection{Direct Method}
-As mentioned in Chapter \ref{ch:sensitivityAnalysis}, the direct method for sensitivity analysis is preferred where the number of design variables is less than some the functions that the sensitivities are calculated. For this approach, the governing equations are differentiated with respect to the arbitrary shape design variable, $b$.
+As mentioned in Chapter \ref{ch:sensitivityAnalysis}, the direct method for sensitivity analysis is preferred when the number of design variables are less than the number of functions for which the sensitivities are calculated for. For this approach, the governing equations are differentiated with respect to the arbitrary shape design variable, $b$.
 
-For the penalization method, a level-set definition of the solid boundary is used to assign penalization factors to the nodes. As defined in Chapter \ref{ch:immersedBoundary}, the boundary is defined using an analytical function $\mathcal{X}$ that depends on the shape design variable. The governing equation for flow over the immersed boundaries using penalization method is written using the RH function as shown in Equation \eqref{eq:C4_NSwithPenalizationIB}.
+For the penalization method, a level-set definition of the solid boundary is used to assign penalization factors to the nodes. As defined in Chapter \ref{ch:immersedBoundary}, the boundary is defined using an analytical function, $\mathcal{X}$, that depends on the shape design variable. The governing equation for flow over the immersed boundaries using penalization method is written using the RH function as shown in Equation \eqref{eq:C4_NSwithPenalizationIB}.
 
 \begin{equation}\label{eq:C4_NSwithPenalizationIB}
     \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} = 
     -\frac{\nabla P}{\rho} + \nu \nabla^2 \mathbf{u} -\mathcal{H}(\mathcal{X}(b)) \kappa \mathbf{u}
 \end{equation}
 
-Equation \eqref{eq:C4_NSwithPenalizationIB} is differentiated with respect to design variable $b$ to derive the continuum sensitivity equations. The symbol $(\text{ })'$ is used instead of $\partial /\partial b$ in the sensitivity equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}.
+Equation \eqref{eq:C4_NSwithPenalizationIB} is differentiated with respect to design variable $b$ to derive the continuum sensitivity equations. The symbol $(\text{ })'$ represents $\partial /\partial b$ in the sensitivity equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}.
 
 \begin{equation}\label{eq:C4_NSwithPenalizationIBsensitivity}
     \frac{\partial \mathbf{u}'}{\partial t} +
@@ -147,7 +147,7 @@ Equation \eqref{eq:C4_NSwithPenalizationIB} is differentiated with respect to de
     \mathcal{H}(\mathcal{X}) \kappa \mathbf{u}'
 \end{equation}
 
-Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity} is solved for the velocity and pressure sensitivities ($\mathbf{u}'$, $P'$) by knowing the values of $\mathbf{u}$ from the analysis. As shown in Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}, the effect of shape change is introduced to the sensitivity equation through the derivative of the RH function. $\partial \mathcal{H}/\partial \mathcal{X}$ is easily calculated by analytical differentiating the RH function with respect to $\mathcal{X}$. The evaluation of $\partial \mathcal{X}/\partial b$ is also straight forward since it was assumed that the solid boundary is defined analytically. The boundary conditions for Equation \eqref{eq:C4_NSwithPenalizationIB} are often independent of the shape design variables. Therefore, their derivative is zero. This enables us to solve the governing Equation of \eqref{eq:C4_NSwithPenalizationIBsensitivity} for the sensitivity response.
+Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity} is solved for velocity and pressure sensitivities ($\mathbf{u}'$, $P'$) by knowing the values of $\mathbf{u}$ from the analysis. As shown in Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}, the effect of shape change is introduced to the sensitivity equation through the derivative of the RH function. $\partial \mathcal{H}/\partial \mathcal{X}$ is easily calculated by analytically differentiating the RH function with respect to $\mathcal{X}$. The evaluation of $\partial \mathcal{X}/\partial b$ is also straight forward since it was assumed that the solid boundary is defined analytically. The boundary conditions for Equation \eqref{eq:C4_NSwithPenalizationIB} are often independent of the shape design variables. Therefore, their derivative is zero. This enables us to solve the governing Equation of \eqref{eq:C4_NSwithPenalizationIBsensitivity} for the sensitivity response.
 
 Sensitivity implementation for the virtual boundary method is more demanding compared to the penalization method. Using the RD function, the NS equation using virtual boundary method for solid boundary definition is written as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB}.
 
@@ -170,21 +170,21 @@ Sensitivity implementation for the virtual boundary method is more demanding com
     \right\} \bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})
 \end{align}
 
-In above equation, $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point on the solid boundary and $\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x}$ is the current velocity at the Lagrangian node $\mathbf{X}$ on the solid boundary calculated from the Eulerian nodes on the fluid's domain. To transfer the forces back to the Eulerian nodes, the same normalized RD function is used as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} by $\bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})$ where the term in the parenthesis ($\mathbf{x} - \mathbf{X}$) is responsible for casting the RD function at the location of the Lagrangian point $\mathbf{X}$. The term normalized mean that the maximum value for the RD function $\mathcal{D}$ is equal to one. This is essential to have a conservative transformation between the Eulerian and Lagrangian computational nodes. The mapping procedure is illustrated in the following example.
+In the above equation, $\mathbf{V}(\mathbf{X}, t)$ is the desired velocity at the Lagrangian point on the solid boundary and $\int \mathbf{u}(\mathbf{x}, t) \mathcal{D}(\mathbf{x} - \mathbf{X}) d\mathbf{x}$ is the current velocity at the Lagrangian node, $\mathbf{X}$, on the solid boundary calculated from the Eulerian nodes on the fluid's domain. To transfer the forces back to the Eulerian nodes, the same normalized RD function is used as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} by $\bar{\mathcal{D}}(\mathbf{x} - \mathbf{X})$ where the term in the parenthesis ($\mathbf{x} - \mathbf{X}$) is responsible for casting the RD function at the location of the Lagrangian point $\mathbf{X}$. The maximum value for the RD function $\mathcal{D}$ is equal to one. This is essential to have a conservative transformation between the Eulerian and Lagrangian computational nodes. The mapping procedure is illustrated in the following example.
 
-Assume that the analytical function $y=x^2$ is evaluated at $9$ location between $0$ and $1$. To know the function value at locations $X = 0.3321$ and $X = 0.5813$ that does not coincide with the location where the function is evaluated, it is required to use the following equation. We used the RD definition of Equation \eqref{eq:C4_deltaFunction} with $\eta = 0.1$ for this purpose.
+Assume that the analytical function $y=x^2$ is evaluated at $9$ locations between $0$ and $1$. To know the function value at locations $X = 0.3321$ and $X = 0.5813$, that does not coincide with the location where the function is evaluated, it is required to use the following equation. We used the RD definition of Equation \eqref{eq:C4_deltaFunction} with $\eta = 0.1$ for this purpose.
 
 \begin{equation}\label{eq:C4_euler2lagrange}
     y(X) = \sum_{i=1}^9 \mathcal{D}_i Y_i \Delta x_i
 \end{equation}
 
-Where the subscript $i$ This equation used the data from nodes around $X$ to calculate the function value. To convert the data at $X$ (Lagrangian node) back to the surrounding nodes where the original function was evaluated, the following equation is used.
+Where the subscript $i$ is the number of points used to discretize the Delta function. This equation used the data from nodes around $X$ to calculate the function value. To convert the data at $X$ (Lagrangian node) back to the surrounding nodes where the original function was evaluated, the following equation is used.
 
 \begin{equation}
     y(x) = y(X) \bar{\mathcal{D}}(x - X)
 \end{equation}
 
-where $\bar{\mathcal{D}}(x - X)$ is a vector of numbers. The transfer of data from Eulerian nodes to Lagrangian is shown in Figure \ref{fig:C4_euler2lagrangeExample}. In this figure, the original function is represented by the solid black line and the sampling location are represented by black circles. The exact function value at the Lagrangian point is shown by a red circle and the calculated value from Equation \eqref{eq:C4_euler2lagrange} is shown by a blue cross. The numerical results for the comparison between the interpolated and actual values are shown in Table \ref{table:C4_euler2lagrangeExample}. The green squares represent the mapped back data to the Eulerian domain from the data at the Lagrangian point $X$ shown with a red circle in Figure \ref{fig:C4_euler2lagrangeExample}. As shown here, the data at Lagrangian nodes mainly affects the two closest Eulerian nodes. The effect of Lagrangian data at $X$ decreases by moving further from $X$. The mapping from the Lagrangian to Eulerian domain has larger error compared to the mapping from Eulerian to Lagrangian grid. However, since this is done in a loop, the error diminishes as simulation moves in time.
+Where $\bar{\mathcal{D}}(x - X)$ is a vector of numbers. The transfer of data from Eulerian nodes to Lagrangian is shown in Figure \ref{fig:C4_euler2lagrangeExample}. In this figure, the original function is represented by the solid black line and the sampling locations are represented by black circles. The exact function value at the Lagrangian point is shown by a red circle and the calculated value from Equation \eqref{eq:C4_euler2lagrange} is shown by a blue cross. The numerical results for the comparison between the interpolated and actual values are shown in Table \ref{table:C4_euler2lagrangeExample}. The green squares represent the mapped back data to the Eulerian domain from the data at the Lagrangian point $X$ shown with a red circle in Figure \ref{fig:C4_euler2lagrangeExample}. As shown here, the data at Lagrangian nodes mainly affects the two closest Eulerian nodes. The effect of Lagrangian data at $X$ decreases by moving further from $X$. The mapping from the Lagrangian to Eulerian domain has larger error compared to the mapping from Eulerian to Lagrangian grid. However, since this is done in a loop, the error diminishes as the simulation continues in time.
 
 \begin{figure}[H]
     \centering
@@ -283,7 +283,7 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
     \lambda \frac{\partial \mathcal{R}}{\partial b_i}
 \end{equation}
 
-%The adjoint formulation is implemented for a simple continuous system as defined in Figure \ref{fig:C4_stepBeamAdjoint}. The design variables are selected as the cross-sectional areas of the axial bars, $A_1$ and $A_2$. The length of bars are chosen as $L_1$ and $L_2$ with a force applied at the tip, $F$. We are interested in the sensitivity of stress in the bar (1) with respect to the cross-section areas $A_1$ and $A_2$.
+%The adjoint formulation is implemented for a simple continuous system as defined in Figure \ref{fig:C4_stepBeamAdjoint}. The design variables are selected as the cross-sectional areas of the axial bars, $A_1$ and $A_2$. The length of the bars are chosen as $L_1$ and $L_2$ with a force applied at the tip, $F$. We are interested in the sensitivity of stress in the bar (1) with respect to the cross-sectional areas $A_1$ and $A_2$.
 %
 %\begin{figure}[H]
 %    \centering
@@ -318,7 +318,7 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
 %    \right) = 0
 %\end{equation}
 %
-%The sensitivity of stress in the first bar is calculated by integrating above equation. This needs to be done for each of the design variables as shown in Equation \eqref{eq:C4_directSensitivityMethodForBarExample}.
+%The sensitivity of stress in the first bar is calculated by integrating the above equation. This needs to be done for each of the design variables as shown in Equation \eqref{eq:C4_directSensitivityMethodForBarExample}.
 %
 %\begin{subequations}\label{eq:C4_directSensitivityMethodForBarExample}
 %\begin{align}
@@ -347,7 +347,7 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
 %    \Gamma = h(\sigma) + \mathcal{R}(\sigma, A)
 %\end{equation}
 %
-%where $h(\sigma)$ is the stress in first element, and $\mathcal{R}(\sigma, A)$ is the governing equation. $\mathcal{R}(\sigma, A)$ is equal to zero when the governing equation is satisfied therefore, calculating the sensitivity of $\Gamma$ is same as $h$. This is done in Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}.
+%Where $h(\sigma)$ is the stress in first element and $\mathcal{R}(\sigma, A)$ is the governing equation. $\mathcal{R}(\sigma, A)$ is equal to zero when the governing equation is satisfied; therefore, calculating the sensitivity of $\Gamma$ is the same as $h$. This is done in Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}.
 %
 %\begin{equation}\label{eq:C4_barExampleAdjointSensitivityEquation}
 %    \frac{d\Gamma}{d \bar{A}} = 
@@ -358,7 +358,7 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
 %    \frac{\partial \bar{\sigma}}{\partial \bar{A}}
 %\end{equation}
 %
-%where $\bar{\text{ }}$ represents a vector. $\dfrac{\partial h}{\partial \bar{A}}$ is equal to zero since $h = \sigma_1$ and the stress does not explicitly related to the cross-sectional area. $\dfrac{\partial h}{\partial \bar{\sigma}}$ is calculated easily. $\dfrac{\partial \mathcal{R}}{\partial \bar{\sigma}}$ is calculated as shown in Equation \eqref{eq:C4_sensitivityOfGoverningEquationToStressBarExample}.
+%Where $\bar{\text{ }}$ represents a vector. $\dfrac{\partial h}{\partial \bar{A}}$ is equal to zero since $h = \sigma_1$ and the stress is not explicitly related to the cross-sectional area. $\dfrac{\partial h}{\partial \bar{\sigma}}$ is calculated easily. $\dfrac{\partial \mathcal{R}}{\partial \bar{\sigma}}$ is calculated as shown in Equation \eqref{eq:C4_sensitivityOfGoverningEquationToStressBarExample}.
 %
 %\begin{subequations}\label{eq:C4_sensitivityOfGoverningEquationToStressBarExample}
 %\begin{align}
@@ -424,7 +424,7 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
 %    \end{bmatrix}
 %\end{align}
 %
-%Finally, to calculate the sensitivities it is required to calculate the sensitivity of the governing equation \eqref{eq:C4_governingEquationForAdjointExample} to the design variables. This is easy to calculate since the no solution is needed. This is done in Equation \eqref{eq:C4_sensitivityOfRtoAbarExample}.
+%Finally, to calculate the sensitivities, it is required to calculate the sensitivity of the governing equation \eqref{eq:C4_governingEquationForAdjointExample} to the design variables. This is easy to calculate since no solution is needed. This is done in Equation \eqref{eq:C4_sensitivityOfRtoAbarExample}.
 %
 %\begin{subequations}\label{eq:C4_sensitivityOfRtoAbarExample}
 %\begin{equation}
@@ -435,7 +435,7 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
 %\end{equation}
 %\end{subequations}
 %
-%The sensitivity of stress in first bar is calculate by substituting Equations \eqref{eq:C4_adjointVectorForBarExample} and \eqref{eq:C4_sensitivityOfRtoAbarExample} into Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}. The sensitivity of stress in first bar to design variables using adjoint method is written as
+%The sensitivity of stress in the first bar is calculate by substituting Equations \eqref{eq:C4_adjointVectorForBarExample} and \eqref{eq:C4_sensitivityOfRtoAbarExample} into Equation \eqref{eq:C4_barExampleAdjointSensitivityEquation}. The sensitivity of stress in the first bar to design variables using adjoint method is written as:
 %
 %\begin{equation}
 %    \frac{d \Gamma}{d \bar{A}} = 
@@ -464,4 +464,4 @@ By knowing the adjoint vector, the sensitivity of Lagrangian function, $\Gamma(\
 \input{Chapter_4/Chapter_4_Shape_Sensitivity_of_Flow_through_a_Nozzle.tex}
 % ======================================================================
 \section{Summary}
-In this chapter the Continuum Sensitivity Analysis (CSA) framework was applied to the Immersed Boundary (IB) formulation of flow over solid boundaries. In the conventional IB method, Heaviside and Delta functions are used to assign force terms to the governing equations to represent the effect of solid boundaries. To derive the sensitivity equations using the CSA, the governing equations need to be continuously differentiable; however, this is not true for the conventional IB formulation. To address this issue, we introduced Regularized Heaviside (RH) and Regularized Delta (RD) functions to the governing equations. These functions are continuously differentiable and are tuned based on the grid size used in the simulation. The governing Navier-Stokes (NS) equations are rewritten based on two different continuous IB formulations and differentiated to get the sensitivity equations. The sensitivity equations were solved for the sensitivity of the flow variables with respect to different shape design variables where the results were verified using the complex step method. It was shown that the CSA results are in good agreement with numerical results of the complex step method. The convergence rate of the sensitivity equations was also compared with the convergence rate of the governing equations. It was reported that the sensitivity equations converge with the same rate as the governing equations for the conducted analysis.
+In this chapter, the Continuum Sensitivity Analysis (CSA) framework was applied to the Immersed Boundary (IB) formulation of flow over solid boundaries. In the conventional IB method, Heaviside and Delta functions are used to assign force terms to the governing equations to represent the effect of solid boundaries. To derive the sensitivity equations using the CSA, the governing equations need to be continuously differentiable; however, this is not true for conventional IB formulation. To address this issue, we introduced Regularized Heaviside (RH) and Regularized Delta (RD) functions to the governing equations. These functions are continuously differentiable and are tuned based on the grid size used in the simulation. The governing Navier-Stokes (NS) equations are rewritten based on two different continuous IB formulations and differentiated to get the sensitivity equations. The sensitivity equations were solved for the sensitivity of the flow variables with respect to different shape design variables where the results were verified using the complex step method. It was shown that the CSA results are in good agreement with numerical results of the complex step method. The convergence rate of the sensitivity equations were also compared with the convergence rate of the governing equations. For the conducted analysis, it was reported that the sensitivity equations converge with the same rate as the governing equations.

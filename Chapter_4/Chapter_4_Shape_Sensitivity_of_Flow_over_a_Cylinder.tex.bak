@@ -1,6 +1,6 @@
-\section{Shape Sensitivity of Flow over a Cylinder}
+\section{Shape Sensitivity of Flow Over a Cylinder}
 % ==================================================
-For the second demonstration problem, the flow over a cylinder is modeled using the virtual boundary method using Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} and the sensitivity of the flow field variables (velocity and pressure) with respect to the radius of the cylinder is calculated. For this problem, the domain is defined as a rectangle with the cylinder located on the horizontal symmetry line as shown in Figure \ref{fig:C4_cylinderPhysicalDomain}.
+For the second demonstration problem, the flow over a cylinder is modeled via the virtual boundary method using Equation \eqref{eq:C4_NSwithvirtualBoundaryIB} and the sensitivity of the flow field variables (velocity and pressure) with respect to the radius of the cylinder is calculated. For this problem, the domain is defined as a rectangle with the cylinder located on the horizontal symmetry line as shown in Figure \ref{fig:C4_cylinderPhysicalDomain}.
 
 \begin{figure}[H]
     \centering
@@ -9,7 +9,7 @@ For the second demonstration problem, the flow over a cylinder is modeled using 
     \label{fig:C4_cylinderPhysicalDomain}
 \end{figure}
 
-The boundary conditions are defined as the flow velocity at the inlet (left boundary) and the outflow (zero gradient) boundary condition at the outlet (right boundary). The top and bottom boundaries are modeled as free slip walls. The surface of the cylinder is modeled by the virtual boundary method. The cylinder is located at $(0.5, 0.0)$ and has the radius of $0.1 m$. Its surface is represented by using 100 Lagrangian nodes. The $\alpha$ and $\beta$ values for this analysis are selected as $-10^4$ and $-50$. These constants are problem dependent and are selected in such a way that the required velocity conditions are satisfied at the Lagrangian points. To ensure the stability of the numerical method, the CFL number is kept under one for all the following analysis. This is done by selected the appropriate time step for the chosen mesh size using Equation \eqref{eq:C4_CFLnumber}.
+The boundary conditions are defined as the flow velocity at the inlet (left boundary) and the outflow (zero gradient) boundary condition at the outlet (right boundary). The top and bottom boundaries are modeled as free slip walls. The surface of the cylinder is modeled by the virtual boundary method. The cylinder is located at $(0.5, 0.0)$ and has the radius of $0.1 m$. Its surface is represented by using 100 Lagrangian nodes. The $\alpha$ and $\beta$ values for this analysis are selected as $-10^4$ and $-50$. These constants are problem dependent and are selected in such a way that the required velocity conditions are satisfied at the Lagrangian points. To ensure the stability of the numerical method, the CFL number is kept under one for all following analysis. This is done by selected the appropriate time step for the chosen mesh size using Equation \eqref{eq:C4_CFLnumber}.
 
 \begin{equation}\label{eq:C4_CFLnumber}
 	\frac{u \Delta t}{\Delta x} + \frac{v \Delta t}{\Delta y} \leq 1.0
