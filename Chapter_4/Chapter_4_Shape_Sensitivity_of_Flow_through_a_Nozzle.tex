@@ -101,3 +101,25 @@ The sensitivity of the flow with respect to the throat area is calculated using 
     \caption{Sensitivity contours.}
     \label{fig:C4_nozzleFlow_sensitivityPlots}
 \end{figure}
+
+To verify the sensitivity analysis, the sensitivities of velocity and pressure are plotted on different locations in the domain. We chose the symmetry line of the nozzle to plot the u-velocity and pressure sensitivity with respect to the throat are and the vertical line passing through the throat for verifying the v-velocity sensitivity. The verification is done using the complex step sensitivities as shown in Figure \ref{fig:C4_nozzleSensitivityVerification}.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[U-velocity sensitivity on $y = 0.5$.]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_through_nozzle/verification_dUdr_RE100_Y050.eps}
+    }
+    \quad
+    \subfigure[V-velocity sensitivity on $x = 0.3$.]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_through_nozzle/verification_dVdr_RE100_X030.eps}
+    }
+    \\
+    \subfigure[Pressure sensitivity on $y = 0.5$.]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_through_nozzle/verification_dPdr_RE100_Y050.eps}
+    }
+    \caption{Verification of sensitivity results for the nozzle.}
+    \label{fig:C4_nozzleSensitivityVerification}
+\end{figure}

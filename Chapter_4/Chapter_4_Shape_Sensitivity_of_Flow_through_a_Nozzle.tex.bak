@@ -80,7 +80,7 @@ The contour plots for the velocities through the nozzle are shown in Figure \ref
 
 The sensitivity of the flow variables with respect to the throat area is calculated by differentiating the governing equations with respect to the design variable. The boundary conditions do not depend on the shape design variable; therefore, their derivative is equal to zero. This results in zero boundary conditions for the sensitivity equations.
 
-The sensitivity of the flow with respect to the throat area is calculated using the CSA. The u-velocity and pressure sensitivities are plotted on the symmetry line of the nozzle whereas the v-velocity sensitivity is plotted at the throat area. These values are verified with the complex step results where they showed a good comparison. This is shown in Figure \ref{fig:C4_nozzleFlow_sensitivityPlots}.
+The sensitivity of the flow with respect to the throat area is calculated using CSA. The u-velocity and pressure sensitivities are plotted on the symmetry line of the nozzle; whereas, the v-velocity sensitivity is plotted at the throat area. These values are verified with the complex step results where they showed a favorable comparison. This is shown in Figure \ref{fig:C4_nozzleFlow_sensitivityPlots}.
 
 \begin{figure}[H]
     \centering
@@ -100,4 +100,26 @@ The sensitivity of the flow with respect to the throat area is calculated using 
     }
     \caption{Sensitivity contours.}
     \label{fig:C4_nozzleFlow_sensitivityPlots}
+\end{figure}
+
+To verify the sensitivity analysis, the sensitivities of velocity and pressure are plotted on different locations in the domain. We chose the symmetry line of the nozzle to plot the u-velocity and pressure sensitivity with respect to the throat are and the vertical line passing through the throat for verifying the v-velocity sensitivity. The verification is done using the complex step sensitivities as shown in Figure \ref{fig:C4_nozzleSensitivityVerification}.
+
+\begin{figure}[H]
+    \centering
+    \subfigure[U-velocity sensitivity on $y = 0.5$.]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_through_nozzle/verification_dUdr_RE100_Y050.eps}
+    }
+    \quad
+    \subfigure[V-velocity sensitivity on $x = 0.3$.]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_through_nozzle/verification_dVdr_RE100_X030.eps}
+    }
+    \\
+    \subfigure[Pressure sensitivity on $y = 0.5$.]
+    {
+    \includegraphics[width=7.0cm]{Chapter_4/figure/flow_through_nozzle/verification_dPdr_RE100_Y050.eps}
+    }
+    \caption{Verification of sensitivity results for the nozzle.}
+    \label{fig:C4_nozzleSensitivityVerification}
 \end{figure}

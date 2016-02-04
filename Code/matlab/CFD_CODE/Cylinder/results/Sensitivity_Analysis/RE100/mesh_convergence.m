@@ -12,6 +12,10 @@ skip = 10;
 loadData = false;
 if loadData
 clear all;
+fontsize = 52;
+linewidth = 5.0;
+markersize = 15.0;
+skip = 10;
 xImm = dlmread('100X75/xImm');
 yImm = dlmread('100X75/yImm');
 
@@ -201,24 +205,24 @@ end
 % ============================ U - Velocity ============================= %
 % ======================================================================= %
 %% Complex step validation
-% y = 0.0;
-% [a, b] = min(abs(Yu5(1, :) - y));
-% 
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% plot(Xu5(:, b), Up5(:, b), 'k',...
-%      Xu5(:, b), dUdB5(:, b), 'r--',...
-%      'linewidth', linewidth, 'markersize', markersize)
-% xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
-% legend('CSA', 'CS', 'fontsize', fontsize)
-% title(['RMSE = ' num2str(calcRMSE(dUdB5(:, b), Up5(:, b)))], 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gcf,'renderer','painters')
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-% grid('on')
-% grid minor
-% set(gca,'LooseInset',get(gca,'TightInset'))
+y = 0.2;
+[a, b] = min(abs(Yu5(1, :) - y));
+
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+plot(Xu5(:, b), Up5(:, b), 'k',...
+     Xu5(:, b), dUdB5(:, b), 'r--',...
+     'linewidth', linewidth, 'markersize', markersize)
+xlabel('X (m)', 'fontsize', fontsize)
+ylabel('dU/dr (1/s)', 'fontsize', fontsize)
+legend('CSA', 'CS', 'fontsize', fontsize)
+title(['RMSE = ' num2str(calcRMSE(dUdB5(:, b), Up5(:, b)))], 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gcf,'renderer','painters')
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+grid('on')
+grid minor
+set(gca,'LooseInset',get(gca,'TightInset'))
 
 %% Contour plots
 % figure,
