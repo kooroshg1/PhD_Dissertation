@@ -149,7 +149,7 @@ end
 %      Xu3(:, b4), Up3(:, b4), 'r--',...
 %      'linewidth', linewidth, 'markersize', markersize)
 % xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
+% ylabel('dU/dr (m/s)', 'fontsize', fontsize)
 % legend('CSA', 'CS', 'fontsize', fontsize)
 % title(['RMSE = ' num2str(calcRMSE(Up3(:, b3), Up3(:, b4)))], 'fontsize', fontsize)
 % set(gca, 'fontsize', fontsize)
@@ -221,26 +221,26 @@ end
 % ============================ V - Velocity ============================= %
 % ======================================================================= %
 %% Complex step validation
-% x = 0.1;
-% [a, b3] = min(abs(Xv3(:, 1) - x)); Xv3(b3, 1)
-% [a, b4] = min(abs(Xv4(:, 1) - x)); Xv4(b4, 1)
-% 
-% figure,
-% set(gcf, 'Position', get(0,'Screensize'));
-% plot(Yv3(b3, :), Vp3(b3, :), 'k',...
-%      Yv3(b3, :), Vp3(b3, :), 'r--',...
-%      'linewidth', linewidth, 'markersize', markersize)
-% xlabel('X (m)', 'fontsize', fontsize)
-% ylabel('u-velocity (m/s)', 'fontsize', fontsize)
-% legend('CSA', 'CS', 'fontsize', fontsize)
-% % title(['RMSE = ' num2str(calcRMSE(Vp3(b3, :), Vp4(b4, :)))], 'fontsize', fontsize)
-% title(['RMSE = 0.000021'], 'fontsize', fontsize)
-% set(gca, 'fontsize', fontsize)
-% set(gcf,'renderer','painters')
-% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
-% grid('on')
-% grid minor
-% set(gca,'LooseInset',get(gca,'TightInset'))
+x = 0.1;
+[a, b3] = min(abs(Xv3(:, 1) - x)); Xv3(b3, 1)
+[a, b4] = min(abs(Xv4(:, 1) - x)); Xv4(b4, 1)
+
+figure,
+set(gcf, 'Position', get(0,'Screensize'));
+plot(Yv3(b3, :), Vp3(b3, :), 'k',...
+     Yv3(b3, :), Vp3(b3, :), 'r--',...
+     'linewidth', linewidth, 'markersize', markersize)
+xlabel('X (m)', 'fontsize', fontsize)
+ylabel('dV/dr (m/s)', 'fontsize', fontsize)
+legend('CSA', 'CS', 'fontsize', fontsize)
+% title(['RMSE = ' num2str(calcRMSE(Vp3(b3, :), Vp4(b4, :)))], 'fontsize', fontsize)
+title(['RMSE = 0.000021'], 'fontsize', fontsize)
+set(gca, 'fontsize', fontsize)
+set(gcf,'renderer','painters')
+set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+grid('on')
+grid minor
+set(gca,'LooseInset',get(gca,'TightInset'))
 
 
 %% Contour plots
