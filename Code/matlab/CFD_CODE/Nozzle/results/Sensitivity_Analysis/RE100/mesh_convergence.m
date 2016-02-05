@@ -230,7 +230,7 @@ set(gcf, 'Position', get(0,'Screensize'));
 plot(Yv3(b3, :), Vp3(b3, :), 'k',...
      Yv3(b3, :), Vp3(b3, :), 'r--',...
      'linewidth', linewidth, 'markersize', markersize)
-xlabel('X (m)', 'fontsize', fontsize)
+xlabel('Y (m)', 'fontsize', fontsize)
 ylabel('dV/dr (m/s)', 'fontsize', fontsize)
 legend('CSA', 'CS', 'fontsize', fontsize)
 % title(['RMSE = ' num2str(calcRMSE(Vp3(b3, :), Vp4(b4, :)))], 'fontsize', fontsize)
@@ -354,17 +354,17 @@ set(gca,'LooseInset',get(gca,'TightInset'))
 % set(gca,'LooseInset',get(gca,'TightInset'))
 
 %% Contour plots
-figure,
-set(gcf, 'Position', get(0,'Screensize'));
-contourf(Xp5, Yp5, Pp5, 100, 'linestyle', 'none')
-axis equal
-colorbar('eastoutside')
-hold on
-plot(xImm, yImm, 'k.', ...
-     'linewidth', linewidth)
-set(gca, 'fontsize', fontsize)
-set(gcf,'renderer','painters')
-set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
+% figure,
+% set(gcf, 'Position', get(0,'Screensize'));
+% contourf(Xp5, Yp5, Pp5, 100, 'linestyle', 'none')
+% axis equal
+% colorbar('eastoutside')
+% hold on
+% plot(xImm, yImm, 'k.', ...
+%      'linewidth', linewidth)
+% set(gca, 'fontsize', fontsize)
+% set(gcf,'renderer','painters')
+% set(gcf, 'PaperPosition', [0.25 2.5 8 6]); % last 2 are width/height.
 
 %% Convergence plot
 % figure,
