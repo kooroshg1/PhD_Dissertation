@@ -9,13 +9,13 @@ For the second demonstration problem, the flow over a cylinder is modeled via th
     \label{fig:C4_cylinderPhysicalDomain}
 \end{figure}
 
-The boundary conditions are defined as the flow velocity at the inlet (left boundary) and the outflow (zero gradient) boundary condition at the outlet (right boundary). The top and bottom boundaries are modeled as free slip walls. The surface of the cylinder is modeled by the virtual boundary method. The cylinder is located at $(0.5, 0.0)$ and has the radius of $0.1 m$. Its surface is represented by using 100 Lagrangian nodes. The $\alpha$ and $\beta$ values for this analysis are selected as $-10^4$ and $-50$. These constants are problem dependent and are selected in such a way that the required velocity conditions are satisfied at the Lagrangian points. To ensure the stability of the numerical method, the CFL number is kept under one for all following analysis. This is done by selected the appropriate time step for the chosen mesh size using Equation \eqref{eq:C4_CFLnumber}.
+The boundary conditions are defined as the flow velocity at the inlet (left boundary) and the outflow (zero gradient) boundary condition at the outlet (right boundary). The top and bottom boundaries are modeled as free slip walls. The surface of the cylinder is modeled by the virtual boundary method. The cylinder is located at $(0.5, 0.0)$ and has the radius of $0.1 m$. Its surface is represented by using 100 Lagrangian nodes. The $\alpha$ and $\beta$ values for this analysis are selected as $-10^4$ and $-50$, respectively. These constants are problem dependent and are selected in such a way that the required velocity conditions are satisfied at the Lagrangian points. To ensure the stability of the numerical method, the CFL number is kept under one for all following analysis. This is done by selecting an appropriate time step for the chosen mesh size using Equation \eqref{eq:C4_CFLnumber}.
 
 \begin{equation}\label{eq:C4_CFLnumber}
 	\frac{u \Delta t}{\Delta x} + \frac{v \Delta t}{\Delta y} \leq 1.0
 \end{equation}
 
-The mesh convergence for this problem for Reynolds number of 100 is shown in Figure \ref{fig:C4_meshConvergenceForCylidnerRE100GE}.
+The mesh convergence for this problem for a Reynolds number of 100 is shown in Figure \ref{fig:C4_meshConvergenceForCylidnerRE100GE}.
 
 \begin{figure}[H]
     \centering
@@ -37,7 +37,7 @@ The mesh convergence for this problem for Reynolds number of 100 is shown in Fig
     \label{fig:C4_meshConvergenceForCylidnerRE100GE}
 \end{figure}
 
-The convergence study of the mesh refinement is also conducted for a node on the downwash of the cylinder at $(2, 0)$ as shown in Figure \ref{fig:C4_meshRefinementForCylinderRE100GE}. The slopes of the fitted lines to the u-velocity, v-velocity, and pressure error estimates are calculated as $-2.34$, and $-1.96$, and $-2.72$. This means that the method is second order in space and time.
+The convergence study of the mesh refinement is also conducted for a node on the downwash of the cylinder at $(2, 0)$ as shown in Figure \ref{fig:C4_meshRefinementForCylinderRE100GE}. The slopes of the fitted curves to the u-velocity, v-velocity, and pressure error estimates are calculated as $-2.34$, $-1.96$, and $-2.72$, respectfully. This means that the method is second-order accurate in space and time.
 
 \begin{figure}[H]
     \centering
@@ -59,7 +59,7 @@ The convergence study of the mesh refinement is also conducted for a node on the
     \label{fig:C4_meshRefinementForCylinderRE100GE}
 \end{figure}
 
-The contour plots for the velocity and pressure is shown in Figure \ref{fig:C4_contourPlotsForFlowOverCylidnerGE}.
+The contour plots for the velocity and pressure are shown in Figure \ref{fig:C4_contourPlotsForFlowOverCylidnerGE}.
 
 \begin{figure}[H]
     \centering
@@ -76,7 +76,7 @@ The contour plots for the velocity and pressure is shown in Figure \ref{fig:C4_c
     \label{fig:C4_contourPlotsForFlowOverCylidnerGE}
 \end{figure}
 
-To ensure that the zero velocity on the solid boundary, we looked at the value of the u and v velocities at the Lagrangian points on the boundary. These are shown in Figure \ref{fig:C4_fluidVelocityOnCylinder}. As shown here, the forcing terms brought the velocity to zero within the accuracy requirement. The oscillation of the velocity magnitude is due to their small values. The $\theta$ is the polar coordinate on Lagrangian points on the surface of the cylinder as shown in Figure \ref{fig:C4_cylinderPhysicalDomain}.
+To ensure zero velocity on the solid boundary, we looked at the value of $u$ and $v$ velocities at the Lagrangian points on the boundary. These are shown in Figure \ref{fig:C4_fluidVelocityOnCylinder}. As shown here, the forcing terms brought the velocity to zero within the accuracy requirement. The oscillation of the velocity magnitude is due to their small values. $\theta$ is the polar coordinate of Lagrangian points on the cylinder surface as shown in Figure \ref{fig:C4_cylinderPhysicalDomain}.
 
 \begin{figure}[H]
     \centering
@@ -93,7 +93,7 @@ To ensure that the zero velocity on the solid boundary, we looked at the value o
     \label{fig:C4_fluidVelocityOnCylinder}
 \end{figure}
 
-Finally, the pressure profile on the surface of the cylinder is calculated as shown in Figure \ref{fig:C4_pressureOnSurfaceCylinder}. No smoothing is done for the calculating the pressure values on the Lagrangian points. This data is interpolated using the RD function of Equation \eqref{eq:C4_deltaFunction}.
+Finally, the pressure profile on the cylinder surface is calculated as shown in Figure \ref{fig:C4_pressureOnSurfaceCylinder}. No smoothing is done for calculating the pressure values at the Lagrangian points. This data is interpolated using the RD function of Equation \eqref{eq:C4_deltaFunction}.
 
 \begin{figure}[H]
     \centering
@@ -102,7 +102,7 @@ Finally, the pressure profile on the surface of the cylinder is calculated as sh
     \label{fig:C4_pressureOnSurfaceCylinder}
 \end{figure}
 
-The continuum sensitivity equation are derived by differentiating the governing NS equations of \eqref{eq:C4_NSwithvirtualBoundaryIB} with respect to the shape design variable, $b$, as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. For this problem, the boundary oب the cylinder is defined using the following analytical level-set function. For the points on the surface of the cylinder, Equation \eqref{eq:C4_levelSetFunctionForCylinder} is equal to zero.
+The continuum sensitivity equations are derived by differentiating the governing NS equations of \eqref{eq:C4_NSwithvirtualBoundaryIB} with respect to the shape design variable, $b$, as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. For this problem, the cylinder boundary is defined using the following analytical level-set function. For the points on the cylinder surface, Equation \eqref{eq:C4_levelSetFunctionForCylinder} is equal to zero.
 
 \begin{equation}\label{eq:C4_levelSetFunctionForCylinder}
 	\mathcal{R}(x, y; r): (x - x_0)^2 + (y - y_0)^2 = r^2
@@ -117,9 +117,9 @@ For the sensitivity analysis, $\partial D/\partial X$ is calculated easily since
 	2 r \frac{\partial r}{\partial b}
 \end{equation}
 
-For this analysis, the design variable $b$ is selected as the radius of the cylinder. Therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
+For this analysis, the design variable, $b$, is selected as the radius of the cylinder; therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
 
-The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore, have zero values. Having the governing equations and boundary conditions, it is possible to solve the sensitivity equations. The convergence analysis for the sensitivity results are shown in Figure \ref{fig:C4_flowOverCylinderSAmeshConvergence}. As can be seen in these plots, the mesh size of $500 \time 375$ is selected for the rest of sensitivity analysis.
+The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore, have zero values. Obtaining the governing equations and boundary conditions, it is possible to solve the sensitivity equations. The convergence analysis for the sensitivity results are shown in Figure \ref{fig:C4_flowOverCylinderSAmeshConvergence}. As can be seen in these plots, the mesh size of $500 \time 375$ is selected for the rest of sensitivity analysis.
 
 \begin{figure}[H]
     \centering
@@ -141,7 +141,7 @@ The boundary conditions for the sensitivity analysis are defined by differentiat
     \label{fig:C4_flowOverCylinderSAmeshConvergence}
 \end{figure}
 
-The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not have the accuracy issues of the finite different method and provides the accurate sensitivities up to machine precision. However, the analysis code requires handling complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculating the sensitivities. The complex-step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities for a different location in the domain is shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}, shows a good comparison between the CSA and CS results.
+The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not contain the accuracy issues of the finite difference method and provides the accurate sensitivities up to machine precision. However, the analysis code requires handling complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculate the sensitivities. The complex-step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities of a different location in the domain is shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation} shows an acceptable comparison between the CSA and CS results.
 
 \begin{figure}[H]
     \centering
@@ -178,7 +178,7 @@ The complex step method is used to validate the sensitivity response of the syst
     \label{fig:C4_flowOverCylinderSensitivityValidation}
 \end{figure}
 
-The rate of convergence of the sensitivity results are investigated in Figure \ref{fig:C4_flowOverCylinderSArateOfConvergence}. The slope of the fitted line (dashed line) for $u$-velocity, $v$-velocity, and pressure sensitivity is reported as $-2.2$, $-1.94$, and $-2.31$. The $v$-velocity has lower convergence rate since the sampling location is near the wall when the spatial approximations are first order.
+The rate of convergence of the sensitivity results are investigated in Figure \ref{fig:C4_flowOverCylinderSArateOfConvergence}. The slope of the fitted line (dashed line) for $u$-velocity, $v$-velocity, and pressure sensitivity are reported as $-2.2$, $-1.94$, and $-2.31$, respectively. The $v$-velocity has lower convergence rate since the sampling location is near the wall when the spatial approximations are first order.
 
 \begin{figure}[H]
     \centering
@@ -200,7 +200,7 @@ The rate of convergence of the sensitivity results are investigated in Figure \r
     \label{fig:C4_flowOverCylinderSArateOfConvergence}
 \end{figure}
 
-The sensitivity contours for the velocity and pressure and shown in Figure \ref{fig:C4_flowOverCylinderSensitivityContour}.
+The sensitivity contours for the velocity and pressure are shown in Figure \ref{fig:C4_flowOverCylinderSensitivityContour}.
 
 \begin{figure}[H]
     \centering
@@ -222,7 +222,7 @@ The sensitivity contours for the velocity and pressure and shown in Figure \ref{
     \label{fig:C4_flowOverCylinderSensitivityContour}
 \end{figure}
 
-In most aerodynamic/aeroelastic designs, the sensitivity analysis is conducted for calculating the sensitivity of the pressure field on the surface of the solid boundaries. This sensitivity value is later used for calculating the sensitivity of aerodynamic forces acting on the solid boundaries by integrating the sensitivity of the pressure field. For this purpose, the sensitivity of pressure field is plotted on solid boundaries and verified with the complex step method in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}. It should be noted that Savitzky-Golay filtering is used to smooth the results over the solid boundary. As shown in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}, the two results agree very well with each other.
+In most aerodynamic/aeroelastic designs, the sensitivity analysis is conducted for calculating the sensitivity of the pressure field on the surface of the solid boundaries. This sensitivity value is later used for calculating the sensitivity of aerodynamic forces acting on the solid boundaries by integrating the sensitivity of the pressure field. For this purpose, the sensitivity of the pressure field is plotted on solid boundaries and verified with the complex step method in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}. It should be noted that Savitzky-Golay filtering is used to smooth the results over the solid boundary. As shown in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}, the two results agree very well with each other.
 
 \begin{figure}[H]
     \centering
