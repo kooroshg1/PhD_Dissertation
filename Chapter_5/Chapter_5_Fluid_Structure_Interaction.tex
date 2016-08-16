@@ -1,0 +1,23 @@
+\section{Fluid-Structure Interaction}
+% ============================= 
+Considering fluid–structure interactions are vital in the design of numerous engineering systems such as aircraft and turbine blades especially in designs where fatigue is the dominant mode of failure. Neglecting the effects of oscillatory loads caused by fluid-structure interaction can yield to the catastrophic failure of designed systems. Tacoma Narrows Bridge (1940), is probably one of the most infamous examples of large-scale failure.
+
+Computer simulations are often used to calculate the response of a system for a multiphysics and often nonlinear fluid-structure problem. There are two main approaches available for developing simulation tools for these coupled FSI problems \cite{michler2004monolithic}: 1) Partitioned approach and 2) Monolithic approach.
+
+In a \textbf{partitioned} scheme, the fluid and the structure equations are alternatingly integrated in
+time and the interface conditions are enforced. Typically, partitioned methods are based on the following sequential process:
+
+\begin{enumerate}
+	\item Transfer the location and velocity of the structure to the fluid domain.
+	\item Update the fluid mesh
+	\item Solve fluid's governing equation and calculate new pressure field
+	\item Apply pressure load on the structure
+	\item Advance the structural system in time under the fluid-induced load
+\end{enumerate}
+
+This sequential process allows for software modularity. Partitioned schemes require only one fluid
+and structure solution per time step, which can be considered as a single fluid–structure iteration.
+
+In the \textbf{monolithic} approach, the equations governing the flow and the displacement of the structure are solved simultaneously, with a single solver. The monolithic approach requires a code developed for this particular combination of physical problems whereas the partitioned approach preserves software modularity because an existing flow solver and structural solver are coupled. Moreover, the partitioned approach facilitates solution of the flow equations and the structural equations with different, possibly more efficient techniques which have been developed specifically for either flow equations or structural equations. In this work we are following the partitioned approach to the FSI problem. In this chapter we will couple the IB solver developed in Chapter \ref{ch:immersedBoundary} for solving the NS equations with an external finite element code to solve the multiphysics problem.
+
+The FSI solution procedure is also classified in terms of the level of coupling between the two disciplines \cite{hu2001direct}. In the 1-way or weak coupling, the pressure loads are transferred on the structure, causing the solid domain to deform. However, the structural domain does not affect the fluid's mesh and the solid domain deformations are not mapped back to the fluid domain. In this approach each discipline is solved single time to calculate the response. On the other hand, in the 2-way or strong coupling the solution of the coupled system is done in an iterative manner. The solution procedure starts with solving the fluid's governing equations. The pressure distribution at the fluid-structure boundary is then mapped to the solid domain to calculate the displacement of the structure. The deformation of the structure results in updating the fluid mesh. This is done until the solution is converged or the process is stopped manually. By using the IB method, mesh modification step of the strong coupling is removed in this work. As described in Chapter \ref{ch:immersedBoundary}, by removing the mesh deformation step, we get a more robust simulation and decrease the computational expense of the coupled multiphysics analysis at the same time.
