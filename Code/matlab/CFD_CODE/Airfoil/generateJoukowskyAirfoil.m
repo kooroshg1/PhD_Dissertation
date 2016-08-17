@@ -20,7 +20,7 @@ xNew = x0 + dx0;
 x0 = x0 + dx0;
 
 % y0 = 0.3 + 0.0001; % Defines camber. Positive values for up camber [0 1]
-y0 = 0.3 + 0.0010; % Defines camber. Positive values for up camber [0 1]
+y0 = 0.1 + 0.00000; % Defines camber. Positive values for up camber [0 1]
 dy0 = 0.000; % Perturbation in camber
 yNew = y0 + dy0;
 % y0 = y0 - dy0;

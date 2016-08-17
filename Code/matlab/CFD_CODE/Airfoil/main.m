@@ -14,8 +14,8 @@ xStart = -1.0;
 xEnd = 3.0;
 yStart = -0.5;
 yEnd = 0.5;
-nx = 400;      % number of x-gridpoints
-ny = 100;      % number of y-gridpoints
+nx = 402;      % number of x-gridpoints
+ny = 101;      % number of y-gridpoints
 nsteps = 10;   % number of steps with graphic output
 %-----------------------------------------------------------------------
 nt = ceil(tf/dt); dt = tf/nt;

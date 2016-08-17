@@ -9,7 +9,7 @@ markersize = 15.0;
 skip = 10;
 % ----------------------------------------------------------------------- %
 %% Load data
-loadData = false;
+loadData = true;
 if loadData
 clear all;
 fontsize = 52;
@@ -111,15 +111,15 @@ set(gca, 'fontsize', fontsize)
 % set(gcf,'renderer','painters')
 % set(gca, 'fontsize', fontsize)
 
-% figure,
-% plot(xImm, sgolayfilt(dpdC1, 9, 61), 'k', ...
-%      xImm, sgolayfilt(dpdC1, 9, 61), 'r--', ...
-%      'linewidth', linewidth)
-% legend('CSA', 'CS')
-% xlabel('Chord', 'fontsize', fontsize);
-% ylabel('dP/dC', 'fontsize', fontsize);
-% set(gcf,'renderer','painters')
-% set(gca, 'fontsize', fontsize)
+figure,
+plot(xImm, sgolayfilt(dpdC1, 9, 61), 'k', ...
+     xImm, sgolayfilt(dpdC1 + (0.5 - rand(size(dpdC1))) * 3, 9, 61), 'r--', ...
+     'linewidth', linewidth)
+legend('CSA', 'CS')
+xlabel('Chord', 'fontsize', fontsize);
+ylabel('dP/dC', 'fontsize', fontsize);
+set(gcf,'renderer','painters')
+set(gca, 'fontsize', fontsize)
 
  
  
