@@ -437,4 +437,21 @@ Kamaraju, V. and Narasimham, R., {\em Linear Systems: Analysis And
   Applications, Second Edition\/}, I.K. International Publishing House Pvt.
   Limited, 2009.
 
+\bibitem{michler2004monolithic}
+Michler, C., Hulshoff, S., Van~Brummelen, E., and De~Borst, R., \enquote{A
+  monolithic approach to fluid--structure interaction,} {\em Computers \&
+  fluids\/}, Vol.~33, No.~5, 2004, pp.~839--848.
+
+\bibitem{hu2001direct}
+Hu, H.~H., Patankar, N.~A., and Zhu, M., \enquote{Direct numerical simulations
+  of fluid--solid systems using the arbitrary Lagrangian--Eulerian technique,}
+  {\em Journal of Computational Physics\/}, Vol.~169, No.~2, 2001,
+  pp.~427--462.
+
+\bibitem{van2007comparison}
+Van~Loon, R., Anderson, P., Van~de Vosse, F., and Sherwin, S.,
+  \enquote{Comparison of various fluid--structure interaction methods for
+  deformable bodies,} {\em Computers \& structures\/}, Vol.~85, No.~11, 2007,
+  pp.~833--843.
+
 \end{thebibliography}

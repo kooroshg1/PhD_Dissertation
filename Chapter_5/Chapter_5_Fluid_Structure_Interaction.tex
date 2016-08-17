@@ -4,7 +4,7 @@ Considering fluidâ€“structure interactions are vital in the design of numerous e
 
 Computer simulations are often used to calculate the response of a system for a multiphysics and often nonlinear fluid-structure problem. There are two main approaches available for developing simulation tools for these coupled FSI problems \cite{michler2004monolithic}: 1) Partitioned approach and 2) Monolithic approach.
 
-In a \textbf{partitioned} scheme, the fluid and the structure equations are alternatingly integrated in
+In a \textbf{partitioned} scheme, the fluid and the structure equations are alternatively integrated in
 time and the interface conditions are enforced. Typically, partitioned methods are based on the following sequential process:
 
 \begin{enumerate}
@@ -21,3 +21,81 @@ and structure solution per time step, which can be considered as a single fluidâ
 In the \textbf{monolithic} approach, the equations governing the flow and the displacement of the structure are solved simultaneously, with a single solver. The monolithic approach requires a code developed for this particular combination of physical problems whereas the partitioned approach preserves software modularity because an existing flow solver and structural solver are coupled. Moreover, the partitioned approach facilitates solution of the flow equations and the structural equations with different, possibly more efficient techniques which have been developed specifically for either flow equations or structural equations. In this work we are following the partitioned approach to the FSI problem. In this chapter we will couple the IB solver developed in Chapter \ref{ch:immersedBoundary} for solving the NS equations with an external finite element code to solve the multiphysics problem.
 
 The FSI solution procedure is also classified in terms of the level of coupling between the two disciplines \cite{hu2001direct}. In the 1-way or weak coupling, the pressure loads are transferred on the structure, causing the solid domain to deform. However, the structural domain does not affect the fluid's mesh and the solid domain deformations are not mapped back to the fluid domain. In this approach each discipline is solved single time to calculate the response. On the other hand, in the 2-way or strong coupling the solution of the coupled system is done in an iterative manner. The solution procedure starts with solving the fluid's governing equations. The pressure distribution at the fluid-structure boundary is then mapped to the solid domain to calculate the displacement of the structure. The deformation of the structure results in updating the fluid mesh. This is done until the solution is converged or the process is stopped manually. By using the IB method, mesh modification step of the strong coupling is removed in this work. As described in Chapter \ref{ch:immersedBoundary}, by removing the mesh deformation step, we get a more robust simulation and decrease the computational expense of the coupled multiphysics analysis at the same time.
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Governing Equations}
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+The coupled motion of the fluid and solid domains is governed by a set of governing equations. The Navier-Stokes and continuity equations govern the fluids motion as shown in Equation \eqref{eq:C5_fluidGE} and the solid deformation is governed by a set of elastic equations as shown in Equation \eqref{eq:C5_solidGE}.
+%
+\begin{subequations}\label{eq:C5_fluidGE}
+\begin{align}
+	\rho^f \frac{\partial \mathbf{u}^f}{\partial t} + 
+	\rho^f \mathbf{u}^f \cdot \nabla \mathbf{u}^f = 
+	\nabla \cdot \mathbf{\sigma}^f +
+	\rho^f \mathbf{f}^f
+	\quad \quad &\text{: Conservation of momentum}
+	\\
+	\nabla \cdot \mathbf{u}^f = 0
+	\quad \quad &\text{: Conservation of mass}
+	\\
+	\mathbf{\sigma}^f = 
+	\mu \left[ \nabla \mathbf{u}^f + \left( \nabla \mathbf{u}^f \right)^T \right] - 
+	p^f \mathbf{I}
+	\quad \quad &\text{: Stress formula}
+\end{align}
+\end{subequations}
+%
+\begin{subequations}\label{eq:C5_solidGE}
+\begin{align}
+	\rho^s \dot{\mathbf{u}}^s = 
+	\nabla \cdot \sigma^s + \mathbf{f}^s
+	\quad \quad &\text{: Equation of motion}
+	\\
+	\mathbf{\epsilon^s} = \frac{1}{2}
+	                                 \left[ \nabla \mathbf{d}^s + \left( \nabla \mathbf{d}^s \right)^T \right]
+	\quad \quad &\text{: Strain-displacement equation}
+	\\
+	\mathbf{\sigma}^s = \mathbf{C} : \mathbf{\epsilon}^s
+	\quad \quad &\text{: Constitutive equation}
+\end{align}
+\end{subequations}
+%
+In the above equations, superscript \lq\emph{f}\rq\ and \lq\emph{s}\rq\ correspond to the fluid and solid properties respectively. In Equation \eqref{eq:C5_fluidGE} $\rho^f$, $\mathbf{u}^f$, $p^f$, and $\mathbf{f}^f$ correspond to the fluid density, velocity, pressure, and body forces respectively. It should be noted that the immersed boundary forces are applied through the body force term $\mathbf{f}^f$. In Equation \eqref{eq:C5_solidGE} $\rho^s$, $\mathbf{u}^s$, $\mathbf{f}^s$, $\mathbf{d}^s$, and $C$ correspond to the solid density, velocity, body force, displacement, and stiffness tensor. We chose $d$ to represent the displacement so that it won't be confused with the velocity term $u$. This is required when we are defining the IB conditions over the boundary. It should be noted that $\mathbf{C} : \mathbf{\epsilon}^s$ defined the inner product of two second order tensors and is equation to $\mathbf{C}_{ij} \mathbf{\epsilon}_{ij}^s$.
+
+In order to couple the fluid and solid equations of \eqref{eq:C5_fluidGE} and \eqref{eq:C5_solidGE}, we are imposing a set of kinematic and dynamic constraints \cite{van2007comparison} at the intersection of the two mediums as defined in Equation \eqref{eq:C5_FSIconstraints}.
+%
+\begin{subequations}\label{eq:C5_FSIconstraints}
+\begin{align}
+	\mathbf{u}^s - \mathbf{u}^f = 0
+	\quad \quad &\text{: Kinematic constraint}
+	\\
+	\mathbf{\sigma}^s \cdot \mathbf{n} - \mathbf{\sigma}^f \cdot \mathbf{n} = 0
+	\quad \quad &\text{: Dynamic constraint}
+\end{align}
+\end{subequations}
+%
+The kinematic constraint will result in zero relative velocity between the fluid and solid domains whereas the dynamic constraint will result in the transfer of loads between the two physical mediums.
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+\subsection{Multidisciplinary Coupling}
+% -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+In Chapter \ref{ch:immersedBoundary}, we utilized the Regularized Delta (RD) function to transfer the velocity information from the Eulerian nodes to the Lagrangian nodes to calculate the force terms needed for the IB method. Same idea is used here to calculated the pressure loads acting on the solid domain. As shown in Figure \ref{fig:C5_pressureMapping}, by solving the NS equations, the magnitude of the pressure field at each fluid (Eulerian) node ($x_i$) is known. To map this pressure information from the Eulerian nodes, $x_i$, to the Lagrangian node, $X$, we convolute the pressure field calculated from the CFD simulation with RD function of Equation \eqref{eq:C5_pressureDeltaFunction}.  By this approach we have calculated the pressure load on the structure. This is shown in Equation \eqref{eq:C5_surfacePressureCalculation}
+%
+\begin{subequations}
+\begin{align}
+    \mathcal{D}(x, X) &=
+    \dfrac{-\tanh^{2}{\left (\dfrac{x - X}{\eta} \right )} + 1}{2 \eta}
+    \label{eq:C5_pressureDeltaFunction}
+    \\
+    p(X, Y) &= \int \int p(x,y) \mathcal{D}(x, X) \mathcal{D}(y, Y) dx dy
+    \label{eq:C5_surfacePressureCalculation}
+\end{align}
+\end{subequations}
+%
+By applying this pressure distribution on the solid domain and solving the equation of motion, we can calculate the displacement and the resulting velocity of the solid structure. The structure new location is used to update the RD function used for data transfer between the Eulerian and Lagrangian nodes. The cost of updating the RD functions for IB method is minuscule compared to the effort required to update the mesh in body conformal discretization approaches. The velocity of the solid domain is used for calculating the force terms required by the IB method as shown in Equation \eqref{eq:C5_immersedBoundaryForceTerm}.
+%
+\begin{equation}\label{eq:C5_immersedBoundaryForceTerm}
+    \mathbf{f}(\mathbf{X}, t) = 
+    \alpha \int_0^t \left[ \mathbf{u}(\mathbf{X}, \tau) - \mathbf{V}(\mathbf{X}, \tau) \right] d\tau + 
+    \beta \left[ \mathbf{u}(\mathbf{X}, \tau) - \mathbf{V}(\mathbf{X}, \tau) \right]
+\end{equation}
+%
+As described in Chapter \ref{ch:shapeSenwithIB}, $\mathbf{u}(\mathbf{X}, \tau)$, is the velocity of fluid calculated at the Lagrangian point $\mathbf{X}$ at time $\tau$, and $\mathbf{V}(\mathbf{X}, \tau)$ is the velocity of the solid structure at the same location and time. The later is calculated after solving the structure's equation of motion. This loop is continued until the convergence is meet or the process stoped manually. The flowchart for the fluid solid interaction using the IB method is shown in Figure \ref{fig:C5_FSIflowchart}.
