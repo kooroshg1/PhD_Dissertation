@@ -1,6 +1,11 @@
-\chapter{Shape Sensitivity Analysis for a Coupled FSI Problem}
+\chapter{Shape Sensitivity Analysis for Coupled Fluid-Structure Interaction Problems}\label{ch:FSIsen}
+Fluid-Structure interaction (FSI) is a multiphysics coupling of the physical laws that govern fluid mechanics and structural dynamics. When the fluid flows over or inside a structure, it causes stresses on the solid object. These stresses can cause large or small deformations in the structure with leads to change in its shape. Depending on the magnitude of the stress, these deformations can be small or large. The effect of small deformations of the solid can be neglected since they do not affect the fluid flow. However, if the deformations are large, the pressure and velocity field of the fluid will change as a result.
+
+In this chapter we start with survey of different coupling and solution methods available for solving a coupled FSI problem. To handle the mesh deformation short coming of large structural deformations, we will propose the IB method for handling these multiphysics simulations. We will build on the work of Chapter \ref{ch:shapeSenwithIB} to develope shape sensitivity analysis for a coupled FSI system. The shape sensitivity analysis developed here is demonstrated on various coupled systems. Throughout this chapter we consider the flow of \emph{incompressible laminar Newtonian fluid} governed by Navier-Stokes (NS) equations interacting with an \emph{elastic structure}. 
 
 % ======================================================================================
+\input{Chapter_5/Chapter_5_Fluid_Structure_Interaction.tex}
+\input{Chapter_5/Chapter_5_Shape_Sensitivity_Analysis.tex}
 \section{Problem definition}
 \subsection{Governing Equations}
 \subsection{FSI Coupling}
