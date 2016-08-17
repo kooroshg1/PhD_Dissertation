@@ -77,7 +77,16 @@ The kinematic constraint will result in zero relative velocity between the fluid
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Multidisciplinary Coupling}
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-In Chapter \ref{ch:immersedBoundary}, we utilized the Regularized Delta (RD) function to transfer the velocity information from the Eulerian nodes to the Lagrangian nodes to calculate the force terms needed for the IB method. Same idea is used here to calculated the pressure loads acting on the solid domain. As shown in Figure \ref{fig:C5_pressureMapping}, by solving the NS equations, the magnitude of the pressure field at each fluid (Eulerian) node ($x_i$) is known. To map this pressure information from the Eulerian nodes, $x_i$, to the Lagrangian node, $X$, we convolute the pressure field calculated from the CFD simulation with RD function of Equation \eqref{eq:C5_pressureDeltaFunction}.  By this approach we have calculated the pressure load on the structure. This is shown in Equation \eqref{eq:C5_surfacePressureCalculation}
+In Chapter \ref{ch:immersedBoundary}, we utilized the Regularized Delta (RD) function to transfer the velocity information from the Eulerian nodes to the Lagrangian nodes to calculate the force terms needed for the IB method. Same idea is used here to calculated the pressure loads acting on the solid domain. As shown in Figure \ref{fig:C5_pressureMapping}, by solving the NS equations, the magnitude of the pressure field at each fluid (Eulerian) node ($x_i$) is known.
+%
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=7.00cm]{Chapter_5/figure/Chapter5_pressureMapping.jpg}
+    \caption{Eulerian ($\bigcirc$) and Lagrangian ($\square$) nodes for pressure values near and on the immersed boundary.}
+    \label{fig:C5_pressureMapping}
+\end{figure}
+%
+To map this pressure information from the Eulerian nodes, $x_i$, to the Lagrangian node, $X$, we convolute the pressure field calculated from the CFD simulation with RD function of Equation \eqref{eq:C5_pressureDeltaFunction}.  By this approach we have calculated the pressure load on the structure. This is shown in Equation \eqref{eq:C5_surfacePressureCalculation}
 %
 \begin{subequations}
 \begin{align}
@@ -99,3 +108,11 @@ By applying this pressure distribution on the solid domain and solving the equat
 \end{equation}
 %
 As described in Chapter \ref{ch:shapeSenwithIB}, $\mathbf{u}(\mathbf{X}, \tau)$, is the velocity of fluid calculated at the Lagrangian point $\mathbf{X}$ at time $\tau$, and $\mathbf{V}(\mathbf{X}, \tau)$ is the velocity of the solid structure at the same location and time. The later is calculated after solving the structure's equation of motion. This loop is continued until the convergence is meet or the process stoped manually. The flowchart for the fluid solid interaction using the IB method is shown in Figure \ref{fig:C5_FSIflowchart}.
+%
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=7.00cm]{Chapter_5/figure/Chapter5_FSI_FlowChart.jpg}
+    \caption{Fluid-solid interaction analysis using IB method flow chart.}
+    \label{fig:C5_FSIflowchart}
+\end{figure}
+%
