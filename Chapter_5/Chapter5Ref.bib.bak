@@ -8,15 +8,6 @@
   year={2001}
 }
 
-
-@techreport{jendrzejczyk1985fluid,
-  title={Fluid forces on two circular cylinders in crossflow},
-  author={Jendrzejczyk, JA and Chen, SS},
-  year={1985},
-  institution={Argonne National Lab.}
-}
-
-
 @book{chen1987flow,
   title={Flow-induced vibration of circular cylindrical structures},
   author={Chen, Shoei-Sheng},
@@ -174,4 +165,9 @@
   publisher={Springer}
 }
 
-
+@techreport{jendrzejczyk1985fluid,
+  title={Fluid forces on two circular cylinders in crossflow},
+  author={Jendrzejczyk, JA and Chen, SS},
+  year={1985},
+  institution={Argonne National Lab.}
+}
