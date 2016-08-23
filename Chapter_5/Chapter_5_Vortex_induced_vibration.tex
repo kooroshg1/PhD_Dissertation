@@ -1,5 +1,3 @@
-\section{Demonstration Problems}
-% ============================= 
 \subsection{Vortex induced vibration}
 Vortex induced vibrations (VIV) are motions of solid structures immersed in fluid that is caused by the irregularities in the flow. VIV of structures is of practical interest to many fields of engineering. For example, it can cause vibration and noise in heat exchanger tubes and aircraft wing. The practical significance of VIV has led to various studies that are discussed in the literature\cite{williamson2004vortex}. In this demonstration problem, we are interested in the forced oscillations of an elastically mounted rigid cylinder for different values of the Reynolds number. The physical problem is shown in Figure \ref{fig:C5_cylinderShape}.
 %
@@ -132,6 +130,43 @@ For this problem the stiffness of the elastic structure, $k$, is selected as 1 N
     \label{fig:C5_cylinderDisplacement}
 \end{figure}
 %
+Figure \ref{fig:C5_cylinderFSIvelocity} shows the u-velocity contour around the elastically mounted cylinder at different times. As can be seen, the vortex shedding is dominant at $t=5$. It should be noted that the vortex shedding starts before $t=5$ and causes the cylinder to oscillate.
+%
+\begin{figure}[H]
+    \centering
+    \subfigure[$Re = 100, t = 0 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_analysis_Re100_t0.png}
+    }
+    \quad
+    \subfigure[$Re = 500, t = 0 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_analysis_Re500_t0.png}
+    }
+    \\
+    \subfigure[$Re = 100, t = 0.5 \text{ ec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_analysis_Re100_t05.png}
+    }
+    \quad
+    \subfigure[$Re = 500, t = 0.5 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_analysis_Re500_t05.png}
+    }
+    \\
+    \subfigure[$Re = 100, t = 5 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_analysis_Re100_t5.png}
+    }
+    \quad
+    \subfigure[$Re = 500, t = 5 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_analysis_Re500_t5.png}
+    }
+    \caption{Unsteady u-velocity contours for flow around cylinder at $Re = 100$ and $Re = 500$.}
+    \label{fig:C5_cylinderFSIvelocity}
+\end{figure}
+%
 The time history of the sensitivity results are shown and verified with the complex step solution in Figure \ref{fig:C5_cylinderDisplacementSensitivity}. As shown here, As the initial time the sensitivity of displacement with respect to radius is zero since the cylinder is not moving. However, the value of cylinder displacement will start oscillating between positive and negative numbers as the simulation continuous. This is what we are expecting since by increasing the radius, the loads on the cylinder will increase. This will result in increase in the amplitude in both ends of the oscillation period.
 %
 \begin{figure}[H]
@@ -147,5 +182,42 @@ The time history of the sensitivity results are shown and verified with the comp
     }
     \caption{Time history of cylinder center displacement sensitivity.}
     \label{fig:C5_cylinderDisplacementSensitivity}
+\end{figure}
+%
+Figure \ref{fig:C5_cylinderFSIvelocitySensitivity} shows the u-velocity sensitivity contour around the elastically mounted cylinder at different times. As shown in the sensitivity contours, the change in the cylinder radius mainly affects the downstream flow. This is expected for a convective flow where the information from cylinder cannot move upstream. The small region with negative sensitivity near the surface is due to the reduction of velocity due to boundary layer expansion as the radius increases and has physical meaning.
+%
+\begin{figure}[H]
+    \centering
+    \subfigure[$Re = 100, t = 0 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_sensitivity_Re100_t0.png}
+    }
+    \quad
+    \subfigure[$Re = 500, t = 0 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_sensitivity_Re500_t0.png}
+    }
+    \\
+    \subfigure[$Re = 100, t = 0.5 \text{ ec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_sensitivity_Re100_t05.png}
+    }
+    \quad
+    \subfigure[$Re = 500, t = 0.5 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_sensitivity_Re500_t05.png}
+    }
+    \\
+    \subfigure[$Re = 100, t = 5 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_sensitivity_Re100_t5.png}
+    }
+    \quad
+    \subfigure[$Re = 500, t = 5 \text{ sec}$]
+    {
+    \includegraphics[width=6.0cm]{Chapter_5/figure/cylinder_sensitivity_Re500_t5.png}
+    }
+    \caption{Unsteady u-velocity contours for flow around cylinder at $Re = 100$ and $Re = 500$.}
+    \label{fig:C5_cylinderFSIvelocitySensitivity}
 \end{figure}
 %

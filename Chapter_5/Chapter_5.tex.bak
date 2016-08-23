@@ -6,4 +6,6 @@ In this chapter, we start with a survey of different coupling and solution metho
 % ======================================================================================
 \input{Chapter_5/Chapter_5_Fluid_Structure_Interaction.tex}
 \input{Chapter_5/Chapter_5_Shape_Sensitivity_Analysis.tex}
-\input{Chapter_5/Chapter_5_Demonstration_Problems.tex}
+\section{Demonstration Problems}
+\input{Chapter_5/Chapter_5_Vortex_induced_vibration.tex}
+\input{Chapter_5/Chapter_5_Pitch_and_plunge_airfoil_motion.tex}
