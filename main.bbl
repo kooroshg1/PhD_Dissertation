@@ -1,9 +1,5 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{100}
 \newcommand{\enquote}[1]{``#1''}
-
-\bibitem{jendrzejczyk1985fluid}
-Jendrzejczyk, J. and Chen, S., \enquote{Fluid forces on two circular cylinders
-  in crossflow,} Tech. rep., Argonne National Lab., 1985.
 
 \bibitem{sridhar2011aircraft}
 Sridhar, B., Ng, H., and Chen, N., \enquote{Aircraft trajectory optimization
@@ -466,6 +462,10 @@ Williamson, C. and Govardhan, R., \enquote{Vortex-induced vibrations,} {\em
 Chen, S.-S., {\em Flow-induced vibration of circular cylindrical structures\/},
   Vol. 414, Hemisphere publishing corporation Washington, DC, 1987.
 
+\bibitem{jendrzejczyk1985fluid}
+Jendrzejczyk, J. and Chen, S., \enquote{Fluid forces on two circular cylinders
+  in crossflow,} Tech. rep., Argonne National Lab., 1985.
+
 \bibitem{mittal2001control}
 Mittal, S. and Raghuvanshi, A., \enquote{Control of vortex shedding behind
   circular cylinder for flows at low Reynolds numbers,} {\em International
@@ -498,5 +498,25 @@ Lian, Y., Ol, M.~V., and Shyy, W., \enquote{Comparative study of pitch-plunge
 Webb, C., Dong, H., and Ol, M., \enquote{Effects of unequal pitch and plunge
   airfoil motion frequency on aerodynamic response,} {\em 46th AIAA Aerospace
   Sciences Meeting and Exhibit\/}, 2008, pp. 7--10.
+
+\bibitem{luersen2006computationally}
+Luersen, M., Le~Riche, R., Lemosse, D., and Le~Ma{\^\i}tre, O., \enquote{A
+  computationally efficient approach to swimming monofin optimization,} {\em
+  Structural and Multidisciplinary Optimization\/}, Vol.~31, No.~6, 2006,
+  pp.~488--496.
+
+\bibitem{allen2001energy}
+Allen, J. and Smits, A., \enquote{Energy harvesting eel,} {\em Journal of
+  fluids and structures\/}, Vol.~15, No.~3, 2001, pp.~629--640.
+
+\bibitem{shen2003turbulent}
+Shen, L., Zhang, X., Yue, D.~K., and Triantafyllou, M.~S., \enquote{Turbulent
+  flow over a flexible wall undergoing a streamwise travelling wave motion,}
+  {\em Journal of Fluid Mechanics\/}, Vol.~484, 2003, pp.~197--221.
+
+\bibitem{kim2007penalty}
+Kim, Y. and Peskin, C.~S., \enquote{Penalty immersed boundary method for an
+  elastic boundary with mass,} {\em Physics of Fluids (1994-present)\/},
+  Vol.~19, No.~5, 2007, pp.~053103.
 
 \end{thebibliography}
