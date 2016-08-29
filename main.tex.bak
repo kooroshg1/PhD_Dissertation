@@ -1,0 +1,49 @@
+\documentclass[12pt]{report}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={blue!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage{geometry}
+	\geometry{
+	a4paper,
+	total={170mm,257mm},
+	%left=20mm,
+	left=38.1mm,
+    right = 25.4mm,
+	top=20mm,
+	}
+\usepackage{graphicx, float, subfigure} % For figures
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{amssymb,amsmath} % For math
+\usepackage{setspace}
+\doublespacing
+\usepackage{lipsum}
+
+% ===============================================
+\title{Shape Sensitivity Analysis for Coupled Fluid-Solid Interaction Problems}
+\author{Koorosh Gobal}
+\date{\today}
+%\date{February 11, 2016}
+% ===============================================
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+\input{Abstract/Abstract.tex}
+\input{Chapter_1/Chapter_1.tex}
+\input{Chapter_2/Chapter_2.tex}
+\input{Chapter_3/Chapter_3.tex}
+\input{Chapter_4/Chapter_4.tex}
+\input{Chapter_5/Chapter_5.tex}
+\input{Chapter_6/Chapter_6.tex}
+
+%\input{Chapter_7/Chapter_7.tex}
+\bibliographystyle{aiaa}
+\bibliography{Chapter_1/Chapter1Ref,Chapter_2/Chapter2Ref,Chapter_3/Chapter3Ref,Chapter_4/Chapter4Ref,Chapter_5/Chapter5Ref},
+\end{document}
