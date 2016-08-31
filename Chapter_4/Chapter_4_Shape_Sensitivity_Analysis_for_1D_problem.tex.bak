@@ -1,7 +1,7 @@
 \section{Shape Sensitivity Analysis for 1D problem}
 % ================================================
 For the first benchmark case, we looked at the flow between two plates that was defined in Section \ref{sec:C3_benchmark_case}. The governing equation and boundary conditions for this problem is shown in Equation \eqref{eq:C4_1DbenchmarkProblem}. The boundary condition is defined as $u = U$ at $y = L$.
-
+%
 \begin{subequations}\label{eq:C4_1DbenchmarkProblem}
 \begin{equation}\label{eq:C4_1DbenchmarkGoverningEquation}
     u_t = \mu u_{yy} \quad \text{in } \Omega_f
@@ -13,15 +13,15 @@ For the first benchmark case, we looked at the flow between two plates that was 
 \end{cases}
 \end{equation}
 \end{subequations}
-
-The analytical result for the steady-state velocity profile between the two plates is defined in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSolution}.
-
+%
+The analytical result for the steady-state velocity profile between the two plates is:
+%
 \begin{equation}\label{eq:C4_1DbenchmarkAnalyticalSolution}
     u = U\frac{L - x}{L}
 \end{equation}
-
+%
 This enables us to treat the moving wall velocity ($U$) and the distance between the two plates ($L$) as design variables. The sensitivity of the steady-state velocity profile between the two plates to these design variables is calculated using CSA. The results of the CSA are verified with the analytical sensitivity results in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSensitivityResults}.
-
+%
 \begin{subequations}\label{eq:C4_1DbenchmarkAnalyticalSensitivityResults}
 \begin{equation}\label{eq:C4_1DbenchmarkAnalyticalSAlength}
     \frac{\partial u}{\partial L} = \frac{Ux}{L^2}
@@ -30,22 +30,22 @@ This enables us to treat the moving wall velocity ($U$) and the distance between
     \frac{\partial u}{\partial U} = \frac{L - x}{L}
 \end{equation}
 \end{subequations}
+%
+For this benchmark problem, the flow is modeled using two different immersed boundary techniques introduced at the beginning of this chapter: penalization method and the virtual boundary method. The difference between the flow analysis from Chapter \ref{ch:immersedBoundary} is the use of RH and RD functions instead of discontinuous step and delta functions. Therefore, first the effects of these modifications are investigated.
 
-For this benchmark problem, the flow is modeled using two different immersed boundary techniques introduced at the beginning of this chapter; penalization method and the virtual boundary method. The difference between the flow analysis from Chapter \ref{ch:immersedBoundary} is the use of RH and RD functions instead of discontinuous step and delta functions. Therefore, first the effects of these modifications are investigated.
-
-For the flow simulation using the penalization method of Equation \eqref{eq:C4_NSwithPenalization}, we investigated the effect of number of nodes and the moving wall velocity of the solution. To have a stable solution, the flow analysis time step cannot be larger that $2 / \kappa$ where $\kappa$ is the porosity value that is selected to model the solid domain. For this analysis, the $\eta$ value of the RH function is selected based on the criteria that 99 percent change of the RH function occurs within two mesh cells. The result for the simulation based on RH function is compared with the step function solution in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}.
-
+For the flow simulation using the penalization method of Equation \eqref{eq:C4_NSwithPenalization}, I investigated the effect of number of nodes and the moving wall velocity of the solution. To have a stable solution, the flow analysis time step cannot be larger that $2 / \kappa$ where $\kappa$ is the porosity value that is selected to model the solid domain. For this analysis, the $\eta$ value of the RH function is selected based on the criteria that 99 percent change of the RH function occurs within two mesh cells. The result for the simulation based on RH function is compared with the step function solution in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}.
+%
 \begin{figure}[H]
     \centering
     \includegraphics[width=12.00cm]{Chapter_4/figure/effect_of_RH_on_simulation_vs_numberOfNodes_1D_problem.eps}
     \caption{Effect of Regularized Heaviside (RH) and step functions on the solution accuracy.}
     \label{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}
 \end{figure}
-
+%
 As shown in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem}, the results of the RH function are more accurate compared to the step function. The effect of wall velocity on the accuracy from the simulation was also investigated. The wall velocity was selected as $1 m/s$, $10 m/s$, $100 m/s$, and $1000 m/s$. However, this did not affect the simulation accuracy.
 
-The sensitivity equations for the penalization technique are derived by differentiating the governing equation as shown in Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}. However, for this problem, the convective terms and pressure gradient drop out from the derivation, resulting in the sensitivity equation as shown in Equation \eqref{eq:C4_SAforPenlizationMethod1D}.
-
+The sensitivity equations for the penalization technique are derived by differentiating the governing equation as shown in Equation \eqref{eq:C4_NSwithPenalizationIBsensitivity}. However, for this problem, the convective terms and pressure gradient drop out, from the derivation, resulting in the sensitivity equation
+%
 \begin{equation}\label{eq:C4_SAforPenlizationMethod1D}
     \frac{\partial u'}{\partial t} = 
     \mu \frac{\partial^2 u'}{\partial x^2} +
@@ -54,18 +54,18 @@ The sensitivity equations for the penalization technique are derived by differen
     \mathcal{H}(X) u'
     \right]
 \end{equation}
-
+%
 Where $X$ is $x - x_w$ and $x_w$ is the solid wall location . $u$ is the flow velocity, $\mu$ is the viscosity, $\kappa$ is the porosity, and $\mathcal{H}$ is the RH function. $b$ corresponds to a generic design variable and $u'$ is the flow field sensitivity to the design variable, $b$. The boundary conditions are derived by differentiating Equation \eqref{eq:C4_1DbenchmarkBoundaryCondition}; this is shown in Equation \eqref{eq:C4_SAboundaryConditionforPenlizationMethod1D}. Both boundary conditions are zero because their location does not change by changing the design variable.
-
+%
 \begin{equation}\label{eq:C4_SAboundaryConditionforPenlizationMethod1D}
 \begin{cases}
     u' = 0 \qquad \text{at } x = 0 \\
     u' = 0 \quad \text{at } x = 1
 \end{cases}
 \end{equation}
-
-For this problem, $\kappa$ is selected as $2 \time 10^4$ based on the convergence studies for the governing equations, and the sensitivity of the velocity profile with respect to the distance between two plates is verified with Equation \eqref{eq:C4_1DbenchmarkAnalyticalSAlength}. The $\eta$ parameter for the RH function is selected in such a way that 95 percent of change in RH function occurs within two nodes from the solid boundary. This ensures the stability of the method. The wall initial locations are selected as $x_{wall} = 0.4321$ and $x_{wall} = 0.7583$. Neither of these locations coincide with the computational nodes in the domain. The effect of the number of nodes on the accuracy of the solution of the governing equations and the sensitivity results are shown in Figure \ref{fig:C4_effectOfNumberOfNodesOnSensitivityResults1Dproblem}.
-
+%
+For this problem, $\kappa$ is selected as $2 \time 10^4$ based on the convergence studies for the governing equations, and the sensitivity of the velocity profile with respect to the distance between two plates is verified with Equation \eqref{eq:C4_1DbenchmarkAnalyticalSAlength}. The $\eta$ parameter for the RH function is selected in such a way that 95 percent of change in RH function occurs within two nodes from the solid boundary. This ensures the stability of the method. The wall initial locations are selected as $x_{wall} = 0.4321$ and $x_{wall} = 0.7583$. Neither of these locations coincide with the computational nodes in the domain. The effect of the number of nodes on the accuracy of the solution of the governing equations. Sensitivity results are shown in Figure \ref{fig:C4_effectOfNumberOfNodesOnSensitivityResults1Dproblem}.
+%
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.4321$]
@@ -80,36 +80,36 @@ For this problem, $\kappa$ is selected as $2 \time 10^4$ based on the convergenc
     \caption{RSME value for the sensitivity analysis (SA) and governing equation (GE). The thick lines represent the actual values for the RSME error and the thin lines represent the least-square approximation of the best fit.}
     \label{fig:C4_effectOfNumberOfNodesOnSensitivityResults1Dproblem}
 \end{figure}
-
+%
 The thin lines in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dproblem} represent the curve fit using function $y = ae^{bx}$ through the RSME values. The slope of this line is $-1.75$ for both of these analyses. This means that the convergence rate is the same for governing equations and sensitivity analysis in this problem. The error source between the analytical and the CSA is better investigated by looking at the comparison between the sensitivity of the velocity profile to the distance between the plates as shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}.
-
+%
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.4321, n = 120$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw04321.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw04321.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.7583, n = 120$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw07583.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw07583.eps}
     }
     \\
     \subfigure[$x_{wall} = 0.2451, n = 30$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw02451.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw02451.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.5742, n = 60$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw05742.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_xw05742.eps}
     }
     \caption{Comparison between the velocity sensitivity profile of CSA and analytical results in the domain. $w_{wall}$ is the location of the stationary wall and $n$ is the number of nodes used to discretize the domain.}
     \label{fig:C4_sensitivityResults1Dproblem}
 \end{figure}
-
+%
 As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA results starts to decay near the boundary. It should be noted that this domain corresponds to the region that we chose the RH function value to have its 99 percent change. Therefore, the size of this region is known prior to the analysis. As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, decay of accuracy near the walls did not affect the sensitivity results in regions further away from the boundary. This means that the sensitivities near the boundary can be reconstructed by post-processing the sensitivity data. This is done by using function approximation techniques such as linear extrapolation or TANA \cite{wang1995improved}. The reconstructed results of Figure \ref{fig:C4_sensitivityResults1Dproblem} are done using linear extrapolation as shown in Figure \ref{fig:C4_sensitivityResultsReconstructed1Dproblem}.
-
+%
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.4321, n = 120$]
@@ -134,22 +134,22 @@ As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA
     \caption{Reconstructed sensitivity by post-processing the results.}
     \label{fig:C4_sensitivityResultsReconstructed1Dproblem}
 \end{figure}
-
+%
 This problem is also solved using the virtual boundary method and the results are compared with the penalization method regarding the accuracy of simulation cost. The simulation cost is defined as the number of time steps it takes to reach a converged value. The virtual boundary method is based on solving the Navier-Stokes equation \eqref{eq:C4_NS} and modeling the boundaries through the force term defined in Equation \eqref{eq:C3_feedbackForcingFunction}. As mentioned in Section \ref{sec:C4_RHandRDfunction}, the RD function needs to be used in the virtual boundary method to have a differentiable governing equation for CSA. Therefore, the effect of the RD function on the accuracy of the solution is first investigated.
 
-The RD function for this simulation is selected as the one in Equation \eqref{eq:C4_deltaFunction}. The $\eta$ parameter is based on Equation \eqref{eq:C4_etaGuideForRDfunction} where $p = 0.99$ and $R = 2dx$. This ensures the solution stability. For this analysis, $\alpha$ and $\beta$ constants in Equation \eqref{eq:C3_feedbackForcingFunction} are each selected as $-100$. The convergence result is shown in Figure \ref{fig:C4_virtualBoundary_RDvsD}. As shown here, the simulation with RD function has better convergence properties.
-
+The RD function for this simulation is selected as the one in Equation \eqref{eq:C4_deltaFunction}. The $\eta$ parameter is based on Equation \eqref{eq:C4_etaGuideForRDfunction} where $p = 0.99$ and $R = 2dx$. This ensures the solution stability. For this analysis, $\alpha$ and $\beta$ constants in Equation \eqref{eq:C3_feedbackForcingFunction} are each selected as $-100$. The convergence result is shown in Figure \ref{fig:C4_virtualBoundary_RDvsD}. As shown here, the simulation with RD function has better convergence properties than the delta function.
+%
 \begin{figure}[H]
     \centering
     \includegraphics[width=12.00cm]{Chapter_4/figure/effect_of_RD_on_simulation_vs_numberOfNodes_1D_problem.eps}
     \caption{Effect of Regularized Delta (RD) and delta function on the solution accuracy.}
     \label{fig:C4_virtualBoundary_RDvsD}
 \end{figure}
-
+%
 The effect of wall velocity accuracy of the simulation was also investigated. The wall velocity was selected as $1 m/s$, $10 m/s$, $100 m/s$, and $1000 m/s$. However, this did not affect the accuracy of the simulations.
 
 The sensitivity equations are derived by differentiating the Navier-Stokes equations as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. However, for this problem, Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity} is simplified as shown in Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D}.
-
+%
 \begin{align}\label{eq:C4_SAforVirtualBoundaryMethod1D}
     \frac{\partial u'}{\partial t}
     &= 
@@ -182,34 +182,35 @@ The sensitivity equations are derived by differentiating the Navier-Stokes equat
     \right\}
     \frac{\partial \bar{\mathcal{D}}}{\partial X} \frac{\partial X}{\partial b}
 \end{align}
-
-Where $X$ is the wall location. Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} required the calculation of the RD function of Equation \eqref{eq:C4_deltaFunction}. This function is known as the doublet function \cite{kamaraju2009linear} and is written as shown in Equation \eqref{eq:C4_doubletFunction}. The $\eta$ value for this function is the same one chosen for the RD function. The double function of Equation \eqref{eq:C4_doubletFunction} is plotted in Figure \ref{fig:C4_doubletFunction} for different values of $\eta$.
-
+%
+Where $X$ is the wall location. Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} required the calculation of the RD function of Equation \eqref{eq:C4_deltaFunction}. This function is known as the doublet function \cite{kamaraju2009linear} and is written as shown in Equation \eqref{eq:C4_doubletFunction}. The $\eta$ value for this function is the same one chosen for the RD function. The doublet function of Equation \eqref{eq:C4_doubletFunction} is plotted in Figure \ref{fig:C4_doubletFunction} for different values of $\eta$.
+%
 \begin{equation}\label{eq:C4_doubletFunction}
     T(x, \eta) = 
     \frac{\left[ \tanh^{2}{\left(\dfrac{x}{\eta} \right)} - 1 \right] \tanh{\left( \dfrac{x}{\eta} \right)}}{\eta^2} 
 \end{equation}
-
+%
+%
 \begin{figure}[H]
     \centering
     \includegraphics[width=12.00cm]{Chapter_4/figure/doubletFunction.eps}
     \caption{Doublet function of Equation \eqref{eq:C4_doubletFunction}.}
     \label{fig:C4_doubletFunction}
 \end{figure}
-
+%
 The boundary conditions for Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} are defined by differentiating the boundary conditions in Equation \eqref{eq:C4_1DbenchmarkBoundaryCondition}. Since neither of these boundary conditions depend on the design variable, the boundary conditions for Equation \eqref{eq:C4_SAforVirtualBoundaryMethod1D} are equal to zero. This are defined in Equation \eqref{eq:C4_SAboundaryConditionforVirtualBoundaryMethod1D}.
-
+%
 \begin{equation}\label{eq:C4_SAboundaryConditionforVirtualBoundaryMethod1D}
 \begin{cases}
     u' = 0 \qquad \text{at } x = 0 \\
     u' = 0 \quad \text{at } x = 1
 \end{cases}
 \end{equation}
-
+%
 The analytical results of the sensitivity of velocity profile to the length are defined in Equation \eqref{eq:C4_1DbenchmarkAnalyticalSAlength} and used for verifying the sensitivity results.
 
-The convergence results for the sensitivity analysis are shown in Figure \ref{fig:C4_virtualBoundarySAconvergence}. We looked at two different wall locations and moving wall velocities. The wall location is defined as $x_{wall} = 0.6981 m$ and $x_{wall} = 0.4327 m$ with the velocities $U = 1 m/s$ and $U = 1000 m/s$ respectively. The thick line represents the RSME data value and the thin line represents the line with equation $y = ax^b$ passing through the data points. The slope of this line is reported as $-0.85$ for the sensitivity analysis and $-0.95$ for the governing equations. This slope describes the convergence rate of the method.
-
+The convergence results for the sensitivity analysis are shown in Figure \ref{fig:C4_virtualBoundarySAconvergence}. We looked at two different wall locations and moving wall velocities. The wall location is defined as $x_{wall} = 0.6981 m$ and $x_{wall} = 0.4327 m$ with the velocities $U = 1 m/s$ and $U = 1000 m/s$, respectively. The thick line represents the RSME data value and the thin line represents the line with equation $y = ax^b$ passing through the data points. The slope of this line is reported as $-0.85$ for the sensitivity analysis and $-0.95$ for the governing equations. This slope describes the convergence rate of the method.
+%
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.4327, U_{wall} = 1000$]
@@ -221,12 +222,12 @@ The convergence results for the sensitivity analysis are shown in Figure \ref{fi
     {
     \includegraphics[width=12.0cm]{Chapter_4/figure/virtualBoundaryMethod_SA_1D_problem_xw06981_U1.eps}
     }
-    \caption{RSME value for the sensitivity analysis (SA) and governing equation (GE).}
+    \caption{RSME value for the sensitivity analysis (SA) and governing equation (GE). The thick lines represent the actual values for the RSME error and the thin lines represent the least-square approximation of the best fit.}
     \label{fig:C4_virtualBoundarySAconvergence}
 \end{figure}
-
+%
 To better investigate the sensitivity results, we looked at the velocity sensitivity profile between the two plates in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfile}. As seen here, the accuracy of the sensitivity results decays near the perturbed boundary. The accuracy decay near the boundary can be fixed by reconstructing the sensitivities near the boundary as was done in the penalization method. The reconstructed results are shown in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}.
-
+%
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.5321 m, U_{wall} = 1 m/s, n = 95$]
@@ -251,7 +252,8 @@ To better investigate the sensitivity results, we looked at the velocity sensiti
     \caption{Velocity sensitivity profile between the two plates.}
     \label{fig:C4_virtualBoundaryVelocitySensitivityProfile}
 \end{figure}
-
+%
+%
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.5321 m, U_{wall} = 1 m/s, n = 95$]
@@ -276,5 +278,5 @@ To better investigate the sensitivity results, we looked at the velocity sensiti
     \caption{Reconstructed sensitivity by post-processing the results.}
     \label{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}
 \end{figure}
-
-While the results accuracy of the results are the same with the penalization technique and the virtual boundary method throughout the domain, the virtual boundary method, has better stability characteristics meaning that bigger time step can be used for the numerical integration. This reduces the cost associated with the simulation. Moreover, the penalization method is only capable of enforcing the zero velocity on the immersed boundary whereas with the virtual boundary method an arbitrary velocity $V(X, t)$ can be defined on the immersed boundary as shown in Equation \eqref{eq:C3_feedbackForcingFunction}. This makes the virtual boundary method a more general method for the treatment of solid boundaries. Therefore, for the rest of the benchmark problems, the virtual boundary method is used.
+%
+While the accuracy of the results is the same with the penalization technique and the virtual boundary method throughout the domain, the virtual boundary method has better stability characteristics, meaning that a larger time step can be used for the numerical integration. This reduces the cost associated with the simulation. Moreover, the penalization method is only capable of enforcing the zero velocity on the immersed boundary, whereas with the virtual boundary method an arbitrary velocity $V(X, t)$ can be defined on the immersed boundary as shown in Equation \eqref{eq:C3_feedbackForcingFunction}. This makes the virtual boundary method a more general method for the treatment of solid boundaries. Therefore, for the rest of the benchmark problems, the virtual boundary method is used.

@@ -1,5 +1,5 @@
-\subsection{Flapping and bending of a monofin}
-An archetype of fluid-structure interaction is the flapping of a flag pole in a steady wing, and the mutual interaction of the pole and its surrounding fluid. This phenomena is also of interest in various other engineering application such as locomotion using a monofin \cite{luersen2006computationally}, sails and understanding the flapping of flexible structure and possible application of energy harvesting \cite{allen2001energy} and turbulence reduction \cite{shen2003turbulent}. In this section we will focus on calculating the sensitivity of structure response to the change in its shape since application of the immersed boundary method for such problems has already been demonstrated in the work of Kim et al. \cite{kim2007penalty}. The physical domain for this problem is shown in Figure \ref{fig:C5_flagPolePhysical}.
+\subsection{Flapping and Bending of a Monofin}
+An archetype of fluid-structure interaction is the flapping of a flag pole in a steady wing and the mutual interaction of the pole and its surrounding fluid. This phenomenon is also of interest in various other engineering applications such as locomotion using a monofin \cite{luersen2006computationally}, sails and understanding the flapping of flexible structures, and possible application of energy harvesting \cite{allen2001energy} and turbulence reduction \cite{shen2003turbulent}. In this section we will focus on calculating the sensitivity of structure response to the change in its shape since the application of the immersed boundary method for such problems has already been demonstrated in the work of Kim et al. \cite{kim2007penalty}. The physical domain for this problem is shown in Figure \ref{fig:C5_flagPolePhysical}.
 %
 \begin{figure}[H]
     \centering
@@ -8,9 +8,9 @@ An archetype of fluid-structure interaction is the flapping of a flag pole in a 
     \label{fig:C5_flagPolePhysical}
 \end{figure}
 %
-As the cross-flow starts, the monofin will start vibrating due to the aerodynamic loads. Due to the sudden start of the flow, the loading on the structure mimics the same characteristic as a step function loading. Hence we expect the structural response to have similar characteristics. This will provide us more insight into the dynamic response of the system. 
+As the cross-flow starts, the monofin will start vibrating due to the aerodynamic loads. Due to the sudden start of the flow, the loading on the structure mimics the same characteristic as a step function loading. Hence we expect the structural response to having similar characteristics. This will provide us more insight into the dynamic response of the system. 
 
-The monofin structure is modelled using Euler-Bernoulli beam theory with three degrees of freedom at each node. Due to the unsteady nature of the problem, the Newmark-beta method is used for explicit time integration of the structures equation of motion. As previous problems, the pressure load is transferred to the structure using regularized delta function and the effect of location and velocity of the Lagrangian nodes of the structure are reflected through the immersed boundary forcing term of Equation \eqref{eq:C3_virtualBoundaryMethod}. For this problem, we looked at the unsteady response of two different cases of the monotin, each at different length. The Reynolds number for this problem is fixed at $100$ to make sure that the Laminar flow assumption is met for the simulation. The time history of monofin tip displacement is shown in Figure \ref{fig:C5_timeHistoryTipDisplacement}. As shown here, as we increase the length of the beam the frequency of oscillation decreases. This is true since by increasing the length the bending stiffness of the structure decreases which results in lower frequency of oscillation.
+The monofin structure is modeled using Euler-Bernoulli beam theory with three degrees of freedom at each node. Due to the unsteady nature of the problem, the Newmark-beta method is used for explicit time integration of the structures equation of motion. As previous problems, the pressure load is transferred to the structure using regularized delta function and the effect of location and velocity of the Lagrangian nodes of the structure are reflected through the immersed boundary forcing term of Equation \eqref{eq:C3_virtualBoundaryMethod}. For this problem, we looked at the unsteady response of two different cases of the monofin, each at a different length. The Reynolds number for this problem is fixed at $100$ to make sure that the Laminar flow assumption is met for the simulation. The time history of monofin tip displacement is shown in Figure \ref{fig:C5_timeHistoryTipDisplacement}. As shown here, as we increase the length of the beam the frequency of oscillation decreases. This is true since by increasing the length the bending stiffness of the structure decreases which results in a lower frequency of oscillation.
 %
 \begin{figure}[H]
     \centering
@@ -29,7 +29,7 @@ The monofin structure is modelled using Euler-Bernoulli beam theory with three d
     \label{fig:C5_timeHistoryTipDisplacement}
 \end{figure}
 %
-Another important aspect of Figure \ref{fig:C5_timeHistoryTipDisplacement} is the viscous damping feature of the tip displacement movement. The structural model does not include viscous damping and the effect seen in Figure \ref{fig:C5_timeHistoryTipDisplacement} is purely due to multidisciplinary interaction of fluid and structure for this problem. It is clear that the longer monofin experience lower damping which is due to lower frequency and therefore lower velocity of the structure. This will result in lower damping force since the viscous damping is proportional to the velocity of the structure. To better see the flow structure behind the monofin, time snapshots of u-velocity contour are shown in Figure \ref{fig:C5_monofinTimeSnapShotVelocity}.
+Another important aspect of Figure \ref{fig:C5_timeHistoryTipDisplacement} is the viscous damping feature of the tip displacement movement. The structural model does not include viscous damping and the effect seen in Figure \ref{fig:C5_timeHistoryTipDisplacement} is purely due to the multidisciplinary interaction of fluid and structure for this problem. It is clear that the longer monofin experience lower damping which is due to lower frequency and therefore the lower velocity of the structure. This will result in less damping force since the viscous damping is proportional to the velocity of the structure. To better see the flow structure behind the monofin, time snapshots of the u-velocity contour are shown in Figure \ref{fig:C5_monofinTimeSnapShotVelocity}.
 %
 \begin{figure}[H]
     \centering
@@ -66,21 +66,21 @@ Another important aspect of Figure \ref{fig:C5_timeHistoryTipDisplacement} is th
     \label{fig:C5_monofinTimeSnapShotVelocity}
 \end{figure}
 %
-To calculate the monofin dip displacement sensitivity to its length, it should be noted that this design variable affects both the fluid and structure domain. Therefore, both of the governing equations need to be differentiated with respect to the monofin length. Differentiation of the Navier-stokes equations for the fluid is extensively discussed in Chapter \ref{ch:shapeSenwithIB}, here we derive the continuum sensitivity equation for the monofin structure. To do so, we start by the governing equation for an Euler-Bernoulli beam as shown in Equation \eqref{eq:C5_eulerBernoulliBeamGE}.
+To calculate the monofin dip displacement sensitivity to its length, it should be noted that this design variable affects both the fluid and structure domain. Therefore, both of the governing equations need to be differentiated to the monofin length. Differentiation of the Navier-stokes equations for the fluid is extensively discussed in Chapter \ref{ch:shapeSenwithIB}, here we derive the continuum sensitivity equation for the monofin structure. To do so, we start by the governing equation for a Euler-Bernoulli beam as shown in Equation \eqref{eq:C5_eulerBernoulliBeamGE}.
 %
 \begin{equation}\label{eq:C5_eulerBernoulliBeamGE}
 	\frac{d^2}{dx^2}
 	\left( EI \frac{d^2 w}{dx^2} \right) + \rho \frac{d^2 w}{dt^2} = q(x)
 \end{equation}
 %
-where $w$ is deflection in $y$ direction, $E$ is elastic modulus, $I$ is the second moment of area of the beam's cross-section, $\rho$ is mass per length, and $q(x)$ is the distributed load. The sensitivity equation for the structure is derived by analytical differentiating Equation \eqref{eq:C5_eulerBernoulliBeamGE} with respect to design variable $L$ as shown in Equation \eqref{eq:C5_eulerBernoulliBeamSE}.
+where $w$ is the deflection in $y$ direction, $E$ is elastic modulus, $I$ is the second moment of area of the beam's cross-section, $\rho$ is mass per length, and $q(x)$ is the distributed load. The sensitivity equation for the structure is derived by analytical differentiating Equation \eqref{eq:C5_eulerBernoulliBeamGE} with respect to design variable $L$ as shown in Equation \eqref{eq:C5_eulerBernoulliBeamSE}.
 %
 \begin{equation}\label{eq:C5_eulerBernoulliBeamSE}
 	\frac{d^2}{dx^2}
 	\left( EI \frac{d^2 w'}{dx^2} \right) + \rho \frac{d^2 w'}{dt^2} = q'(x)
 \end{equation}
 %
-where $( )'$ represents the derivative of variable with respect to design variable, $L$. It should be noted that the right-hand-side of Equations \eqref{eq:C5_eulerBernoulliBeamGE} and \eqref{eq:C5_eulerBernoulliBeamSE} are solved by solving the Navier-stokes and differentiated Navier-stokes equations respectively. The loads from the fluid domain are transferred to the structure using regularized delta function. The time history of the sensitivity of tip displacement with respect to the length of the monofin is shown in Figure \ref{fig:C5_timeHistoryTipDisplacementSensitivity}. As shown here, the sensitivity results from the CSA agrees well with the Complex Step (CS) results.
+where $( )'$ represents the derivative of variable with respect to design variable, $L$. It should be noted that the right-hand side of Equations \eqref{eq:C5_eulerBernoulliBeamGE} and \eqref{eq:C5_eulerBernoulliBeamSE} are solved by solving the Navier-stokes and differentiated Navier-stokes equations respectively. The loads from the fluid domain are transferred to the structure using regularized delta function. The time history of the sensitivity of tip displacement to the length of the monofin is shown in Figure \ref{fig:C5_timeHistoryTipDisplacementSensitivity}. As shown here, the sensitivity results from the CSA agrees well with the Complex Step (CS) results.
 %
 \begin{figure}[H]
     \centering
