@@ -10,7 +10,7 @@ An archetype of fluid-structure interaction is the flapping of a flag pole in a 
 %
 As the cross-flow starts, the monofin will start vibrating due to aerodynamic loads. Due to the sudden start of the flow, the loading on the structure mimics the same characteristic as step function loading. Hence, we expect the structural response to have similar characteristics. This will provide us with more insight into the dynamic response of the system. 
 
-The monofin structure is modeled using Euler-Bernoulli beam theory with three degrees of freedom at each node. Due to the unsteady nature of the problem, the Newmark-beta method is used for explicit time integration of the structures equation of motion. As in previous problems, the pressure load is transferred to the structure using regularized delta function and the effect of location and velocity of the Lagrangian nodes of the structure are reflected through the immersed boundary forcing term of Equation \eqref{eq:C3_virtualBoundaryMethod}. For this problem, we looked at the unsteady response of two different cases of the monofin, each at a different length. The Reynolds number for this problem is fixed at $100$ to make sure that the Laminar flow assumption is met for the simulation. The time history of monofin tip displacement is shown in Figure \ref{fig:C5_timeHistoryTipDisplacement}. As shown here, as we increase the length of the beam, the frequency of oscillation decreases. This is true since by increasing the length, the bending stiffness of the structure decreases, which results in a lower frequency of oscillation.
+The monofin structure is modeled using Euler-Bernoulli beam theory with three degrees of freedom at each node. The monofin is made of Aluminium with $E = 68.9$ GPa, and $\rho = 2.7 \times 10^3 \text{ Kg/m}^3$. The cross-section is defined as circle with the diameter of $4 mm$. Due to the unsteady nature of the problem, the Newmark-beta method is used for explicit time integration of the structures equation of motion. As in previous problems, the pressure load is transferred to the structure using regularized delta function and the effect of location and velocity of the Lagrangian nodes of the structure are reflected through the immersed boundary forcing term of Equation \eqref{eq:C3_virtualBoundaryMethod}. For this problem, we looked at the unsteady response of two different cases of the monofin, each at a different length. The Reynolds number for this problem is fixed at $100$ to make sure that the Laminar flow assumption is met for the simulation. The time history of monofin tip displacement is shown in Figure \ref{fig:C5_timeHistoryTipDisplacement}. As shown here, as we increase the length of the beam, the frequency of oscillation decreases. This is true since by increasing the length, the bending stiffness of the structure decreases, which results in a lower frequency of oscillation.
 %
 \begin{figure}[H]
     \centering
@@ -29,41 +29,77 @@ The monofin structure is modeled using Euler-Bernoulli beam theory with three de
     \label{fig:C5_timeHistoryTipDisplacement}
 \end{figure}
 %
-Another important aspect of Figure \ref{fig:C5_timeHistoryTipDisplacement} is the viscous damping feature of the tip displacement movement. The structural model does not include viscous damping and the effect seen in Figure \ref{fig:C5_timeHistoryTipDisplacement} is purely due to the multidisciplinary interaction of fluid and structure for this problem. It is clear that the longer monofin experiences lower damping which is due to lower frequency and therefore, the lower velocity of the structure. This will result in less damping force since the viscous damping is proportional to the velocity of the structure. To better see the flow structure behind the monofin, time snapshots of the u-velocity contour are shown in Figure \ref{fig:C5_monofinTimeSnapShotVelocity}.
+Another important aspect of Figure \ref{fig:C5_timeHistoryTipDisplacement} is the viscous damping feature of the tip displacement movement. The structural model does not include viscous damping and the effect seen in Figure \ref{fig:C5_timeHistoryTipDisplacement} is purely due to the multidisciplinary interaction of fluid and structure for this problem. It is clear that the longer monofin experiences lower damping which is due to lower frequency and therefore, the lower velocity of the structure. This will result in less damping force since the viscous damping is proportional to the velocity of the structure. To better see the flow structure behind the monofin, time snapshots of the u-velocity and pressure contours are shown in Figure \ref{fig:C5_monofinTimeSnapShotVelocity} and \ref{fig:C5_monofinTimeSnapShotPressure} respectively.
 %
 \begin{figure}[H]
     \centering
-    \subfigure[$t = 0.2 \text{ sec}$]
+    \subfigure[$t = 0.1 \text{ sec}$]
     {
-    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t02.png}
-    }
-    \quad
-    \subfigure[$t = 1.0 \text{ sec}$]
-    {
-    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t10.png}
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t01_U.png}
     }
     \quad
     \subfigure[$t = 2.0 \text{ sec}$]
     {
-    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t20.png}
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t20_U.png}
+    }
+    \quad
+    \subfigure[$t = 5.0 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t50_U.png}
     }
     \\
-    \subfigure[$t = 0.2 \text{ sec}$]
+    \subfigure[$t = 0.1 \text{ sec}$]
     {
-    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t02.png}
-    }
-    \quad
-    \subfigure[$t = 1.0 \text{ sec}$]
-    {
-    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t10.png}
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t01_U.png}
     }
     \quad
     \subfigure[$t = 2.0 \text{ sec}$]
     {
-    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t20.png}
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t20_U.png}
+    }
+    \quad
+    \subfigure[$t = 5.0 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t50_U.png}
     }
     \caption{U-velocity time snapshots for elastic monofin.}
     \label{fig:C5_monofinTimeSnapShotVelocity}
+\end{figure}
+%
+%
+\begin{figure}[H]
+    \centering
+    \subfigure[$t = 0.1 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t01_P.png}
+    }
+    \quad
+    \subfigure[$t = 2.0 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t20_P.png}
+    }
+    \quad
+    \subfigure[$t = 5.0 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L05_t50_P.png}
+    }
+    \\
+    \subfigure[$t = 0.1 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t01_P.png}
+    }
+    \quad
+    \subfigure[$t = 2.0 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t20_P.png}
+    }
+    \quad
+    \subfigure[$t = 5.0 \text{ sec}$]
+    {
+    \includegraphics[width=4.25cm]{Chapter_5/figure/monofin_L75_t50_P.png}
+    }
+    \caption{Pressure time snapshots for elastic monofin.}
+    \label{fig:C5_monofinTimeSnapShotPressure}
 \end{figure}
 %
 To calculate the monofin dip displacement sensitivity to its length, it should be noted that this design variable affects both the fluid and structure domain. Therefore, both of the governing equations need to be differentiated to the monofin length. Differentiation of the Navier-stokes equations for the fluid is extensively discussed in Chapter \ref{ch:shapeSenwithIB}, here we derive the continuum sensitivity equation for the monofin structure. To do so, we start by the governing equation for a Euler-Bernoulli beam as shown in Equation \eqref{eq:C5_eulerBernoulliBeamGE}.

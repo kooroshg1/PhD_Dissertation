@@ -1,4 +1,25 @@
+%-----------------------------------------------------------------------
+% Latex Thesis/Dissertation Template for Wright State University
+% 
+% Written by Sean A. Mortara
+% 28 June 2001
+% Modified by Josh Mark
+% 15 Dec 2011
+% Later edits by Joseph C. Slater
+%-----------------------------------------------------------------------
 \documentclass[12pt]{report}
+
+\usepackage{xcolor}
+\usepackage{booktabs} % used for tables
+\usepackage{multirow} % used for tables to merge multiple rows
+\usepackage{bigdelim} % used for tables to set spacing
+\usepackage{bigstrut} % used for tables to set spacing
+\usepackage{graphicx} % used for includegraphics
+\usepackage{subfigure} % allows the use of subfigures
+\usepackage{amssymb,amsmath} % For math
+\usepackage{graphicx, float, subfigure, caption} % For figures
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode} % used to insert code
+%
 \usepackage[hidelinks]{hyperref}
 \usepackage{xcolor}
 \hypersetup{
@@ -7,43 +28,241 @@
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
 }
-\usepackage{geometry}
-	\geometry{
-	a4paper,
-	total={170mm,257mm},
-	%left=20mm,
-	left=38.1mm,
-    right = 25.4mm,
-	top=20mm,
-	}
-\usepackage{graphicx, float, subfigure} % For figures
-\usepackage{caption}
-%\usepackage{subcaption}
-\usepackage{amssymb,amsmath} % For math
-\usepackage{setspace}
-\doublespacing
-\usepackage{lipsum}
+%-----------------------------------------------------------------------
+%  Modified fields
+%-----------------------------------------------------------------------
+\newcommand{\authorfirst}{Koorosh}
+\newcommand{\authorMI}{}
+\newcommand{\authorlast}{Gobal}
+\newcommand{\degreefull}{Doctor of Philosophy}  % force hyphenation at syllables if line breaks are required
+\newcommand{\degreeshort}{Ph.D.}
+\newcommand{\thesisordissertationlc}{Dissertation}
+\newcommand{\dept}{Department of Mechanical Engineering}
+\newcommand{\institution}{Wright State University} % Doubting you will
+                                % change this. 
+\newcommand{\thesistitle}{High-Fidelity Multidisciplinary Sensitivity Analysis for Coupled Fluid-Solid Interaction Design} % Needes a line break
+\newcommand{\bachdegreeshort}{B.S.M.E.} % Bachelor degree short
+\newcommand{\bachinstitution}{Sharif University of Technology} % Bachelor degree institution
+\newcommand{\bachyear}{2012}% Bachelor degree year
+%No spaces should be before or after this title.
+\newcommand{\pdfsubject}{Shape Sensitivity Analysis for FSI Design}
+\newcommand{\pdfkeywords}{Sensitivity Analysis, Fluid-Solid Interaction, Multidisciplinary Design Optimization}
+\newcommand{\yearcomplete}{2016}
+% set pdf file info
+\usepackage{hyperxmp} % used to set pdf property info with \hypersetup command
 
-% ===============================================
-\title{Shape Sensitivity Analysis for Coupled Fluid-Solid Interaction Problems}
-\author{Koorosh Gobal}
-\date{\today}
-%\date{February 11, 2016}
-% ===============================================
+%-----------------------------------------------------------------------
+%  Thesis Advisor, Department Chair, Dean of Graduate Studies
+%  I don't know why titles as separated... except in the one case at
+%  the end. 
+%-----------------------------------------------------------------------
+\newcommand{\thesisdirector}{Ramana V. Grandhi}
+\newcommand{\thesisdirectortitle}{Ph.D.}
+\newcommand{\phdProgrameChair}{Frank W. Ciarallo}
+\newcommand{\phdProgrameChairTitle}{Ph.D.}
+\newcommand{\graduateSchoolDean}{Robert E.W. Fyffe}
+\newcommand{\graduateSchoolDeanEducation}{Ph.D.}
+\newcommand{\graduateSchoolDeanTitle}{Vice President for Research and \\Dean of the Graduate School}
+%-----------------------------------------------------------------------
+%  Final Examination Committee: Comment out the ones you don't need. 
+%-----------------------------------------------------------------------
+\newcommand{\fecone}{Ramana V. Grandhi, Ph.D.}
+
+\newcommand{\fectwo}{Mitch Wolff, Ph.D.}
+
+\newcommand{\fecthree}{Ha-Rok Bae, Ph.D.}
+
+\newcommand{\fecfour}{Robert A. Canfield, Ph.D.}
+
+\newcommand{\fecfive}{Raymond M. Kolonay, Ph.D.}
+
+\newcommand{\fecsix}{Christopher M. Koehler, Ph.D.}
+
+% If you have more committee members... good luck
+
+% Modify this if needed for getting citations to "look right" according to your field. Read the natbib documentation on how to use this. 
+%\usepackage[round]{natbib}
+%\usepackage{doublespace}
+
+%=============================
+%  Begin document!
+%=============================
+%
+% Don't touch
+
+% still don't touch.   
+
+% title sheet
+\usepackage{WSU}
+%\hypersetup{
+%                     pdfauthor={\authorfull},
+%                     pdftitle={\thesistitle},
+%                     pdfsubject={\pdfsubject},
+%                     pdfkeywords={\pdfkeywords},
+%                     }
+% \normalem
+\pagenumbering{roman}
+\pagestyle{plain}
+\rhead{\today}
 \begin{document}
 \maketitle
+\doublespace
+
+% Still don't touch!!
+
+%=============================
+%  approval sheet
+%=============================
+
+\thispagestyle{empty}
+\renewcommand\baselinestretch{2}
+\begin{singlespace}
+\signaturepage
+\end{singlespace}
+%
+%=============================
+%  Abstract
+%=============================
+\newpage
+\setcounter{page}{3}
+\vspace{2in}
+%
+\begin{singlespace}
+\begin{center}
+  ABSTRACT
+\end{center}
+%
+\noindent{\small{\authorlast, \authorfirst}. 
+		 {\degreeshort, \dept, \institution}, 
+		 {\yearcomplete}. 
+		 {\sl \thesistitle}.}
+\end{singlespace}
+\vspace*{.5in}
+
+\pdfbookmark[0]{Abstract}{Abstract}
+%\phantomsection
+%
+%========================
+% Start editing below. 
+%========================
+\input{Abstract/Abstract.tex}
+%%%%%%%%%%%%%%%%%%
+%-----------------------------------------------------------------------
+%
+%=============================
+%  List of symbols (Optional)
+%=============================
+%\newpage
+%%\renewcommand\baselinestretch{1.5}
+%\begin{singlespace}\begin{center}
+%  \textbf{\Huge{List of Symbols}}
+%\end{center}
+%
+%\begin{flushleft}{\large Chapter 2} \end{flushleft}
+%\begin{tabular}{p{0.75in}l}
+%   $\gamma$ & $\frac{-b+\sqrt{b^{2}-4ac}}{2a}$\\
+%   $L$ & {Plate length}\\
+%\end{tabular}
+%
+%%%%%%
+%\begin{flushleft}{\large Chapter 3} \end{flushleft}
+%\begin{tabular}{p{0.75in}l}
+%   $h$ & {Plate thickness}\\
+%   $L$ & {Plate length}\\
+%\end{tabular}
+%
+%%%%%%
+%\begin{flushleft}{\large Chapter 4} \end{flushleft}
+%\begin{tabular}{p{0.75in}l}
+%   $M_{\infty}$ & {Freestream Mach number}\\
+%   $U_{\infty}$ & {Freestream fluid velocity}\\
+%   $p-p_\infty$ & {Aerodynamic pressure differential}\\
+%\end{tabular}
+%
+%%%%%%
+%\begin{flushleft} {\large Chapter 7} \end{flushleft}
+%\begin{tabular}{p{0.75in}l}
+%   $\beta$   & $\sqrt{M_{\infty}^2-1}$\\
+%   $\lambda$ & {Nondimensional freestream dynamic pressure}\\
+%\end{tabular}
+%\end{singlespace}
+%=============================
+%  Table of contents, etc.
+%=============================
+%\renewcommand\baselinestretch{1.5}
+\begin{singlespace}
 \tableofcontents
 \listoffigures
 \listoftables
-\input{Abstract/Abstract.tex}
+\end{singlespace}
+%
+%=============================
+%  Acknowledgments
+%=============================
+\newpage
+\thispagestyle{plain}
+\setlength{\parindent}{0em}
+\begin{center}
+{\huge Acknowledgment}
+\end{center}
+
+I would like to take this opportunity to extend my thanks to\ldots If you have multiple paragraphs, the first should not be indented to match the style of the rest of the thesis
+
+\setlength{\parindent}{2em}
+Any additional paragraphs should be indented as such.  Remember to thank your advisor and committee members.
+%
+%=============================
+%  Dedication
+%=============================
+%\newpage
+%\thispagestyle{plain}
+%\vspace*{3in}
+%\begin{center}
+%Dedicated to\\
+%Somebody special (Wife, husband, girlfriend or boyfriend works well
+%here. )
+%\end{center}
+%
+%
+%
+%=============================
+%  Begin Chapters
+%=============================
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\setlength{\parindent}{2em}
+%=============================
+%
 \input{Chapter_1/Chapter_1.tex}
 \input{Chapter_2/Chapter_2.tex}
 \input{Chapter_3/Chapter_3.tex}
 \input{Chapter_4/Chapter_4.tex}
 \input{Chapter_5/Chapter_5.tex}
 \input{Chapter_6/Chapter_6.tex}
-
-%\input{Chapter_7/Chapter_7.tex}
+%
+%-----------------------------------------------------------------------
+% Bibliography
+%-----------------------------------------------------------------------
+\clearpage \phantomsection %used to correctly anchor hyperlinks
+\renewcommand\baselinestretch{1.5}
+\addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{aiaa}
-\bibliography{Chapter_1/Chapter1Ref,Chapter_2/Chapter2Ref,Chapter_3/Chapter3Ref,Chapter_4/Chapter4Ref,Chapter_5/Chapter5Ref},
-\end{document}
+\bibliography{Chapter_1/Chapter1Ref,Chapter_2/Chapter2Ref,Chapter_3/Chapter3Ref,Chapter_4/Chapter4Ref,Chapter_5/Chapter5Ref}
+%
+%-----------------------------------------------------------------------
+% Appendices
+%-----------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%
+%\begin{appendices}
+%\phantomsection %use \phantomsection command to correctly anchor hyperlinks
+%\include{AppendixA}
+%\phantomsection
+%\include{AppendixB}
+%\end{appendices}
+%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+% End of document
+\end{document} 

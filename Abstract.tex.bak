@@ -1,0 +1,20 @@
+%----------
+%  Abstract
+%----------
+\newpage
+\setcounter{page}{3}
+\vspace{2in}
+%
+\begin{singlespace}
+\begin{center}
+  ABSTRACT
+\end{center}
+%
+\noindent{\small{\authorlast, \authorfirst}. 
+		 {\degreeshort, \dept, \institution}, 
+		 {\yearcomplete}. 
+		 {\sl \thesistitle}.}
+\end{singlespace}
+\vspace*{.5in}
+%
+Typical vibration analysis of turbine engine components incorporates the use of a function generator to produce a signal that is routed to an excitation source as the forcing function of the test specimen.  These waveforms are constructed by varying the amplitude of the signal over time with a fixed update rate (time increment between samples).  This research investigates generating chirp waveforms by storing only one sinusoid of points and using an external timing signal to repetitively send out these stored data points.  This results in varying the amplitude of the signal over time as well as the update rate.  The update rate varies linearly as the frequency varies throughout the chirp.  The number of samples stored is fixed as only one sinusoid is stored in memory.  This results in a degraded waveform with step changes in the voltages of the analog output signal.  This research incorporates a high speed analog output device from National Instruments used to generate the waveform built from user inputs for sweep range, time, and desired samples/cycle.  For this research, both single and multiple degree of freedom systems were used to analytically predict the response of the system to the degraded waveforms.  A series of experimental tests was conducted using a cantilevered beam to validate the analytical predictions.  The response of the test article was captured using a scanning laser vibrometer from which the frequency response function (FRF) was calculated, and in turn, the natural frequencies, mode shapes, and damping characteristics were determined.  The differences in the responses of the test article were quantified to determine the effect of the degraded waveform and the minimum number of samples/cycle in a waveform necessary to generate a signal sufficient for accurate modal analysis.  A simulated bladed disk was modeled in state space to quantify the accuracy of modal analysis implementing the variable update rate waveforms with traveling wave excitation.

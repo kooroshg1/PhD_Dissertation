@@ -1,3 +1,20 @@
-\begin{abstract}
-In many engineering disciplines such as aerospace, marine, automotive, and biomedical engineering the consideration of the coupling between the fluid and structural systems are necessary for quality engineering analysis. Therefore, the need for such analysis in the design processes is continuously increasing. The primary motivation for this work is to develop a sensitivity analysis tool that is capable of calculating accurate sensitivities without significant modification of the source codes for simulations based on non-body conformal grids. The majority of work done on the coupled fluid-solid simulations are based on computational grids that conform to the solid boundaries. This becomes a restriction for complex boundary shapes or large deformation of the solid domain for these systems. The hurdles associated with the body-conformal techniques are mainly due to additional cost related to mesh deformation and the effect of mesh movement on sensitivity calculation. Therefore, we propose to use a particular family of non-body conformal techniques often known as Immersed Boundary (IB) methods for modeling the flow over immersed boundaries. The Continuum Sensitivity Analysis (CSA) is added on top of the IB method, which calculates the sensitivity of the flow variables, velocity and pressure. These variables are modeled with Navier-Stokes (NS) equations, and their sensitivities are calculated with respect to change in the shape of the solid boundary. This technique is implemented in the calculation of the sensitivity of the coupled fluid-structure system subject to different shape design variables. The sensitivity of various benchmark problems such as flow between parallel plates, over a cylinder, and through a convergent-divergent nozzle is calculated with respect to shape parameters using this approach. These results are verified using the complex step method which gives accurate sensitivities up to machine precision. This work is the first implementation of CSA for continuous IB method for viscous flow (Navier-Stokes) models.
-\end{abstract}
+%----------
+%  Abstract
+%----------
+\newpage
+\setcounter{page}{3}
+\vspace{2in}
+%
+\begin{singlespace}
+\begin{center}
+  ABSTRACT
+\end{center}
+%
+\noindent{\small{\authorlast, \authorfirst}. 
+		 {\degreeshort, \dept, \institution}, 
+		 {\yearcomplete}. 
+		 {\sl \thesistitle}.}
+\end{singlespace}
+\vspace*{.5in}
+%
+In many engineering disciplines such as aerospace, marine, automotive, and biomedical engineering the consideration of the coupling between the fluid and structural systems is necessary for quality engineering analysis. Therefore, the need for such analysis in the design processes is continuously increasing. The primary motivation for this work is to develop a sensitivity analysis tool that is capable of calculating accurate sensitivities without significant modification of the source codes for simulations based on non-body conformal grids. The majority of work done on the coupled fluid-solid simulations are based on computational grids that conform to the solid boundaries. This becomes a restriction for complex boundary shapes or large deformation of the solid domain for these systems. The hurdles associated with the body-conformal techniques are mainly due to additional cost related to mesh deformation and the effect of mesh movement on the sensitivity calculation. Therefore, we propose to use a particular family of non-body conformal techniques often known as Immersed Boundary (IB) methods for modeling the flow over immersed boundaries. The Continuum Sensitivity Analysis (CSA) is added on top of the IB method, which calculates the sensitivity of the flow variables, velocity, and pressure. These variables are modeled with Navier-Stokes (NS) equations and their sensitivities are calculated with respect to change in the shape of the solid boundary. This technique is implemented in the calculation of the sensitivity of the coupled fluid-structure system subject to different shape design variables. The sensitivity of various benchmark problems such as flow between parallel plates, over a cylinder, and through a convergent-divergent nozzle is calculated with respect to shape parameters using this approach. These results are verified using the complex step method which gives accurate sensitivities up to machine precision. This work is the first implementation of CSA for continuous IB method for viscous flow (Navier-Stokes) models.

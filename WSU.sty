@@ -1,0 +1,188 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Begin LaTeX header!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-----------------------------------------------------------------------
+% Latex Thesis Template for Wright State University
+% 
+% Written by Sean A. Mortara
+% 28 June 2001
+% Modified by Josh Mark
+% 8 Dec 2011
+% Maintained by Joseph Slater (continuously)
+%-----------------------------------------------------------------------
+%\usepackage{graphicx}
+\usepackage{amsmath,times}%,textcase} This allows uppercased, with 
+% breaking lines in underline using \MakeUppercase
+\usepackage[normalem]{ulem} %allows \uline command for wrapping
+                            %underlined text
+\usepackage{xifthen}
+%\usepackage{pslatex}
+%\usepackage{rotating}
+%\usepackage{latexcad}
+% \newcommand{\checkfor}[1]{%
+%   \ifcsname#1\endcsname%
+%     \\#1%
+%   \else%
+%     ... command '#1' does not exist ...%
+%   \fi%
+% }
+\newcommand{\fart}{dfdsf}
+\newcommand{\checkfor}[1]{
+  \ifthenelse{\isundefined{#1}}{%
+    % expand undefined
+  }{%
+    \vfill
+    \rule{3in}{0.01in}\\
+#1% expand defined
+  }%
+}
+\newcommand{\thesisordissertation}{\uppercase{\thesisordissertationlc}}% 'Thesis' or 'Dissertation'
+
+% \newcommand[1]{\checkfor}{
+%   \ifthenelse{\isundefined{#1}}{%
+%     % expand undefined
+% b
+%   }{%
+%   \vfill a
+%   \rule{3in}{0.01in}
+%     %#1% expand defined
+%   }%
+% }
+\usepackage{hhline}
+\usepackage{appendix}
+% Uncomment the first line of options if you are using PDFTeX.
+
+%\newcommand{\Chapter}[1]{\setcounter{secnumdepth}{-1}
+%                         \addtocounter{chapter}{1}
+%                         \chapter{#1}
+%	                 \setcounter{secnumdepth}{2}
+%			 \setcounter{section}{0}}
+
+\usepackage{fncychap}% Allows us to use the \DOCH command below
+
+\usepackage{ifpdf}
+\ifpdf
+\usepackage{pdfsync}% Synchronization when using pdflatex on mac
+                    % (could be used by other editors in the future)
+\else
+\usepackage{srcltx}%Traditional synchronization using dvi files 
+\fi
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{-.5in}
+\setlength{\baselineskip}{18pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9in}
+
+\makeatletter\renewcommand{\DOCH}{}%This gets rid of the text
+                                %"Chapter..." in the chapter title
+\makeatother
+
+\newcommand{\authorfull}{\authorfirst\ \authorMI\authorlast}
+\newcommand{\bachfull}{\bachdegreeshort, \bachinstitution, \bachyear}  % creates Bachelor information under name on title page
+%\newcommand{\degreefullall}{\degreefull\ in En\-gi\-neer\-ing}  % added forced hyphenation (automatic hyphenation disabled for \uline)
+
+%-----------------------------------------------------------------------
+%  Page format setup
+%-----------------------------------------------------------------------
+\setlength{\topmargin}{-0.5in}
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\textwidth}{6in}
+\setlength{\textheight}{9in}
+\setlength{\headheight}{0.5in}
+\setlength{\headsep}{0.1in}
+%
+%----------------------------------------------------------------------
+%  Title page info - do not change!
+%-----------------------------------------------------------------------
+\title{                          \thesistitle                          }
+
+\author{           A \thesisordissertationlc\ submitted in partial fulfillment          \\
+                     of the requirements for the degree of            \\
+                        \degreefull              \\
+\\ \\ \\
+                                       by                             \\
+\\ \\ \\
+\uppercase{                       \authorfull                        }\\
+                                     \bachfull                           \\
+                                  \\
+ \\ \\ \\ \\
+                                 \yearcomplete                        \\
+                                  \institution                         }
+
+\date{}
+
+%\bibliographystyle{plainnat}
+\newcommand{\signaturepage}{%
+\begin{center}
+              \uppercase{\institution}\\
+              COLLEGE OF GRADUATE STUDIES\\
+\end{center}
+
+\begin{flushright}
+              \today
+\end{flushright}
+
+\renewcommand\baselinestretch{1}
+    I HEREBY RECOMMEND THAT THE \MakeUppercase{\thesisordissertation} PREPARED UNDER MY                 
+    SUPERVISION BY \expandafter\expandafter\expandafter\uline\expandafter{\authorfull} 
+    ENTITLED \expandafter\expandafter\expandafter\uline\expandafter{\thesistitle}                
+    BE ACCEPTED IN PARTIAL FULFILLMENT OF THE REQUIREMENTS
+    FOR THE DEGREE OF                                            
+    \expandafter\expandafter\expandafter\uline\expandafter{\degreefull}.
+%
+\bigskip
+\begin{flushright}
+\vfill%{}\vspace{1.2cm}
+  \rule{3in}{0.01in}
+  \\                     \thesisdirector, \thesisdirectortitle
+  \\                      \thesisordissertation\ Director
+  \\
+  \vfill%\vspace{1.2cm}
+  \rule{3in}{0.01in}
+  \\                     \phdProgrameChair, \phdProgrameChairTitle
+  \\                     Director, Ph.D. in Engineering Program
+  \vfill%\vspace{1.2cm}
+  \rule{3in}{0.01in}
+  \\                     \graduateSchoolDean, \graduateSchoolDeanEducation
+  \\                     \graduateSchoolDeanTitle
+  \\
+\end{flushright}
+%
+
+\begin{flushleft}
+                          Committee on
+  \\                      Final Examination
+  \\ 
+  \vfill
+  \rule{3in}{0.01in}
+  \\                     \fecone
+  \\
+  \vfill
+  \rule{3in}{0.01in}
+  \\                     \fectwo  \\
+  \vfill
+  \rule{3in}{0.01in}
+  \\                     \fecthree
+  \\
+\checkfor{\fecfour}
+\checkfor{\fecfive}
+\checkfor{\fecsix}
+\checkfor{\fecseven}
+
+  %\vspace{1.2cm}
+%\vfill
+%  \rule{3in}{0.01in}
+% Uncomment next 4 lines for fourth committee member
+% \\                     \fecfour
+%  \\
+%  \vspace{1.2cm}
+%  \rule{3in}{0.01in}
+
+\end{flushleft}}
+\usepackage{setspace}
+%\usepackage[ colorlinks={true}, % set to {false} for printing
+%            linkcolor={blue},
+%            citecolor={blue}
+%           ]{hyperref}
+\usepackage{fancyhdr}
