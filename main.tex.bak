@@ -214,14 +214,14 @@ Any additional paragraphs should be indented as such.  Remember to thank your ad
 %=============================
 %  Dedication
 %=============================
-\newpage
-\thispagestyle{plain}
-\vspace*{3in}
-\begin{center}
-Dedicated to\\
-Somebody special (Wife, husband, girlfriend or boyfriend works well
-here. )
-\end{center}
+%\newpage
+%\thispagestyle{plain}
+%\vspace*{3in}
+%\begin{center}
+%Dedicated to\\
+%Somebody special (Wife, husband, girlfriend or boyfriend works well
+%here. )
+%\end{center}
 %
 %
 %
@@ -247,19 +247,19 @@ here. )
 \clearpage \phantomsection %used to correctly anchor hyperlinks
 \renewcommand\baselinestretch{1.5}
 \addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{plain}
-\bibliography{thesisBIB}
+\bibliographystyle{aiaa}
+\bibliography{Chapter_1/Chapter1Ref,Chapter_2/Chapter2Ref,Chapter_3/Chapter3Ref,Chapter_4/Chapter4Ref,Chapter_5/Chapter5Ref}
 %
 %-----------------------------------------------------------------------
 % Appendices
 %-----------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%
-\begin{appendices}
-\phantomsection %use \phantomsection command to correctly anchor hyperlinks
-\include{AppendixA}
-\phantomsection
-\include{AppendixB}
-\end{appendices}
+%\begin{appendices}
+%\phantomsection %use \phantomsection command to correctly anchor hyperlinks
+%\include{AppendixA}
+%\phantomsection
+%\include{AppendixB}
+%\end{appendices}
 %%%%%%%%%%%%%%%%%%%
 %
 %
