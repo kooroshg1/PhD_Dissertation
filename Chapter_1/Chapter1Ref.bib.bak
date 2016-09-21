@@ -1,3 +1,14 @@
+@article{jameson1988aerodynamic,
+  title={Aerodynamic design via control theory},
+  author={Jameson, Antony},
+  journal={Journal of scientific computing},
+  volume={3},
+  number={3},
+  pages={233--260},
+  year={1988},
+  publisher={Springer}
+}
+
 @article{han2013improving,
   title={Improving variable-fidelity surrogate modeling via gradient-enhanced kriging and a generalized hybrid bridge function},
   author={Han, Zhong-Hua and G{\"o}rtz, Stefan and Zimmermann, Ralf},
@@ -325,7 +336,7 @@
 @article{mittal2005immersed,
   title={Immersed boundary methods},
   author={Mittal, Rajat and Iaccarino, Gianluca},
-  journal={Annu. Rev. Fluid Mech.},
+  journal={Annual Review of Fluid Mechanics},
   volume={37},
   pages={239--261},
   year={2005},
@@ -400,7 +411,7 @@
 @article{arquis1984conditions,
   title={Sur les conditions hydrodynamiques au voisinage d’une interface milieu fluide-milieu poreux: applicationa la convection naturelle},
   author={Arquis, E and Caltagirone, JP},
-  journal={CR Acad. Sci. Paris II},
+  journal={Comptes Rendus de l'Académie des Sciences Paris II},
   volume={299},
   pages={1--4},
   year={1984}
@@ -442,7 +453,7 @@
 @article{mohd1997combined,
   title={Combined immersed-boundary/B-spline methods for simulations of ow in complex geometries},
   author={Mohd-Yusof, J},
-  journal={Annual Research Briefs. NASA Ames Research Center= Stanford University Center of Turbulence Research: Stanford},
+  journal={Annual Research Briefs},
   pages={317--327},
   year={1997}
 }
@@ -450,7 +461,7 @@
 @article{verzicco1998complex,
   title={LES in complex geometries using boundary body forces},
   author={Verzicco, R and Mohd-Yusof, J and Orlandi, P and Haworth, D},
-  journal={Center for Turbulence Research Proceedings of the Summer Program, NASA Ames= Stanford University},
+  journal={Center for Turbulence Research, Proceedings of the Summer Program, Stanford University},
   pages={171--186},
   year={1998}
 }

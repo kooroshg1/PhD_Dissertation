@@ -9,7 +9,7 @@ For the second demonstration problem, the flow over a cylinder is modeled via th
     \label{fig:C4_cylinderPhysicalDomain}
 \end{figure}
 %
-The boundary conditions are defined as the flow velocity at the inlet (left boundary) and the outflow (zero gradient) boundary condition at the outlet (right boundary). The top and bottom boundaries are modeled as free slip walls. The surface of the cylinder is modeled by the virtual boundary method. The cylinder is located at $(0.5, 0.0)$ and has the radius of $0.1 m$. Its surface is represented by using 100 Lagrangian nodes. The $\alpha$ and $\beta$ values for this analysis are selected as $-10^4$ and $-50$, respectively. These constants are problem dependent and are selected in such a way that the required velocity conditions are satisfied at the Lagrangian points. To ensure the stability of the numerical method, the CFL number is kept under one for all following analysis. This is done by selecting an appropriate time step for the chosen mesh size using Equation \eqref{eq:C4_CFLnumber}.
+The boundary conditions are defined as the flow velocity at the inlet (left boundary) and the outflow (zero gradient) boundary condition at the outlet (right boundary). The top and bottom boundaries are modeled as free slip walls. The pressure boundary conditions are defined as zero gradient on inlet, top, and bottom wall and zero dirichlet boundary condition at the outlet. The surface of the cylinder is modeled by the virtual boundary method. The cylinder is located at $(0.5, 1.5)$ and has the radius of $0.1 m$. Its surface is represented by using 50 Lagrangian nodes. The $\alpha$ and $\beta$ values for this analysis are selected as $-10^4$ and $-50$, respectively. These constants are problem dependent and are selected in such a way that the required velocity conditions are satisfied at the Lagrangian points. To ensure the stability of the numerical method, the CFL number is kept under one for all following analysis. This is done by selecting an appropriate time step for the chosen mesh size using Equation \eqref{eq:C4_CFLnumber}.
 %
 \begin{equation}\label{eq:C4_CFLnumber}
 	\frac{u \Delta t}{\Delta x} + \frac{v \Delta t}{\Delta y} \leq 1.0
@@ -19,19 +19,23 @@ The mesh convergence for this problem for a Reynolds number of 100 is shown in F
 %
 \begin{figure}[H]
     \centering
-    \subfigure[U-velocity on y = 0.]
+    \subfigure[U-velocity on y = 1.5]
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/meshConvergence_RE100_U.eps}
     }
     \quad
-    \subfigure[V-velocity on x = 0.5]
+    \subfigure[V-velocity on x = 2.0]
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/meshConvergence_RE100_V.eps}
     }
     \\
-    \subfigure[Pressure on y = 0]
+    \subfigure[Pressure on x = 2.0]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/meshConvergence_RE100_P.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/meshConvergence_RE100_P1.eps}
+    }
+    \subfigure[Pressure on y = 1.5]
+    {
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/meshConvergence_RE100_P2.eps}
     }
     \caption{Convergence results for Re = 100.}
     \label{fig:C4_meshConvergenceForCylidnerRE100GE}
@@ -72,7 +76,12 @@ The contour plots for the velocity and pressure are shown in Figure \ref{fig:C4_
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/v_velocity_contour_RE100.eps}
     }
-    \caption{Velocity contours for Re = 100.}
+    \\
+    \subfigure[Pressure]
+    {
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/pressure_contour_RE100.eps}
+    }
+    \caption{Velocity and pressure contours for Re = 100.}
     \label{fig:C4_contourPlotsForFlowOverCylidnerGE}
 \end{figure}
 %
@@ -93,7 +102,7 @@ To ensure zero velocity on the solid boundary, we looked at the value of $u$ and
     \label{fig:C4_fluidVelocityOnCylinder}
 \end{figure}
 %
-Finally, the pressure profile on the cylinder surface is calculated as shown in Figure \ref{fig:C4_pressureOnSurfaceCylinder}. No smoothing is done for calculating the pressure values at the Lagrangian points. This data is interpolated using the RD function of Equation \eqref{eq:C4_deltaFunction}.
+Finally, the pressure profile on the cylinder surface is calculated as shown in Figure \ref{fig:C4_pressureOnSurfaceCylinder}. No smoothing is done for calculating the pressure values at the Lagrangian points. This data is interpolated using the RD function of Equation \eqref{eq:C4_deltaFunction}. As shown here, the pressure distribution on the boundary is smooth. This is in contrast to other IB methods that result in a non-smooth pressure profiles over the boundaries.
 %
 \begin{figure}[H]
     \centering
@@ -119,60 +128,40 @@ For the sensitivity analysis, $\partial D/\partial X$ is calculated easily, sinc
 %
 For this analysis, the design variable, $b$, is selected as the radius of the cylinder; therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
 
-The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore have zero values. Obtaining the governing equations and boundary conditions, it is possible to solve the sensitivity equations. The convergence analysis for the sensitivity results are shown in Figure \ref{fig:C4_flowOverCylinderSAmeshConvergence}. As can be seen in these plots, the mesh size of $500 \times 375$ is selected for the rest of sensitivity analysis.
-%
-\begin{figure}[H]
-    \centering
-    \subfigure[U-velocity sensitivity on $y = 0.0$]
-    {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/convergence_dUdR_Y000_RE100.eps}
-    }
-    \quad
-    \subfigure[V-velocity sensitivity on $x = 0.75$]
-    {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/convergence_dVdR_X075_RE100.eps}
-    }
-    \\
-    \subfigure[Pressure sensitivity on $y = 0.0$]
-    {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/convergence_dPdR_Y000_RE100.eps}
-    }
-    \caption{Flow variable sensitivities with respect to change in the cylinder radius for different mesh sizes (Re = 100).}
-    \label{fig:C4_flowOverCylinderSAmeshConvergence}
-\end{figure}
-%
+The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore have zero values. These conditions are applied using a 4th order approximation on the boundaries of sensitivity equation. Obtaining the governing equations and boundary conditions, it is possible to solve the sensitivity equations.
+
 The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not contain the accuracy issues of the finite difference method and provides the accurate sensitivities up to machine precision. However, the analysis code requires handling complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculate the sensitivities. The complex-step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities of a different location in the domain is shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation} shows an acceptable comparison between the CSA and CS results.
 %
 \begin{figure}[H]
     \centering
-    \subfigure[U-velocity sensitivity on $y = 0.0$]
+    \subfigure[U-velocity sensitivity on $y = 1.50$]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_Y000_RE100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_Y150_RE100.eps}
     }
     \quad
-    \subfigure[U-velocity sensitivity on $y = 0.20$]
+    \subfigure[U-velocity sensitivity on $x = 2.00$]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_Y020_RE100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_X200_RE100.eps}
     }
     \\
-	\subfigure[V-velocity sensitivity on $x = 0.5$]
+	\subfigure[V-velocity sensitivity on $x = 1.50$]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_X050_RE100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_Y150_RE100.eps}
     }
     \quad
-    \subfigure[V-velocity sensitivity on $x = 0.75$]
+    \subfigure[V-velocity sensitivity on $x = 2.00$]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_X075_RE100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_X200_RE100.eps}
     }
     \\
-	\subfigure[Pressure sensitivity on $y = 0.0$]
+	\subfigure[Pressure sensitivity on $y = 1.50$]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dPdR_Y000_RE100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dPdR_Y150_RE100.eps}
     }
     \quad
-    \subfigure[Pressure sensitivity on $y = 0.20$]
+    \subfigure[Pressure sensitivity on $x = 2.00$]
     {
-    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dPdR_Y020_RE100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dPdR_X200_RE100.eps}
     }
     \caption{Verification of the flow variable sensitivities with respect to change in the cylinder radius for different location in the domain.}
     \label{fig:C4_flowOverCylinderSensitivityValidation}

@@ -85,8 +85,7 @@
   author={Tuncer, Ismail H and Walz, Ralf and Platzer, Max F},
   journal={AIAA paper},
   volume={2519},
-  pages={1998},
-  year={1998}
+  pages={AIAA-2519}
 }
 
 @article{mittal2001control,
@@ -110,7 +109,7 @@
 @article{williamson2004vortex,
   title={Vortex-induced vibrations},
   author={Williamson, CHK and Govardhan, R},
-  journal={Annu. Rev. Fluid Mech.},
+  journal={Annual Review of Fluid Mechanics},
   volume={36},
   pages={413--455},
   year={2004},

@@ -1,5 +1,5 @@
 \subsection{Vortex Induced Vibration}
-Vortex Induced Vibrations (VIV) are motions of solid structures immersed in fluid that are caused by the irregularities in the flow. VIV of structures are of practical interest to many fields of engineering. For example, they can cause vibration and noise in heat exchanger tubes and an aircraft wing. The practical significance of VIV has led to various studies discussed in the literature\cite{williamson2004vortex}. In this demonstration problem, we are interested in the forced oscillations of an elastically mounted, rigid cylinder for different values of the Reynolds number. The physical problem is shown in Figure \ref{fig:C5_cylinderShape}. The boundary conditions are selected as constant velocity at inlet, free slip boundary conditions on top and bottom walls, and outflow boundary condition at the outlet.
+Vortex Induced Vibrations (VIV) are motions of solid structures immersed in fluid that are caused by the irregularities in the flow. VIV of structures are of practical interest to many fields of engineering. For example, they can cause vibration and noise in heat exchanger tubes or an aircraft wing. In this demonstration problem, we are interested in the forced oscillations of an elastically mounted, rigid cylinder for different values of the Reynolds number. The physical problem is shown in Figure \ref{fig:C5_cylinderShape}. The boundary conditions are selected as constant velocity at inlet, free slip boundary conditions on top and bottom walls, and outflow boundary condition at the outlet.
 %
 \begin{figure}[H]
     \centering
@@ -32,11 +32,11 @@ To verify the simulation code developed for the IB simulation, we verified the s
      100 & 0.171 & 0.168 \\ \hline
      500 & 0.194 & 0.200 \\
 \end{tabular}
-\caption{Comparison between the shedding frequency calcualted using IB method and results from the literature.}
+\caption{Comparison of the shedding frequency using IB method and literature.}
 \label{table:C5_strouhalVerification}
 \end{table}
 %
-The effect of the number of Lagrangian points on the shedding frequency is shown in Figure \ref{fig:C5_numberOfLagrangianOnSheddingFreq} for the two Reynolds numbers of 100 and 500. As shown here, the number of Lagrangian points does not affect the vortex shedding frequency.
+The effect of the number of Lagrangian points on the shedding frequency is shown in Figure \ref{fig:C5_numberOfLagrangianOnSheddingFreq}. As shown here, the number of Lagrangian points does not affect the vortex shedding frequency.
 %
 \begin{figure}[H]
     \centering
@@ -59,7 +59,7 @@ After verifying the shedding frequency of IB solver, we attach the elastic struc
 	m \ddot{y} + k y = f(y, \dot{y}, t; R)
 \end{equation}
 %
-where $y$ is the cylinder location; $m$ is the cylinder mass; $k$ is elastic structure stiffness; and $f(y, \dot{y}, t; R)$ is the aerodynamic load. It should be noted that the load is an explicit function of cylinder location, velocity, and time, while an implicit function of cylinder radius. This requires an unsteady treatment of the FSI problem by coupling Equation \eqref{eq:C5_fluidGE} and \eqref{eq:C5_cylinderEquationOfMotion}.
+where $y$ is the cylinder location; $m$ is the cylinder mass; $k$ is elastic structure stiffness; and $f(y, \dot{y}, t; R)$ is the aerodynamic load. It should be noted that the load is an explicit function of cylinder location, velocity, and time, while an implicit function of cylinder radius. This requires an unsteady treatment of the FSI problem by coupling Equations \eqref{eq:C5_fluidGE} and \eqref{eq:C5_cylinderEquationOfMotion}.
 
 At each time step, the NS equations are solved and the pressure values at the Lagrangian nodes are calculated using the regularized Delta function. These pressure values are then integrated over the cylinder surface to calculate the force value on the right-hand-side of Equation \eqref{eq:C5_cylinderEquationOfMotion}. To solve for the structure displacement and velocity, Equation \eqref{eq:C5_cylinderEquationOfMotion} is written in the state-space form as shown in Equation \eqref{eq:C5_cylinderEquationOfMotionStateSpace}. This equation is then integrated in time alongside the NS equations using Adams-bashforth method. The initial condition for the structure is selected as zero displacement and velocity at $t = 0$.
 %
@@ -90,7 +90,7 @@ where the load, $f(y, \dot{y}, t; R)$, is calculated  as shown in Equation \eqre
 %
 In Equation \eqref{eq:C5_loadOnCylidner}, $p(x, y)$ is the pressure calculated from the CFD solution; $\mathcal{D}$ is the regularized delta function; and $ds$ represents the infinitesimal element on the cylinder surface.
 
-For the coupled FSI sensitivity analysis, we looked at the vortex induced vibration of the cylinder at two different Reynolds numbers. The sensitivity of the displacement to the radius of the cylinder is calculated and verified with the complex step results. The sensitivity equation for the fluid domain is derived in Chapter \ref{ch:shapeSenwithIB}, by solving it, we have the sensitivity of pressure field on the surface of the cylinder. The sensitivity equation for the structure is derived by differentiating Equation \eqref{eq:C5_cylinderEquationOfMotionStateSpace} as shown in Equation \eqref{eq:C5_cylinderEquationOfMotionSAStateSpace}.
+For the coupled FSI sensitivity analysis, we considered the vortex induced vibration of the cylinder at two different Reynolds numbers. The sensitivity of the displacement to the radius of the cylinder is calculated and verified with the complex step results. The sensitivity equation for the fluid domain is derived in Chapter \ref{ch:shapeSenwithIB}, by solving it, we have the sensitivity of pressure field on the surface of the cylinder. The sensitivity equation for the structure is derived by differentiating Equation \eqref{eq:C5_cylinderEquationOfMotionStateSpace} as shown in Equation \eqref{eq:C5_cylinderEquationOfMotionSAStateSpace}.
 %
 \begin{equation}\label{eq:C5_cylinderEquationOfMotionSAStateSpace}
 	\begin{bmatrix}
@@ -111,9 +111,9 @@ For the coupled FSI sensitivity analysis, we looked at the vortex induced vibrat
 	\end{bmatrix}
 \end{equation}
 %
-here, $()'$, represents the derivative with respect to the design variable. As can be seen, the same solver used for solving Equation \eqref{eq:C5_cylinderEquationOfMotionStateSpace} is utilized for solving Equation \eqref{eq:C5_cylinderEquationOfMotionSAStateSpace}. The only difference between the two is the load used for evaluating the right-hand-side of Equation \eqref{eq:C5_cylinderEquationOfMotionSAStateSpace}.
+here, $()'$, represents the derivative with respect to the design variable. It can be seen that the same solver used for solving Equation \eqref{eq:C5_cylinderEquationOfMotionStateSpace} is utilized for solving Equation \eqref{eq:C5_cylinderEquationOfMotionSAStateSpace}. The only difference between the two systems is the load used for evaluating the right-hand-side of Equation \eqref{eq:C5_cylinderEquationOfMotionSAStateSpace}.
 
-For this problem, the stiffness of the elastic structure, $k$, is selected as 1 N/m and the cylinder mass is chosen as 1 kg. The time history of cylinder displacement in the first 25 seconds of its motion is shown in Figure \ref{fig:C5_cylinderDisplacement}. As can be seen here, the cylinder starts from the initial position at $y=1.2$, and after a short transient region, starts oscillating at an almost constant amplitude as shown in Figure \ref{fig:C5_cylinderDisplacement}.
+For this problem, the stiffness of the elastic structure, $k$, is selected as 1 N/m and the cylinder mass is chosen as 1 kg. The time history of cylinder displacement in the first 25 seconds of its motion is shown in Figure \ref{fig:C5_cylinderDisplacement}. The cylinder starts from the initial position at $y=1.2$, and after a short transient region, starts oscillating at an almost constant amplitude as shown in Figure \ref{fig:C5_cylinderDisplacement}.
 %
 \begin{figure}[H]
     \centering
@@ -130,7 +130,7 @@ For this problem, the stiffness of the elastic structure, $k$, is selected as 1 
     \label{fig:C5_cylinderDisplacement}
 \end{figure}
 %
-Figure \ref{fig:C5_cylinderFSIvelocity} shows the u-velocity contour around the elastically mounted cylinder at different times. As can be seen, the vortex shedding is dominant at $t=5$. It should be noted that the vortex shedding starts before $t=5$ and causes the cylinder to oscillate.
+Figure \ref{fig:C5_cylinderFSIvelocity} shows the u-velocity contour around the elastically mounted cylinder at different times. As can be seen, the vortex shedding is dominant at $t=5$, but it started before $t=5$ and causes the cylinder to oscillate.
 %
 \begin{figure}[H]
     \centering
@@ -167,7 +167,7 @@ Figure \ref{fig:C5_cylinderFSIvelocity} shows the u-velocity contour around the 
     \label{fig:C5_cylinderFSIvelocity}
 \end{figure}
 %
-The time history of the sensitivity results are shown and verified with the complex step solution in Figure \ref{fig:C5_cylinderDisplacementSensitivity}. As shown here, at $t=0$, the sensitivity of displacement with respect to radius is zero since the initial location of cylinder is independent of its shape. However, the value of cylinder displacement will start oscillating between positive and negative numbers as the simulation continuous. This is what we are expecting since by increasing the radius, the loads on the cylinder will increase. This will result in an increase in the amplitude in both ends of the oscillation period.
+The time history of the sensitivity results are shown and verified with the complex step solution in Figure \ref{fig:C5_cylinderDisplacementSensitivity}. As shown here, at $t=0$, the sensitivity of displacement with respect to radius is zero since the initial location of cylinder is independent of its shape. However, the value of cylinder displacement will start oscillating between positive and negative numbers as the time progresses. This is what we are expecting since by increasing the radius, the loads on the cylinder will increase. This will result in an increase in the amplitude at both ends of the oscillation period.
 %
 \begin{figure}[H]
     \centering

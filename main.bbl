@@ -205,8 +205,8 @@ Uhlmann, M., \enquote{An immersed boundary method with direct forcing for the
   Vol.~209, No.~2, 2005, pp.~448--476.
 
 \bibitem{mittal2005immersed}
-Mittal, R. and Iaccarino, G., \enquote{Immersed boundary methods,} {\em Annu.
-  Rev. Fluid Mech.\/}, Vol.~37, 2005, pp.~239--261.
+Mittal, R. and Iaccarino, G., \enquote{Immersed boundary methods,} {\em Annual
+  Review of Fluid Mechanics\/}, Vol.~37, 2005, pp.~239--261.
 
 \bibitem{goldstein1993modeling}
 Goldstein, D., Handler, R., and Sirovich, L., \enquote{Modeling a no-slip flow
@@ -221,8 +221,8 @@ Durlofsky, L. and Brady, J., \enquote{Analysis of the Brinkman equation as a
 \bibitem{arquis1984conditions}
 Arquis, E. and Caltagirone, J., \enquote{Sur les conditions hydrodynamiques au
   voisinage d’une interface milieu fluide-milieu poreux: applicationa la
-  convection naturelle,} {\em CR Acad. Sci. Paris II\/}, Vol.~299, 1984,
-  pp.~1--4.
+  convection naturelle,} {\em Comptes Rendus de l'Académie des Sciences Paris
+  II\/}, Vol.~299, 1984, pp.~1--4.
 
 \bibitem{angot1999analysis}
 Angot, P., \enquote{Analysis of singular perturbations on the Brinkman problem
@@ -243,15 +243,14 @@ Kevlahan, N. K.-R. and Ghidaglia, J.-M., \enquote{Computation of turbulent flow
 
 \bibitem{mohd1997combined}
 Mohd-Yusof, J., \enquote{Combined immersed-boundary/B-spline methods for
-  simulations of ow in complex geometries,} {\em Annual Research Briefs. NASA
-  Ames Research Center= Stanford University Center of Turbulence Research:
-  Stanford\/}, 1997, pp.~317--327.
+  simulations of ow in complex geometries,} {\em Annual Research Briefs\/},
+  1997, pp.~317--327.
 
 \bibitem{verzicco1998complex}
 Verzicco, R., Mohd-Yusof, J., Orlandi, P., and Haworth, D., \enquote{LES in
   complex geometries using boundary body forces,} {\em Center for Turbulence
-  Research Proceedings of the Summer Program, NASA Ames= Stanford
-  University\/}, 1998, pp.~171--186.
+  Research, Proceedings of the Summer Program, Stanford University\/}, 1998,
+  pp.~171--186.
 
 \bibitem{verzicco2002large}
 Verzicco, R., Fatica, M., Iaccarino, G., Moin, P., and Khalighi, B.,
@@ -431,6 +430,11 @@ Kreissl, S., Pingen, G., and Maute, K., \enquote{An explicit level set approach
   method,} {\em International Journal for Numerical Methods in Fluids\/},
   Vol.~65, No.~5, 2011, pp.~496--519.
 
+\bibitem{cross2015local}
+Cross, D.~M. and Canfield, R.~A., \enquote{Local continuum shape sensitivity
+  with spatial gradient reconstruction for nonlinear analysis,} {\em Structural
+  and Multidisciplinary Optimization\/}, Vol.~51, No.~4, 2015, pp.~849--865.
+
 \bibitem{wang1995improved}
 Wang, L. and Grandhi, R.~V., \enquote{Improved two-point function
   approximations for design optimization,} {\em AIAA journal\/}, Vol.~33,
@@ -458,10 +462,6 @@ Van~Loon, R., Anderson, P., Van~de Vosse, F., and Sherwin, S.,
   deformable bodies,} {\em Computers \& structures\/}, Vol.~85, No.~11, 2007,
   pp.~833--843.
 
-\bibitem{williamson2004vortex}
-Williamson, C. and Govardhan, R., \enquote{Vortex-induced vibrations,} {\em
-  Annu. Rev. Fluid Mech.\/}, Vol.~36, 2004, pp.~413--455.
-
 \bibitem{chen1987flow}
 Chen, S.-S., {\em Flow-induced vibration of circular cylindrical structures\/},
   Vol. 414, Hemisphere publishing corporation Washington, DC, 1987.
@@ -479,7 +479,7 @@ Mittal, S. and Raghuvanshi, A., \enquote{Control of vortex shedding behind
 \bibitem{tuncer1998computational}
 Tuncer, I.~H., Walz, R., and Platzer, M.~F., \enquote{A computational study on
   the dynamic stall of a flapping airfoil,} {\em AIAA paper\/}, Vol.~2519,
-  1998, pp.~1998.
+  pp.~AIAA 98--2519.
 
 \bibitem{shyy2008computational}
 Shyy, W., Lian, Y., Tang, J., Liu, H., Trizila, P., Stanford, B., Bernal, L.,
@@ -496,12 +496,12 @@ Tuncer, I.~H. and Platzer, M.~F., \enquote{Computational study of flapping
 \bibitem{lian2008comparative}
 Lian, Y., Ol, M.~V., and Shyy, W., \enquote{Comparative study of pitch-plunge
   airfoil aerodynamics at transitional reynolds number,} {\em AIAA paper\/},
-  Vol.~652, No. 2008, 2008, pp.~16.
+  Vol.~652, pp.~AIAA 2008--652.
 
 \bibitem{webb2008effects}
 Webb, C., Dong, H., and Ol, M., \enquote{Effects of unequal pitch and plunge
   airfoil motion frequency on aerodynamic response,} {\em 46th AIAA Aerospace
-  Sciences Meeting and Exhibit\/}, 2008, pp. 7--10.
+  Sciences Meeting and Exhibit\/}, 2008, pp. AIAA Paper 2008--582.
 
 \bibitem{luersen2006computationally}
 Luersen, M., Le~Riche, R., Lemosse, D., and Le~Ma{\^\i}tre, O., \enquote{A
@@ -519,8 +519,7 @@ Shen, L., Zhang, X., Yue, D.~K., and Triantafyllou, M.~S., \enquote{Turbulent
   {\em Journal of Fluid Mechanics\/}, Vol.~484, 2003, pp.~197--221.
 
 \bibitem{kim2007penalty}
-Kim, Y. and Peskin, C.~S., \enquote{Penalty immersed boundary method for an
-  elastic boundary with mass,} {\em Physics of Fluids (1994-present)\/},
-  Vol.~19, No.~5, 2007, pp.~053103.
+Kim, Y. and Peskin, C.~S., {\em Penalty immersed boundary method for an elastic
+  boundary with mass\/}, Vol.~19, AIP Publishing, 2007.
 
 \end{thebibliography}

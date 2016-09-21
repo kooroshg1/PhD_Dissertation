@@ -85,22 +85,22 @@ To verify the discretization process, we compare the analytical solution of this
     \centering
     \subfigure[$n = 6$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n6.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/finitedifference_vs_analytical_n6.eps}
     }
     \quad
     \subfigure[$n = 12$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n12.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/finitedifference_vs_analytical_n12.eps}
     }
     \\
     \subfigure[$n = 24$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n24.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/finitedifference_vs_analytical_n24.eps}
     }
     \quad
     \subfigure[$n = 48$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/finitedifference_vs_analytical_n48.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/finitedifference_vs_analytical_n48.eps}
     }
     \caption{Comparison between the analytical and finite difference solutions for 1D heat equation for different number of nodes.}
     \label{fig:C2_verificationOfSolver}
@@ -189,22 +189,22 @@ Where $\hat{y}$ is the value calculated using DSA and $y$ is the true value calc
     \centering
     \subfigure[$n = 11$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/DSA_n11.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/DSA_n11.eps}
     }
     \quad
     \subfigure[$n = 41$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/DSA_n41.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/DSA_n41.eps}
     }
     \\
     \subfigure[$n = 81$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/DSA_n81.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/DSA_n81.eps}
     }
     \quad
     \subfigure[$n = 161$]
     {
-    \includegraphics[width=7.0cm]{Chapter_2/figure/DSA_n161.eps}
+    \includegraphics[width=6.5cm]{Chapter_2/figure/DSA_n161.eps}
     }
     \caption{Comparison between discrete sensitivity analysis and analytical results for different number of nodes.}
     \label{fig:C2_discreteSensitivityVerification}
@@ -299,7 +299,7 @@ Where $b$ is the design variable. $[K_s]$ is not affected by the design variable
     \right\}
 \end{equation}
 %
-In Equation \eqref{eq:C2_discretizedSensitivityEquation}, $[U]$ is known as the result of solving the governing equation \eqref{eq:C2_discretizedBarEquation}that change in and $\dfrac{\partial F_d}{\partial b}$ is easily calculated since the distributed force is analytically known. $\dfrac{\partial K}{\partial b}$ is calculated by differentiating Equation \eqref{eq:C2_stiffnessMatrixOfBar}. It should be noted that the change in bar length, $L$, only affects $l_3$. Therefore, $\dfrac{\partial l_3}{\partial L}$ is equal to one. Finally, the sensitivity of the stiffness matrix to the shape design variable for a simple case of Equation \eqref{eq:C2_stiffnessMatrixOfBar} is written as:
+In Equation \eqref{eq:C2_discretizedSensitivityEquation}, $[U]$ is known as the result of solving the governing equation \eqref{eq:C2_discretizedBarEquation} that change in and $\dfrac{\partial F_d}{\partial b}$ is easily calculated since the distributed force is analytically known. $\dfrac{\partial K}{\partial b}$ is calculated by differentiating Equation \eqref{eq:C2_stiffnessMatrixOfBar}. It should be noted that the change in bar length, $L$, only affects $l_3$. Therefore, $\dfrac{\partial l_3}{\partial L}$ is equal to one. Finally, the sensitivity of the stiffness matrix to the shape design variable for a simple case of Equation \eqref{eq:C2_stiffnessMatrixOfBar} is written as:
 %
 \begin{equation}\label{eq:C2_sensitivityOfStiffnessMatrixOfBar}
     \left[ \frac{\partial K}{\partial L} \right] = 

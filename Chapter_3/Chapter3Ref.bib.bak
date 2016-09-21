@@ -147,14 +147,6 @@
   publisher={Cambridge Univ Press}
 }
 
-@article{mohd1997combined,
-  title={Combined immersed-boundary/B-spline methods for simulations of ow in complex geometries},
-  author={Mohd-Yusof, J},
-  journal={Annual Research Briefs. NASA Ames Research Center= Stanford University Center of Turbulence Research: Stanford},
-  pages={317--327},
-  year={1997}
-}
-
 @article{majumdar2001rans,
   title={RANS solvers with adaptive structured boundary non-conforming grids},
   author={Majumdar, Sekhar and Iaccarino, Gianluca and Durbin, Paul},
@@ -174,14 +166,4 @@
   publisher={Wiley Online Library}
 }
 
-@article{borrvall2003topology,
-  title={Topology optimization of fluids in Stokes flow},
-  author={Borrvall, Thomas and Petersson, Joakim},
-  journal={International journal for numerical methods in fluids},
-  volume={41},
-  number={1},
-  pages={77--107},
-  year={2003},
-  publisher={Wiley Online Library}
-}
 
