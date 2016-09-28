@@ -108,7 +108,7 @@ The thin lines in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dprob
     \label{fig:C4_sensitivityResults1Dproblem}
 \end{figure}
 %
-As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA results starts to decay near the boundary. It should be noted that this domain corresponds to the region that we chose the RH function value to have its 99 percent change. Therefore, the size of this region is known prior to the analysis. As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, decay of accuracy near the walls did not affect the sensitivity results in regions further away from the boundary. This means that the sensitivities near the boundary can be reconstructed by post-processing the sensitivity data. This is done by using function approximation techniques such as linear extrapolation or TANA \cite{wang1995improved}. The reconstructed results of Figure \ref{fig:C4_sensitivityResults1Dproblem} are done using linear extrapolation as shown in Figure \ref{fig:C4_sensitivityResultsReconstructed1Dproblem}.
+As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA results starts to decay near the boundary. It should be noted that this domain corresponds to the region that we chose the RH function value to have its 99 percent change. Therefore, the size of this region is known prior to the analysis. As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, decay of accuracy near the walls did not affect the sensitivity results in regions further away from the boundary. Sensitivity response near the boundaries is improved by using higher order method to represent the boundary. The results based on higher order boundary representation are shown in Figure \ref{fig:C4_sensitivityResultsReconstructed1Dproblem}.
 %
 \begin{figure}[H]
     \centering
@@ -131,7 +131,7 @@ As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw05742.eps}
     }
-    \caption{Reconstructed sensitivity by post-processing the results.}
+    \caption{Improving the sensitivity results by using higher order boundary representation.}
     \label{fig:C4_sensitivityResultsReconstructed1Dproblem}
 \end{figure}
 %
@@ -226,7 +226,7 @@ The convergence results for the sensitivity analysis are shown in Figure \ref{fi
     \label{fig:C4_virtualBoundarySAconvergence}
 \end{figure}
 %
-To better investigate the sensitivity results, we looked at the velocity sensitivity profile between the two plates in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfile}. As seen here, the accuracy of the sensitivity results decays near the perturbed boundary. The accuracy decay near the boundary can be fixed by reconstructing the sensitivities near the boundary as was done in the penalization method. The reconstructed results are shown in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}.
+To better investigate the sensitivity results, we looked at the velocity sensitivity profile between the two plates in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfile}. As seen here, the accuracy of the sensitivity results decays near the perturbed boundary. As before, the accuracy decay near the boundary is fixed by using higher order boundary representation as shown in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}.
 %
 \begin{figure}[H]
     \centering
@@ -275,7 +275,7 @@ To better investigate the sensitivity results, we looked at the velocity sensiti
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000_reconstructed.eps}
     }
-    \caption{Reconstructed sensitivity by post-processing the results.}
+    \caption{Effect of higher order boundary definition on the sensitivity analysis.}
     \label{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}
 \end{figure}
 %

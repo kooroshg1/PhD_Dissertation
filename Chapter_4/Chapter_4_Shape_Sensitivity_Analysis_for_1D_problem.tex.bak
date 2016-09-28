@@ -108,30 +108,30 @@ The thin lines in Figure \ref{fig:C4_effectOfRHfunctionOnSimulationResults1Dprob
     \label{fig:C4_sensitivityResults1Dproblem}
 \end{figure}
 %
-As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA results starts to decay near the boundary. It should be noted that this domain corresponds to the region that we chose the RH function value to have its 99 percent change. Therefore, the size of this region is known prior to the analysis. As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, decay of accuracy near the walls did not affect the sensitivity results in regions further away from the boundary. This means that the sensitivities near the boundary can be reconstructed by post-processing the sensitivity data. This is done by using function approximation techniques such as linear extrapolation or TANA \cite{wang1995improved}. The reconstructed results of Figure \ref{fig:C4_sensitivityResults1Dproblem} are done using linear extrapolation as shown in Figure \ref{fig:C4_sensitivityResultsReconstructed1Dproblem}.
+As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, the accuracy of CSA results starts to decay near the boundary. It should be noted that this domain corresponds to the region that we chose the RH function value to have its 99 percent change. Therefore, the size of this region is known prior to the analysis. As shown in Figure \ref{fig:C4_sensitivityResults1Dproblem}, decay of accuracy near the walls did not affect the sensitivity results in regions further away from the boundary. Sensitivity response near the boundaries is improved by using higher order method to represent the boundary. The results based on higher order boundary representation are shown in Figure \ref{fig:C4_sensitivityResultsReconstructed1Dproblem}.
 %
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.4321, n = 120$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw04321.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw04321.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.7583, n = 120$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw07583.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw07583.eps}
     }
     \\
     \subfigure[$x_{wall} = 0.2451, n = 30$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw02451.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw02451.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.5742, n = 60$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw05742.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/penalizationMethod_sensitivityProfile_reconstructed_xw05742.eps}
     }
-    \caption{Reconstructed sensitivity by post-processing the results.}
+    \caption{Improving the sensitivity results by using higher order boundary representation.}
     \label{fig:C4_sensitivityResultsReconstructed1Dproblem}
 \end{figure}
 %
@@ -226,28 +226,28 @@ The convergence results for the sensitivity analysis are shown in Figure \ref{fi
     \label{fig:C4_virtualBoundarySAconvergence}
 \end{figure}
 %
-To better investigate the sensitivity results, we looked at the velocity sensitivity profile between the two plates in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfile}. As seen here, the accuracy of the sensitivity results decays near the perturbed boundary. The accuracy decay near the boundary can be fixed by reconstructing the sensitivities near the boundary as was done in the penalization method. The reconstructed results are shown in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}.
+To better investigate the sensitivity results, we looked at the velocity sensitivity profile between the two plates in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfile}. As seen here, the accuracy of the sensitivity results decays near the perturbed boundary. As before, the accuracy decay near the boundary is fixed by using higher order boundary representation as shown in Figure \ref{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}.
 %
 \begin{figure}[H]
     \centering
     \subfigure[$x_{wall} = 0.5321 m, U_{wall} = 1 m/s, n = 95$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw05321_U1.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw05321_U1.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.6845 m, U_{wall} = 10 m/s, n = 51$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw06845_U10.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw06845_U10.eps}
     }
     \\
     \subfigure[$x_{wall} = 0.2861 m, U_{wall} = 100 m/s, n = 71$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw02861_U100.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw02861_U100.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.7412 m, U_{wall} = 1000 m/s, n = 86$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000.eps}
     }
     \caption{Velocity sensitivity profile between the two plates.}
     \label{fig:C4_virtualBoundaryVelocitySensitivityProfile}
@@ -258,24 +258,24 @@ To better investigate the sensitivity results, we looked at the velocity sensiti
     \centering
     \subfigure[$x_{wall} = 0.5321 m, U_{wall} = 1 m/s, n = 95$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw05321_U1_reconstructed.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw05321_U1_reconstructed.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.6845 m, U_{wall} = 10 m/s, n = 51$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw06845_U10_reconstructed.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw06845_U10_reconstructed.eps}
     }
     \\
     \subfigure[$x_{wall} = 0.2861 m, U_{wall} = 100 m/s, n = 71$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw02861_U100_reconstructed.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw02861_U100_reconstructed.eps}
     }
     \quad
     \subfigure[$x_{wall} = 0.7412 m, U_{wall} = 1000 m/s, n = 86$]
     {
-    \includegraphics[width=7.0cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000_reconstructed.eps}
+    \includegraphics[width=6.5cm]{Chapter_4/figure/virtualBoundary_sensitivityProfile_xw07412_U1000_reconstructed.eps}
     }
-    \caption{Reconstructed sensitivity by post-processing the results.}
+    \caption{Effect of higher order boundary definition on the sensitivity analysis.}
     \label{fig:C4_virtualBoundaryVelocitySensitivityProfileReconstructed}
 \end{figure}
 %

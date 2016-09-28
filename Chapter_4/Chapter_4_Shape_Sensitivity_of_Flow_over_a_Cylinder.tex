@@ -85,7 +85,7 @@ The contour plots for the velocity and pressure are shown in Figure \ref{fig:C4_
     \label{fig:C4_contourPlotsForFlowOverCylidnerGE}
 \end{figure}
 %
-To ensure zero velocity on the solid boundary, we looked at the value of $u$ and $v$ velocities at the Lagrangian points on the boundary. These are shown in Figure \ref{fig:C4_fluidVelocityOnCylinder}. As shown here, the forcing terms brought the velocity to zero within the accuracy requirement. The oscillation of the velocity magnitude is due to the small value of the velocity compared to the numerical error of the simulation. $\theta$ is the polar coordinate of Lagrangian points on the cylinder surface as shown in Figure \ref{fig:C4_cylinderPhysicalDomain}.
+To ensure zero velocity on the solid boundary, we looked at the value of $u$ and $v$ velocities at the Lagrangian points on the boundary. These are shown in Figure \ref{fig:C4_fluidVelocityOnCylinder}. As shown here, the forcing terms brought the velocity to zero within the accuracy requirement. $\theta$ is the polar coordinate of Lagrangian points on the cylinder surface as shown in Figure \ref{fig:C4_cylinderPhysicalDomain}.
 %
 \begin{figure}[H]
     \centering
@@ -128,7 +128,7 @@ For the sensitivity analysis, $\partial D/\partial X$ is calculated easily, sinc
 %
 For this analysis, the design variable, $b$, is selected as the radius of the cylinder; therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
 
-The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore have zero values. These conditions are applied using a 4th order approximation on the boundaries of sensitivity equation. Obtaining the governing equations and boundary conditions, it is possible to solve the sensitivity equations.
+The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore have zero values. These conditions are applied using a 4th order approximation on the boundaries of sensitivity equation. It should be noted that the solver uses 2nd order discretization vs the boundary condition. This is required for accurate sensitivity calculation. Obtaining the governing equations and boundary conditions, it is possible to solve the sensitivity equations.
 
 The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not contain the accuracy issues of the finite difference method and provides the accurate sensitivities up to machine precision. However, the analysis code requires handling complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculate the sensitivities. The complex-step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities of a different location in the domain is shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation} shows an acceptable comparison between the CSA and CS results.
 %
@@ -144,7 +144,7 @@ The complex step method is used to validate the sensitivity response of the syst
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_X200_RE100.eps}
     }
     \\
-	\subfigure[V-velocity sensitivity on $x = 1.50$]
+	\subfigure[V-velocity sensitivity on $y = 1.50$]
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_Y150_RE100.eps}
     }
@@ -211,7 +211,7 @@ The sensitivity contours for the velocity and pressure are shown in Figure \ref{
     \label{fig:C4_flowOverCylinderSensitivityContour}
 \end{figure}
 %
-In most aerodynamic/aeroelastic designs, the sensitivity analysis is conducted for calculating the sensitivity of the pressure field on the surface of the solid boundaries. This sensitivity value is later used for calculating the sensitivity of aerodynamic forces acting on the solid boundaries by integrating the sensitivity of the pressure field. For this purpose, the sensitivity of the pressure field is plotted on solid boundaries and verified with the complex step method in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}. It should be noted that Savitzky-Golay filtering is used to smooth the results over the solid boundary. As shown in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}, the two results agree very well with each other.
+In most aerodynamic/aeroelastic designs, the sensitivity analysis is conducted for calculating the sensitivity of the pressure field on the surface of the solid boundaries. This sensitivity value is later used for calculating the sensitivity of aerodynamic forces acting on the solid boundaries by integrating the sensitivity of the pressure field. For this purpose, the sensitivity of the pressure field is plotted on solid boundaries and verified with the complex step method in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}. It should be noted that Savitzky-Golay filtering is used to smooth the sensitivity results over the solid boundary. As shown in Figure \ref{fig:C4_flowOverCylidner_pressureSensitivityOnSurface}, the two results agree very well with each other.
 %
 \begin{figure}[H]
     \centering
