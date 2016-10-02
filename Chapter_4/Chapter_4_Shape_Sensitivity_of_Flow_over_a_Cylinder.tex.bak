@@ -144,7 +144,7 @@ The complex step method is used to validate the sensitivity response of the syst
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dUdR_X200_RE100.eps}
     }
     \\
-	\subfigure[V-velocity sensitivity on $x = 1.50$]
+	\subfigure[V-velocity sensitivity on $y = 1.50$]
     {
     \includegraphics[width=6.5cm]{Chapter_4/figure/flow_over_cylinder/validation_dVdR_Y150_RE100.eps}
     }
