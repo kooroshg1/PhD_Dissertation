@@ -1,3 +1,10 @@
+@book{szabo1991finite,
+  title={Finite element analysis},
+  author={Szabo, Barna Aladar and Babu{\v{s}}ka, Ivo},
+  year={1991},
+  publisher={John Wiley \& Sons}
+}
+
 @book{mase2009continuum,
   title={Continuum mechanics for engineers},
   author={Mase, G Thomas and Smelser, Ronald E and Mase, George E},

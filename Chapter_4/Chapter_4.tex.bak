@@ -1,7 +1,7 @@
 \chapter{Shape Sensitivity Analysis Using Immersed Boundary Method}\label{ch:shapeSenwithIB}
 In this chapter we apply the continuum sensitivity analysis to the CFD simulations conducted using the Immersed Boundary (IB) method, focusing on calculating the sensitivity of flow descriptors, such as pressure and velocity, with respect to the design variables that control the shape of the boundary, i.e. radius of a cylinder, or airfoil camber. The solid domain boundary is represented by using an analytical function. However, as will be shown in the following chapters, this is not required for applying this method. In this chapter, the modifications of the IB approach for making it suitable for continuum sensitivity formulation are discussed. To the best of the author's knowledge, this is the first time that continuum sensitivity analysis has been done for CFD simulations based on the continuum IB formulation.
 
-In contrast to traditional body conformal methods, in IB approach, the solid boundaries are represented by modifying the governing equation near the boundaries. In the case of continuum IB method, this is done by adding the appropriate force term to the cells adjacent to the immersed boundary. The value of these forces are calculated by using either a feedback forcing \cite{goldstein1993modeling} or a penalization function \cite{arquis1984conditions}. The Navier-Stokes (NS) equations are written as:
+In contrast to traditional body conformal methods, in the IB approach, the solid boundaries are represented by modifying the governing equation near the boundaries. In the case of continuum IB method, this is done by adding the appropriate force term to the cells adjacent to the immersed boundary. The value of these forces are calculated by using either a feedback forcing \cite{goldstein1993modeling} or a penalization function \cite{arquis1984conditions}. The Navier-Stokes (NS) equations are written as:
 %
 \begin{equation}\label{eq:C4_NS}
     \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} = 
@@ -13,7 +13,7 @@ Where $\mathbf{u}$ is the velocity vector, $P$ is pressure, $\mu$ is kinematic v
 \begin{figure}[H]
     \centering
     \includegraphics[width=7.00cm]{Chapter_4/figure/lagrangian_and_eulerian_nodes.jpg}
-    \caption{Eulerian and Lagrangian nodes for representing the fluid and solid domains. The Eulerian and Lagrangian nodes are represented by black squares and red circles, respectively.}
+    \caption{Eulerian and Lagrangian nodes for representing the fluid and solid domains. The Eulerian and Lagrangian nodes are represented by squares and circles, respectively.}
     \label{fig:C4_lagrangianAndEulerianDomain}
 \end{figure}
 %
@@ -30,7 +30,7 @@ Where $\mathcal{S}$ is the step function, $\mathcal{X}$ defines the relative loc
     -\frac{\nabla P}{\rho} + \mu \nabla^2 \mathbf{u} -\mathcal{S}(\mathcal{X}(b)) \kappa \mathbf{u}
 \end{equation}
 %
-As mentioned in Chapter \ref{ch:sensitivityAnalysis}, to derive the continuum sensitivity formulation, the governing equation of \eqref{eq:C4_NSwithPenalization} is differentiated with respect to the design variable, $b$. The step function $\mathcal{S}$'s derivative is Dirac delta function, which is singular and cannot be used to solve the governing equations in a numerical framework. Therefore, a regularized Heaviside function, $\mathcal{H}$, will be employed instead of the step function for penalizing the governing equation. The effect of this function on the simulation results and sensitivity formulation will be discussed in the following sections.
+As mentioned in Chapter \ref{ch:sensitivityAnalysis}, to derive the continuum sensitivity formulation, the governing equation of \eqref{eq:C4_NSwithPenalization} is differentiated with respect to the design variable, $b$. The step function $\mathcal{S}$'s derivative is the Dirac delta function, which is singular and cannot be used to solve the governing equations in a numerical framework. Therefore, a regularized Heaviside function, $\mathcal{H}$, will be employed instead of the step function for penalizing the governing equation. The effect of this function on the simulation results and sensitivity formulation will be discussed in the following sections.
 
 In the virtual boundary method, the forcing function is calculated at the \emph{Lagrangian} nodes.
 %
@@ -61,7 +61,7 @@ The Regularized Heaviside (RH) function is a step function that is smoothened so
     \label{fig:C4_heavisideFunctionExample}
 \end{figure}
 %
-As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all RH functions, other than $\mathcal{H}_3$, are symmetric around $x = 0$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain and accurate representation of the boundary requires the force terms to have same amount of information from the both side of the boundary. By using asymmetric definition for the RH function, the force term will be biased only on information from one side of the boundary. In this work, the RH function selected is $\mathcal{H}_4 = \dfrac{1 + \tanh(x)}{2}$, since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}, the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
+As shown in Figure \ref{fig:C4_heavisideFunctionExample}, all RH functions, other than $\mathcal{H}_3$, are symmetric around $x = 0$. This symmetry is required since the line $x = 0$ defines the boundary of the solid domain and accurate representation of the boundary requires the force terms to have same amount of information from both side of the boundary. By using an asymmetric definition for the RH function, the force term will be biased only on information from one side of the boundary. In this work, the RH function selected is $\mathcal{H}_4 = \dfrac{1 + \tanh(x)}{2}$, since it gives the fastest transition from $0$ to $1$. This transition is further controlled by adding the control parameter $\eta$ to the RH function definition as shown in Equation \eqref{eq:C4_heavisideFunction}. The effect of the control parameter on the RH function is shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}. As shown in Figure \ref{fig:C4_heavisideFunctionWithControlParamter}, the transition region is reduced by increasing the control parameter. Using this feature, the smearing effect of penalization method can be reduced near the boundaries.
 %
 \begin{equation}\label{eq:C4_heavisideFunction}
     \mathcal{H} = \frac{1 + \tanh(x / \eta)}{2}

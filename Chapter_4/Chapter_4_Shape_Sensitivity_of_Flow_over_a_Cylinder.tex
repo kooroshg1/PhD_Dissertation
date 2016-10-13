@@ -111,7 +111,7 @@ Finally, the pressure profile on the cylinder surface is calculated as shown in 
     \label{fig:C4_pressureOnSurfaceCylinder}
 \end{figure}
 %
-The continuum sensitivity equations are derived by differentiating the governing NS equations of \eqref{eq:C4_NSwithvirtualBoundaryIB} with respect to the shape design variable, $b$, as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. For this problem, the cylinder boundary is defined using the following analytical level-set function. For the points on the cylinder surface, Equation \eqref{eq:C4_levelSetFunctionForCylinder} is equal to zero.
+The continuum sensitivity equations are derived by differentiating the governing NS equations of \eqref{eq:C4_NSwithvirtualBoundaryIB} with respect to the shape design variable, $b$, as shown in Equation \eqref{eq:C4_NSwithvirtualBoundaryIBsensitivity}. For this problem, the cylinder boundary is defined using the following analytical level-set function. For the points on the cylinder surface, Equation \eqref{eq:C4_levelSetFunctionForCylinder} holds.
 %
 \begin{equation}\label{eq:C4_levelSetFunctionForCylinder}
 	\mathcal{R}(x, y; r): (x - x_0)^2 + (y - y_0)^2 = r^2
@@ -128,9 +128,9 @@ For the sensitivity analysis, $\partial D/\partial X$ is calculated easily, sinc
 %
 For this analysis, the design variable, $b$, is selected as the radius of the cylinder; therefore, the right-hand-side of Equation \eqref{eq:C4_levelSetFunctionForCylinderSA} reduces to $2r$.
 
-The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore have zero values. These conditions are applied using a 4th order approximation on the boundaries of sensitivity equation. It should be noted that the solver uses 2nd order discretization vs the boundary condition. This is required for accurate sensitivity calculation. Obtaining the governing equations and boundary conditions, it is possible to solve the sensitivity equations.
+The boundary conditions for the sensitivity analysis are defined by differentiating the original boundary conditions of the governing equations. These conditions do not depend on the design variables and therefore their material derivatives have zero values. These conditions are applied using a fourth order approximation on the far field boundaries of sensitivity equation. It should be noted that the solver uses second order discretization for the boundary condition. This is required for accurate sensitivity calculation. Obtaining the differentiated governing equations and boundary conditions, it is possible to solve the sensitivity equations.
 
-The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not contain the accuracy issues of the finite difference method and provides the accurate sensitivities up to machine precision. However, the analysis code requires handling complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculate the sensitivities. The complex-step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities of a different location in the domain is shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation} shows an acceptable comparison between the CSA and CS results.
+The complex step method is used to validate the sensitivity response of the system. As mentioned in Chapter \ref{ch:introduction}, the complex step method does not suffer from the accuracy issues of the finite difference method and provides the accurate sensitivities up to machine precision. However, the analysis code requires handling complex arithmetic. The analysis code is developed in MATLAB using the guidelines of \cite{martins2003complex} so that complex step can be used to calculate the sensitivities. The complex-step derivative is defined in Equation \eqref{eq:C1_compelxStepFormula}. The comparison of the CSA results with the complex step solution for the sensitivities of a different location in the domain is shown in Figure \ref{fig:C4_flowOverCylinderSensitivityValidation}. The RMSE value is used to compare the results of continuum sensitivity analysis (CSA) and complex step (CS) method. Figure \ref{fig:C4_flowOverCylinderSensitivityValidation} shows an acceptable comparison between the CSA and CS results.
 %
 \begin{figure}[H]
     \centering
@@ -167,7 +167,7 @@ The complex step method is used to validate the sensitivity response of the syst
     \label{fig:C4_flowOverCylinderSensitivityValidation}
 \end{figure}
 %
-The rate of convergence of the sensitivity results are investigated in Figure \ref{fig:C4_flowOverCylinderSArateOfConvergence}. The slope of the fitted line (dashed line) for $u$-velocity, $v$-velocity, and pressure sensitivity are reported as $-2.2$, $-1.94$, and $-2.31$, respectively. The $v$-velocity has lower convergence rate since the sampling location is near the wall when the spatial approximations are first order.
+The rate of convergence of the sensitivity results are investigated in Figure \ref{fig:C4_flowOverCylinderSArateOfConvergence}. The slope of the fitted line (dashed line) for $u$-velocity, $v$-velocity, and pressure sensitivity are reported as $-2.2$, $-1.94$, and $-2.31$, respectively. The $v$-velocity has lower convergence rate since the sampling location is near the wall where the spatial approximations are first order.
 %
 \begin{figure}[H]
     \centering

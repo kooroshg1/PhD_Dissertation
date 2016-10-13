@@ -5,12 +5,12 @@ For a continuous system, the governing equations and boundary conditions are wri
 %
 \begin{subequations}\label{eq:C2_continuumGoverningEquation}
 \begin{align}
-    A(u, t; b) &= 0 \qquad \qquad \text{on } \Omega \\
-    B(u, t; b) &= g(x, t; b) \quad \text{on } \Gamma
+    A(\mathbf{u}, t; \mathbf{b}) &= \textbf{0} \qquad \qquad \text{on } \Omega \\
+    B(\mathbf{u}, t; \mathbf{b}) &= g(\mathbf{x}, t; \mathbf{b}) \quad \text{on } \Gamma
 \end{align}    
 \end{subequations}
 %
-where $u$ is the response variable, i.e. displacement or pressure, $t$ is time, $x$ is the spatial coordinate, and $b$ is the design variable that can be used to control the solution. $A$ and $B$ are continuum functions that define the governing equations and boundary conditions respectively. It should be noted that the governing equation is written in the residual form where its value needs to be equal to zero when $u$ is the solution at time $t$. $g$ is the value of the boundary condition of the defined system. To calculate the response sensitivity, the total derivative of Equation \eqref{eq:C2_continuumGoverningEquation} is required. This is done by determining the local sensitivity of the governing equation followed by converting the local sensitivities to their total form using Equation \eqref{eq:C2_totalSensitivityDef}.
+where $\mathbf{u}$ is the response variable, i.e. displacement or pressure, $t$ is time, $x$ is the spatial coordinate, and $\mathbf{b}$ is the design variable that can be used to control the solution. $A$ and $B$ are continuum functions that define the governing equations and boundary conditions, respectively. It should be noted that the governing equation is written in the residual form where its value needs to be equal to zero when $u$ is the solution at time $t$. $g$ is the value of the boundary condition of the defined system. To calculate the response sensitivity, the total derivative of Equation \eqref{eq:C2_continuumGoverningEquation} is required. This is done by determining the local sensitivity of the governing equation followed by converting the local sensitivities to their total form using Equation \eqref{eq:C2_totalSensitivityDef}.
 
 The governing equation while the boundary condition of \eqref{eq:C2_continuumGoverningEquation} is differentiated as follows
 %
@@ -21,7 +21,7 @@ The governing equation while the boundary condition of \eqref{eq:C2_continuumGov
 \end{align}    
 \end{subequations}
 %
-where $(\text{ })'$ and $\dot{(\text{ })}$ are local and total derivative which are defined as follows
+where $(\text{ })'$ indicated local derivative and $\dot{(\text{ })}$ indicated total derivative.
 %
 \begin{subequations}
 \begin{align*}
@@ -39,21 +39,21 @@ It should be noted that the governing equations are differentiated in the local 
 \end{split}
 \end{align}
 %
-To study the differentiated governing equation of Equation \eqref{eq:C2_continuumSensitivityFormulation}, we will assume two situations: i) linear analysis and ii) nonlinear analysis.
+To study the differentiated governing equation \eqref{eq:C2_continuumSensitivityFormulation}, we will assume two situations: i) linear analysis and ii) nonlinear analysis.
 
-For the linear analysis, the governing  of \eqref{eq:C2_continuumSensitivityFormulation} is written as:
+For a linear analysis, the governing  of \eqref{eq:C2_continuumSensitivityFormulation} is written as:
 %
 \begin{equation}\label{eq:C2_linearSAgoverningEquation}
     A(u', t; b) = 0 
 \end{equation}
 %
-This is valid for the linear case because the differential operators of the governing equation do not depend on the response variable, $u$. To explain this concept we look at the transient heat conduction in the 1D domain. The governing equations are defined as
+This is valid for the linear case because the differential operators of the governing equation do not depend on the response variable, $u$. To explain this concept we look at the transient heat conduction in a 1D domain. The governing equations are defined as
 %
 \begin{equation}\label{eq:C2_transientHeatCondtionGE}
     \frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T}{\partial t}
 \end{equation}
 %
-where $T$ is the temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is is the thermal diffusivity ($k/\rho c_p$). This equation can be differentiated with respect to a design variable $b$ as shown in the following equation.
+where $T$ is temperature, $x$ is spatial coordinate, $t$ is time, and $\alpha$ is thermal diffusivity ($k/\rho c_p$). This equation can be differentiated with respect to a design variable $b$ as shown in the following equation.
 %
 \begin{equation*}
     \frac{\partial}{\partial b}
@@ -73,7 +73,7 @@ Due to linearity of the differential operators we can change the order of differ
 %
 By comparing Equations \eqref{eq:C2_transientHeatCondtionGE} and \eqref{eq:C2_transientHeatCondtionSA} we can see that the differential operators $\partial^2 /\partial x^2$ and $\partial /\partial t$ remain unchanged. Therefore the same solver can be used for solving this system of governing equations and for the sensitivity variable, $\partial T/\partial b$.
 
-For nonlinear problems, the differential operators are functions of response variables as well. For example, the incompressible Euler's equation for a 2D flow is derived as
+For nonlinear problems, the differential operators are functions of the response variables as well. For example, the incompressible Euler's equation for a 2D flow is derived as
 %
 \begin{subequations}\label{eq:C2_eulerEquations}
 \begin{gather}
@@ -87,7 +87,7 @@ For nonlinear problems, the differential operators are functions of response var
 \end{gather}
 \end{subequations}
 %
-where $u$ and $v$ are the velocity components in $x$ and $y$ directions respectively. $p$ is pressure, $t$ is time, and $x$ and $y$ are spatial coordinates. We can rewrite Equation \eqref{eq:C2_eulerEquations} in terms of differential operators as well.
+where $u$ and $v$ are the velocity components in $x$ and $y$ directions, respectively. $p$ is pressure, $t$ is time, and $x$ and $y$ are spatial coordinates. We can rewrite Equation \eqref{eq:C2_eulerEquations} in terms of differential operators as well.
 %
 \begin{subequations}
 \begin{gather*}
@@ -107,7 +107,7 @@ where $\mathcal{T}$ is the time derivative operator ($\partial /\partial t$) and
     \mathcal{C} = u \frac{\partial}{\partial x} + v \frac{\partial}{\partial y}
 \end{equation}
 %
-and $\mathcal{G}_x$ and $\mathcal{G}_y$ are gradient operators in $x$ and $y$ respectively ($\partial /\partial x$ and $\partial /\partial y$). The gradient and time derivative operators are linear; therefore, they can be treated as shown in the previous paragraphs. On the other hand, the convective operator is nonlinear and should be differentiated with response variables as well. As a result, the sensitivity equations can be written in the operator form as
+and $\mathcal{G}_x$ and $\mathcal{G}_y$ are gradient operators in $x$ and $y$ respectively ($\partial /\partial x$ and $\partial /\partial y$). The gradient and time derivative operators are linear; therefore, they can be treated as shown earlier. On the other hand, the convective operator is nonlinear and should be differentiated with respect to the response variables as well. As a result, the sensitivity equations can be written in the operator form as
 %
 \begin{subequations}\label{eq:C2_eulerEquationsSA}
 \begin{gather}
@@ -127,9 +127,9 @@ where
     \mathcal{C}' = u' \frac{\partial}{\partial x} + v' \frac{\partial}{\partial y}
 \end{equation*}
 %
-Several interesting properties of CSA can be explained using Equation \eqref{eq:C2_eulerEquationsSA}. Importantly, although the original Euler equation is nonlinear due to the multiplication of response variables and their derivatives ($u$ and $\partial u/\partial x$), the resulting sensitivity equation is linear. This means that the sensitivity equations are easier to solve both concerning algorithms and simulation time compared to the original equations. The challenging expression that needs to be calculated in Equation \eqref{eq:C2_eulerEquationsSA} is the convective term derivative.
+Several interesting properties of CSA can be explained using Equation \eqref{eq:C2_eulerEquationsSA}. Importantly, although the original Euler equation is nonlinear due to the multiplication of response variables and their derivatives ($u$ and $\partial u/\partial x$), the resulting sensitivity equation is linear. This means that the sensitivity equations are easier and quicker to solve compared to the original equations. The challenging expression that needs to be calculated in Equation \eqref{eq:C2_eulerEquationsSA} is the convective term derivative.
 
-The first step in solving the sensitivity equations is to find the solution of the governing equations. This enables us to calculate the convective operator, $\mathcal{C}$, at each step of sensitivity solution based on the analysis data. $\mathcal{C}'$ is also calculated at each step of the solution of sensitivity equations based on the solution of the previous time step. For a simple predictor-corrector method used to solving the original governing equations, this can be written as follows for sensitivity equation in $x$ direction.
+The first step in solving the sensitivity equations is to find the solution of the governing equations. This enables us to calculate the convective operator, $\mathcal{C}$, at each step of sensitivity solution based on the analysis data. $\mathcal{C}'$ is also calculated at each step of the solution of sensitivity equations based on the solution of the previous time step. For a simple predictor-corrector method used to solving the original governing equations, this can be written as follows for the sensitivity equation in $x$ direction.
 %
 \begin{align*}
     \bar{u}' &= u'(i) - 
@@ -142,7 +142,7 @@ The first step in solving the sensitivity equations is to find the solution of t
     \qquad \qquad \quad \text{: corrector}
 \end{align*}
 %
-Here, $\bar{\mathcal{C}}$ in the convective operator is evaluated using $\bar{u}$. It should be noted that to generate the operator we do not need to know the details of how it has been put together. We only supply the required values of the state variables for generating the convective operator; the black-box solver will generate it for us. This input is the response variable when solving the governing equation and is the sensitivity of response variable for sensitivity analysis. Therefore, the solver can still be considered as a black box that we do not modify.
+Here, $\bar{\mathcal{C}}$ in the convective operator is evaluated using $\bar{u}$. It should be noted that to generate the operator we do not need to know the details of how it has been constructed. We only supply the required values of the state variables for generating the convective operator; the black-box solver will generate it for us. This input is the response variable when solving the governing equation and is the sensitivity of response variable for sensitivity analysis. Therefore, the solver can still be considered as a black box that we do not modify.
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Implementation on heat transfer problem}
 In this section, the continuum sensitivity formulation is used for calculating the sensitivity of temperature with respect to the length of a 1D domain. The domain is defined in Figure \ref{fig:C2_benchmarkCase} with the temperature in the domain governed by Equation \eqref{eq:C2_laplaceEquation}. The boundary conditions are defined as $T_0$ at $x=0$ and $T_L$ at $x=L$.
@@ -283,7 +283,7 @@ It should be noted that the sensitivity equations are derived and solved in the 
     \frac{DT}{Db} = \frac{\partial T}{\partial b} + \frac{\partial T}{\partial x} \cdot \frac{\partial x}{\partial b}
 \end{equation*}
 %
-This will add an extra cost to the simulation due to the additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes as the results of a change in shape. Therefore, if the computational nodes can be fixed, the $\partial x/\partial b$ term will be equal to zero. We are proposing to achieve this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more detail.
+This will add an extra cost to the simulation due to the additional step for calculating $\partial x/\partial b$. The reason this step exists is due to movement of computational nodes as the results of a change in shape. Therefore, if the computational nodes can be fixed, the $\partial x/\partial b$ term will be equal to zero. We have achieved this using a non-body conformal technique such as immersed boundary method. This will be explained in the next chapter in more detail.
 % -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 \subsection{Implementation on solid mechanics problem}
 To derive the continuum sensitivity equations, the governing equation of \eqref{eq:C2_axialBarGE} is differentiated with respect to the design variable, $L$, as shown in Equation \eqref{eq:C2_axialBarContinuumSensitivityEquation}.

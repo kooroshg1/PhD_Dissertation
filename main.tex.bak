@@ -15,6 +15,7 @@
 \usepackage{bigdelim} % used for tables to set spacing
 \usepackage{bigstrut} % used for tables to set spacing
 \usepackage{graphicx} % used for includegraphics
+
 \usepackage{subfigure} % allows the use of subfigures
 \usepackage{amssymb,amsmath} % For math
 \usepackage{graphicx, float, subfigure, caption} % For figures
@@ -103,7 +104,7 @@
 % \normalem
 \pagenumbering{roman}
 \pagestyle{plain}
-\rhead{\today}
+\rhead{October 5, 2016}
 \begin{document}
 \maketitle
 \doublespace
