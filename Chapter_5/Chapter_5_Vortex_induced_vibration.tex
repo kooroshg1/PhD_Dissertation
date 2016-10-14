@@ -59,7 +59,7 @@ After verifying the shedding frequency of IB solver, we attach the elastic struc
 	m \ddot{y} + k y = f(y, \dot{y}, t; R)
 \end{equation}
 %
-where $y$ is the cylinder location; $m$ is the cylinder mass; $k$ is elastic structure stiffness; and $f(y, \dot{y}, t; R)$ is the aerodynamic load. It should be noted that the load is an explicit function of cylinder location, velocity, and time, while an implicit function of cylinder radius. This requires an unsteady treatment of the FSI problem by coupling Equations \eqref{eq:C5_fluidGE} and \eqref{eq:C5_cylinderEquationOfMotion}.
+where $y$ is the cylinder location; $m$ is the cylinder mass; $k$ is elastic structure stiffness; and $f(y, \dot{y}, t; R)$ is the aerodynamic load. The load is an implicit function of cylinder location, velocity, and time, while an implicit function of cylinder radius. This requires an unsteady treatment of the FSI problem by coupling Equations \eqref{eq:C5_fluidGE} and \eqref{eq:C5_cylinderEquationOfMotion}.
 
 At each time step, the NS equations are solved and the pressure values at the Lagrangian nodes are calculated using the regularized Delta function. These pressure values are then integrated over the cylinder surface to calculate the force value on the right-hand-side of Equation \eqref{eq:C5_cylinderEquationOfMotion}. To solve for the structure displacement and velocity, Equation \eqref{eq:C5_cylinderEquationOfMotion} is written in the state-space form as shown in Equation \eqref{eq:C5_cylinderEquationOfMotionStateSpace}. This equation is then integrated in time alongside the NS equations using Adams-bashforth method. The initial condition for the structure is selected as zero displacement and velocity at $t = 0$.
 %

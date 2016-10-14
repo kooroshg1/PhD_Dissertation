@@ -36,13 +36,22 @@ The shape sensitivity analysis for the coupled multidisciplinary problem is buil
 \end{subequations}
 %
 %
+%\begin{subequations}\label{eq:C5_FSIconstraintsSA}
+%\begin{align}
+%	\frac{\partial \mathbf{u}^s}{\partial b} - 
+%	\frac{\partial \mathbf{u}^f}{\partial b} &= 0
+%	\\
+%	\frac{\partial \mathbf{\sigma}^s}{\partial b} \cdot \mathbf{n} - 
+%	\frac{\partial \mathbf{\sigma}^f}{\partial b} \cdot \mathbf{n} &= 0
+%\end{align}
+%\end{subequations}
 \begin{subequations}\label{eq:C5_FSIconstraintsSA}
 \begin{align}
-	\frac{\partial \mathbf{u}^s}{\partial b} - 
-	\frac{\partial \mathbf{u}^f}{\partial b} &= 0
+	\frac{D \mathbf{u}^s}{D b} - 
+	\frac{D \mathbf{u}^f}{D b} &= 0
 	\\
-	\frac{\partial \mathbf{\sigma}^s}{\partial b} \cdot \mathbf{n} - 
-	\frac{\partial \mathbf{\sigma}^f}{\partial b} \cdot \mathbf{n} &= 0
+	\frac{D \mathbf{\sigma}^s}{D b} \cdot \mathbf{n} - 
+	\frac{D \mathbf{\sigma}^f}{D b} \cdot \mathbf{n} &= 0
 \end{align}
 \end{subequations}
 %
@@ -51,7 +60,7 @@ As shown in Equations \eqref{eq:C5_fluidSA} and \eqref{eq:C5_solidSA}, to solve 
 \begin{figure}[H]
     \centering
     \includegraphics[width=14.00cm]{Chapter_5/figure/couple_SA_flowchart.jpg}
-    \caption{Coupled multidisciplinary sensitivity analysis flowchart.}
+    \caption{Coupled multidisciplinary sensitivity analysis flowchart. The loop represents time marching for solution convergence.}
     \label{fig:C5_SAflowchart}
 \end{figure}
 %
