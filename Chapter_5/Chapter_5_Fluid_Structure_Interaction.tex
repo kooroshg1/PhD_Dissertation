@@ -113,8 +113,11 @@ As described in Chapter \ref{ch:shapeSenwithIB}, $\mathbf{u}(\mathbf{X}, \tau)$ 
 %
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7.00cm]{Chapter_5/figure/Chapter5_FSI_FlowChart.jpg}
+    \includegraphics[width=6.00cm]{Chapter_5/figure/Chapter5_FSI_FlowChart.jpg}
     \caption{Fluid-solid interaction analysis using IB method flow chart.}
     \label{fig:C5_FSIflowchart}
 \end{figure}
 %
+The immersesd boundary approach for the multidisiplinary coupling is fundamentally different from the conventional body-conformal methods. For the body-confomal approach the effect of solid boundary and its movement is a \emph{boundary condition} to the coupled simulation. This is in addition to the fluid domain  far-field boundary conditions such as velocity and pressure distribution.
+
+On the other hand, for the immersed boundary approach, the effect of solid domain is not a boundary condition anymore. The solid domain is directly included in the fluid governing equations. This makes the fluid domain far-field the only boundary condition of the fluid simulation and the conditions of Equation \eqref{eq:C5_FSIconstraints} are satisfied thourght the force term in the governing Navier-Stokes equation. This is a crucial piece for the sensitivity formulation, since boundary condision require extra treatment for accurate sensitivity calcualtion \cite{cross2015local}.
