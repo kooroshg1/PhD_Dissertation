@@ -155,10 +155,10 @@ Sahin, M. and Mohseni, K., \enquote{An arbitrary Lagrangian--Eulerian
   hydromedusa Aequorea victoria,} {\em Journal of Computational Physics\/},
   Vol.~228, No.~12, 2009, pp.~4588--4605.
 
-\bibitem{liu2013boundary}
-Liu, S. and Canfield, R.~A., \enquote{Boundary velocity method for continuum
-  shape sensitivity of nonlinear fluid–structure interaction problems,} {\em
-  Journal of Fluids and Structures\/}, Vol.~40, No.~0, 2013, pp.~284 -- 301.
+\bibitem{liu2016two}
+Liu, S. and Canfield, R.~A., \enquote{Two forms of continuum shape sensitivity
+  method for fluid--structure interaction problems,} {\em Journal of Fluids and
+  Structures\/}, Vol.~62, 2016, pp.~46--64.
 
 \bibitem{peskin1977numerical}
 Peskin, C.~S., \enquote{Numerical analysis of blood flow in the heart,} {\em

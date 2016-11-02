@@ -55,7 +55,7 @@ The shape sensitivity analysis for the coupled multidisciplinary problem is buil
 \end{align}
 \end{subequations}
 %
-The derivatives of the interface conditions of Equation \eqref{eq:C5_FSIconstraintsSA} are written and simplified using the chaine rule. Here we show the process for the Dirichlet boundary condition. The same approach can be done for the Neumann boudaries as well.
+The derivatives of the interface conditions of Equation \eqref{eq:C5_FSIconstraintsSA} are written and simplified using the chain rule. Here we show the process for the Dirichlet boundary condition. The same approach can be made for the Neumann boundaries as well.
 %
 \begin{gather*}
 	\overbrace{	
@@ -107,9 +107,9 @@ The derivatives of the interface conditions of Equation \eqref{eq:C5_FSIconstrai
 	\frac{\partial \mathbf{u}^f}{\partial b} = 0
 \end{gather*}
 %
-Sensitivity of solid shape movement is represented in the derivative of the forcing function, $\mathbf{f}^f$ in Equation \eqref{eq:C5_fluidSA}. In particular the geometric sensitivity of the solid boundary is added to the governing equations through the derivative of the regulirized delta function in Equation \eqref{eq:C5_fluidSA}. However, as discussed in Chapter \ref{ch:sensitivityAnalysis}, the geometric sensitivity does not propagate inside the domain since the fluid mesh does not move.
+The sensitivity of solid shape movement is represented in the derivative of the forcing function, $\mathbf{f}^f$ in Equation \eqref{eq:C5_fluidSA}. In particular, the geometric sensitivity of the solid boundary is added to the governing equations through the derivative of the regularized delta function in Equation \eqref{eq:C5_fluidSA}. However, as discussed in Chapter \ref{ch:sensitivityAnalysis}, the geometric sensitivity does not propagate inside the domain since the fluid mesh does not move.
 
-To solve the sensitivity equations we need to obtain the solution of the governing equation ($\mathbf{u}^f$, $\mathbf{\epsilon^s}$). Therefore, we are proposing to use the flowchart of Figure \ref{fig:C5_SAflowchart} for the coupled multidisciplinary sensitivity analysis. The sensitivity calculation process starts by solving the Navier-Stokes equation and mapping the pressure to the structural domain to calculate the deformation in the structural domain. The solution of the Navier-Stokes and Elasticity equations are then fed to the sensitivity solver to calculate the sensitivity response. This loop is continued until a convergence for the governing equations is reached or the process is stopped manually. 
+To solve the sensitivity equations we need to obtain the solution of the governing equation ($\mathbf{u}^f$, $\mathbf{\epsilon^s}$). Therefore, we are proposing to use the flowchart of Figure \ref{fig:C5_SAflowchart} for the coupled multidisciplinary sensitivity analysis. The sensitivity calculation process starts by solving the Navier-Stokes equation and mapping the pressure to the structural domain to calculate the deformation in the structural domain. The solution of the Navier-Stokes and Elasticity equations are then fed to the sensitivity solver to calculate the sensitivity response. This loop is continued until a convergence for the governing equations is reached, or the process is stopped manually. 
 %
 \begin{figure}[H]
     \centering
