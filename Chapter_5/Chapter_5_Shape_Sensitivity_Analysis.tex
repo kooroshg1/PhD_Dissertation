@@ -51,11 +51,13 @@ The shape sensitivity analysis for the coupled multidisciplinary problem is buil
 	\frac{D \mathbf{u}^f}{D b} &= 0
 	\\
 	\frac{D \mathbf{\sigma}^s}{D b} \cdot \mathbf{n} - 
-	\frac{D \mathbf{\sigma}^f}{D b} \cdot \mathbf{n} &= 0
+	\frac{D \mathbf{\sigma}^f}{D b} \cdot \mathbf{n} +
+	\sigma^s \cdot \frac{D \mathbf{n}}{D b} - 
+	\sigma^f \cdot \frac{D \mathbf{n}}{D b} &= 0
 \end{align}
 \end{subequations}
 %
-The derivatives of the interface conditions of Equation \eqref{eq:C5_FSIconstraintsSA} are written and simplified using the chain rule. Here we show the process for the Dirichlet boundary condition. The same approach can be made for the Neumann boundaries as well.
+The derivatives of the interface conditions of Equation (5.8a) are written and simplified using the chain rule. Here we show the process for the Dirichlet boundary condition. For the case of the Newmann boundary condition, the derivative of the normal direction is also included in the formulation. For the example problems in the dissertation, an analytical formulation for the solid boundary is used. This simplifies the differentiation of surface normals.
 %
 \begin{gather*}
 	\overbrace{	
